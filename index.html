@@ -1,0 +1,3829 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Plexima × Omi. Rozhovory, které se samy promění v úkoly, reporty a CRM záznamy</title>
+<meta name="description" content="Nositelné AI zařízení Omi zachytí schůzky a návštěvy. Plexima z nich automaticky udělá úkoly, reporty a CRM záznamy v systémech, které už používáte.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@700;800&family=Open+Sans:wght@400;600;700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --yellow: #FEC710;
+  --yellow-hover: #EAB70F;
+  --blue: #6EC1E4;
+  --ink: #1F1741;
+  --ink-soft: #30265E;
+  --white: #FFFFFF;
+  --soft: #F7F8F9;
+  --border: #E6E6E6;
+  --muted: #54595F;
+  --caption: #7A7A7A;
+  --font-heading: "Nunito", system-ui, -apple-system, "Segoe UI", sans-serif;
+  --font-body: "Open Sans", system-ui, -apple-system, "Segoe UI", sans-serif;
+  --radius-sm: 5px;
+  --radius-md: 10px;
+  --radius-lg: 20px;
+  --shadow-sm: 0 2px 8px rgba(31, 23, 65, 0.08);
+  --shadow-md: 0 10px 30px -10px rgba(0, 0, 0, 0.15);
+  --shadow-lg: 0 18px 48px -18px rgba(31, 23, 65, 0.22);
+  --container: 1200px;
+  --gutter: clamp(20px, 4vw, 56px);
+  --section-y: clamp(64px, 8vw, 112px);
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+html { scroll-behavior: smooth; }
+
+body {
+  font: 400 18px/1.65 var(--font-body);
+  color: var(--ink);
+  background: var(--white);
+  -webkit-font-smoothing: antialiased;
+}
+
+h1, h2, h3, h4 { font-family: var(--font-heading); font-weight: 700; }
+
+.container {
+  max-width: var(--container);
+  margin: 0 auto;
+  padding-left: var(--gutter);
+  padding-right: var(--gutter);
+}
+
+section { padding: var(--section-y) 0; }
+
+.eyebrow {
+  display: inline-block;
+  font: 700 13px/1.45 var(--font-body);
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--muted);
+  margin-bottom: 16px;
+}
+
+.section-title {
+  font-size: clamp(30px, 4vw, 40px);
+  line-height: 1.18;
+  max-width: 760px;
+}
+
+.section-lead {
+  font-size: clamp(17px, 2vw, 20px);
+  color: var(--muted);
+  max-width: 720px;
+  margin-top: 16px;
+}
+
+/* ---------- Buttons ---------- */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  min-height: 48px;
+  padding: 12px 24px;
+  border-radius: var(--radius-sm);
+  font: 700 16px/1.2 var(--font-body);
+  text-decoration: none;
+  cursor: pointer;
+  transition: background .18s ease, transform .18s ease, border-color .18s ease;
+  border: 1px solid transparent;
+}
+.btn-primary {
+  background: var(--yellow);
+  color: var(--ink);
+  border-color: var(--yellow);
+}
+.btn-primary:hover { background: var(--yellow-hover); transform: translateY(-1px); }
+.btn-secondary {
+  background: var(--ink);
+  color: var(--white);
+  border-color: var(--ink);
+}
+.btn-secondary:hover { background: var(--ink-soft); transform: translateY(-1px); }
+.btn-ghost {
+  background: transparent;
+  color: var(--ink);
+  border-color: var(--border);
+}
+.btn-ghost:hover { background: var(--soft); border-color: var(--blue); }
+a.btn-ghost[href="dotaznik.html"] { background: var(--white); border-color: var(--ink); }
+a.btn-ghost[href="dotaznik.html"]:hover { background: var(--soft); border-color: var(--ink); }
+.btn:focus-visible { outline: 2px solid var(--blue); outline-offset: 2px; }
+
+/* ---------- Header ---------- */
+.site-header {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  background: rgba(255,255,255,.92);
+  backdrop-filter: blur(10px);
+  border-bottom: 1px solid transparent;
+  transition: border-color .25s ease, box-shadow .25s ease;
+}
+.site-header.is-scrolled {
+  border-bottom-color: var(--border);
+  box-shadow: var(--shadow-sm);
+}
+.header-inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 76px;
+  gap: 24px;
+}
+.wordmark {
+  font: 800 24px/1 var(--font-heading);
+  color: var(--ink);
+  text-decoration: none;
+  letter-spacing: -0.01em;
+  display: inline-flex;
+  align-items: center;
+}
+.wordmark span { color: var(--yellow); }
+.wordmark img { height: 28px; width: auto; display: block; }
+.main-nav { display: flex; align-items: center; gap: 4px; }
+.main-nav a {
+  font: 600 15px/1 var(--font-body);
+  color: var(--ink);
+  text-decoration: none;
+  padding: 10px 14px;
+  border-radius: var(--radius-sm);
+  border-bottom: 2px solid transparent;
+  transition: background .15s ease;
+}
+.main-nav a:hover { background: var(--soft); }
+.main-nav a.is-active { border-bottom-color: var(--yellow); }
+.nav-sep { width: 1px; height: 22px; background: var(--border); margin: 0 8px; flex-shrink: 0; }
+.header-cta { flex-shrink: 0; }
+.nav-toggle {
+  display: none;
+  width: 44px; height: 44px;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  background: var(--white);
+  cursor: pointer;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  gap: 5px;
+}
+.nav-toggle span { display: block; width: 18px; height: 2px; background: var(--ink); transition: transform .2s ease, opacity .2s ease; }
+
+/* ---------- Hero ---------- */
+.hero { padding-top: clamp(48px, 6vw, 88px); padding-bottom: var(--section-y); }
+.hero-grid {
+  display: grid;
+  grid-template-columns: 52fr 48fr;
+  gap: clamp(32px, 5vw, 72px);
+  align-items: center;
+}
+.hero h1 {
+  font-size: clamp(38px, 4.6vw, 55px);
+  line-height: 1.08;
+  letter-spacing: -0.01em;
+}
+.hero-sub {
+  font-size: clamp(18px, 2vw, 22px);
+  line-height: 1.55;
+  color: var(--muted);
+  margin-top: 24px;
+  max-width: 560px;
+}
+.hero-sub strong { color: var(--ink); font-weight: 700; }
+.hero-cta { display: flex; gap: 16px; margin-top: 32px; flex-wrap: wrap; }
+.hero-trust {
+  margin-top: 24px;
+  font-size: 14px;
+  color: var(--caption);
+}
+.hero-trust strong { color: var(--ink); font-weight: 700; }
+.hero-benefits {
+  margin-top: 28px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  list-style: none;
+}
+.hero-benefits li {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  font-size: 16px;
+  color: var(--muted);
+}
+.hero-benefits svg { flex-shrink: 0; margin-top: 4px; }
+
+.hero-visual { position: relative; }
+.device-figure {
+  position: relative;
+  border-radius: var(--radius-lg);
+  background: var(--soft);
+  overflow: hidden;
+  padding: clamp(16px, 3vw, 32px);
+}
+.device-figure img {
+  display: block;
+  width: 100%;
+  max-width: 360px;
+  margin: 44px auto 0;
+  mix-blend-mode: multiply;
+}
+.device-tag {
+  position: absolute;
+  top: 20px;
+  left: 20px;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 12px;
+  border-radius: 999px;
+  background: var(--white);
+  border: 1px solid var(--border);
+  font: 700 12px/1 var(--font-body);
+  color: var(--ink);
+}
+.device-tag i {
+  width: 7px; height: 7px;
+  border-radius: 50%;
+  background: var(--blue);
+  animation: pulse 2.2s ease-in-out infinite;
+}
+@keyframes pulse { 0%,100% { opacity: 1; } 50% { opacity: .3; } }
+
+.flow-card {
+  position: relative;
+  margin: -44px 20px 0 20px;
+  background: var(--white);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-md);
+  padding: 20px 22px;
+  min-height: 168px;
+}
+.flow-label {
+  font: 700 11px/1 var(--font-body);
+  letter-spacing: .08em;
+  text-transform: uppercase;
+  color: var(--caption);
+  margin-bottom: 12px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.flow-label .dot { width: 8px; height: 8px; border-radius: 50%; background: #D9534F; animation: pulse 1.6s ease-in-out infinite; }
+.transcript-line {
+  font-size: 14px;
+  line-height: 1.5;
+  color: var(--muted);
+  opacity: 0;
+  transform: translateY(6px);
+  transition: opacity .5s ease, transform .5s ease;
+  margin-bottom: 6px;
+}
+.transcript-line strong { color: var(--ink); font-weight: 600; }
+.transcript-line.is-visible { opacity: 1; transform: translateY(0); }
+.flow-outputs {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 14px;
+}
+.output-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 7px 12px;
+  border-radius: 999px;
+  font: 700 13px/1 var(--font-body);
+  opacity: 0;
+  transform: scale(.85);
+  transition: opacity .4s ease, transform .4s cubic-bezier(.34,1.56,.64,1);
+}
+.output-chip.is-visible { opacity: 1; transform: scale(1); }
+.chip-yellow { background: rgba(254,199,16,.18); color: var(--ink); }
+.chip-blue { background: rgba(110,193,228,.16); color: var(--ink); }
+.chip-neutral { background: var(--soft); color: var(--muted); border: 1px solid var(--border); }
+
+/* ---------- Bolest ---------- */
+.section-soft { background: var(--soft); }
+.card-grid-heading {
+  font: 700 18px/1.3 var(--font-heading);
+  color: var(--ink);
+  margin-top: 48px;
+}
+.card-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 24px;
+  margin-top: 20px;
+}
+.pain-card {
+  background: var(--white);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  padding: 28px;
+  transition: box-shadow .2s ease, border-color .2s ease, transform .2s ease;
+}
+.pain-card:hover { box-shadow: var(--shadow-md); border-color: var(--blue); transform: translateY(-3px); }
+.pain-card .pain-num {
+  font: 800 15px/1 var(--font-heading);
+  color: var(--white);
+  background: var(--ink);
+  width: 32px; height: 32px;
+  border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  margin-bottom: 18px;
+}
+.pain-card h3 { font-size: 20px; line-height: 1.3; margin-bottom: 10px; }
+.pain-card p { font-size: 15px; line-height: 1.6; color: var(--muted); }
+
+.scenare-foot { text-align: center; margin-top: 44px; }
+.scenare-q { font: 700 19px/1.4 var(--font-heading); color: var(--ink); margin-bottom: 18px; }
+.scenare-note { font-size: 14px; color: var(--caption); margin-top: 12px; }
+.scenare-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  margin-top: 22px;
+  font: 600 15px/1 var(--font-body);
+  color: var(--muted);
+  text-decoration: none;
+  border-bottom: 1px solid var(--border);
+  padding-bottom: 4px;
+  transition: color .15s ease, border-color .15s ease;
+}
+.scenare-link svg { transition: transform .18s ease; }
+.scenare-link:hover { color: var(--ink); border-color: var(--ink); }
+.scenare-link:hover svg { transform: translateX(3px); }
+
+/* ---------- Skrytá cena ---------- */
+.cost-grid {
+  display: grid;
+  grid-template-columns: 46fr 54fr;
+  gap: clamp(32px, 5vw, 64px);
+  align-items: start;
+  margin-top: 48px;
+}
+.calc-panel {
+  background: var(--white);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  padding: clamp(24px, 3vw, 40px);
+  box-shadow: var(--shadow-sm);
+}
+.calc-row { margin-bottom: 28px; }
+.calc-row label {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  font: 600 15px/1.4 var(--font-body);
+  color: var(--ink);
+  margin-bottom: 10px;
+}
+.calc-row label output {
+  font: 800 18px/1 var(--font-heading);
+  color: var(--ink);
+}
+input[type="range"] {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 100%;
+  height: 6px;
+  border-radius: 999px;
+  background: var(--border);
+  outline: none;
+  cursor: pointer;
+}
+input[type="range"]::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 22px; height: 22px;
+  border-radius: 50%;
+  background: var(--yellow);
+  border: 2px solid var(--ink);
+  transition: transform .15s ease;
+}
+input[type="range"]::-webkit-slider-thumb:hover { transform: scale(1.12); }
+input[type="range"]::-moz-range-thumb {
+  width: 22px; height: 22px;
+  border-radius: 50%;
+  background: var(--yellow);
+  border: 2px solid var(--ink);
+  cursor: pointer;
+}
+input[type="range"]:focus-visible { outline: 2px solid var(--blue); outline-offset: 4px; }
+.calc-result {
+  border-top: 1px solid var(--border);
+  padding-top: 24px;
+  margin-top: 4px;
+}
+.calc-result .calc-caption {
+  font: 700 12px/1.4 var(--font-body);
+  letter-spacing: .06em;
+  text-transform: uppercase;
+  color: var(--caption);
+}
+.calc-number {
+  font: 800 clamp(44px, 5vw, 64px)/1.05 var(--font-heading);
+  color: var(--ink);
+  margin: 8px 0 4px;
+}
+.calc-number small { font-size: .45em; font-weight: 700; color: var(--muted); }
+.calc-days { font-size: 15px; color: var(--muted); }
+.calc-days strong { color: var(--ink); }
+.calc-note { font-size: 13px; color: var(--caption); margin-top: 16px; }
+
+.silent-losses { display: flex; flex-direction: column; gap: 20px; }
+.loss-item {
+  display: flex;
+  gap: 18px;
+  padding: 24px;
+  background: var(--white);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+}
+.loss-icon {
+  flex-shrink: 0;
+  width: 44px; height: 44px;
+  border-radius: var(--radius-sm);
+  background: rgba(110,193,228,.16);
+  display: flex; align-items: center; justify-content: center;
+}
+.loss-item h3 { font-size: 19px; margin-bottom: 6px; }
+.loss-item p { font-size: 15px; line-height: 1.6; color: var(--muted); }
+.cost-closing {
+  margin-top: 28px;
+  font: 700 clamp(19px, 2vw, 22px)/1.5 var(--font-heading);
+  color: var(--ink);
+  border-left: 3px solid var(--yellow);
+  padding-left: 20px;
+}
+
+/* ---------- Flip section ---------- */
+.flip-grid2 {
+  display: grid;
+  grid-template-columns: 48fr 52fr;
+  gap: clamp(32px, 5vw, 72px);
+  align-items: center;
+}
+.flip-list {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  margin-top: 36px;
+}
+.flip-item {
+  border-left: 3px solid var(--yellow);
+  padding-left: 20px;
+}
+.flip-item h3 { font-size: 21px; margin-bottom: 6px; color: var(--ink); }
+.flip-item p { font-size: 15px; line-height: 1.65; color: var(--muted); }
+.flip-visual img { width: 100%; height: auto; display: block; }
+
+/* ---------- Jak to funguje ---------- */
+.how-tabs {
+  display: flex;
+  gap: 8px;
+  margin-top: 48px;
+  border-bottom: 1px solid var(--border);
+}
+.how-tab {
+  appearance: none;
+  background: none;
+  border: none;
+  border-bottom: 3px solid transparent;
+  padding: 14px 20px;
+  font: 700 17px/1 var(--font-heading);
+  color: var(--muted);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  transition: color .2s ease;
+  margin-bottom: -1px;
+}
+.how-tab .step-no {
+  width: 28px; height: 28px;
+  border-radius: 50%;
+  background: var(--soft);
+  border: 1px solid var(--border);
+  display: flex; align-items: center; justify-content: center;
+  font: 800 13px/1 var(--font-heading);
+  color: var(--muted);
+  transition: background .2s ease, color .2s ease, border-color .2s ease;
+}
+.how-tab:hover { color: var(--ink); }
+.how-tab.is-active { color: var(--ink); border-bottom-color: var(--yellow); }
+.how-tab.is-active .step-no { background: var(--yellow); color: var(--ink); border-color: var(--yellow); }
+.how-tab:focus-visible { outline: 2px solid var(--blue); outline-offset: 2px; }
+
+.how-panels { position: relative; margin-top: 40px; }
+.how-panel {
+  display: none;
+  grid-template-columns: 44fr 56fr;
+  gap: clamp(32px, 4vw, 64px);
+  align-items: center;
+  animation: panelIn .45s ease;
+}
+.how-panel.is-active { display: grid; }
+@keyframes panelIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+.how-panel h3 { font-size: 26px; margin-bottom: 14px; }
+.how-panel > div > p { color: var(--muted); font-size: 17px; }
+.how-list { list-style: none; margin-top: 20px; display: flex; flex-direction: column; gap: 10px; }
+.how-list li {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  font-size: 15px;
+  color: var(--muted);
+}
+.how-list svg { flex-shrink: 0; margin-top: 4px; }
+.how-visual {
+  background: var(--soft);
+  border-radius: var(--radius-lg);
+  padding: clamp(24px, 3vw, 48px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 320px;
+}
+.how-visual svg { width: 100%; max-width: 480px; height: auto; }
+
+/* ---------- Capture scene (Zachytit animation) ---------- */
+.capture-visual { padding: 0; overflow: hidden; position: relative; min-height: 0; aspect-ratio: 1000 / 800; background: transparent; border-radius: 0; }
+.capture-stage { position: absolute; left: 0; top: 0; width: 1000px; height: 800px; transform-origin: top left; }
+.capture-stage svg { width: auto; height: auto; max-width: none; }
+.capture-stage svg.cap-lines { position: absolute; left: 0; top: 0; width: 1000px; height: 800px; overflow: visible; }
+.cap-ripple, .cap-ring { position: absolute; border-radius: 50%; pointer-events: none; }
+.cap-ripple { border: 1.5px solid #4DABF7; }
+.cap-ring { border: 2px solid #4DABF7; }
+.cap-lens {
+  position: absolute; left: 430px; top: 266px; width: 140px; height: 140px; border-radius: 50%;
+  background: #fff; box-shadow: 0 14px 40px rgba(23,23,58,.16), inset 0 0 0 1px #EEF1F6;
+}
+.cap-core {
+  position: absolute; left: 448px; top: 284px; width: 104px; height: 104px; border-radius: 50%;
+  background: radial-gradient(circle at 42% 38%, #26265A 0%, #17173A 62%, #101031 100%);
+  box-shadow: inset 0 3px 10px rgba(0,0,0,.35);
+}
+.cap-dot { position: absolute; border-radius: 50%; background: #4DABF7; box-shadow: 0 0 14px rgba(77,171,247,.75); pointer-events: none; }
+.cap-rec {
+  position: absolute; left: 440px; top: 428px; width: 120px; display: flex; align-items: center; justify-content: center;
+  gap: 7px; font: 600 12px/1 var(--font-body); letter-spacing: .14em; color: #8A90A2;
+}
+.cap-rec-dot { width: 8px; height: 8px; border-radius: 50%; background: #E5484D; flex-shrink: 0; }
+.cap-speaker {
+  position: absolute; width: 176px; height: 60px; border-radius: 16px; background: #fff; border: 1px solid #ECEEF3;
+  box-sizing: border-box; display: flex; align-items: center; gap: 11px; padding: 0 14px;
+}
+.cap-avatar {
+  width: 30px; height: 30px; border-radius: 50%; flex: 0 0 auto; color: #fff;
+  font: 700 13px/1 var(--font-body); display: flex; align-items: center; justify-content: center;
+}
+.cap-speaker-body { display: flex; flex-direction: column; gap: 5px; min-width: 0; }
+.cap-speaker-name { font: 600 13.5px/1 var(--font-body); color: #17173A; }
+.cap-wave { display: flex; align-items: flex-end; gap: 3px; height: 14px; }
+.cap-wave span { display: block; width: 4px; border-radius: 2px; background: #D6DBE6; }
+.cap-tail { position: absolute; width: 14px; height: 14px; background: #fff; transform: rotate(45deg); }
+.cap-tail--right { border-right: 1px solid #ECEEF3; border-top: 1px solid #ECEEF3; }
+.cap-tail--left { border-left: 1px solid #ECEEF3; border-bottom: 1px solid #ECEEF3; }
+.cap-ctx {
+  position: absolute; left: 405px; top: 520px; width: 190px; box-sizing: border-box; padding: 11px 18px;
+  border-radius: 14px; background: #fff; border: 1px solid #ECEEF3; box-shadow: 0 10px 26px rgba(23,23,58,.07);
+  display: flex; align-items: center; justify-content: center; gap: 10px;
+}
+.cap-ctx span { font: 600 14.5px/1 var(--font-body); color: #17173A; }
+.cap-dots { position: absolute; left: 476px; top: 576px; width: 48px; display: flex; justify-content: center; gap: 8px; }
+.cap-dots span { width: 6px; height: 6px; border-radius: 50%; background: #D6DBE6; }
+
+/* ---------- Process scene (Zpracovat animation) ---------- */
+.process-visual { padding: 0; overflow: hidden; position: relative; min-height: 0; aspect-ratio: 1000 / 800; background: transparent; border-radius: 0; }
+.process-stage { position: absolute; left: 0; top: 0; width: 1000px; height: 800px; transform-origin: top left; }
+.process-stage svg { width: auto; height: auto; max-width: none; }
+.proc-card {
+  position: absolute; border-radius: 22px; background: #fff;
+  box-shadow: 0 30px 70px rgba(23,23,58,.18), 0 6px 16px rgba(23,23,58,.10);
+  border: 1px solid #ECEEF3;
+}
+.proc-icon-tile {
+  position: absolute; width: 40px; height: 40px; border-radius: 11px;
+  background: radial-gradient(circle at 40% 35%, #26265A, #17173A);
+  display: flex; align-items: center; justify-content: center;
+}
+.proc-title { position: absolute; font: 700 17px/1 Inter, system-ui, sans-serif; color: #17173A; }
+.proc-sub { position: absolute; font: 500 13px/1 Inter, system-ui, sans-serif; color: #8A90A2; }
+.proc-divider { position: absolute; height: 1px; background: #ECEEF3; }
+.proc-avatar {
+  position: absolute; border-radius: 50%; color: #fff;
+  font: 700 11px/1 Inter, system-ui, sans-serif;
+  display: flex; align-items: center; justify-content: center;
+}
+.proc-highlight { position: absolute; border-radius: 9px; background: rgba(77,171,247,.10); pointer-events: none; }
+.proc-text-clip { position: absolute; overflow: hidden; white-space: nowrap; }
+.proc-text-clip span { display: inline-block; overflow: hidden; white-space: nowrap; vertical-align: top; font: 500 13.5px/1.2 Inter, system-ui, sans-serif; color: #2B2B47; }
+.proc-caret { display: inline-block; width: 1.5px; height: 15px; background: #4DABF7; vertical-align: top; margin-left: 1px; }
+.proc-checkbox {
+  position: absolute; width: 22px; height: 22px; border-radius: 7px; box-sizing: border-box;
+  display: flex; align-items: center; justify-content: center;
+}
+.proc-task-title { position: absolute; font: 600 15px/1 Inter, system-ui, sans-serif; color: #2B2B47; white-space: nowrap; }
+.proc-task-date { position: absolute; display: flex; align-items: center; gap: 6px; font: 500 12.5px/1 Inter, system-ui, sans-serif; color: #8A90A2; }
+.proc-owner { position: absolute; display: flex; align-items: center; gap: 7px; }
+.proc-owner-avatar {
+  width: 20px; height: 20px; border-radius: 50%; color: #fff;
+  font: 700 10px/1 Inter, system-ui, sans-serif;
+  display: flex; align-items: center; justify-content: center;
+}
+.proc-owner-name { font: 600 12.5px/1 Inter, system-ui, sans-serif; color: #3A3A6B; }
+.proc-pill {
+  position: absolute; display: flex; align-items: center; gap: 6px;
+  padding: 5px 10px; border-radius: 9px; background: #fff; border: 1px solid #ECEEF3;
+  box-shadow: 0 8px 20px rgba(23,23,58,.14); pointer-events: none;
+}
+.proc-pill-dot { width: 6px; height: 6px; border-radius: 50%; flex: 0 0 auto; }
+.proc-pill-text { font: 600 11.5px/1 Inter, system-ui, sans-serif; color: #17173A; white-space: nowrap; }
+
+/* ---------- Connect scene (Napojit animation) ---------- */
+.connect-visual { padding: 0; overflow: hidden; position: relative; min-height: 0; aspect-ratio: 1000 / 800; background: transparent; border-radius: 0; }
+.connect-stage { position: absolute; left: 0; top: 0; width: 1000px; height: 800px; transform-origin: top left; }
+.connect-stage svg { width: auto; height: auto; max-width: none; }
+.conn-card {
+  position: absolute; border-radius: 20px; background: #fff;
+  box-shadow: 0 26px 60px rgba(23,23,58,.16), 0 6px 16px rgba(23,23,58,.09);
+  border: 1px solid #ECEEF3;
+}
+.conn-icon-tile {
+  position: absolute; width: 38px; height: 38px; border-radius: 11px;
+  background: radial-gradient(circle at 40% 35%, #26265A, #17173A);
+  display: flex; align-items: center; justify-content: center;
+}
+.conn-title { position: absolute; font: 700 16px/1.25 Inter, system-ui, sans-serif; color: #17173A; }
+.conn-sub { position: absolute; font: 500 12.5px/1 Inter, system-ui, sans-serif; color: #8A90A2; }
+.conn-chip {
+  position: absolute; display: flex; align-items: center; gap: 10px;
+  padding: 8px 14px; border-radius: 10px; background: #F4F6FA;
+}
+.conn-chip-check {
+  width: 16px; height: 16px; border-radius: 50%; background: #4DABF7;
+  display: flex; align-items: center; justify-content: center; flex: 0 0 auto;
+}
+.conn-chip-label { font: 600 13.5px/1 Inter, system-ui, sans-serif; color: #3A3A6B; }
+.conn-tile {
+  position: absolute; width: 312px; height: 104px; border-radius: 16px; background: #fff;
+  border: 1px solid #ECEEF3; box-shadow: 0 20px 44px rgba(23,23,58,.10), 0 5px 12px rgba(23,23,58,.07);
+  display: flex; align-items: center; gap: 16px; padding: 0 22px; box-sizing: border-box;
+}
+.conn-tile-icon {
+  position: relative; width: 48px; height: 48px; border-radius: 13px; flex: 0 0 auto;
+  background: #F4F6FA; display: flex; align-items: center; justify-content: center;
+}
+.conn-tile-body { display: flex; flex-direction: column; gap: 5px; min-width: 0; flex: 1; }
+.conn-tile-name { font: 600 15.5px/1.25 Inter, system-ui, sans-serif; color: #17173A; }
+.conn-tile-status { font: 600 12.5px/1 Inter, system-ui, sans-serif; display: flex; align-items: center; gap: 5px; }
+.conn-tile-dot { width: 6px; height: 6px; border-radius: 50%; }
+.conn-badge {
+  width: 26px; height: 26px; border-radius: 50%; flex: 0 0 auto; background: #4DABF7;
+  display: flex; align-items: center; justify-content: center;
+  box-shadow: 0 4px 12px rgba(77,171,247,.4);
+}
+.conn-packet {
+  position: absolute; display: flex; align-items: center; gap: 6px;
+  padding: 5px 10px; border-radius: 9px; background: #fff; border: 1px solid #ECEEF3;
+  box-shadow: 0 8px 20px rgba(23,23,58,.16); pointer-events: none;
+}
+.conn-packet-dot { width: 6px; height: 6px; border-radius: 50%; flex: 0 0 auto; }
+.conn-packet-text { font: 600 11.5px/1 Inter, system-ui, sans-serif; color: #17173A; white-space: nowrap; }
+
+/* ---------- Scénáře ---------- */
+.scenario-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 24px;
+  margin-top: 48px;
+}
+.scenario-card {
+  background: var(--white);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  padding: 32px;
+  display: flex;
+  flex-direction: column;
+  transition: box-shadow .2s ease, border-color .2s ease, transform .2s ease;
+}
+.scenario-card:hover { box-shadow: var(--shadow-md); border-color: var(--blue); transform: translateY(-3px); }
+.scenario-badge {
+  display: inline-flex;
+  align-self: flex-start;
+  align-items: center;
+  padding: 5px 12px;
+  border-radius: 999px;
+  font: 700 12px/1.4 var(--font-body);
+  background: rgba(110,193,228,.16);
+  color: var(--ink);
+  margin-bottom: 18px;
+}
+.scenario-card h3 { font-size: 22px; line-height: 1.3; margin-bottom: 12px; }
+.scenario-today {
+  font-size: 15px;
+  line-height: 1.6;
+  color: var(--muted);
+  margin-bottom: 18px;
+}
+.scenario-outputs {
+  border-top: 1px dashed var(--border);
+  padding-top: 16px;
+  margin-top: auto;
+}
+.scenario-outputs .out-label {
+  font: 700 11px/1 var(--font-body);
+  letter-spacing: .08em;
+  text-transform: uppercase;
+  color: var(--caption);
+  display: block;
+  margin-bottom: 10px;
+}
+.scenario-outputs .chips { display: flex; flex-wrap: wrap; gap: 8px; }
+.scenario-outputs .chips span {
+  padding: 6px 11px;
+  border-radius: 999px;
+  font: 600 13px/1 var(--font-body);
+  background: var(--soft);
+  border: 1px solid var(--border);
+  color: var(--ink);
+}
+.scenario-int {
+  margin-top: 14px;
+  font-size: 13px;
+  color: var(--caption);
+}
+
+/* ---------- Produkt + Služba ---------- */
+.duo-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 24px;
+  margin-top: 48px;
+}
+.duo-card {
+  border-radius: var(--radius-lg);
+  padding: clamp(28px, 3vw, 44px);
+}
+.duo-device { background: var(--soft); border: 1px solid var(--border); }
+.duo-service { background: var(--ink); color: var(--white); }
+.duo-card .duo-kicker {
+  font: 700 12px/1.4 var(--font-body);
+  letter-spacing: .06em;
+  text-transform: uppercase;
+  margin-bottom: 14px;
+  display: block;
+}
+.duo-device .duo-kicker { color: var(--muted); }
+.duo-service .duo-kicker { color: var(--blue); }
+.duo-card h3 { font-size: clamp(22px, 2.4vw, 28px); line-height: 1.25; margin-bottom: 12px; }
+.duo-card > p { font-size: 16px; line-height: 1.6; margin-bottom: 22px; }
+.duo-device > p { color: var(--muted); }
+.duo-service > p { color: rgba(255,255,255,.78); }
+.duo-list { list-style: none; display: flex; flex-direction: column; gap: 10px; }
+.duo-list li { display: flex; gap: 10px; align-items: flex-start; font-size: 15px; }
+.duo-device .duo-list li { color: var(--muted); }
+.duo-service .duo-list li { color: rgba(255,255,255,.82); }
+.duo-list svg { flex-shrink: 0; margin-top: 4px; }
+.duo-img { max-width: 190px; margin: 0 auto 8px; display: block; mix-blend-mode: multiply; }
+.duo-cta { display: flex; gap: 16px; margin-top: 40px; flex-wrap: wrap; justify-content: center; }
+
+/* ---------- Konzultace kroky ---------- */
+.consult-steps {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 32px;
+  margin-top: 56px;
+}
+.consult-step {
+  position: relative;
+  border-top: 3px solid var(--border);
+  padding-top: 24px;
+  transition: border-color .25s ease;
+}
+.consult-step:hover { border-top-color: var(--yellow); }
+.consult-num {
+  font: 800 44px/1 var(--font-heading);
+  color: var(--ink);
+  display: block;
+  margin-bottom: 14px;
+}
+.consult-num::after {
+  content: "";
+  display: block;
+  width: 28px;
+  height: 4px;
+  border-radius: 2px;
+  background: var(--yellow);
+  margin-top: 10px;
+}
+.consult-step h3 { font-size: 20px; line-height: 1.3; margin-bottom: 10px; }
+.consult-step p { font-size: 15px; line-height: 1.6; color: var(--muted); }
+.consult-cta {
+  margin-top: 48px;
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  flex-wrap: wrap;
+}
+.consult-cta .consult-note { font-size: 14px; color: var(--caption); }
+.consult-cta .consult-meta { font-size: 15px; color: var(--muted); margin-top: 12px; width: 100%; letter-spacing: .02em; }
+
+/* ---------- Modal choice ---------- */
+.modal-choice {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  margin-top: 8px;
+}
+.modal-choice .btn { width: 100%; min-height: 54px; font-size: 17px; }
+.modal-choice .btn-ghost { border-color: var(--ink); }
+.modal-choice .btn-ghost:hover { background: var(--soft); border-color: var(--ink); }
+.modal-back {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  border: none;
+  background: none;
+  font: 600 14px/1 var(--font-body);
+  color: var(--muted);
+  cursor: pointer;
+  padding: 0;
+  margin-bottom: 8px;
+}
+.modal-back:hover { color: var(--ink); }
+.modal-view { display: none; }
+.modal-view.is-active { display: block; }
+
+/* ---------- Integrace ---------- */
+.integration-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 24px;
+  margin-top: 48px;
+}
+.int-category {
+  background: var(--white);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  padding: 26px;
+}
+.int-category h3 {
+  font-size: 16px;
+  margin-bottom: 16px;
+  display: flex;
+  align-items: center;
+  gap: 9px;
+}
+.int-category h3 i {
+  width: 9px; height: 9px;
+  border-radius: 2px;
+  background: var(--blue);
+  display: inline-block;
+}
+.int-chips { display: flex; flex-wrap: wrap; gap: 8px; }
+.int-chips span {
+  padding: 7px 13px;
+  border-radius: 999px;
+  background: var(--soft);
+  border: 1px solid var(--border);
+  font: 600 14px/1 var(--font-body);
+  color: var(--ink);
+  transition: border-color .15s ease, background .15s ease;
+}
+.int-chips span:hover { border-color: var(--blue); background: rgba(110,193,228,.08); }
+.integration-note {
+  margin-top: 36px;
+  font-size: 17px;
+  color: var(--muted);
+  max-width: 720px;
+}
+.integration-note strong { color: var(--ink); }
+
+/* ---------- Pilot ---------- */
+.pilot-panel {
+  background: var(--ink);
+  color: var(--white);
+  border-radius: var(--radius-lg);
+  padding: clamp(32px, 5vw, 64px);
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: clamp(32px, 4vw, 64px);
+}
+.pilot-panel .eyebrow { color: var(--blue); }
+.pilot-panel h2 { font-size: clamp(28px, 3.4vw, 38px); line-height: 1.2; }
+.pilot-panel .pilot-lead { color: rgba(255,255,255,.78); margin-top: 16px; font-size: 17px; }
+.pilot-panel .btn-primary { margin-top: 32px; }
+.pilot-cols h3 {
+  font-size: 15px;
+  letter-spacing: .06em;
+  text-transform: uppercase;
+  color: var(--blue);
+  margin-bottom: 14px;
+  font-family: var(--font-body);
+  font-weight: 700;
+}
+.pilot-cols ul { list-style: none; display: flex; flex-direction: column; gap: 9px; margin-bottom: 28px; }
+.pilot-cols li {
+  display: flex;
+  gap: 10px;
+  align-items: flex-start;
+  font-size: 15px;
+  color: rgba(255,255,255,.82);
+}
+.pilot-cols svg { flex-shrink: 0; margin-top: 4px; }
+.pilot-price { font-size: 14px; color: rgba(255,255,255,.6); }
+
+/* ---------- FAQ ---------- */
+.faq-list { max-width: 760px; margin: 48px auto 0; }
+.faq-item {
+  border-bottom: 1px solid var(--border);
+}
+.faq-item summary {
+  list-style: none;
+  cursor: pointer;
+  padding: 22px 0;
+  font: 700 18px/1.4 var(--font-heading);
+  color: var(--ink);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 16px;
+  transition: color .15s ease;
+}
+.faq-item summary::-webkit-details-marker { display: none; }
+.faq-item summary:hover { color: var(--ink-soft); }
+.faq-item summary .faq-icon {
+  flex-shrink: 0;
+  width: 28px; height: 28px;
+  border-radius: 50%;
+  border: 1px solid var(--border);
+  display: flex; align-items: center; justify-content: center;
+  transition: transform .25s ease, background .25s ease, border-color .25s ease;
+}
+.faq-item[open] summary .faq-icon { transform: rotate(45deg); background: var(--yellow); border-color: var(--yellow); }
+.faq-body {
+  padding: 0 44px 24px 0;
+  font-size: 16px;
+  color: var(--muted);
+}
+
+/* ---------- Final CTA ---------- */
+.final-cta { text-align: center; }
+.final-cta h2 {
+  font-size: clamp(30px, 4vw, 44px);
+  line-height: 1.15;
+  max-width: 820px;
+  margin: 0 auto;
+}
+.final-cta p {
+  font-size: 18px;
+  color: var(--muted);
+  max-width: 640px;
+  margin: 20px auto 0;
+}
+.final-cta .btn { margin-top: 36px; }
+
+/* ---------- Footer ---------- */
+.site-footer {
+  background: var(--ink);
+  color: rgba(255,255,255,.7);
+  padding: 56px 0 40px;
+  font-size: 14px;
+}
+.footer-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 32px;
+  flex-wrap: wrap;
+}
+.footer-mid {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  gap: 32px;
+  margin-top: 20px;
+}
+.footer-desc { flex: 1; max-width: 420px; line-height: 1.6; margin: 0; }
+.footer-logo { display: inline-flex; }
+.footer-logo img { height: 28px; display: block; filter: grayscale(1) brightness(0) invert(1); }
+.footer-subscribe { max-width: 480px; }
+.footer-subscribe h3 { font: 700 18px/1.3 var(--font-heading); color: #fff; margin-bottom: 12px; }
+.subscribe-form { display: flex; gap: 10px; flex-wrap: wrap; }
+.subscribe-form input {
+  flex: 1;
+  min-width: 200px;
+  min-height: 48px;
+  padding: 12px 16px;
+  border: 1px solid rgba(255,255,255,.18);
+  border-radius: var(--radius-md);
+  background: rgba(255,255,255,.06);
+  color: #fff;
+  font: 400 16px/1.4 var(--font-body);
+}
+.subscribe-form input::placeholder { color: rgba(255,255,255,.45); }
+.subscribe-form input:focus { border-color: var(--blue); outline: 2px solid rgba(110,193,228,.3); }
+.subscribe-btn {
+  background: #fff;
+  color: var(--ink);
+  border: 1px solid #fff;
+  flex-shrink: 0;
+  padding: 12px 20px;
+}
+.subscribe-btn:hover { background: rgba(255,255,255,.86); transform: translateY(-1px); }
+.subscribe-status { width: 100%; font-size: 14px; margin-top: 2px; color: rgba(255,255,255,.7); }
+.footer-links {
+  display: flex;
+  gap: 28px;
+  flex-wrap: wrap;
+}
+.footer-subscribe { flex: 0 1 380px; margin-left: auto; }
+.footer-links a { color: rgba(255,255,255,.7); text-decoration: none; }
+.footer-links a:hover { color: var(--white); text-decoration: underline; text-decoration-color: var(--yellow); text-underline-offset: 4px; }
+.footer-bottom {
+  margin-top: 32px;
+  padding-top: 24px;
+  border-top: 1px solid rgba(255,255,255,.12);
+  display: flex;
+  justify-content: space-between;
+  gap: 16px;
+  flex-wrap: wrap;
+  font-size: 13px;
+  color: rgba(255,255,255,.5);
+}
+.footer-bottom a { color: rgba(255,255,255,.5); }
+.footer-bottom a:hover { color: var(--white); }
+
+/* ---------- Work photo cards ---------- */
+.work-cards {
+  display: flex;
+  gap: 24px;
+  margin-top: 48px;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  padding-bottom: 12px;
+  -webkit-overflow-scrolling: touch;
+}
+.work-card {
+  position: relative;
+  flex: 0 0 clamp(280px, 26vw, 340px);
+  height: clamp(400px, 44vw, 520px);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  scroll-snap-align: start;
+  background: var(--soft);
+  transition: flex-basis .45s cubic-bezier(.4,0,.2,1);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 20px;
+}
+.work-card.is-expanded {
+  flex-basis: clamp(320px, 62vw, 720px);
+}
+.work-card img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.work-card::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to top, rgba(31,23,65,.78) 0%, rgba(31,23,65,.18) 48%, rgba(31,23,65,0) 68%);
+  pointer-events: none;
+  transition: background .4s ease;
+}
+.work-card.is-expanded::after {
+  background: linear-gradient(to top, rgba(31,23,65,.9) 0%, rgba(31,23,65,.5) 45%, rgba(31,23,65,.18) 100%);
+}
+.work-toggle {
+  position: absolute;
+  top: 16px;
+  right: 16px;
+  z-index: 3;
+  width: 40px;
+  height: 40px;
+  border: none;
+  border-radius: 999px;
+  background: rgba(255,255,255,.92);
+  color: var(--ink);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: transform .35s ease, background .15s ease;
+}
+.work-toggle:hover { background: #fff; }
+.work-toggle:focus-visible { outline: 2px solid var(--blue); outline-offset: 2px; }
+.work-toggle svg { width: 16px; height: 16px; }
+.work-card.is-expanded .work-toggle { transform: rotate(45deg); }
+.work-content {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+}
+.work-badge {
+  align-self: flex-start;
+  position: relative;
+  z-index: 2;
+  padding: 7px 14px;
+  border-radius: 999px;
+  background: rgba(255,255,255,.88);
+  backdrop-filter: blur(6px);
+  font: 700 13px/1 var(--font-body);
+  color: var(--ink);
+}
+.work-headline {
+  font: 700 21px/1.3 var(--font-heading);
+  color: #fff;
+}
+.work-desc {
+  color: rgba(255,255,255,.82);
+  font-size: 15px;
+  line-height: 1.5;
+  max-width: 460px;
+  overflow: hidden;
+  max-height: 0;
+  opacity: 0;
+  transition: max-height .4s ease, opacity .3s ease, margin-top .4s ease;
+}
+.work-case {
+  align-self: flex-start;
+  background: #fff;
+  color: var(--ink);
+  min-height: 42px;
+  padding: 10px 18px;
+  font-size: 14px;
+  overflow: hidden;
+  max-height: 0;
+  opacity: 0;
+  transform: translateY(6px);
+  transition: max-height .4s ease, opacity .3s ease, transform .3s ease, margin-top .4s ease;
+}
+.work-case:hover { background: var(--soft); transform: translateY(-1px); }
+.work-card.is-expanded .work-desc {
+  max-height: 100px;
+  opacity: 1;
+  margin-top: 12px;
+}
+.work-card.is-expanded .work-case {
+  max-height: 60px;
+  opacity: 1;
+  transform: translateY(0);
+  margin-top: 18px;
+}
+.work-placeholder {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(180deg, #EFEFF1 0%, #E1E4EA 100%);
+}
+
+/* ---------- Product card (konfigurátor) ---------- */
+.product-card {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  background: var(--white);
+  box-shadow: var(--shadow-sm);
+  margin-top: 48px;
+}
+.product-media {
+  position: relative;
+  background: linear-gradient(155deg, #E9F4FA 0%, #F5F8FA 55%, #FEF6DA 130%);
+  padding: clamp(24px, 3vw, 40px);
+  display: flex;
+  flex-direction: column;
+  min-height: 400px;
+}
+.product-stage {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 0;
+}
+.product-badge {
+  position: absolute;
+  top: 22px;
+  left: 22px;
+  padding: 8px 15px;
+  border-radius: 999px;
+  background: var(--ink);
+  color: #fff;
+  font: 700 12px/1 var(--font-body);
+  letter-spacing: .03em;
+}
+.product-media #gallery-main {
+  max-width: 80%;
+  max-height: 300px;
+  object-fit: contain;
+  transition: opacity .25s ease;
+  filter: drop-shadow(0 24px 40px rgba(31,23,65,.18));
+}
+.product-thumbs { display: flex; gap: 12px; justify-content: center; margin-top: 16px; }
+.buy-thumb {
+  width: 72px; height: 72px;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  background: rgba(255,255,255,.7);
+  padding: 9px;
+  cursor: pointer;
+  transition: border-color .15s ease, background .15s ease;
+}
+.buy-thumb img { width: 100%; height: 100%; object-fit: contain; }
+.buy-thumb.is-active, .buy-thumb:hover { border-color: var(--blue); background: #fff; }
+.buy-thumb:focus-visible { outline: 2px solid var(--blue); outline-offset: 2px; }
+
+.product-config { padding: clamp(24px, 3vw, 44px); }
+.eyebrow-dot { display: inline-flex; align-items: center; gap: 8px; }
+.eyebrow-dot::before {
+  content: "";
+  width: 8px; height: 8px;
+  border-radius: 50%;
+  background: var(--blue);
+}
+.product-title { font-size: clamp(30px, 3.6vw, 44px); line-height: 1.1; margin-top: 4px; }
+.product-desc { color: var(--muted); margin-top: 12px; font-size: 16px; line-height: 1.6; max-width: 460px; }
+
+.config-group { margin-top: 28px; }
+.config-label {
+  display: block;
+  font: 700 12px/1 var(--font-body);
+  letter-spacing: .06em;
+  text-transform: uppercase;
+  color: var(--caption);
+  margin-bottom: 12px;
+}
+.option-row { display: flex; gap: 12px; }
+.option-box {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  padding: 14px 12px;
+  border: 1.5px solid var(--border);
+  border-radius: var(--radius-md);
+  background: var(--white);
+  cursor: pointer;
+  text-align: center;
+  transition: border-color .15s ease, background .15s ease, color .15s ease;
+}
+.option-box .option-title { font: 700 15px/1.2 var(--font-heading); color: var(--ink); }
+.option-box .option-price { font-size: 13px; color: var(--muted); }
+.option-box:hover { border-color: var(--blue); }
+.option-box.is-active { background: var(--ink); border-color: var(--ink); }
+.option-box.is-active .option-title { color: #fff; }
+.option-box.is-active .option-price { color: rgba(255,255,255,.7); }
+.option-box:focus-visible { outline: 2px solid var(--blue); outline-offset: 2px; }
+
+.radio-row { display: flex; flex-direction: column; gap: 12px; }
+.radio-box {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 14px 16px;
+  border: 1.5px solid var(--border);
+  border-radius: var(--radius-md);
+  cursor: pointer;
+  transition: border-color .15s ease, background .15s ease;
+}
+.radio-box .radio-dot {
+  flex-shrink: 0;
+  width: 20px; height: 20px;
+  border-radius: 50%;
+  border: 2px solid var(--border);
+  position: relative;
+  transition: border-color .15s ease;
+}
+.radio-box.is-active { border-color: var(--blue); background: rgba(110,193,228,.07); }
+.radio-box.is-active .radio-dot { border-color: var(--blue); }
+.radio-box.is-active .radio-dot::after {
+  content: "";
+  position: absolute;
+  inset: 3px;
+  border-radius: 50%;
+  background: var(--blue);
+}
+.radio-box input { position: absolute; opacity: 0; pointer-events: none; }
+.radio-text { font: 600 15px/1.3 var(--font-body); color: var(--ink); }
+.radio-badge {
+  margin-left: auto;
+  padding: 4px 10px;
+  border-radius: 999px;
+  background: rgba(254,199,16,.2);
+  color: var(--ink);
+  font: 700 11px/1 var(--font-body);
+  text-transform: uppercase;
+  letter-spacing: .03em;
+}
+.buy-big {
+  margin-top: 28px;
+  width: 100%;
+  min-height: 56px;
+  font-size: 17px;
+  background: var(--ink);
+  color: #fff;
+  border: 1px solid var(--ink);
+}
+.buy-big:hover { background: var(--ink-soft); transform: translateY(-1px); }
+.product-hint { font-size: 13px; color: var(--caption); margin-top: 12px; }
+.service-panel {
+  margin-top: 48px;
+  background: var(--ink);
+  color: var(--white);
+  border-radius: var(--radius-lg);
+  padding: clamp(28px, 4vw, 52px);
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: clamp(28px, 4vw, 56px);
+  align-items: center;
+}
+.service-panel .duo-kicker { color: var(--blue); font: 700 12px/1.4 var(--font-body); letter-spacing: .06em; text-transform: uppercase; display: block; margin-bottom: 14px; }
+.service-panel h3 { font-size: clamp(22px, 2.4vw, 28px); line-height: 1.25; margin-bottom: 12px; }
+.service-panel p { font-size: 16px; line-height: 1.6; color: rgba(255,255,255,.78); }
+.service-panel .btn { margin-top: 24px; }
+.service-panel .duo-list li { color: rgba(255,255,255,.82); }
+
+/* ---------- Modals ---------- */
+.modal-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 200;
+  background: rgba(31, 23, 65, 0.45);
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  padding: 4vh 16px;
+  overflow-y: auto;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity .22s ease;
+}
+.modal-overlay.is-open { opacity: 1; pointer-events: auto; }
+.modal {
+  background: var(--white);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-lg);
+  max-width: 560px;
+  width: 100%;
+  padding: clamp(24px, 4vw, 40px);
+  position: relative;
+  transform: translateY(14px);
+  transition: transform .22s ease;
+  margin: auto 0;
+}
+.modal-overlay.is-open .modal { transform: translateY(0); }
+.modal h3 { font-size: 26px; margin-bottom: 8px; padding-right: 44px; }
+.modal .modal-lead { font-size: 15px; color: var(--muted); margin-bottom: 24px; }
+.modal-close {
+  position: absolute;
+  top: 18px; right: 18px;
+  width: 44px; height: 44px;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  background: var(--white);
+  cursor: pointer;
+  font-size: 20px;
+  line-height: 1;
+  color: var(--ink);
+  transition: background .15s ease;
+}
+.modal-close:hover { background: var(--soft); }
+.form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+.form-field { display: flex; flex-direction: column; gap: 6px; }
+.form-field.full { grid-column: 1 / -1; }
+.form-field label { font: 600 14px/1.4 var(--font-body); color: var(--ink); }
+.form-field label .req { color: #D9534F; }
+.form-field input, .form-field select, .form-field textarea {
+  min-height: 48px;
+  padding: 12px 16px;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  background: var(--soft);
+  color: var(--ink);
+  font: 400 16px/1.4 var(--font-body);
+  width: 100%;
+}
+.form-field textarea { min-height: 96px; resize: vertical; }
+.form-field input:focus, .form-field select:focus, .form-field textarea:focus {
+  border-color: var(--blue);
+  outline: 2px solid rgba(110,193,228,.25);
+}
+.form-check {
+  grid-column: 1 / -1;
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  font-size: 14px;
+  color: var(--muted);
+  cursor: pointer;
+}
+.form-check input { width: 20px; height: 20px; margin-top: 1px; accent-color: #FEC710; }
+.order-summary {
+  grid-column: 1 / -1;
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  background: var(--soft);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  padding: 14px 18px;
+  font-size: 15px;
+}
+.order-summary strong { font: 800 22px/1 var(--font-heading); color: var(--ink); }
+.form-submit { grid-column: 1 / -1; margin-top: 4px; width: 100%; }
+.form-status {
+  grid-column: 1 / -1;
+  border-radius: var(--radius-md);
+  padding: 14px 16px;
+  font-size: 14px;
+  border: 1px solid;
+}
+.form-status.ok { background: rgba(57,181,74,.10); border-color: rgba(57,181,74,.36); color: var(--ink); }
+.form-status.err { background: rgba(217,83,79,.10); border-color: rgba(217,83,79,.36); color: var(--ink); }
+body.modal-open { overflow: hidden; }
+
+/* ---------- Exit-intent popup ---------- */
+.exit-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 300;
+  background: rgba(31, 23, 65, 0.55);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 16px;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity .3s ease;
+}
+.exit-overlay.is-open { opacity: 1; pointer-events: auto; }
+.exit-popup {
+  background: var(--white);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-lg);
+  max-width: 480px;
+  width: 100%;
+  padding: clamp(28px, 4vw, 44px);
+  position: relative;
+  transform: translateY(20px) scale(.96);
+  transition: transform .3s ease;
+  text-align: center;
+}
+.exit-overlay.is-open .exit-popup { transform: translateY(0) scale(1); }
+.exit-popup .exit-close {
+  position: absolute;
+  top: 14px; right: 14px;
+  width: 40px; height: 40px;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  background: var(--white);
+  cursor: pointer;
+  font-size: 18px;
+  line-height: 1;
+  color: var(--ink);
+  transition: background .15s ease;
+}
+.exit-popup .exit-close:hover { background: var(--soft); }
+.exit-popup .exit-icon {
+  width: 56px; height: 56px;
+  border-radius: 50%;
+  background: rgba(254,199,16,.18);
+  display: flex; align-items: center; justify-content: center;
+  margin: 0 auto 20px;
+  font-size: 26px;
+}
+.exit-popup h3 {
+  font-size: clamp(22px, 3vw, 28px);
+  line-height: 1.2;
+  margin-bottom: 10px;
+  padding: 0 24px;
+}
+.exit-popup .exit-lead {
+  font-size: 16px;
+  line-height: 1.6;
+  color: var(--muted);
+  margin-bottom: 24px;
+  max-width: 380px;
+  margin-left: auto;
+  margin-right: auto;
+}
+.exit-form {
+  display: flex;
+  gap: 10px;
+  max-width: 380px;
+  margin: 0 auto;
+}
+.exit-form input {
+  flex: 1;
+  min-height: 48px;
+  padding: 12px 16px;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  background: var(--soft);
+  color: var(--ink);
+  font: 400 16px/1.4 var(--font-body);
+}
+.exit-form input:focus {
+  border-color: var(--blue);
+  outline: 2px solid rgba(110,193,228,.25);
+}
+.exit-form .btn { flex-shrink: 0; }
+.exit-popup .exit-note {
+  font-size: 13px;
+  color: var(--caption);
+  margin-top: 14px;
+}
+.exit-popup .exit-status {
+  max-width: 380px;
+  margin: 10px auto 0;
+  border-radius: var(--radius-md);
+  padding: 12px 16px;
+  font-size: 14px;
+  border: 1px solid;
+}
+.exit-status.ok { background: rgba(57,181,74,.10); border-color: rgba(57,181,74,.36); color: var(--ink); }
+.exit-status.err { background: rgba(217,83,79,.10); border-color: rgba(217,83,79,.36); color: var(--ink); }
+
+/* ---------- How-it-works animations ---------- */
+.pulse-ring {
+  transform-box: fill-box;
+  transform-origin: center;
+  animation: pulseRing 2.4s ease-out infinite;
+  opacity: 0;
+}
+.pulse-ring.r2 { animation-delay: 1.2s; }
+@keyframes pulseRing {
+  0% { transform: scale(.6); opacity: .7; }
+  100% { transform: scale(1.5); opacity: 0; }
+}
+.eq-bar {
+  transform-box: fill-box;
+  transform-origin: center;
+  animation: eqBounce 1s ease-in-out infinite;
+}
+.eq-bar.e2 { animation-delay: .15s; }
+.eq-bar.e3 { animation-delay: .3s; }
+.eq-bar.e4 { animation-delay: .45s; }
+.eq-bar.e5 { animation-delay: .6s; }
+.eq-bar.e6 { animation-delay: .75s; }
+@keyframes eqBounce {
+  0%, 100% { transform: scaleY(.4); }
+  50% { transform: scaleY(1.15); }
+}
+.rec-fill {
+  transform-box: fill-box;
+  transform-origin: left center;
+  animation: recFill 6s linear infinite;
+}
+@keyframes recFill {
+  0% { transform: scaleX(0); }
+  100% { transform: scaleX(1); }
+}
+html.no-motion .how-visual * { animation: none !important; }
+
+/* ---------- Carousel ---------- */
+.carousel { margin-top: 48px; overflow: hidden; }
+.carousel .work-cards { margin-top: 0; }
+.carousel-track { scrollbar-width: none; }
+.carousel-track::-webkit-scrollbar { display: none; }
+.uc-track {
+  display: flex;
+  gap: 24px;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  padding-bottom: 8px;
+  -webkit-overflow-scrolling: touch;
+}
+.uc-track .scenario-card {
+  flex: 0 0 calc(50% - 12px);
+  scroll-snap-align: start;
+}
+.uc-more {
+  margin-top: 18px;
+  align-self: flex-start;
+  min-height: 40px;
+  padding: 8px 16px;
+  font-size: 14px;
+}
+.carousel-nav {
+  display: flex;
+  gap: 10px;
+  justify-content: flex-end;
+  margin-top: 20px;
+}
+.car-btn {
+  width: 44px;
+  height: 44px;
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  background: var(--white);
+  color: var(--ink);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background .15s ease, border-color .15s ease;
+}
+.car-btn:hover { background: var(--soft); border-color: var(--blue); }
+.car-btn:focus-visible { outline: 2px solid var(--blue); outline-offset: 2px; }
+
+/* ---------- Case study modal ---------- */
+.modal-case { max-width: 720px; }
+.modal-case .scenario-badge { margin-bottom: 14px; display: inline-flex; }
+.case-body h4 {
+  font-size: 15px;
+  letter-spacing: .05em;
+  text-transform: uppercase;
+  color: var(--blue);
+  margin: 22px 0 6px;
+  font-family: var(--font-body);
+  font-weight: 700;
+}
+.case-body h4:first-child { margin-top: 4px; }
+.case-body p { font-size: 15px; line-height: 1.65; color: var(--muted); }
+.case-note {
+  margin-top: 22px;
+  font-size: 13px;
+  color: var(--caption);
+  border-left: 3px solid var(--yellow);
+  padding-left: 14px;
+}
+.case-subscribe {
+  margin-top: 24px;
+  padding-top: 22px;
+  border-top: 1px solid var(--border);
+}
+.case-subscribe p { font-size: 15px; margin-bottom: 12px; }
+
+/* ---------- Trust section ---------- */
+.trust-grid {
+  display: grid;
+  grid-template-columns: 42fr 58fr;
+  gap: clamp(32px, 5vw, 72px);
+  align-items: center;
+}
+.trust-cards {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+}
+.trust-card {
+  background: var(--white);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  padding: 24px;
+  transition: box-shadow .2s ease, border-color .2s ease, transform .2s ease;
+}
+.trust-card:hover { box-shadow: var(--shadow-md); border-color: var(--blue); transform: translateY(-2px); }
+.trust-card .trust-icon {
+  width: 42px;
+  height: 42px;
+  border-radius: var(--radius-sm);
+  background: rgba(110,193,228,.16);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 14px;
+}
+.trust-card h3 { font-size: 17px; margin-bottom: 6px; }
+.trust-card p { font-size: 14px; line-height: 1.55; color: var(--muted); }
+
+/* ---------- Integration logos ---------- */
+.int-chips span { display: inline-flex; align-items: center; gap: 8px; }
+.int-chips img { width: 18px; height: 18px; object-fit: contain; border-radius: 3px; }
+
+/* ---------- Scroll reveal ---------- */
+.reveal {
+  opacity: 0;
+  transform: translateY(24px);
+  transition: opacity .55s ease, transform .55s ease;
+}
+.reveal.is-visible { opacity: 1; transform: translateY(0); }
+.reveal-stagger > * { transition-delay: calc(var(--i, 0) * 90ms); }
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  *, *::before, *::after { animation: none !important; transition: none !important; }
+  .reveal { opacity: 1; transform: none; }
+}
+
+/* ---------- Responsive ---------- */
+@media (max-width: 1024px) {
+  .card-grid { grid-template-columns: repeat(2, 1fr); }
+  .integration-grid { grid-template-columns: repeat(2, 1fr); }
+  .consult-steps { grid-template-columns: repeat(2, 1fr); }
+  .hero-grid { grid-template-columns: 1fr; }
+  .hero-visual { max-width: 560px; }
+  .cost-grid { grid-template-columns: 1fr; }
+  .how-panel { grid-template-columns: 1fr; }
+  .pilot-panel { grid-template-columns: 1fr; }
+  .product-card { grid-template-columns: 1fr; }
+  .service-panel { grid-template-columns: 1fr; }
+  .flip-grid2 { grid-template-columns: 1fr; }
+  .trust-grid { grid-template-columns: 1fr; }
+}
+@media (max-width: 768px) {
+  .main-nav {
+    display: none;
+    position: absolute;
+    top: 76px;
+    left: 0; right: 0;
+    background: var(--white);
+    border-bottom: 1px solid var(--border);
+    box-shadow: var(--shadow-md);
+    flex-direction: column;
+    align-items: stretch;
+    padding: 12px var(--gutter) 20px;
+  }
+  .main-nav.is-open { display: flex; }
+  .main-nav a { padding: 14px 10px; border-bottom: none; }
+  .nav-sep { width: auto; height: 1px; margin: 8px 10px; }
+  .nav-toggle { display: flex; }
+  .header-cta { display: none; }
+  .card-grid, .duo-grid, .integration-grid, .flip-grid2, .consult-steps { grid-template-columns: 1fr; }
+  .how-tabs { overflow-x: auto; }
+  .how-tab { white-space: nowrap; padding: 12px 14px; font-size: 15px; }
+  .scenario-grid {
+    display: flex;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    gap: 16px;
+    margin-left: calc(-1 * var(--gutter));
+    margin-right: calc(-1 * var(--gutter));
+    padding: 4px var(--gutter) 12px;
+  }
+  .scenario-card { flex: 0 0 82%; scroll-snap-align: center; }
+  .faq-body { padding-right: 0; }
+  .work-card { flex: 0 0 78%; height: 440px; }
+  .work-card.is-expanded { flex-basis: 88%; }
+  .trust-cards { grid-template-columns: 1fr; }
+  .form-grid { grid-template-columns: 1fr; }
+  .footer-top { gap: 32px; }
+  .footer-mid { flex-wrap: wrap; }
+  .footer-subscribe { margin-left: 0; }
+}
+</style>
+</head>
+<body>
+
+<header class="site-header" id="top">
+  <div class="container header-inner">
+    <a href="#top" class="wordmark"><img src="Fotky/Logo-Plexima.webp" alt="Plexima"></a>
+    <button class="nav-toggle" aria-label="Otevřít menu" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
+    <nav class="main-nav" aria-label="Hlavní navigace">
+      <a href="#jak-to-funguje">Jak to funguje</a>
+      <a href="#scenare">Scénáře</a>
+      <a href="#produkt">Produkt</a>
+      <a href="#implementace">Služba</a>
+      <a href="#faq">FAQ</a>
+      <i class="nav-sep" aria-hidden="true"></i>
+      <a href="priklady.html">Příklady z praxe</a>
+    </nav>
+    <div class="header-cta">
+      <button type="button" class="btn btn-primary" data-open="modal-konzultace">Domluvit konzultaci</button>
+    </div>
+  </div>
+</header>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="container hero-grid">
+    <div>
+      <span class="eyebrow">Méně ruční administrativy</span>
+      <h1>Co kdyby po schůzce nikdo nemusel psát zápis?</h1>
+      <p class="hero-sub">Rozhovory nemusí končit v poznámkách ani v hlavách lidí. Pošlete jejich výstupy rovnou do CRM nebo ERP. <strong>Automaticky.</strong></p>
+      <div class="hero-cta">
+        <button type="button" class="btn btn-primary" data-open="modal-konzultace">Domluvit konzultaci</button>
+        <a href="dotaznik.html" class="btn btn-ghost">Najít řešení</a>
+      </div>
+      <p class="hero-trust">Technologii Omi dnes používá přes <strong>300&nbsp;000 profesionálů</strong> po celém světě.</p>
+      <ul class="hero-benefits">
+        <li>
+          <svg width="18" height="18" viewBox="0 0 18 18" fill="none"><circle cx="9" cy="9" r="9" fill="#FEC710"/><path d="M5.5 9.2l2.3 2.3 4.7-4.8" stroke="#1F1741" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          Méně ručního zapisování po schůzkách
+        </li>
+        <li>
+          <svg width="18" height="18" viewBox="0 0 18 18" fill="none"><circle cx="9" cy="9" r="9" fill="#FEC710"/><path d="M5.5 9.2l2.3 2.3 4.7-4.8" stroke="#1F1741" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          Přesnější CRM a ERP data bez zpětného dohledávání
+        </li>
+        <li>
+          <svg width="18" height="18" viewBox="0 0 18 18" fill="none"><circle cx="9" cy="9" r="9" fill="#FEC710"/><path d="M5.5 9.2l2.3 2.3 4.7-4.8" stroke="#1F1741" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          Jasné úkoly a odpovědnosti hned po rozhovoru
+        </li>
+      </ul>
+    </div>
+    <div class="hero-visual">
+      <figure class="device-figure">
+        <span class="device-tag"><i></i>AI zápisník Omi</span>
+        <img src="Fotky/WebP Image.webp" alt="AI zápisník Omi, přívěsek na šňůrce">
+      </figure>
+      <div class="flow-card" id="flow-card" aria-hidden="true">
+        <div class="flow-label"><span class="dot"></span>Záznam schůzky</div>
+        <p class="transcript-line" data-line="1">„…pošleme jim <strong>upravenou nabídku do pátku</strong>…“</p>
+        <p class="transcript-line" data-line="2">„…<strong>Martin zajistí revizi smlouvy</strong> s právníkem…“</p>
+        <p class="transcript-line" data-line="3">„…domluvíme <strong>follow-up na příští úterý</strong>…“</p>
+        <div class="flow-outputs">
+          <span class="output-chip chip-yellow" data-chip="1">
+            <svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M2.5 6.2l2.2 2.2 4.8-4.9" stroke="#1F1741" stroke-width="1.8" stroke-linecap="round"/></svg>
+            CRM záznam
+          </span>
+          <span class="output-chip chip-blue" data-chip="2">
+            <svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M2.5 6.2l2.2 2.2 4.8-4.9" stroke="#1F1741" stroke-width="1.8" stroke-linecap="round"/></svg>
+            Úkol: revize smlouvy
+          </span>
+          <span class="output-chip chip-neutral" data-chip="3">
+            <svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M2.5 6.2l2.2 2.2 4.8-4.9" stroke="#54595F" stroke-width="1.8" stroke-linecap="round"/></svg>
+            Follow-up e-mail
+          </span>
+          <span class="output-chip chip-blue" data-chip="4">
+            <svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M2.5 6.2l2.2 2.2 4.8-4.9" stroke="#1F1741" stroke-width="1.8" stroke-linecap="round"/></svg>
+            Shrnutí schůzky
+          </span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- BOLEST -->
+<section class="section-soft" id="bolest">
+  <div class="container">
+    <div class="reveal">
+      <span class="eyebrow">Kde se ztrácí hodnota</span>
+      <h2 class="section-title">Proměňte každou schůzku v hotovou práci.</h2>
+      <p class="section-lead">Z jediné nahrávky vznikne zápis, úkoly, CRM i reporty. AI udělá administrativu za váš tým během několika minut.</p>
+    </div>
+    <h3 class="card-grid-heading reveal">Co získáte po každé schůzce</h3>
+    <div class="card-grid reveal reveal-stagger">
+      <div class="pain-card" style="--i:0">
+        <div class="pain-num">1</div>
+        <h3>Zápis během minut</h3>
+        <p>Kompletní přepis i přehledné shrnutí bez ruční práce.</p>
+      </div>
+      <div class="pain-card" style="--i:1">
+        <div class="pain-num">2</div>
+        <h3>Jasné úkoly</h3>
+        <p>S termíny, odpovědnými osobami a připravené pro vaše nástroje.</p>
+      </div>
+      <div class="pain-card" style="--i:2">
+        <div class="pain-num">3</div>
+        <h3>CRM vždy aktuální</h3>
+        <p>Obchodní informace se zapisují automaticky bez ručního přepisování.</p>
+      </div>
+      <div class="pain-card" style="--i:3">
+        <div class="pain-num">4</div>
+        <h3>Firemní paměť</h3>
+        <p>Každá schůzka zůstává dohledatelná a informace zůstávají ve firmě.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FLIP -->
+<section id="zmena">
+  <div class="container">
+    <div class="flip-grid2">
+      <div class="reveal">
+        <span class="eyebrow">Změna</span>
+        <h2 class="section-title">Jak vypadá schůzka s Omi</h2>
+        <p class="section-lead">Hotové výstupy během několika minut.</p>
+        <div class="flip-list reveal-stagger">
+          <div class="flip-item" style="--i:0">
+            <h3>Buďte naplno u jednání</h3>
+            <p>Veškerá pozornost patří lidem u stolu. O zbytek je postaráno.</p>
+          </div>
+          <div class="flip-item" style="--i:1">
+            <h3>Každé rozhodnutí má další krok</h3>
+            <p>Úkoly, termíny i odpovědnosti jsou připravené bez dohledávání.</p>
+          </div>
+          <div class="flip-item" style="--i:2">
+            <h3>Follow-up bez čekání</h3>
+            <p>Shrnutí i další kroky mohou odejít téměř okamžitě.</p>
+          </div>
+        </div>
+      </div>
+      <div class="flip-visual reveal">
+        <img src="Fotky/zmena.png" alt="Z rozhovoru vznikne shrnutí, úkoly, rozhodnutí a termíny">
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- VYTVOŘENO PRO SKUTEČNOU PRÁCI -->
+<section class="section-soft" id="scenare">
+  <div class="container">
+    <div class="reveal">
+      <span class="eyebrow">Vytvořeno pro skutečnou práci</span>
+      <h2 class="section-title">Vytvořeno pro každou důležitou schůzku</h2>
+      <p class="section-lead">Každá schůzka má jiný cíl. Výsledek je ale stejný. Méně administrativy a více času na skutečnou práci.</p>
+    </div>
+    <div class="carousel reveal" data-carousel data-interval="4500">
+      <div class="work-cards carousel-track">
+        <article class="work-card" data-case="obchod">
+          <img src="Fotky/obchodni-jednani.webp" alt="Dva muži na obchodním jednání s AI zápisníkem Omi na krku">
+          <button type="button" class="work-toggle" aria-label="Zobrazit více" aria-expanded="false">
+            <svg viewBox="0 0 16 16" fill="none"><path d="M8 3v10M3 8h10" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+          </button>
+          <span class="work-badge">Obchodní jednání</span>
+          <div class="work-content">
+            <h3 class="work-headline">Obchodník prodává, Omi zapisuje</h3>
+            <p class="work-desc">Zařízení nahrává schůzku a automaticky vytváří zápis, follow-up i doporučení pro další jednání. Obchodník se soustředí na klienta, ne na poznámky.</p>
+            <button type="button" class="btn work-case" data-case="obchod">Zobrazit scénář</button>
+          </div>
+        </article>
+        <!-- FOTKA: dodat scénu týmové porady -->
+        <article class="work-card" data-case="porady">
+          <img src="Fotky/obr.3.webp" alt="Tým na poradě s AI zápisníkem Omi na stole">
+          <button type="button" class="work-toggle" aria-label="Zobrazit více" aria-expanded="false">
+            <svg viewBox="0 0 16 16" fill="none"><path d="M8 3v10M3 8h10" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+          </button>
+          <span class="work-badge">Interní porady</span>
+          <div class="work-content">
+            <h3 class="work-headline">Porady končí úkoly, ne dojmy</h3>
+            <p class="work-desc">Rozhodnutí i úkoly vzniknou automaticky a míří rovnou do Asany.</p>
+            <button type="button" class="btn work-case" data-case="porady">Zobrazit scénář</button>
+          </div>
+        </article>
+        <article class="work-card" data-case="management">
+          <img src="Fotky/manazerske-schuzky.webp" alt="Manažerka s AI zápisníkem Omi na krku pracuje na notebooku">
+          <button type="button" class="work-toggle" aria-label="Zobrazit více" aria-expanded="false">
+            <svg viewBox="0 0 16 16" fill="none"><path d="M8 3v10M3 8h10" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+          </button>
+          <span class="work-badge">Projektové schůzky</span>
+          <div class="work-content">
+            <h3 class="work-headline">Každý krok dohledatelný</h3>
+            <p class="work-desc">Každé rozhodnutí i závazek najdete během pár vteřin.</p>
+            <button type="button" class="btn work-case" data-case="management">Zobrazit scénář</button>
+          </div>
+        </article>
+        <article class="work-card" data-case="knowhow">
+          <img src="Fotky/skoleni-knowhow.webp" alt="Prezentace a předávání know-how týmu na poradě">
+          <button type="button" class="work-toggle" aria-label="Zobrazit více" aria-expanded="false">
+            <svg viewBox="0 0 16 16" fill="none"><path d="M8 3v10M3 8h10" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+          </button>
+          <span class="work-badge">Firemní školení</span>
+          <div class="work-content">
+            <h3 class="work-headline">Know-how zůstává ve firmě</h3>
+            <p class="work-desc">Každé školení se promění ve znalosti, které tým znovu využije.</p>
+            <button type="button" class="btn work-case" data-case="knowhow">Zobrazit scénář</button>
+          </div>
+        </article>
+      </div>
+      <div class="carousel-nav">
+        <button type="button" class="car-btn car-prev" aria-label="Předchozí">
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M10 3L5 8l5 5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </button>
+        <button type="button" class="car-btn car-next" aria-label="Další">
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M6 3l5 5-5 5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </button>
+      </div>
+    </div>
+    <div class="reveal scenare-foot">
+      <p class="scenare-q">Nevíte, který scénář je ten váš?</p>
+      <a href="dotaznik.html" class="btn btn-ghost">Najít řešení</a>
+      <p class="scenare-note">Za 2 minuty zjistíte, jestli to u vás dává smysl.</p>
+      <a href="priklady.html" class="scenare-link">
+        Nebo se podívejte, jak Omi používají reálné firmy
+        <svg width="14" height="14" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3 8h9M8 4l4 4-4 4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- JAK TO FUNGUJE -->
+<section id="jak-to-funguje">
+  <div class="container">
+    <div class="reveal">
+      <span class="eyebrow">Řešení</span>
+      <h2 class="section-title">Zachytit. Zpracovat. Napojit.</h2>
+      <p class="section-lead">Od rozhovoru až po hotové výstupy během několika minut.</p>
+    </div>
+    <div class="how-tabs reveal" role="tablist" aria-label="Jak to funguje">
+      <button class="how-tab is-active" role="tab" aria-selected="true" data-panel="0"><span class="step-no">1</span>Zachytit</button>
+      <button class="how-tab" role="tab" aria-selected="false" data-panel="1"><span class="step-no">2</span>Zpracovat</button>
+      <button class="how-tab" role="tab" aria-selected="false" data-panel="2"><span class="step-no">3</span>Napojit</button>
+    </div>
+    <div class="how-panels">
+      <div class="how-panel is-active" role="tabpanel">
+        <div>
+          <h3>Nic nezapisujte. Jen veďte rozhovor.</h3>
+          <p>Omi zaznamená schůzku, telefonát nebo návštěvu u zákazníka, aniž byste museli dělat poznámky.</p>
+          <ul class="how-list">
+            <li><svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3.5 8.2l3 3 6-6.2" stroke="#6EC1E4" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>Schůzka je připravená k dalšímu zpracování</li>
+            <li><svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3.5 8.2l3 3 6-6.2" stroke="#6EC1E4" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>Není potřeba dělat poznámky během jednání</li>
+            <li><svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3.5 8.2l3 3 6-6.2" stroke="#6EC1E4" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>Funguje v kanceláři, online i v terénu</li>
+          </ul>
+        </div>
+        <div class="how-visual capture-visual">
+          <div class="capture-stage" id="capture-stage" role="img" aria-label="Tři kolegové mluví střídavě, Omi uprostřed naslouchá a zaznamenává hovor v kanceláři, online i v terénu">
+            <svg class="cap-lines" viewBox="0 0 1000 800">
+              <line class="cap-line" x1="262" y1="262" x2="414" y2="318" stroke="#CDD5E1" stroke-width="2" stroke-dasharray="2 7" stroke-linecap="round"/>
+              <line class="cap-line" x1="262" y1="414" x2="414" y2="356" stroke="#CDD5E1" stroke-width="2" stroke-dasharray="2 7" stroke-linecap="round"/>
+              <line class="cap-line" x1="738" y1="336" x2="596" y2="336" stroke="#CDD5E1" stroke-width="2" stroke-dasharray="2 7" stroke-linecap="round"/>
+            </svg>
+            <div class="cap-ripple" data-ripple="0"></div>
+            <div class="cap-ripple" data-ripple="1"></div>
+            <div class="cap-ripple" data-ripple="2"></div>
+            <div class="cap-ring" data-ring></div>
+            <div class="cap-lens"></div>
+            <div class="cap-core"></div>
+            <div class="cap-dot" data-dot></div>
+            <div class="cap-rec"><span class="cap-rec-dot" data-rec-dot></span><span>NAHRÁVÁM</span></div>
+
+            <div class="cap-speaker" data-speaker="0" style="left:88px; top:220px;">
+              <div class="cap-avatar" style="background:#3A3A6B">D</div>
+              <div class="cap-speaker-body">
+                <span class="cap-speaker-name">David</span>
+                <div class="cap-wave" data-wave="0">
+                  <span></span><span></span><span></span><span></span><span></span><span></span><span></span>
+                </div>
+              </div>
+            </div>
+            <div class="cap-tail cap-tail--right" data-tail="0" style="left:252px; top:268px;"></div>
+
+            <div class="cap-speaker" data-speaker="1" style="left:88px; top:392px;">
+              <div class="cap-avatar" style="background:#4DABF7">A</div>
+              <div class="cap-speaker-body">
+                <span class="cap-speaker-name">Aneta</span>
+                <div class="cap-wave" data-wave="1">
+                  <span></span><span></span><span></span><span></span><span></span><span></span><span></span>
+                </div>
+              </div>
+            </div>
+            <div class="cap-tail cap-tail--right" data-tail="1" style="left:252px; top:440px;"></div>
+
+            <div class="cap-speaker" data-speaker="2" style="left:736px; top:306px;">
+              <div class="cap-avatar" style="background:#F5B70A">P</div>
+              <div class="cap-speaker-body">
+                <span class="cap-speaker-name">Pavel</span>
+                <div class="cap-wave" data-wave="2">
+                  <span></span><span></span><span></span><span></span><span></span><span></span><span></span>
+                </div>
+              </div>
+            </div>
+            <div class="cap-tail cap-tail--left" data-tail="2" style="left:734px; top:354px;"></div>
+
+            <div class="cap-ctx" data-ctx="0">
+              <svg width="18" height="18" viewBox="0 0 18 18">
+                <rect x="2.5" y="3" width="8" height="12" rx="1" stroke="#3A3A6B" stroke-width="1.4" fill="none"/>
+                <path d="M10.5 7h4.5v8" stroke="#3A3A6B" stroke-width="1.4" fill="none" stroke-linejoin="round"/>
+                <path d="M4.6 6h2 M4.6 9h2 M4.6 12h2 M12 10h1.5 M12 12.5h1.5" stroke="#3A3A6B" stroke-width="1.2" stroke-linecap="round"/>
+              </svg>
+              <span>Kancelář</span>
+            </div>
+            <div class="cap-ctx" data-ctx="1">
+              <svg width="18" height="18" viewBox="0 0 18 18">
+                <rect x="2" y="3.5" width="10" height="8" rx="1.4" stroke="#3A3A6B" stroke-width="1.4" fill="none"/>
+                <path d="M12 6.4 L16 4.4 v7.2 L12 9.6 Z" stroke="#3A3A6B" stroke-width="1.4" fill="none" stroke-linejoin="round"/>
+                <path d="M5 14.5h4" stroke="#3A3A6B" stroke-width="1.4" stroke-linecap="round"/>
+              </svg>
+              <span>Online hovor</span>
+            </div>
+            <div class="cap-ctx" data-ctx="2">
+              <svg width="18" height="18" viewBox="0 0 18 18">
+                <path d="M9 2.2c2.9 0 5 2.1 5 4.9 0 3.4-5 8.4-5 8.4S4 10.5 4 7.1C4 4.3 6.1 2.2 9 2.2Z" stroke="#3A3A6B" stroke-width="1.4" fill="none" stroke-linejoin="round"/>
+                <circle cx="9" cy="7" r="1.8" stroke="#3A3A6B" stroke-width="1.4" fill="none"/>
+              </svg>
+              <span>V terénu</span>
+            </div>
+
+            <div class="cap-dots">
+              <span data-ctxdot="0"></span><span data-ctxdot="1"></span><span data-ctxdot="2"></span>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="how-panel" role="tabpanel">
+        <div>
+          <h3>Během několika minut je vše připravené.</h3>
+          <p>Během několika minut vzniknou hotové výstupy připravené k použití.</p>
+          <ul class="how-list">
+            <li><svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3.5 8.2l3 3 6-6.2" stroke="#6EC1E4" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>Přehledné shrnutí schůzky</li>
+            <li><svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3.5 8.2l3 3 6-6.2" stroke="#6EC1E4" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>Rozhodnutí, úkoly a odpovědnosti</li>
+            <li><svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3.5 8.2l3 3 6-6.2" stroke="#6EC1E4" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>Otevřené body, rizika a další kroky</li>
+          </ul>
+        </div>
+        <div class="how-visual process-visual">
+          <div class="process-stage" id="process-stage" role="img" aria-label="Zápis ze schůzky se automaticky přepíše a úkoly se vytěží do seznamu">
+            <svg style="position:absolute;left:0;top:0;width:1000px;height:800px;overflow:visible">
+              <line x1="458" y1="385" x2="554" y2="385" stroke="#CDD5E1" stroke-width="2" stroke-dasharray="2 7" stroke-linecap="round" opacity=".55"/>
+              <path d="M544 379 l7 6 l-7 6" stroke="#CDD5E1" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round" opacity=".6"/>
+            </svg>
+
+            <div class="proc-card" style="left:60px;top:150px;width:392px;height:470px;"></div>
+            <div class="proc-icon-tile" style="left:86px;top:176px;">
+              <svg width="18" height="18" viewBox="0 0 18 18"><rect x="3.5" y="2" width="11" height="14" rx="1.6" stroke="#4DABF7" stroke-width="1.4" fill="none"/><path d="M6 6h6 M6 9h6 M6 12h3.5" stroke="#4DABF7" stroke-width="1.3" stroke-linecap="round"/></svg>
+            </div>
+            <div class="proc-title" data-note-hdr style="left:140px;top:178px;">Zápis ze schůzky</div>
+            <div class="proc-sub" data-note-hdr style="left:140px;top:200px;">Automatický přepis konverzace</div>
+            <div class="proc-divider" style="left:86px;top:234px;width:340px;"></div>
+
+            <div class="proc-avatar" data-la="0" style="left:84px;top:258px;width:26px;height:26px;background:#3A3A6B;">D</div>
+            <div class="proc-highlight" data-lh="0" style="left:116px;top:253px;width:312px;height:36px;opacity:0;"></div>
+            <div class="proc-text-clip" data-lt="0" style="left:122px;top:261px;width:310px;"><span>Pošlu cenovou nabídku klientovi.</span></div>
+
+            <div class="proc-avatar" data-la="1" style="left:84px;top:320px;width:26px;height:26px;background:#4DABF7;">A</div>
+            <div class="proc-highlight" data-lh="1" style="left:116px;top:315px;width:312px;height:36px;opacity:0;"></div>
+            <div class="proc-text-clip" data-lt="1" style="left:122px;top:323px;width:310px;"><span>Připravím smlouvu k podpisu.</span></div>
+
+            <div class="proc-avatar" data-la="2" style="left:84px;top:382px;width:26px;height:26px;background:#F5B70A;">P</div>
+            <div class="proc-highlight" data-lh="2" style="left:116px;top:377px;width:312px;height:36px;opacity:0;"></div>
+            <div class="proc-text-clip" data-lt="2" style="left:122px;top:385px;width:310px;"><span>Domluvím další schůzku.</span></div>
+
+            <div class="proc-avatar" data-la="3" style="left:84px;top:444px;width:26px;height:26px;background:#3A3A6B;">D</div>
+            <div class="proc-highlight" data-lh="3" style="left:116px;top:439px;width:312px;height:36px;opacity:0;"></div>
+            <div class="proc-text-clip" data-lt="3" style="left:122px;top:447px;width:310px;"><span>Ověřím fakturaci u účetní.</span></div>
+
+            <div class="proc-avatar" data-la="4" style="left:84px;top:506px;width:26px;height:26px;background:#4DABF7;">A</div>
+            <div class="proc-highlight" data-lh="4" style="left:116px;top:501px;width:312px;height:36px;opacity:0;"></div>
+            <div class="proc-text-clip" data-lt="4" style="left:122px;top:509px;width:310px;"><span>Zašlu podklady k projektu.</span></div>
+
+            <div class="proc-card" style="left:560px;top:150px;width:392px;height:470px;"></div>
+            <div class="proc-icon-tile" style="left:586px;top:176px;">
+              <svg width="18" height="18" viewBox="0 0 18 18"><path d="M4 5.5h10 M4 9h10 M4 12.5h6" stroke="#4DABF7" stroke-width="1.6" stroke-linecap="round"/></svg>
+            </div>
+            <div class="proc-title" data-task-hdr style="left:640px;top:178px;">Úkoly ze schůzky</div>
+            <div class="proc-sub" data-task-hdr style="left:640px;top:200px;">Automaticky vytěženo ze zápisu</div>
+            <div class="proc-divider" style="left:586px;top:234px;width:340px;"></div>
+
+            <div class="proc-checkbox" data-cb="0" style="left:586px;top:258px;"></div>
+            <div class="proc-task-title" data-rt="0" style="left:622px;top:255px;">Připravit cenovou nabídku</div>
+            <div class="proc-task-date" data-rd="0" style="left:622px;top:276px;">
+              <svg width="12" height="12" viewBox="0 0 12 12"><rect x="1.5" y="2.5" width="9" height="8" rx="1.6" stroke="#8A90A2" stroke-width="1" fill="none"/><path d="M1.5 4.6h9 M4 1.3v2 M8 1.3v2" stroke="#8A90A2" stroke-width="1" stroke-linecap="round"/></svg>
+              <span>14. 7.</span>
+            </div>
+            <div class="proc-owner" data-ow="0" style="left:834px;top:259px;">
+              <div class="proc-owner-avatar" style="background:#3A3A6B;">D</div>
+              <span class="proc-owner-name">David</span>
+            </div>
+
+            <div class="proc-checkbox" data-cb="1" style="left:586px;top:320px;"></div>
+            <div class="proc-task-title" data-rt="1" style="left:622px;top:317px;">Odeslat smlouvu klientovi</div>
+            <div class="proc-task-date" data-rd="1" style="left:622px;top:338px;">
+              <svg width="12" height="12" viewBox="0 0 12 12"><rect x="1.5" y="2.5" width="9" height="8" rx="1.6" stroke="#8A90A2" stroke-width="1" fill="none"/><path d="M1.5 4.6h9 M4 1.3v2 M8 1.3v2" stroke="#8A90A2" stroke-width="1" stroke-linecap="round"/></svg>
+              <span>15. 7.</span>
+            </div>
+            <div class="proc-owner" data-ow="1" style="left:834px;top:321px;">
+              <div class="proc-owner-avatar" style="background:#4DABF7;">A</div>
+              <span class="proc-owner-name">Aneta</span>
+            </div>
+
+            <div class="proc-checkbox" data-cb="2" style="left:586px;top:382px;"></div>
+            <div class="proc-task-title" data-rt="2" style="left:622px;top:379px;">Naplánovat schůzku</div>
+            <div class="proc-task-date" data-rd="2" style="left:622px;top:400px;">
+              <svg width="12" height="12" viewBox="0 0 12 12"><rect x="1.5" y="2.5" width="9" height="8" rx="1.6" stroke="#8A90A2" stroke-width="1" fill="none"/><path d="M1.5 4.6h9 M4 1.3v2 M8 1.3v2" stroke="#8A90A2" stroke-width="1" stroke-linecap="round"/></svg>
+              <span>16. 7.</span>
+            </div>
+            <div class="proc-owner" data-ow="2" style="left:834px;top:383px;">
+              <div class="proc-owner-avatar" style="background:#F5B70A;">P</div>
+              <span class="proc-owner-name">Pavel</span>
+            </div>
+
+            <div class="proc-checkbox" data-cb="3" style="left:586px;top:444px;"></div>
+            <div class="proc-task-title" data-rt="3" style="left:622px;top:441px;">Ověřit fakturaci</div>
+            <div class="proc-task-date" data-rd="3" style="left:622px;top:462px;">
+              <svg width="12" height="12" viewBox="0 0 12 12"><rect x="1.5" y="2.5" width="9" height="8" rx="1.6" stroke="#8A90A2" stroke-width="1" fill="none"/><path d="M1.5 4.6h9 M4 1.3v2 M8 1.3v2" stroke="#8A90A2" stroke-width="1" stroke-linecap="round"/></svg>
+              <span>17. 7.</span>
+            </div>
+            <div class="proc-owner" data-ow="3" style="left:834px;top:445px;">
+              <div class="proc-owner-avatar" style="background:#3A3A6B;">D</div>
+              <span class="proc-owner-name">David</span>
+            </div>
+
+            <div class="proc-checkbox" data-cb="4" style="left:586px;top:506px;"></div>
+            <div class="proc-task-title" data-rt="4" style="left:622px;top:503px;">Zaslat podklady k projektu</div>
+            <div class="proc-task-date" data-rd="4" style="left:622px;top:524px;">
+              <svg width="12" height="12" viewBox="0 0 12 12"><rect x="1.5" y="2.5" width="9" height="8" rx="1.6" stroke="#8A90A2" stroke-width="1" fill="none"/><path d="M1.5 4.6h9 M4 1.3v2 M8 1.3v2" stroke="#8A90A2" stroke-width="1" stroke-linecap="round"/></svg>
+              <span>18. 7.</span>
+            </div>
+            <div class="proc-owner" data-ow="4" style="left:834px;top:507px;">
+              <div class="proc-owner-avatar" style="background:#4DABF7;">A</div>
+              <span class="proc-owner-name">Aneta</span>
+            </div>
+
+            <div class="proc-pill" data-pill="0" style="opacity:0;"><div class="proc-pill-dot" style="background:#3A3A6B;"></div><span class="proc-pill-text">Připravit cenovou</span></div>
+            <div class="proc-pill" data-pill="1" style="opacity:0;"><div class="proc-pill-dot" style="background:#4DABF7;"></div><span class="proc-pill-text">Odeslat smlouvu</span></div>
+            <div class="proc-pill" data-pill="2" style="opacity:0;"><div class="proc-pill-dot" style="background:#F5B70A;"></div><span class="proc-pill-text">Naplánovat schůzku</span></div>
+            <div class="proc-pill" data-pill="3" style="opacity:0;"><div class="proc-pill-dot" style="background:#3A3A6B;"></div><span class="proc-pill-text">Ověřit fakturaci</span></div>
+            <div class="proc-pill" data-pill="4" style="opacity:0;"><div class="proc-pill-dot" style="background:#4DABF7;"></div><span class="proc-pill-text">Zaslat podklady</span></div>
+          </div>
+        </div>
+      </div>
+      <div class="how-panel" role="tabpanel">
+        <div>
+          <h3>Výstupy pokračují tam, kde pracuje váš tým.</h3>
+          <p>Nemusíte otevírat další aplikaci. Zápisy, úkoly i CRM pokračují přímo do nástrojů, které váš tým používá každý den.</p>
+          <ul class="how-list">
+            <li><svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3.5 8.2l3 3 6-6.2" stroke="#6EC1E4" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>CRM a obchodní systém</li>
+            <li><svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3.5 8.2l3 3 6-6.2" stroke="#6EC1E4" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>Projektové a úkolové nástroje</li>
+            <li><svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3.5 8.2l3 3 6-6.2" stroke="#6EC1E4" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>E-mail, Teams, Slack nebo API</li>
+          </ul>
+        </div>
+        <div class="how-visual connect-visual">
+          <div class="connect-stage" id="connect-stage" role="img" aria-label="Výstupy ze schůzky automaticky pokračují do CRM, úkolových nástrojů a komunikačních kanálů">
+            <svg data-conn-svg style="position:absolute;left:0;top:0;width:1000px;height:800px;overflow:visible">
+              <path data-route="0" d="" stroke="#CDD5E1" stroke-width="2" fill="none" stroke-dasharray="2 7" stroke-linecap="round" opacity=".35"/>
+              <path data-route="1" d="" stroke="#CDD5E1" stroke-width="2" fill="none" stroke-dasharray="2 7" stroke-linecap="round" opacity=".35"/>
+              <path data-route="2" d="" stroke="#CDD5E1" stroke-width="2" fill="none" stroke-dasharray="2 7" stroke-linecap="round" opacity=".35"/>
+              <circle data-emitter cx="394" cy="408" r="5" fill="#4DABF7" opacity="0"/>
+            </svg>
+
+            <div class="conn-card" data-conn-src style="left:74px;top:300px;width:320px;height:216px;opacity:0;"></div>
+            <div class="conn-icon-tile" style="left:96px;top:322px;">
+              <svg width="18" height="18" viewBox="0 0 18 18"><path d="M9 2v9 M5.5 8 L9 11.5 L12.5 8 M3.5 13.5h11" stroke="#4DABF7" stroke-width="1.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </div>
+            <div class="conn-title" data-conn-src-hdr style="left:146px;top:326px;opacity:0;">Výstupy ze schůzky</div>
+            <div class="conn-sub" data-conn-src-hdr style="left:146px;top:348px;opacity:0;">Připraveno k odeslání</div>
+
+            <div class="conn-chip" data-chip="0" style="left:98px;top:396px;opacity:0;">
+              <div class="conn-chip-check"><svg width="9" height="9" viewBox="0 0 8 8"><path d="M1.6 4.2 L3.3 5.9 L6.4 2.4" stroke="#fff" stroke-width="1.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+              <span class="conn-chip-label">Zápis</span>
+            </div>
+            <div class="conn-chip" data-chip="1" style="left:98px;top:432px;opacity:0;">
+              <div class="conn-chip-check"><svg width="9" height="9" viewBox="0 0 8 8"><path d="M1.6 4.2 L3.3 5.9 L6.4 2.4" stroke="#fff" stroke-width="1.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+              <span class="conn-chip-label">Úkoly</span>
+            </div>
+            <div class="conn-chip" data-chip="2" style="left:98px;top:468px;opacity:0;">
+              <div class="conn-chip-check"><svg width="9" height="9" viewBox="0 0 8 8"><path d="M1.6 4.2 L3.3 5.9 L6.4 2.4" stroke="#fff" stroke-width="1.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+              <span class="conn-chip-label">Follow up</span>
+            </div>
+
+            <div class="conn-tile" data-tile="0" style="left:612px;top:232px;">
+              <div class="conn-tile-icon" data-tile-icon="0">
+                <svg width="22" height="22" viewBox="0 0 22 22"><rect x="2.5" y="4" width="17" height="14" rx="2" stroke="#3A3A6B" stroke-width="1.5" fill="none"/><circle cx="7.5" cy="9.5" r="2.1" stroke="#3A3A6B" stroke-width="1.4" fill="none"/><path d="M4.6 15c0-1.8 1.3-2.7 2.9-2.7s2.9 0.9 2.9 2.7" stroke="#3A3A6B" stroke-width="1.3" fill="none" stroke-linecap="round"/><path d="M13.5 8.5h3.5 M13.5 11.5h3.5 M13.5 14.5h2" stroke="#3A3A6B" stroke-width="1.3" stroke-linecap="round"/></svg>
+              </div>
+              <div class="conn-tile-body">
+                <span class="conn-tile-name">CRM a obchodní systém</span>
+                <span class="conn-tile-status" data-tile-status="0"><span class="conn-tile-dot" style="background:#D6DBE6;"></span><span data-tile-verb="0">Připojeno</span></span>
+              </div>
+              <div class="conn-badge" data-tile-badge="0" style="opacity:0;transform:scale(.5);"><svg width="13" height="13" viewBox="0 0 13 13"><path d="M3 6.6 L5.5 9.1 L10 3.9" stroke="#fff" stroke-width="1.8" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+            </div>
+
+            <div class="conn-tile" data-tile="1" style="left:612px;top:364px;">
+              <div class="conn-tile-icon" data-tile-icon="1">
+                <svg width="22" height="22" viewBox="0 0 22 22"><rect x="3" y="4" width="4.6" height="14" rx="1.4" stroke="#3A3A6B" stroke-width="1.5" fill="none"/><rect x="9.2" y="4" width="4.6" height="9.5" rx="1.4" stroke="#3A3A6B" stroke-width="1.5" fill="none"/><rect x="15.4" y="4" width="4.6" height="11" rx="1.4" stroke="#3A3A6B" stroke-width="1.5" fill="none"/></svg>
+              </div>
+              <div class="conn-tile-body">
+                <span class="conn-tile-name">Projektové a úkolové nástroje</span>
+                <span class="conn-tile-status" data-tile-status="1"><span class="conn-tile-dot" style="background:#D6DBE6;"></span><span data-tile-verb="1">Připojeno</span></span>
+              </div>
+              <div class="conn-badge" data-tile-badge="1" style="opacity:0;transform:scale(.5);"><svg width="13" height="13" viewBox="0 0 13 13"><path d="M3 6.6 L5.5 9.1 L10 3.9" stroke="#fff" stroke-width="1.8" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+            </div>
+
+            <div class="conn-tile" data-tile="2" style="left:612px;top:496px;">
+              <div class="conn-tile-icon" data-tile-icon="2">
+                <svg width="22" height="22" viewBox="0 0 22 22"><path d="M3.5 5.5a2 2 0 0 1 2-2h11a2 2 0 0 1 2 2v7a2 2 0 0 1-2 2H9l-4 3.2V14.5H5.5a2 2 0 0 1-2-2Z" stroke="#3A3A6B" stroke-width="1.5" fill="none" stroke-linejoin="round"/><path d="M7 8.5h8 M7 11h5" stroke="#3A3A6B" stroke-width="1.3" stroke-linecap="round"/></svg>
+              </div>
+              <div class="conn-tile-body">
+                <span class="conn-tile-name">E-mail, Teams, Slack nebo API</span>
+                <span class="conn-tile-status" data-tile-status="2"><span class="conn-tile-dot" style="background:#D6DBE6;"></span><span data-tile-verb="2">Připojeno</span></span>
+              </div>
+              <div class="conn-badge" data-tile-badge="2" style="opacity:0;transform:scale(.5);"><svg width="13" height="13" viewBox="0 0 13 13"><path d="M3 6.6 L5.5 9.1 L10 3.9" stroke="#fff" stroke-width="1.8" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+            </div>
+
+            <div class="conn-packet" data-packet="0" style="opacity:0;"><div class="conn-packet-dot" style="background:#3A3A6B;"></div><span class="conn-packet-text">Follow up</span></div>
+            <div class="conn-packet" data-packet="1" style="opacity:0;"><div class="conn-packet-dot" style="background:#4DABF7;"></div><span class="conn-packet-text">Úkoly</span></div>
+            <div class="conn-packet" data-packet="2" style="opacity:0;"><div class="conn-packet-dot" style="background:#F5B70A;"></div><span class="conn-packet-text">Zápis</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SKRYTÁ CENA -->
+<section id="skryta-cena" class="section-soft">
+  <div class="container">
+    <div class="reveal">
+      <span class="eyebrow">Skrytá cena</span>
+      <h2 class="section-title">Kolik vás stojí administrativa, kterou nikdo nevidí?</h2>
+      <p class="section-lead">Každá schůzka nekončí odchodem z místnosti. Následují zápisy, CRM, reporty a follow-up. Spočítejte si, kolik času na nich váš tým každý měsíc stráví.</p>
+    </div>
+    <div class="cost-grid">
+      <div class="calc-panel reveal">
+        <div class="calc-row">
+          <label for="calc-people">Kolik lidí u vás jedná se zákazníky nebo vede schůzky <output id="calc-people-out">8</output></label>
+          <input type="range" id="calc-people" min="1" max="50" value="8">
+        </div>
+        <div class="calc-row">
+          <label for="calc-meetings">Schůzek či návštěv týdně na osobu <output id="calc-meetings-out">5</output></label>
+          <input type="range" id="calc-meetings" min="1" max="15" value="5">
+        </div>
+        <div class="calc-row">
+          <label for="calc-minutes">Minut administrativy po každé z nich <output id="calc-minutes-out">20</output></label>
+          <input type="range" id="calc-minutes" min="5" max="45" step="5" value="20">
+        </div>
+        <div class="calc-result">
+          <span class="calc-caption">Čas strávený administrativou</span>
+          <div class="calc-number"><span id="calc-hours">0</span> <small>hodin měsíčně</small></div>
+          <p class="calc-days">To je zhruba <strong id="calc-days">0 pracovních dní</strong> každý měsíc, strávených přepisováním toho, co už jednou zaznělo.</p>
+        </div>
+      </div>
+      <div>
+        <div class="silent-losses reveal reveal-stagger">
+          <div class="loss-item" style="--i:0">
+            <div class="loss-icon">
+              <svg width="22" height="22" viewBox="0 0 22 22" fill="none"><path d="M11 6v5l3.5 2" stroke="#1F1741" stroke-width="1.8" stroke-linecap="round"/><circle cx="11" cy="11" r="8.5" stroke="#1F1741" stroke-width="1.8"/></svg>
+            </div>
+            <div>
+              <h3>Rozhodnutí bez vlastníka se ztratí</h3>
+              <p>Na poradě se domluví další kroky. Za pár dní už ale nikdo neví, kdo za ně odpovídá. Stejná témata se tak řeší znovu.</p>
+            </div>
+          </div>
+          <div class="loss-item" style="--i:1">
+            <div class="loss-icon">
+              <svg width="22" height="22" viewBox="0 0 22 22" fill="none"><path d="M11 3l2.4 4.9 5.4.8-3.9 3.8.9 5.4L11 15.3l-4.8 2.6.9-5.4L3.2 8.7l5.4-.8L11 3z" stroke="#1F1741" stroke-width="1.7" stroke-linejoin="round"/></svg>
+            </div>
+            <div>
+              <h3>Firemní know-how mizí s každým odchodem.</h3>
+              <p>Nejdůležitější zkušenosti vznikají v rozhovorech. Když je nikdo nezachytí, odejdou spolu s lidmi, kteří je mají v hlavě.</p>
+            </div>
+          </div>
+          <div class="loss-item" style="--i:2">
+            <div class="loss-icon">
+              <svg width="22" height="22" viewBox="0 0 22 22" fill="none"><path d="M4 18V9m7 9V4m7 14v-6" stroke="#1F1741" stroke-width="1.8" stroke-linecap="round"/></svg>
+            </div>
+            <div>
+              <h3>CRM se plní pozdě. Rozhoduje se podle odhadů.</h3>
+              <p>Když se informace zapisují až po schůzce, část se ztratí. Reporty pak vycházejí z paměti, ne z toho, co se skutečně stalo.</p>
+            </div>
+          </div>
+        </div>
+        <div class="reveal" style="margin-top: 28px;">
+          <a href="dotaznik.html" class="btn btn-ghost">Najít řešení</a>
+          <p style="font-size: 14px; color: var(--caption); margin-top: 12px;">Krátký dotazník ukáže, kolik z toho času dokážete získat zpět.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PRODUKT: KOUPIT -->
+<section id="produkt">
+  <div class="container">
+    <div class="product-card reveal">
+      <div class="product-media">
+        <span class="product-badge">Novinka · AI zápisník</span>
+        <div class="product-stage">
+          <img id="gallery-main" src="Fotky/Firefly_Flux_cria_uma_nova_cena_semelhante_a_esta_referencia_com_fundo_escuro_com_o_mesmo_diso_543795 Background Removed.png" alt="AI zápisník Omi, pohled na zařízení">
+        </div>
+        <div class="product-thumbs" role="tablist" aria-label="Fotografie produktu">
+          <button type="button" class="buy-thumb is-active" data-src="Fotky/Firefly_Flux_cria_uma_nova_cena_semelhante_a_esta_referencia_com_fundo_escuro_com_o_mesmo_diso_543795 Background Removed.png">
+            <img src="Fotky/Firefly_Flux_cria_uma_nova_cena_semelhante_a_esta_referencia_com_fundo_escuro_com_o_mesmo_diso_543795 Background Removed.png" alt="Omi zblízka">
+          </button>
+          <button type="button" class="buy-thumb" data-src="Fotky/WebP Image.webp">
+            <img src="Fotky/WebP Image.webp" alt="Omi na šňůrce">
+          </button>
+        </div>
+      </div>
+      <div class="product-config">
+        <span class="eyebrow eyebrow-dot">Nahrávací zařízení</span>
+        <h2 class="product-title">OMI AI</h2>
+        <p class="product-desc">Zařízení s aplikací pro mobil, desktop i web. Zachytí schůzku, hovor nebo návštěvu u zákazníka a během několika minut připraví přepis i přehledné shrnutí.</p>
+
+        <div class="config-group">
+          <span class="config-label">Počet kusů</span>
+          <div class="option-row" id="pack-options">
+            <button type="button" class="option-box is-active" data-qty="1" data-price="4790">
+              <span class="option-title">1 kus</span>
+              <span class="option-price">4 790 Kč</span>
+            </button>
+            <button type="button" class="option-box" data-qty="2" data-price="8990">
+              <span class="option-title">2 kusy</span>
+              <span class="option-price">8 990 Kč</span>
+            </button>
+            <button type="button" class="option-box" data-qty="3" data-price="13190">
+              <span class="option-title">3 kusy</span>
+              <span class="option-price">13 190 Kč</span>
+            </button>
+          </div>
+        </div>
+
+        <div class="config-group">
+          <span class="config-label">Rozsah</span>
+          <div class="radio-row" id="scope-options">
+            <label class="radio-box is-active">
+              <input type="radio" name="scope" value="device" checked>
+              <span class="radio-dot"></span>
+              <span class="radio-text">Jen zařízení</span>
+            </label>
+            <label class="radio-box">
+              <input type="radio" name="scope" value="service">
+              <span class="radio-dot"></span>
+              <span class="radio-text">Zařízení + nastavení automatizací</span>
+              <span class="radio-badge">Doporučeno</span>
+            </label>
+          </div>
+        </div>
+
+        <button type="button" class="btn buy-big" data-open="modal-objednavka" id="buy-cta">Objednat Omi</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- IMPLEMENTACE OD PLEXIMY -->
+<section class="section-soft" id="implementace">
+  <div class="container">
+    <div class="reveal">
+      <span class="eyebrow">Služba</span>
+      <h2 class="section-title">Implementace, která přinese skutečný výsledek.</h2>
+      <p class="section-lead">Pomůžeme vám nastavit procesy i automatizace tak, aby se výstupy dostaly tam, kde vytvářejí hodnotu.</p>
+    </div>
+    <div class="service-panel reveal">
+      <div>
+        <h3>Z rozhovorů se stanou data.<br> Z dat automatizace.</h3>
+        <p>Navrhneme celý workflow, nastavíme integrace a zajistíme, aby Omi zapadlo do způsobu práce vašeho týmu.</p>
+        <button type="button" class="btn btn-primary" data-open="modal-konzultace">Domluvit konzultaci</button>
+      </div>
+      <ul class="duo-list">
+        <li><svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3.5 8.2l3 3 6-6.2" stroke="#6EC1E4" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>Analýza procesů a návrh workflow</li>
+        <li><svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3.5 8.2l3 3 6-6.2" stroke="#6EC1E4" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>Napojení na CRM, úkolové systémy a interní nástroje</li>
+        <li><svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3.5 8.2l3 3 6-6.2" stroke="#6EC1E4" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>Automatizace přes Make, Zapier, Creatio nebo API</li>
+        <li><svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3.5 8.2l3 3 6-6.2" stroke="#6EC1E4" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>Testování výstupů a zaškolení uživatelů</li>
+        <li><svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3.5 8.2l3 3 6-6.2" stroke="#6EC1E4" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>Nastavení pravidel pro nahrávání a práci s daty</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- PROČ PLEXIMA -->
+<section class="section-soft" id="proc-plexima">
+  <div class="container trust-grid">
+    <div class="reveal">
+      <span class="eyebrow">Proč Plexima</span>
+      <h2 class="section-title">Neprodáváme zařízení. Přinášíme výsledek.</h2>
+      <p class="section-lead">Technologie je jen začátek. Hodnotu vytváří správně nastavený proces.</p>
+    </div>
+    <div class="trust-cards reveal reveal-stagger">
+      <div class="trust-card" style="--i:0">
+        <div class="trust-icon">
+          <svg width="22" height="22" viewBox="0 0 22 22" fill="none"><path d="M11 3v5m0 6v5M3 11h5m6 0h5" stroke="#1F1741" stroke-width="1.8" stroke-linecap="round"/><circle cx="11" cy="11" r="3" stroke="#1F1741" stroke-width="1.8"/></svg>
+        </div>
+        <h3>Analýza</h3>
+        <p>Nejdřív pochopíme, jak vaše firma pracuje. Teprve potom navrhneme řešení.</p>
+      </div>
+      <div class="trust-card" style="--i:1">
+        <div class="trust-icon">
+          <svg width="22" height="22" viewBox="0 0 22 22" fill="none"><rect x="3" y="4" width="16" height="14" rx="2" stroke="#1F1741" stroke-width="1.8"/><path d="M3 9h16M8 9v9" stroke="#1F1741" stroke-width="1.8"/></svg>
+        </div>
+        <h3>Integrace</h3>
+        <p>Propojíme CRM, ERP i interní aplikace tak, aby informace proudily tam, kde potřebujete.</p>
+      </div>
+      <div class="trust-card" style="--i:2">
+        <div class="trust-icon">
+          <svg width="22" height="22" viewBox="0 0 22 22" fill="none"><path d="M11 3v5m0 6v5M3 11h5m6 0h5" stroke="#1F1741" stroke-width="1.8" stroke-linecap="round"/><circle cx="11" cy="11" r="3" stroke="#1F1741" stroke-width="1.8"/></svg>
+        </div>
+        <h3>Automatizace</h3>
+        <p>Navrhujeme workflow, která předávají informace mezi systémy automaticky.</p>
+      </div>
+      <div class="trust-card" style="--i:3">
+        <div class="trust-icon">
+          <svg width="22" height="22" viewBox="0 0 22 22" fill="none"><path d="M4 18V9l7-5 7 5v9" stroke="#1F1741" stroke-width="1.8" stroke-linejoin="round"/><path d="M9 18v-5h4v5" stroke="#1F1741" stroke-width="1.8" stroke-linejoin="round"/></svg>
+        </div>
+        <h3>Nasazení</h3>
+        <p>Pomůžeme s pilotním provozem, zaškolením i dlouhodobou podporou.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- JAK KONZULTACE PROBÍHÁ -->
+<section id="konzultace">
+  <div class="container">
+    <div class="reveal">
+      <span class="eyebrow">Bezplatná konzultace</span>
+      <h2 class="section-title">Jak probíhá úvodní konzultace</h2>
+      <p class="section-lead">Během 60 minut společně najdeme proces s největším potenciálem pro automatizaci.</p>
+    </div>
+    <div class="consult-steps reveal reveal-stagger">
+      <div class="consult-step" style="--i:0">
+        <span class="consult-num">01</span>
+        <h3>Najdeme správný proces</h3>
+        <p>Vybereme oblast, kde dnes vzniká nejvíce administrativy po schůzkách.</p>
+      </div>
+      <div class="consult-step" style="--i:1">
+        <span class="consult-num">02</span>
+        <h3>Zmapujeme současný stav</h3>
+        <p>Podíváme se, kdo dnes zapisuje informace, kam putují a kde vzniká zbytečná ruční práce.</p>
+      </div>
+      <div class="consult-step" style="--i:2">
+        <span class="consult-num">03</span>
+        <h3>Navrhneme řešení</h3>
+        <p>Ukážeme, jak data z rozhovorů automaticky tečou do vašich systémů.</p>
+      </div>
+      <div class="consult-step" style="--i:3">
+        <span class="consult-num">04</span>
+        <h3>Doporučíme další krok</h3>
+        <p>Otevřeně řekneme, jestli to pro vás dává smysl nebo doporučíme jiné řešení.</p>
+      </div>
+    </div>
+    <div class="consult-cta reveal">
+      <button type="button" class="btn btn-primary" data-open="modal-konzultace">Domluvit konzultaci</button>
+      <span class="consult-meta">Bezplatná analýza · 60 minut · Konkrétní doporučení</span>
+    </div>
+  </div>
+</section>
+
+<!-- INTEGRACE -->
+<section id="integrace">
+  <div class="container">
+    <div class="reveal">
+      <span class="eyebrow">Integrace</span>
+      <h2 class="section-title">Napojíme výstupy na systémy,<br> které už používáte</h2>
+    </div>
+    <div class="integration-grid reveal reveal-stagger">
+      <div class="int-category" style="--i:0">
+        <h3><i></i>CRM</h3>
+        <div class="int-chips">
+          <span><img src="Fotky/loga/creatio.png" alt="">Creatio</span>
+          <span><img src="Fotky/loga/hubspot.png" alt="">HubSpot</span>
+          <span><img src="Fotky/loga/pipedrive.png" alt="">Pipedrive</span>
+          <span><img src="Fotky/loga/salesforce.png" alt="">Salesforce</span>
+        </div>
+      </div>
+      <div class="int-category" style="--i:1">
+        <h3><i></i>Úkoly a projekty</h3>
+        <div class="int-chips">
+          <span><img src="Fotky/loga/freelo.png" alt="">Freelo</span>
+          <span><img src="Fotky/loga/asana.png" alt="">Asana</span>
+          <span><img src="Fotky/loga/clickup.png" alt="">ClickUp</span>
+          <span><img src="Fotky/loga/notion.png" alt="">Notion</span>
+        </div>
+      </div>
+      <div class="int-category" style="--i:2">
+        <h3><i></i>Komunikace</h3>
+        <div class="int-chips">
+          <span><img src="Fotky/loga/google.png" alt="">Google Workspace</span>
+          <span><img src="Fotky/loga/microsoft365.png" alt="">Microsoft 365</span>
+          <span><img src="Fotky/loga/slack.png" alt="">Slack</span>
+          <span><img src="Fotky/loga/teams.png" alt="">Teams</span>
+        </div>
+      </div>
+      <div class="int-category" style="--i:3">
+        <h3><i></i>Automatizace a API</h3>
+        <div class="int-chips">
+          <span><img src="Fotky/loga/make.png" alt="">Make</span>
+          <span><img src="Fotky/loga/zapier.png" alt="">Zapier</span>
+          <span>Webhooky</span>
+          <span>Vlastní API</span>
+        </div>
+      </div>
+    </div>
+    <p class="integration-note reveal">Cílem není přidat další izolovanou aplikaci. Cílem je dostat výstupy z rozhovorů<br> <strong>do nástrojů, ve kterých už řídíte procesy, úkoly a provozní agendu.</strong></p>
+  </div>
+</section>
+
+<!-- PILOT -->
+<!-- FAQ -->
+<section class="section-soft" id="faq">
+  <div class="container">
+    <div class="reveal" style="text-align:center">
+      <span class="eyebrow">Časté otázky</span>
+      <h2 class="section-title" style="margin:0 auto">Na co se firmy ptají nejčastěji</h2>
+    </div>
+    <div class="faq-list reveal">
+      <details class="faq-item">
+        <summary>Je to jen pro Omi?<span class="faq-icon"><svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M6 1v10M1 6h10" stroke="#1F1741" stroke-width="1.8" stroke-linecap="round"/></svg></span></summary>
+        <p class="faq-body">Omi je aktuální technologie, se kterou pracujeme. Řešení ale stavíme tak, aby hardwarová vrstva byla do budoucna vyměnitelná. Automatizace a integrace zůstávají.</p>
+      </details>
+      <details class="faq-item">
+        <summary>Musíme nahrávat všechny rozhovory?<span class="faq-icon"><svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M6 1v10M1 6h10" stroke="#1F1741" stroke-width="1.8" stroke-linecap="round"/></svg></span></summary>
+        <p class="faq-body">Ne. Naopak doporučujeme začít jedním jasně ohraničeným use casem, kde dává nahrávání smysl a má konkrétní přínos.</p>
+      </details>
+      <details class="faq-item">
+        <summary>Funguje to česky?<span class="faq-icon"><svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M6 1v10M1 6h10" stroke="#1F1741" stroke-width="1.8" stroke-linecap="round"/></svg></span></summary>
+        <p class="faq-body">Ano, funguje to česky. Kvalita přepisu závisí na prostředí a stylu mluvy, ale v běžných podmínkách (kancelář, schůzka, auto) funguje spolehlivě. Přesnost dále vyladíme při nastavení podle vašeho konkrétního prostředí.</p>
+      </details>
+      <details class="faq-item">
+        <summary>Jak je to s nahráváním, souhlasem a GDPR?<span class="faq-icon"><svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M6 1v10M1 6h10" stroke="#1F1741" stroke-width="1.8" stroke-linecap="round"/></svg></span></summary>
+        <p class="faq-body">Tohle bereme vážně a řešíme to s vámi hned na začátku. Součástí pilotu je nastavení pravidel pro souhlas, přístupová práva, retenci dat i interní směrnici. Vše přizpůsobíme vašemu provozu tak, aby nahrávání bylo v souladu s GDPR a zároveň prakticky použitelné.</p>
+      </details>
+      <details class="faq-item">
+        <summary>Co když už máme CRM nebo úkolový systém?<span class="faq-icon"><svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M6 1v10M1 6h10" stroke="#1F1741" stroke-width="1.8" stroke-linecap="round"/></svg></span></summary>
+        <p class="faq-body">To je ideální. Cílem je napojit výstupy na systémy, které už používáte, ne nutit firmu do další izolované aplikace.</p>
+      </details>
+      <details class="faq-item">
+        <summary>Kolik času zabere nasazení?<span class="faq-icon"><svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M6 1v10M1 6h10" stroke="#1F1741" stroke-width="1.8" stroke-linecap="round"/></svg></span></summary>
+        <p class="faq-body">Záleží na rozsahu. Kolik procesů chcete automatizovat a na jaké systémy se napojujete. Jednodušší nasazení zvládneme do týdne, složitější konfigurace s více integracemi zabere 2 až 4 týdny. Přesný harmonogram stanovíme po úvodní konzultaci.</p>
+      </details>
+    </div>
+  </div>
+</section>
+
+<!-- FINAL CTA -->
+<section class="final-cta" id="kontakt">
+  <div class="container reveal">
+    <span class="eyebrow">Další krok</span>
+    <h2>Během 60 minut zjistíte, kde má automatizace největší přínos.</h2>
+    <p>Společně projdeme vaše procesy, odhalíme největší administrativní zátěž a navrhneme konkrétní řešení i další postup.</p>
+    <div style="display: flex; gap: 16px; justify-content: center; flex-wrap: wrap;">
+      <button type="button" class="btn btn-primary" data-open="modal-konzultace">Domluvit konzultaci</button>
+      <a href="dotaznik.html" class="btn btn-ghost">Najít řešení</a>
+    </div>
+  </div>
+</section>
+
+<footer class="site-footer">
+  <div class="container">
+    <div class="footer-top">
+      <div class="footer-brand">
+        <a href="#top" class="footer-logo"><img src="Fotky/Logo-Plexima.webp" alt="Plexima"></a>
+      </div>
+      <nav class="footer-links" aria-label="Patičková navigace">
+        <a href="#jak-to-funguje">Jak to funguje</a>
+        <a href="#scenare">Scénáře</a>
+        <a href="priklady.html">Příklady z praxe</a>
+        <a href="#produkt">Produkt</a>
+        <a href="#faq">FAQ</a>
+      </nav>
+    </div>
+    <div class="footer-mid">
+      <p class="footer-desc">Propojujeme AI zápisník s firemními systémy, aby se rozhovory automaticky měnily na zápisy, úkoly, reporty a CRM záznamy.</p>
+    </div>
+    <div class="footer-bottom">
+      <span>© 2026 Plexima. Všechna práva vyhrazena.</span>
+      <a href="#faq">Bezpečnost a pravidla nahrávání</a>
+    </div>
+  </div>
+</footer>
+
+<!-- MODAL: KONZULTACE -->
+<div class="modal-overlay" id="modal-konzultace" aria-hidden="true">
+  <div class="modal" role="dialog" aria-modal="true" aria-labelledby="konzultace-title">
+    <button type="button" class="modal-close" aria-label="Zavřít">✕</button>
+
+    <div class="modal-view is-active" id="konzultace-choice">
+      <h3 id="konzultace-title">Domluvit konzultaci</h3>
+      <p class="modal-lead">Vyberte, jak se vám to hodí.</p>
+      <div class="modal-choice">
+        <button type="button" class="btn btn-primary" id="choice-zavolejte">Zavolejte mi</button>
+        <a href="#" class="btn btn-ghost" id="choice-calendly">Zobrazit volné termíny</a>
+      </div>
+    </div>
+
+    <div class="modal-view" id="konzultace-form">
+      <button type="button" class="modal-back" id="konzultace-back">← Zpět</button>
+      <h3>Zavolejte mi</h3>
+      <p class="modal-lead">Nechte nám kontakt. Ozveme se do jednoho pracovního dne.</p>
+      <form class="form-grid" data-type="konzultace" novalidate>
+        <div class="form-field">
+          <label for="k-jmeno">Jméno <span class="req">*</span></label>
+          <input type="text" id="k-jmeno" name="jmeno" required autocomplete="name">
+        </div>
+        <div class="form-field">
+          <label for="k-firma">Firma <span class="req">*</span></label>
+          <input type="text" id="k-firma" name="firma" required autocomplete="organization">
+        </div>
+        <div class="form-field">
+          <label for="k-telefon">Telefon <span class="req">*</span></label>
+          <input type="tel" id="k-telefon" name="telefon" required minlength="9" pattern=".{9,}" title="Zadejte alespoň 9 znaků" autocomplete="tel">
+        </div>
+        <div class="form-field">
+          <label for="k-email">E-mail <span class="req">*</span></label>
+          <input type="email" id="k-email" name="email" required autocomplete="email">
+        </div>
+        <div class="form-field full">
+          <label for="k-pozice">Vaše pozice</label>
+          <select id="k-pozice" name="pozice">
+            <option value="" disabled selected>Vyberte pozici</option>
+            <option>Majitel / jednatel</option>
+            <option>Ředitel</option>
+            <option>Vedoucí obchodu</option>
+            <option>Vedoucí provozu</option>
+            <option>Projektový manažer</option>
+            <option>Office / administrativa</option>
+            <option>Jiná</option>
+          </select>
+        </div>
+        <label class="form-check">
+          <input type="checkbox" name="souhlas" required>
+          Souhlasím se zpracováním osobních údajů za účelem vyřízení poptávky. <span class="req">*</span>
+        </label>
+        <button type="submit" class="btn btn-primary form-submit">Odeslat</button>
+        <p class="form-status" hidden></p>
+      </form>
+    </div>
+
+  </div>
+</div>
+
+<!-- MODAL: OBJEDNÁVKA -->
+<div class="modal-overlay" id="modal-objednavka" aria-hidden="true">
+  <div class="modal" role="dialog" aria-modal="true" aria-labelledby="objednavka-title">
+    <button type="button" class="modal-close" aria-label="Zavřít">✕</button>
+    <h3 id="objednavka-title">Objednat AI zápisník Omi</h3>
+    <p class="modal-lead">Bez platby předem. Objednávku potvrdíme e-mailem a domluvíme doručení i fakturaci.</p>
+    <form class="form-grid" data-type="objednavka" novalidate>
+      <div class="form-field">
+        <label for="o-jmeno">Jméno <span class="req">*</span></label>
+        <input type="text" id="o-jmeno" name="jmeno" required autocomplete="name">
+      </div>
+      <div class="form-field">
+        <label for="o-email">E-mail <span class="req">*</span></label>
+        <input type="email" id="o-email" name="email" required autocomplete="email">
+      </div>
+      <div class="form-field">
+        <label for="o-telefon">Telefon <span class="req">*</span></label>
+        <input type="tel" id="o-telefon" name="telefon" required minlength="9" pattern=".{9,}" title="Zadejte alespoň 9 znaků" autocomplete="tel">
+      </div>
+      <div class="form-field">
+        <label for="o-pocet">Počet kusů</label>
+        <select id="o-pocet" name="pocet">
+          <option value="1" selected>1</option>
+          <option value="2">2</option>
+          <option value="3">3</option>
+          <option value="4">4</option>
+          <option value="5">5</option>
+          <option value="6">6</option>
+          <option value="7">7</option>
+          <option value="8">8</option>
+          <option value="9">9</option>
+          <option value="10+">10 a více</option>
+        </select>
+      </div>
+      <div class="form-field">
+        <label for="o-firma">Firma</label>
+        <input type="text" id="o-firma" name="firma" autocomplete="organization">
+      </div>
+      <div class="form-field">
+        <label for="o-ico">IČO</label>
+        <input type="text" id="o-ico" name="ico" inputmode="numeric">
+      </div>
+      <label class="form-check">
+        <input type="checkbox" name="implementace">
+        Mám zájem i o nastavení automatizací od Pleximy (napojení na CRM, úkoly, reporty)
+      </label>
+      <div class="form-field full">
+        <label for="o-poznamka">Poznámka / k čemu chcete zařízení používat</label>
+        <textarea id="o-poznamka" name="poznamka"></textarea>
+      </div>
+      <div class="order-summary">
+        <span>Celkem</span>
+        <strong id="order-total">4 790 Kč</strong>
+      </div>
+      <label class="form-check">
+        <input type="checkbox" name="souhlas" required>
+        Souhlasím se zpracováním osobních údajů za účelem vyřízení objednávky. <span class="req">*</span>
+      </label>
+      <button type="submit" class="btn btn-secondary form-submit">Odeslat objednávku</button>
+      <p class="form-status" hidden></p>
+    </form>
+  </div>
+</div>
+
+<!-- MODAL: CASE STUDY -->
+<div class="modal-overlay" id="modal-case" aria-hidden="true">
+  <div class="modal modal-case" role="dialog" aria-modal="true" aria-labelledby="case-title">
+    <button type="button" class="modal-close" aria-label="Zavřít">✕</button>
+    <span class="scenario-badge" id="case-badge"></span>
+    <h3 id="case-title"></h3>
+    <div class="case-body" id="case-body"></div>
+    <p class="case-note">Ilustrační příklad nasazení. Konkrétní čísla a rozsah ověříme ve vašem pilotu.</p>
+    <button type="button" class="btn btn-primary" data-open="modal-konzultace" style="margin-top:24px;">Domluvit konzultaci</button>
+  </div>
+</div>
+
+<!-- Exit-intent popup -->
+<div class="exit-overlay" id="exit-intent" aria-hidden="true">
+  <div class="exit-popup">
+    <button class="exit-close" aria-label="Zavřít">&times;</button>
+    <div class="exit-icon">
+      <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="var(--ink)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 12h-6l-2 3h-4l-2-3H2"/><path d="M5.45 5.11L2 12v6a2 2 0 002 2h16a2 2 0 002-2v-6l-3.45-6.89A2 2 0 0016.76 4H7.24a2 2 0 00-1.79 1.11z"/></svg>
+    </div>
+    <h3>Počkejte, tohle se vám bude hodit</h3>
+    <p class="exit-lead">Posíláme reálné příklady firem, které si díky nahrávání a automatizaci ušetřily hodiny týdně. Stručně a jasně.</p>
+    <form class="exit-form" data-type="exit-intent">
+      <input type="email" name="email" placeholder="Váš e-mail" required>
+      <button type="submit" class="btn btn-primary">Chci vědět víc</button>
+    </form>
+    <p class="exit-note">Odesláním souhlasíte se zpracováním osobních údajů. Odhlásit se můžete jedním klikem. Žádný spam.</p>
+    <div class="exit-status" hidden></div>
+  </div>
+</div>
+
+<script>
+(function () {
+  var SUBSCRIBE_ENDPOINT = '/api/subscribe';
+  var PACK_PRICES = { 1: 4790, 2: 8990, 3: 13190 };
+  var UNIT_PRICE = 4790;
+
+  var reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches
+    || new URLSearchParams(location.search).has('static');
+  if (reducedMotion) document.documentElement.classList.add('no-motion');
+
+  /* Sticky header shadow */
+  var header = document.querySelector('.site-header');
+  var onScroll = function () {
+    header.classList.toggle('is-scrolled', window.scrollY > 8);
+  };
+  window.addEventListener('scroll', onScroll, { passive: true });
+  onScroll();
+
+  /* Mobile nav */
+  var toggle = document.querySelector('.nav-toggle');
+  var nav = document.querySelector('.main-nav');
+  toggle.addEventListener('click', function () {
+    var open = nav.classList.toggle('is-open');
+    toggle.setAttribute('aria-expanded', open);
+  });
+  nav.addEventListener('click', function (e) {
+    if (e.target.tagName === 'A') nav.classList.remove('is-open');
+  });
+
+  /* Scroll reveal */
+  var revealEls = document.querySelectorAll('.reveal');
+  if (!reducedMotion && 'IntersectionObserver' in window) {
+    var revealObserver = new IntersectionObserver(function (entries) {
+      entries.forEach(function (entry) {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('is-visible');
+          revealObserver.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.12 });
+    revealEls.forEach(function (el) { revealObserver.observe(el); });
+  } else {
+    revealEls.forEach(function (el) { el.classList.add('is-visible'); });
+  }
+
+  /* Active nav by scroll position */
+  var navLinks = document.querySelectorAll('.main-nav a');
+  var sections = [];
+  navLinks.forEach(function (link) {
+    var target = document.querySelector(link.getAttribute('href'));
+    if (target) sections.push({ link: link, el: target });
+  });
+  if ('IntersectionObserver' in window) {
+    var navObserver = new IntersectionObserver(function (entries) {
+      entries.forEach(function (entry) {
+        if (entry.isIntersecting) {
+          navLinks.forEach(function (l) { l.classList.remove('is-active'); });
+          var match = sections.find(function (s) { return s.el === entry.target; });
+          if (match) match.link.classList.add('is-active');
+        }
+      });
+    }, { rootMargin: '-40% 0px -55% 0px' });
+    sections.forEach(function (s) { navObserver.observe(s.el); });
+  }
+
+  /* Hero flow animation */
+  var flowCard = document.getElementById('flow-card');
+  if (flowCard) {
+    var lines = flowCard.querySelectorAll('.transcript-line');
+    var chips = flowCard.querySelectorAll('.output-chip');
+    var runFlow = function () {
+      lines.forEach(function (l) { l.classList.remove('is-visible'); });
+      chips.forEach(function (c) { c.classList.remove('is-visible'); });
+      lines.forEach(function (l, i) {
+        setTimeout(function () { l.classList.add('is-visible'); }, 500 + i * 1100);
+      });
+      chips.forEach(function (c, i) {
+        setTimeout(function () { c.classList.add('is-visible'); }, 4200 + i * 450);
+      });
+    };
+    if (reducedMotion) {
+      lines.forEach(function (l) { l.classList.add('is-visible'); });
+      chips.forEach(function (c) { c.classList.add('is-visible'); });
+    } else {
+      runFlow();
+      setInterval(runFlow, 9500);
+    }
+  }
+
+  /* Calculator */
+  var people = document.getElementById('calc-people');
+  var meetings = document.getElementById('calc-meetings');
+  var minutes = document.getElementById('calc-minutes');
+  var hoursEl = document.getElementById('calc-hours');
+  var daysEl = document.getElementById('calc-days');
+  var displayedHours = 0;
+  var animFrame;
+
+  var czechDays = function (d) {
+    if (d === 1) return '1 pracovní den';
+    if (d >= 2 && d <= 4) return d + ' pracovní dny';
+    return d + ' pracovních dní';
+  };
+
+  var updateCalc = function (animate) {
+    document.getElementById('calc-people-out').textContent = people.value;
+    document.getElementById('calc-meetings-out').textContent = meetings.value;
+    document.getElementById('calc-minutes-out').textContent = minutes.value;
+    var target = Math.round(people.value * meetings.value * minutes.value * 4.3 / 60);
+    daysEl.textContent = czechDays(Math.round(target / 8));
+    if (reducedMotion || !animate) {
+      displayedHours = target;
+      hoursEl.textContent = target;
+      return;
+    }
+    cancelAnimationFrame(animFrame);
+    var start = displayedHours;
+    var startTime = null;
+    var step = function (ts) {
+      if (!startTime) startTime = ts;
+      var p = Math.min((ts - startTime) / 600, 1);
+      var eased = 1 - Math.pow(1 - p, 3);
+      displayedHours = Math.round(start + (target - start) * eased);
+      hoursEl.textContent = displayedHours;
+      if (p < 1) animFrame = requestAnimationFrame(step);
+    };
+    animFrame = requestAnimationFrame(step);
+  };
+
+  [people, meetings, minutes].forEach(function (input) {
+    input.addEventListener('input', function () { updateCalc(true); });
+  });
+  updateCalc(false);
+
+  /* Count-up when calculator scrolls into view */
+  if (!reducedMotion && 'IntersectionObserver' in window) {
+    var calcPanel = document.querySelector('.calc-panel');
+    var counted = false;
+    var calcObserver = new IntersectionObserver(function (entries) {
+      if (entries[0].isIntersecting && !counted) {
+        counted = true;
+        displayedHours = 0;
+        updateCalc(true);
+        calcObserver.disconnect();
+      }
+    }, { threshold: 0.4 });
+    calcObserver.observe(calcPanel);
+  }
+
+  /* How-it-works tabs with auto-rotation */
+  var tabs = document.querySelectorAll('.how-tab');
+  var panels = document.querySelectorAll('.how-panel');
+  var currentTab = 0;
+  var rotateTimer;
+
+  var activateTab = function (index) {
+    currentTab = index;
+    tabs.forEach(function (t, i) {
+      t.classList.toggle('is-active', i === index);
+      t.setAttribute('aria-selected', i === index);
+    });
+    panels.forEach(function (p, i) {
+      p.classList.toggle('is-active', i === index);
+    });
+  };
+
+  var startRotation = function () {
+    if (reducedMotion) return;
+    rotateTimer = setInterval(function () {
+      var next = (currentTab + 1) % tabs.length;
+      activateTab(next);
+      if (animResets[next]) animResets[next]();
+    }, 5000);
+  };
+
+  var animResets = [
+    function () { if (window._captureReset) window._captureReset(); },
+    function () { if (window._processReset) window._processReset(); },
+    function () { if (window._connectReset) window._connectReset(); }
+  ];
+  tabs.forEach(function (tab, i) {
+    tab.addEventListener('click', function () {
+      clearInterval(rotateTimer);
+      activateTab(i);
+      animResets[i]();
+    });
+  });
+
+  if ('IntersectionObserver' in window && !reducedMotion) {
+    var howSection = document.getElementById('jak-to-funguje');
+    var rotationStarted = false;
+    var howObserver = new IntersectionObserver(function (entries) {
+      if (entries[0].isIntersecting && !rotationStarted) {
+        rotationStarted = true;
+        startRotation();
+        howObserver.disconnect();
+      }
+    }, { threshold: 0.3 });
+    howObserver.observe(howSection);
+  }
+
+  /* Capture scene animation (Zachytit panel) */
+  (function () {
+    var stage = document.getElementById('capture-stage');
+    if (!stage) return;
+    var wrap = stage.parentElement;
+    var D = 10;
+    var DEV = { x: 500, y: 336 };
+
+    var lines = stage.querySelectorAll('.cap-line');
+    var ripples = stage.querySelectorAll('[data-ripple]');
+    var ring = stage.querySelector('[data-ring]');
+    var dot = stage.querySelector('[data-dot]');
+    var recDot = stage.querySelector('[data-rec-dot]');
+    var speakers = stage.querySelectorAll('[data-speaker]');
+    var tails = stage.querySelectorAll('[data-tail]');
+    var waves = stage.querySelectorAll('[data-wave]');
+    var ctxChips = stage.querySelectorAll('[data-ctx]');
+    var ctxDots = stage.querySelectorAll('[data-ctxdot]');
+
+    var clamp01 = function (v, a, b) { return Math.max(a, Math.min(b, v)); };
+    var easeInOutCubic = function (t) { return t < 0.5 ? 4 * t * t * t : (t - 1) * (2 * t - 2) * (2 * t - 2) + 1; };
+    var smoothT = function (t, a, b) { return easeInOutCubic(clamp01((t - a) / (b - a), 0, 1)); };
+
+    var spkEnv = function (t, seg, k) {
+      var local = (t - k * seg) / seg;
+      return (local >= 0 && local <= 1) ? Math.sin(Math.PI * local) : 0;
+    };
+
+    var renderCapture = function (t) {
+      var puls = Math.sin((t / D) * Math.PI * 2 * 2);
+      var seg = D / 3;
+
+      lines.forEach(function (line, k) {
+        var env = spkEnv(t, seg, k);
+        line.setAttribute('stroke', env > 0.15 ? '#4DABF7' : '#CDD5E1');
+        line.setAttribute('opacity', 0.35 + env * 0.5);
+      });
+
+      ripples.forEach(function (rip, k) {
+        var phase = ((t / D) + k / 3) % 1;
+        var r = 74 + phase * 150;
+        var op = clamp01(phase / 0.12, 0, 1) * (1 - phase) * 0.32;
+        rip.style.left = (DEV.x - r) + 'px';
+        rip.style.top = (DEV.y - r) + 'px';
+        rip.style.width = rip.style.height = (r * 2) + 'px';
+        rip.style.opacity = op;
+      });
+
+      var ringR = 82 + puls * 6;
+      ring.style.left = (DEV.x - ringR) + 'px';
+      ring.style.top = (DEV.y - ringR) + 'px';
+      ring.style.width = ring.style.height = (ringR * 2) + 'px';
+      ring.style.opacity = 0.16 + (puls * 0.5 + 0.5) * 0.2;
+
+      var dotS = 12 + (puls * 0.5 + 0.5) * 4;
+      dot.style.left = (DEV.x - dotS / 2) + 'px';
+      dot.style.top = (DEV.y - dotS / 2) + 'px';
+      dot.style.width = dot.style.height = dotS + 'px';
+
+      recDot.style.opacity = 0.55 + (puls * 0.5 + 0.5) * 0.45;
+
+      speakers.forEach(function (card, k) {
+        var env = spkEnv(t, seg, k);
+        card.style.boxShadow = '0 12px 30px rgba(23,23,58,' + (0.05 + env * 0.09) + ')';
+        card.style.transform = 'scale(' + (0.97 + env * 0.03) + ')';
+        card.style.opacity = 0.62 + env * 0.38;
+
+        var bars = waves[k].children;
+        for (var i = 0; i < bars.length; i++) {
+          var a = Math.sin((t / D) * Math.PI * 2 * 6 + i * 0.8 + k) * 0.5 + 0.5;
+          var h = 3 + env * a * 13;
+          bars[i].style.height = h + 'px';
+          bars[i].style.background = env > 0.1 ? '#4DABF7' : '#D6DBE6';
+          bars[i].style.opacity = 0.5 + env * 0.5;
+        }
+
+        tails[k].style.opacity = 0.62 + env * 0.38;
+      });
+
+      ctxChips.forEach(function (chip, i) {
+        var start = i * seg, end = (i + 1) * seg;
+        var fadeIn = smoothT(t, start - 0.25, start + 0.25);
+        var fadeOut = 1 - smoothT(t, end - 0.25, end + 0.25);
+        var op = Math.min(fadeIn, fadeOut);
+        if (i === 0) op = Math.max(op, 1 - smoothT(t, D - 0.25, D + 0.25));
+        var riseY = (1 - op) * 6;
+        chip.style.opacity = op;
+        chip.style.transform = 'translateY(' + riseY + 'px)';
+      });
+
+      ctxDots.forEach(function (dotEl, i) {
+        var start = i * seg, end = (i + 1) * seg;
+        var on = Math.min(smoothT(t, start - 0.25, start + 0.25), 1 - smoothT(t, end - 0.25, end + 0.25));
+        if (i === 0) on = Math.max(on, 1 - smoothT(t, D - 0.25, D + 0.25));
+        dotEl.style.background = on > 0.4 ? '#4DABF7' : '#D6DBE6';
+      });
+    };
+
+    var scaleStage = function () {
+      var w = wrap.getBoundingClientRect().width;
+      if (w > 0) stage.style.transform = 'scale(' + (w / 1000) + ')';
+    };
+    scaleStage();
+    window.addEventListener('resize', scaleStage);
+
+    if (reducedMotion) {
+      renderCapture(1);
+      return;
+    }
+
+    var running = false, rafId = null, startTime = performance.now();
+    var loop = function () {
+      var t = ((performance.now() - startTime) / 1000) % D;
+      renderCapture(t);
+      rafId = requestAnimationFrame(loop);
+    };
+    var startCapture = function () {
+      if (running) return;
+      running = true;
+      scaleStage();
+      loop();
+    };
+    var stopCapture = function () {
+      running = false;
+      if (rafId) cancelAnimationFrame(rafId);
+    };
+    window._captureReset = function () {
+      startTime = performance.now();
+      if (running) { cancelAnimationFrame(rafId); loop(); }
+    };
+
+    if ('IntersectionObserver' in window) {
+      new IntersectionObserver(function (entries) {
+        if (entries[0].isIntersecting) startCapture(); else stopCapture();
+      }, { threshold: 0.1 }).observe(wrap);
+    } else {
+      startCapture();
+    }
+  })();
+
+  /* Process scene animation (Zpracovat panel) */
+  (function () {
+    var stage = document.getElementById('process-stage');
+    if (!stage) return;
+    var wrap = stage.parentElement;
+    var D = 11;
+    var TRAVEL = 0.6;
+    var Y0 = 258, RH = 62;
+    var NOTE = { x: 60, w: 392 };
+    var TASK = { x: 560, w: 392 };
+    var ITEMS = [
+      { ll: 0.55, ex: 3.05 },
+      { ll: 1.15, ex: 3.65 },
+      { ll: 1.75, ex: 4.25 },
+      { ll: 2.35, ex: 4.85 },
+      { ll: 2.95, ex: 5.45 }
+    ];
+
+    var noteHdrs = stage.querySelectorAll('[data-note-hdr]');
+    var taskHdrs = stage.querySelectorAll('[data-task-hdr]');
+    var las = [], lhs = [], lts = [], cbs = [], rts = [], rds = [], ows = [], pills = [];
+    for (var i = 0; i < 5; i++) {
+      las.push(stage.querySelector('[data-la="' + i + '"]'));
+      lhs.push(stage.querySelector('[data-lh="' + i + '"]'));
+      lts.push(stage.querySelector('[data-lt="' + i + '"]'));
+      cbs.push(stage.querySelector('[data-cb="' + i + '"]'));
+      rts.push(stage.querySelector('[data-rt="' + i + '"]'));
+      rds.push(stage.querySelector('[data-rd="' + i + '"]'));
+      ows.push(stage.querySelector('[data-ow="' + i + '"]'));
+      pills.push(stage.querySelector('[data-pill="' + i + '"]'));
+    }
+
+    var clamp01 = function (v, a, b) { return Math.max(a, Math.min(b, v)); };
+    var easeInOutCubic = function (t) { return t < 0.5 ? 4 * t * t * t : (t - 1) * (2 * t - 2) * (2 * t - 2) + 1; };
+    var easeOutCubic = function (t) { return (--t) * t * t + 1; };
+    var rise = function (t, at, dur) { return clamp01((t - at) / dur, 0, 1); };
+    var smooth = function (t, a, b) { return easeInOutCubic(clamp01((t - a) / (b - a), 0, 1)); };
+    var bez = function (p, A, C, B) { var q = 1 - p; return { x: q*q*A.x + 2*q*p*C.x + p*p*B.x, y: q*q*A.y + 2*q*p*C.y + p*p*B.y }; };
+
+    var renderProcess = function (t) {
+      var resetOut = smooth(t, 7.1, 7.75);
+      var present = 1 - resetOut;
+      var hdr = rise(t, 0.15, 0.4) * present;
+
+      noteHdrs.forEach(function (el) { el.style.opacity = 0.4 + hdr * 0.6; });
+      taskHdrs.forEach(function (el) { el.style.opacity = 0.4 + hdr * 0.6; });
+
+      for (var i = 0; i < 5; i++) {
+        var it = ITEMS[i];
+        var y = Y0 + i * RH;
+        var write = easeOutCubic(rise(t, it.ll, 0.6)) * present;
+        var appear = rise(t, it.ll, 0.25) * present;
+        var writing = write > 0.02 && write < 0.99;
+
+        var hi = (smooth(t, it.ex - 0.1, it.ex + 0.15) * (1 - smooth(t, it.ex + 0.45, it.ex + 0.9))) * present;
+
+        las[i].style.opacity = appear;
+        lhs[i].style.opacity = hi;
+        lhs[i].style.borderColor = 'rgba(77,171,247,' + (0.25 * hi) + ')';
+
+        var textSpan = lts[i].querySelector('span');
+        textSpan.style.width = (write * 100) + '%';
+        lts[i].style.opacity = appear;
+        var caret = lts[i].querySelector('.proc-caret');
+        if (writing && !caret) {
+          caret = document.createElement('span');
+          caret.className = 'proc-caret';
+          lts[i].appendChild(caret);
+        } else if (!writing && caret) {
+          caret.remove();
+        }
+
+        var arrive = it.ex + TRAVEL;
+        var rowIn = smooth(t, arrive - 0.05, arrive + 0.35) * present;
+        var assigned = smooth(t, arrive + 0.15, arrive + 0.5) * present;
+        var done = assigned > 0.5;
+        var slide = (1 - rowIn) * 8;
+
+        cbs[i].style.opacity = rowIn;
+        cbs[i].style.border = '2px solid ' + (done ? '#4DABF7' : '#D6DBE6');
+        cbs[i].style.background = done ? '#4DABF7' : '#fff';
+        var check = cbs[i].querySelector('svg');
+        if (!check) {
+          check = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
+          check.setAttribute('width', '12');
+          check.setAttribute('height', '12');
+          check.setAttribute('viewBox', '0 0 12 12');
+          var path = document.createElementNS('http://www.w3.org/2000/svg', 'path');
+          path.setAttribute('d', 'M2.6 6.2 L5 8.6 L9.4 3.6');
+          path.setAttribute('stroke', '#fff');
+          path.setAttribute('stroke-width', '1.8');
+          path.setAttribute('fill', 'none');
+          path.setAttribute('stroke-linecap', 'round');
+          path.setAttribute('stroke-linejoin', 'round');
+          check.appendChild(path);
+          cbs[i].appendChild(check);
+        }
+        check.style.opacity = assigned;
+
+        rts[i].style.opacity = rowIn;
+        rts[i].style.transform = 'translateY(' + slide + 'px)';
+        rds[i].style.opacity = rowIn;
+        rds[i].style.transform = 'translateY(' + slide + 'px)';
+        ows[i].style.opacity = assigned;
+        ows[i].style.transform = 'translateY(' + ((1 - assigned) * 8) + 'px)';
+
+        var p = easeInOutCubic(rise(t, it.ex, TRAVEL));
+        if (p <= 0.02 || p >= 0.99 || present < 0.5) {
+          pills[i].style.opacity = 0;
+        } else {
+          var from = { x: NOTE.x + NOTE.w - 20, y: y + 13 };
+          var to = { x: TASK.x + 40, y: y + 11 };
+          var ctrl = { x: (from.x + to.x) / 2, y: Math.min(from.y, to.y) - 34 };
+          var pos = bez(p, from, ctrl, to);
+          var fade = p < 0.14 ? p / 0.14 : (p > 0.86 ? (1 - p) / 0.14 : 1);
+          pills[i].style.left = (pos.x - 50) + 'px';
+          pills[i].style.top = (pos.y - 13) + 'px';
+          pills[i].style.opacity = fade;
+        }
+      }
+    };
+
+    var scaleStage = function () {
+      var w = wrap.getBoundingClientRect().width;
+      if (w > 0) stage.style.transform = 'scale(' + (w / 1000) + ')';
+    };
+    scaleStage();
+    window.addEventListener('resize', scaleStage);
+
+    if (reducedMotion) {
+      renderProcess(6);
+      return;
+    }
+
+    var running = false, rafId = null, startTime = performance.now();
+    var loop = function () {
+      var t = ((performance.now() - startTime) / 1000) % D;
+      renderProcess(t);
+      rafId = requestAnimationFrame(loop);
+    };
+    var startProcess = function () {
+      if (running) return;
+      running = true;
+      scaleStage();
+      loop();
+    };
+    var stopProcess = function () {
+      running = false;
+      if (rafId) cancelAnimationFrame(rafId);
+    };
+    window._processReset = function () {
+      startTime = performance.now();
+      if (running) { cancelAnimationFrame(rafId); loop(); }
+    };
+
+    if ('IntersectionObserver' in window) {
+      new IntersectionObserver(function (entries) {
+        if (entries[0].isIntersecting) startProcess(); else stopProcess();
+      }, { threshold: 0.1 }).observe(wrap);
+    } else {
+      startProcess();
+    }
+  })();
+
+  /* Connect scene animation (Napojit panel) */
+  (function () {
+    var stage = document.getElementById('connect-stage');
+    if (!stage) return;
+    var wrap = stage.parentElement;
+    var D = 10;
+    var TRAVEL = 0.85;
+    var SRC = { x: 74, y: 300, w: 320, h: 216 };
+    var SANCH = { x: SRC.x + SRC.w, y: SRC.y + SRC.h / 2 };
+    var TY = [232, 364, 496];
+    var TILE_X = 612, TILE_W = 312, TILE_H = 104;
+    var DEST = [
+      { tone: '#3A3A6B', packet: 'Follow up', done: 'Zapsáno', launch: 2.35 },
+      { tone: '#4DABF7', packet: 'Úkoly', done: 'Uloženo', launch: 3.15 },
+      { tone: '#F5B70A', packet: 'Zápis', done: 'Odesláno', launch: 3.95 }
+    ];
+
+    var routePts = DEST.map(function (d, k) {
+      var to = { x: TILE_X - 4, y: TY[k] + TILE_H / 2 };
+      var ctrl = { x: (SANCH.x + to.x) / 2 + 20, y: (SANCH.y + to.y) / 2 };
+      return { from: SANCH, ctrl: ctrl, to: to };
+    });
+
+    var routes = [];
+    var emitter = stage.querySelector('[data-emitter]');
+    var srcCard = stage.querySelector('[data-conn-src]');
+    var srcHdrs = stage.querySelectorAll('[data-conn-src-hdr]');
+    var chips = [], tiles = [], tileIcons = [], tileDots = [], tileVerbs = [], tileBadges = [], packets = [];
+    for (var i = 0; i < 3; i++) {
+      routes.push(stage.querySelector('[data-route="' + i + '"]'));
+      chips.push(stage.querySelector('[data-chip="' + i + '"]'));
+      tiles.push(stage.querySelector('[data-tile="' + i + '"]'));
+      tileIcons.push(stage.querySelector('[data-tile-icon="' + i + '"]'));
+      tileDots.push(stage.querySelector('[data-tile-status="' + i + '"] .conn-tile-dot'));
+      tileVerbs.push(stage.querySelector('[data-tile-verb="' + i + '"]'));
+      tileBadges.push(stage.querySelector('[data-tile-badge="' + i + '"]'));
+      packets.push(stage.querySelector('[data-packet="' + i + '"]'));
+    }
+
+    var clamp01 = function (v, a, b) { return Math.max(a, Math.min(b, v)); };
+    var easeInOutCubic = function (t) { return t < 0.5 ? 4 * t * t * t : (t - 1) * (2 * t - 2) * (2 * t - 2) + 1; };
+    var rise = function (t, at, dur) { return clamp01((t - at) / dur, 0, 1); };
+    var smooth = function (t, a, b) { return easeInOutCubic(clamp01((t - a) / (b - a), 0, 1)); };
+    var bez = function (p, A, C, B) { var q = 1 - p; return { x: q*q*A.x + 2*q*p*C.x + p*p*B.x, y: q*q*A.y + 2*q*p*C.y + p*p*B.y }; };
+
+    routePts.forEach(function (r, k) {
+      routes[k].setAttribute('d', 'M' + r.from.x + ' ' + r.from.y + ' Q' + r.ctrl.x + ' ' + r.ctrl.y + ' ' + r.to.x + ' ' + r.to.y);
+    });
+
+    var renderConnect = function (t) {
+      var puls = Math.sin((t / D) * Math.PI * 2 * 2);
+      var appear = clamp01((t - 0.15) / 0.45, 0, 1);
+      var rearm = 1 - smooth(t, 5.7, 6.4);
+
+      srcCard.style.opacity = appear;
+      srcHdrs.forEach(function (el) { el.style.opacity = appear; });
+      emitter.setAttribute('r', 5 + (puls * 0.5 + 0.5) * 2);
+      emitter.setAttribute('opacity', appear);
+
+      for (var i = 0; i < 3; i++) {
+        var chLand = 0.45 + i * 0.5;
+        var ch = smooth(t, chLand, chLand + 0.35);
+        chips[i].style.opacity = ch;
+        chips[i].style.transform = 'translateY(' + ((1 - ch) * 8) + 'px)';
+
+        var d = DEST[i];
+        var arrive = d.launch + TRAVEL;
+        var p = easeInOutCubic(rise(t, d.launch, TRAVEL));
+        var synced = smooth(t, arrive, arrive + 0.3) * rearm;
+
+        var live = (p > 0.02 && p < 0.99) ? 1 : 0;
+        var on = Math.max(live, synced * 0.6);
+        routes[i].setAttribute('stroke', on > 0.1 ? '#4DABF7' : '#CDD5E1');
+        routes[i].setAttribute('opacity', (0.35 + on * 0.5) * appear);
+
+        tiles[i].style.opacity = appear;
+        tiles[i].style.borderColor = synced > 0.05 ? 'rgba(77,171,247,' + (0.25 + synced * 0.4) + ')' : '#ECEEF3';
+        tileIcons[i].style.background = synced > 0.05 ? 'rgba(77,171,247,0.10)' : '#F4F6FA';
+        var iconSvgs = tileIcons[i].querySelectorAll('svg rect, svg path, svg circle');
+        var iconColor = synced > 0.3 ? '#4DABF7' : '#3A3A6B';
+        iconSvgs.forEach(function (el) { el.setAttribute('stroke', iconColor); });
+        tileDots[i].style.background = synced > 0.4 ? '#4DABF7' : '#D6DBE6';
+        tileVerbs[i].textContent = synced > 0.4 ? d.done : 'Připojeno';
+        tileVerbs[i].style.color = synced > 0.4 ? '#4DABF7' : '#C3C9D6';
+        tileBadges[i].style.opacity = synced;
+        tileBadges[i].style.transform = 'scale(' + (0.5 + synced * 0.5) + ')';
+
+        if (p <= 0.02 || p >= 0.99) {
+          packets[i].style.opacity = 0;
+        } else {
+          var r = routePts[i];
+          var pos = bez(p, r.from, r.ctrl, r.to);
+          var fade = p < 0.14 ? p / 0.14 : (p > 0.86 ? (1 - p) / 0.14 : 1);
+          packets[i].style.left = (pos.x - 46) + 'px';
+          packets[i].style.top = (pos.y - 13) + 'px';
+          packets[i].style.opacity = fade;
+        }
+      }
+    };
+
+    var scaleStage = function () {
+      var w = wrap.getBoundingClientRect().width;
+      if (w > 0) stage.style.transform = 'scale(' + (w / 1000) + ')';
+    };
+    scaleStage();
+    window.addEventListener('resize', scaleStage);
+
+    if (reducedMotion) {
+      renderConnect(5);
+      return;
+    }
+
+    var running = false, rafId = null, startTime = performance.now();
+    var loop = function () {
+      var t = ((performance.now() - startTime) / 1000) % D;
+      renderConnect(t);
+      rafId = requestAnimationFrame(loop);
+    };
+    var startConnect = function () {
+      if (running) return;
+      running = true;
+      scaleStage();
+      loop();
+    };
+    var stopConnect = function () {
+      running = false;
+      if (rafId) cancelAnimationFrame(rafId);
+    };
+    window._connectReset = function () {
+      startTime = performance.now();
+      if (running) { cancelAnimationFrame(rafId); loop(); }
+    };
+
+    if ('IntersectionObserver' in window) {
+      new IntersectionObserver(function (entries) {
+        if (entries[0].isIntersecting) startConnect(); else stopConnect();
+      }, { threshold: 0.1 }).observe(wrap);
+    } else {
+      startConnect();
+    }
+  })();
+
+  /* Modals */
+  var openModal = function (id) {
+    var overlay = document.getElementById(id);
+    if (!overlay) return;
+    document.querySelectorAll('.modal-overlay.is-open').forEach(function (o) {
+      o.classList.remove('is-open');
+      o.setAttribute('aria-hidden', 'true');
+    });
+    overlay.classList.add('is-open');
+    overlay.setAttribute('aria-hidden', 'false');
+    document.body.classList.add('modal-open');
+    var firstInput = overlay.querySelector('input, textarea, select');
+    if (firstInput) setTimeout(function () { firstInput.focus(); }, 240);
+  };
+  var closeModal = function (overlay) {
+    overlay.classList.remove('is-open');
+    overlay.setAttribute('aria-hidden', 'true');
+    document.body.classList.remove('modal-open');
+  };
+  document.querySelectorAll('[data-open]').forEach(function (btn) {
+    btn.addEventListener('click', function () { openModal(btn.getAttribute('data-open')); });
+  });
+  document.querySelectorAll('.modal-overlay').forEach(function (overlay) {
+    overlay.addEventListener('click', function (e) {
+      if (e.target === overlay) closeModal(overlay);
+    });
+    overlay.querySelector('.modal-close').addEventListener('click', function () { closeModal(overlay); });
+  });
+  document.addEventListener('keydown', function (e) {
+    if (e.key === 'Escape') {
+      document.querySelectorAll('.modal-overlay.is-open').forEach(closeModal);
+    }
+  });
+
+  /* Konzultace modal: choice → form toggle */
+  var konzChoice = document.getElementById('konzultace-choice');
+  var konzForm = document.getElementById('konzultace-form');
+  var showKonzView = function (view) {
+    konzChoice.classList.toggle('is-active', view === 'choice');
+    konzForm.classList.toggle('is-active', view === 'form');
+    if (view === 'form') {
+      var fi = konzForm.querySelector('input');
+      if (fi) setTimeout(function () { fi.focus(); }, 120);
+    }
+  };
+  document.getElementById('choice-zavolejte').addEventListener('click', function () { showKonzView('form'); });
+  document.getElementById('konzultace-back').addEventListener('click', function () { showKonzView('choice'); });
+  var origCloseModal = closeModal;
+  closeModal = function (overlay) {
+    origCloseModal(overlay);
+    if (overlay.id === 'modal-konzultace') showKonzView('choice');
+  };
+
+  /* Order total */
+  var pocetSelect = document.getElementById('o-pocet');
+  var orderTotal = document.getElementById('order-total');
+  var formatCzk = function (n) {
+    return n.toLocaleString('cs-CZ').replace(/ /g, ' ') + ' Kč';
+  };
+  if (pocetSelect) {
+    pocetSelect.addEventListener('change', function () {
+      var qty = parseInt(pocetSelect.value, 10);
+      if (pocetSelect.value === '10+' || isNaN(qty)) {
+        orderTotal.textContent = 'individuální nabídka';
+      } else if (PACK_PRICES[qty]) {
+        orderTotal.textContent = formatCzk(PACK_PRICES[qty]);
+      } else {
+        orderTotal.textContent = formatCzk(qty * UNIT_PRICE);
+      }
+    });
+  }
+
+  /* Forms -> Make webhook */
+  var submitForm = function (form) {
+    var status = form.querySelector('.form-status, .subscribe-status');
+    var payload = { type: form.getAttribute('data-type'), page: location.href };
+    new FormData(form).forEach(function (value, key) { payload[key] = value; });
+    if (payload.type === 'objednavka') {
+      var oQty = parseInt(pocetSelect.value, 10);
+      payload.cena_za_kus = UNIT_PRICE;
+      payload.celkem = (pocetSelect.value === '10+' || isNaN(oQty)) ? 'individuální' : (PACK_PRICES[oQty] || oQty * UNIT_PRICE);
+    }
+    var showStatus = function (ok, msg) {
+      if (!status) return;
+      status.hidden = false;
+      status.classList.remove('ok', 'err');
+      status.classList.add(ok ? 'ok' : 'err');
+      status.textContent = msg;
+    };
+    fetch(SUBSCRIBE_ENDPOINT, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(payload)
+    }).then(function (res) {
+      if (!res.ok) throw new Error(res.status);
+      showStatus(true, 'Odesláno. Ozveme se vám do jednoho pracovního dne.');
+      form.reset();
+    }).catch(function () {
+      showStatus(false, 'Odeslání se nepovedlo. Zkuste to prosím znovu, nebo napište na info@plexima.io.');
+    });
+  };
+  document.querySelectorAll('form[data-type]').forEach(function (form) {
+    form.addEventListener('submit', function (e) {
+      e.preventDefault();
+      if (!form.checkValidity()) {
+        form.reportValidity();
+        return;
+      }
+      submitForm(form);
+    });
+  });
+
+  /* Product gallery */
+  var galleryMain = document.getElementById('gallery-main');
+  document.querySelectorAll('.buy-thumb').forEach(function (thumb) {
+    thumb.addEventListener('click', function () {
+      document.querySelectorAll('.buy-thumb').forEach(function (t) { t.classList.remove('is-active'); });
+      thumb.classList.add('is-active');
+      galleryMain.style.opacity = '0';
+      setTimeout(function () {
+        galleryMain.src = thumb.getAttribute('data-src');
+        galleryMain.style.opacity = '1';
+      }, 180);
+    });
+  });
+
+  /* Product configurator */
+  var selectedQty = '1';
+  var selectedScope = 'device';
+  var buyCta = document.getElementById('buy-cta');
+  var packBoxes = document.querySelectorAll('#pack-options .option-box');
+  packBoxes.forEach(function (box) {
+    box.addEventListener('click', function () {
+      packBoxes.forEach(function (b) { b.classList.remove('is-active'); });
+      box.classList.add('is-active');
+      selectedQty = box.getAttribute('data-qty');
+    });
+  });
+  document.querySelectorAll('#scope-options .radio-box').forEach(function (rb) {
+    rb.addEventListener('click', function () {
+      document.querySelectorAll('#scope-options .radio-box').forEach(function (r) { r.classList.remove('is-active'); });
+      rb.classList.add('is-active');
+      var input = rb.querySelector('input');
+      if (input) { input.checked = true; selectedScope = input.value; }
+    });
+  });
+  if (buyCta) {
+    buyCta.addEventListener('click', function () {
+      if (pocetSelect) {
+        var mapQty = selectedQty;
+        if ([].some.call(pocetSelect.options, function (o) { return o.value === mapQty; })) {
+          pocetSelect.value = mapQty;
+          pocetSelect.dispatchEvent(new Event('change'));
+        }
+      }
+      var implCheck = document.querySelector('#modal-objednavka input[name="implementace"]');
+      if (implCheck) implCheck.checked = (selectedScope === 'service');
+    });
+  }
+
+  /* Carousels: auto-rotate in loop + arrows */
+  document.querySelectorAll('[data-carousel]').forEach(function (root) {
+    var track = root.querySelector('.carousel-track');
+    if (!track) return;
+    var interval = parseInt(root.getAttribute('data-interval'), 10) || 4500;
+    var step = function () {
+      var card = track.children[0];
+      if (!card) return 0;
+      var styles = getComputedStyle(track);
+      var gap = parseFloat(styles.columnGap || styles.gap) || 24;
+      return card.getBoundingClientRect().width + gap;
+    };
+    var animating = false;
+    var advance = function (dir) {
+      if (animating) return;
+      var s = step();
+      if (!s) return;
+      animating = true;
+      track.style.scrollSnapType = 'none';
+      if (dir > 0) {
+        track.scrollTo({ left: s, behavior: reducedMotion ? 'auto' : 'smooth' });
+        var done = function () {
+          track.appendChild(track.firstElementChild);
+          track.scrollLeft = 0;
+          track.style.scrollSnapType = '';
+          animating = false;
+        };
+        if (reducedMotion) done();
+        else setTimeout(done, 550);
+      } else {
+        track.insertBefore(track.lastElementChild, track.firstElementChild);
+        track.scrollLeft = s;
+        track.scrollTo({ left: 0, behavior: reducedMotion ? 'auto' : 'smooth' });
+        if (reducedMotion) { track.style.scrollSnapType = ''; animating = false; }
+        else setTimeout(function () { track.style.scrollSnapType = ''; animating = false; }, 550);
+      }
+    };
+    var timer = null;
+    var stop = function () { clearInterval(timer); timer = null; };
+    var start = function () {
+      if (reducedMotion || timer) return;
+      timer = setInterval(function () {
+        if (track.querySelector('.is-expanded')) return;
+        advance(1);
+      }, interval);
+    };
+    var prev = root.querySelector('.car-prev');
+    var next = root.querySelector('.car-next');
+    if (next) next.addEventListener('click', function () { stop(); advance(1); });
+    if (prev) prev.addEventListener('click', function () { stop(); advance(-1); });
+    track.addEventListener('pointerenter', stop);
+    track.addEventListener('pointerleave', start);
+    track.addEventListener('touchstart', stop, { passive: true });
+    if ('IntersectionObserver' in window) {
+      new IntersectionObserver(function (entries) {
+        if (entries[0].isIntersecting) start(); else stop();
+      }, { threshold: 0.3 }).observe(root);
+    } else {
+      start();
+    }
+  });
+
+  /* Case studies */
+  var CASES = {
+    obchod: {
+      badge: 'Obchodní jednání',
+      title: 'Obchodní tým: zápisy, follow-upy a koučink bez jediné ruční poznámky',
+      html: '<h4>Situace</h4><p>Obchodník absolvuje několik schůzek denně. Po každé musí ručně psát zápis, připravit follow-up e-mail a aktualizovat CRM. Detaily z rozhovorů se ztrácejí a na přípravu další schůzky nezbývá čas.</p><h4>Řešení</h4><p>Omi zařízení nahrává celé jednání. Z nahrávky automaticky vznikne strukturovaný zápis, návrh follow-upu, seznam dohodnutých kroků a doporučení, co příště udělat jinak.</p><h4>Implementace</h4><p>Výstupy proudí do CRM, e-mailového klienta i aplikace Prospirio, která obchodníkovi dává zpětnou vazbu na jeho prodejní dovednosti a manažerovi přehled o aktivitě týmu.</p><h4>Výsledek</h4><p>Žádné ruční zápisy, konzistentní follow-upy do hodiny po schůzce a obchodníci, kteří se zlepšují s každým dalším jednáním.</p>'
+    },
+    servis: {
+      badge: 'Servis a terén',
+      title: 'Klimatizační servis: report hotový, než technik nastartuje auto',
+      html: '<h4>Situace</h4><p>Servisní firma s 12 techniky v terénu. Každý zásah znamenal 20 až 30 minut ručního psaní reportu, často až večer po směně. Detaily se ztrácely a fakturace čekala na podklady.</p><h4>Řešení</h4><p>Technik má Omi u sebe a během zásahu popisuje, co vidí a co dělá. Z rozhovoru vznikne strukturovaný servisní report, seznam zjištění a úkoly pro další tým.</p><h4>Implementace</h4><p>Výstupy tečou přes Make do interního servisního systému a do Freela. Dispečink vidí report do 10 minut po odjezdu od zákazníka.</p><h4>Výsledek</h4><p>Zhruba 6 hodin týdně na technika ušetřených na administrativě, přesnější servisní historie a rychlejší fakturace.</p>'
+    },
+    porady: {
+      badge: 'Interní schůzky',
+      title: 'Konzultační tým: porady končí úkoly v Asaně, ne slibem zápisu',
+      html: '<h4>Situace</h4><p>Tým 15 konzultantů s poradami dvakrát týdně. Zápis dělal pokaždé někdo jiný, pokaždé jinak. Úkoly bez vlastníků se ztrácely a po týdnu se řešilo, kdo měl co udělat.</p><h4>Řešení</h4><p>Porada se nahrává přes Omi. Vznikne shrnutí, seznam rozhodnutí a úkoly s navrženými vlastníky a termíny, které stačí jen potvrdit.</p><h4>Implementace</h4><p>Úkoly se přes Make zakládají rovnou v Asaně a shrnutí odchází do týmového kanálu ve Slacku. Kdo na poradě nebyl, přečte si přehled za dvě minuty.</p><h4>Výsledek</h4><p>Nulový čas strávený zápisem, dohledatelná rozhodnutí a follow-up hned po poradě, ne za tři dny.</p>'
+    },
+    management: {
+      badge: 'Manažerské porady',
+      title: 'Výrobní firma: rozhodnutí vedení přestala mizet mezi poradami',
+      html: '<h4>Situace</h4><p>Vedení výrobní firmy se schází každé pondělí. Rozhodnutí se zapisovala do sešitu a po měsíci nikdo nevěděl, proč se co rozhodlo a kdo to slíbil.</p><h4>Řešení</h4><p>Z porady vzniká manažerský souhrn: rozhodnutí, odpovědnosti, otevřené otázky a agenda na příští setkání.</p><h4>Implementace</h4><p>Souhrn se ukládá do Notion, vlastníci úkolů dostávají notifikaci a jednatel týdenní digest e-mailem.</p><h4>Výsledek</h4><p>Kontinuita mezi poradami, méně opakovaných diskusí a jasná odpovědnost za každý závazek.</p>'
+    },
+    knowhow: {
+      badge: 'Firemní know-how',
+      title: 'Účetní kancelář: know-how seniorů se mění na interní wiki',
+      html: '<h4>Situace</h4><p>Dva senioři drželi v hlavě postupy pro desítky klientů. Každý nový kolega znamenal týdny opakovaného vysvětlování stejných věcí.</p><h4>Řešení</h4><p>Interní školení a konzultace se nahrávají. Z rozhovorů vznikají návrhy článků, FAQ a checklisty postupů.</p><h4>Implementace</h4><p>Návrhy článků se ukládají do interní wiki v Notion ke schválení a tagují se podle klienta a agendy.</p><h4>Výsledek</h4><p>Onboarding nováčka zkrácený zhruba na polovinu a know-how, které ve firmě zůstane, i když někdo odejde.</p>'
+    }
+  };
+  document.querySelectorAll('.work-case, .uc-more').forEach(function (btn) {
+    btn.addEventListener('click', function (e) {
+      e.stopPropagation();
+      var data = CASES[btn.getAttribute('data-case')];
+      if (!data) return;
+      document.getElementById('case-badge').textContent = data.badge;
+      document.getElementById('case-title').textContent = data.title;
+      document.getElementById('case-body').innerHTML = data.html;
+      openModal('modal-case');
+    });
+  });
+
+  /* Exit-intent popup */
+  (function () {
+    var overlay = document.getElementById('exit-intent');
+    if (!overlay) return;
+    var shown = false;
+    var DELAY = 3000;
+    var ready = false;
+    setTimeout(function () { ready = true; }, DELAY);
+
+    var show = function () {
+      if (shown || sessionStorage.getItem('exit-shown')) return;
+      shown = true;
+      sessionStorage.setItem('exit-shown', '1');
+      overlay.classList.add('is-open');
+      overlay.setAttribute('aria-hidden', 'false');
+      document.body.classList.add('modal-open');
+      var input = overlay.querySelector('input[type="email"]');
+      if (input) setTimeout(function () { input.focus(); }, 300);
+    };
+
+    var close = function () {
+      overlay.classList.remove('is-open');
+      overlay.setAttribute('aria-hidden', 'true');
+      document.body.classList.remove('modal-open');
+    };
+
+    document.addEventListener('mouseout', function (e) {
+      if (!ready || shown) return;
+      if (e.clientY <= 0 || e.clientX <= 5 || e.clientX >= window.innerWidth - 5) {
+        show();
+      }
+    });
+
+    overlay.addEventListener('click', function (e) { if (e.target === overlay) close(); });
+    overlay.querySelector('.exit-close').addEventListener('click', close);
+    document.addEventListener('keydown', function (e) {
+      if (e.key === 'Escape' && overlay.classList.contains('is-open')) close();
+    });
+
+    var form = overlay.querySelector('form');
+    var status = overlay.querySelector('.exit-status');
+    form.addEventListener('submit', function (e) {
+      e.preventDefault();
+      if (!form.checkValidity()) { form.reportValidity(); return; }
+      var payload = { type: 'exit-intent', page: location.href };
+      new FormData(form).forEach(function (v, k) { payload[k] = v; });
+      var showMsg = function (ok, msg) {
+        status.hidden = false;
+        status.classList.remove('ok', 'err');
+        status.classList.add(ok ? 'ok' : 'err');
+        status.textContent = msg;
+      };
+      fetch(SUBSCRIBE_ENDPOINT, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(payload)
+      }).then(function (res) {
+        if (!res.ok) throw new Error(res.status);
+        showMsg(true, 'Díky! Budeme se ozývat.');
+        form.reset();
+        setTimeout(close, 2000);
+      }).catch(function () {
+        showMsg(false, 'Odeslání se nepovedlo. Zkuste to znovu.');
+      });
+    });
+  })();
+
+  /* Work cards: expand one at a time */
+  var workCards = document.querySelectorAll('.work-card');
+  workCards.forEach(function (card) {
+    var toggle = card.querySelector('.work-toggle');
+    if (!toggle) return;
+    toggle.addEventListener('click', function () {
+      var willExpand = !card.classList.contains('is-expanded');
+      workCards.forEach(function (c) {
+        c.classList.remove('is-expanded');
+        var t = c.querySelector('.work-toggle');
+        if (t) t.setAttribute('aria-expanded', 'false');
+      });
+      if (willExpand) {
+        card.classList.add('is-expanded');
+        toggle.setAttribute('aria-expanded', 'true');
+        setTimeout(function () {
+          card.scrollIntoView({ behavior: reducedMotion ? 'auto' : 'smooth', inline: 'center', block: 'nearest' });
+        }, 60);
+      }
+    });
+  });
+})();
+</script>
+
+</body>
+</html>

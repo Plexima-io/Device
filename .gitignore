@@ -1,0 +1,14 @@
+# Ignore everything by default, then allow only the web itself
+/*
+
+!/index.html
+!/dotaznik.html
+!/priklady.html
+!/priklady-prospirio.html
+!/api/
+!/Fotky/
+!/.vercelignore
+!/.gitignore
+
+# Never track OS junk, even inside allowed folders
+**/.DS_Store

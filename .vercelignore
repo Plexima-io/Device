@@ -1,0 +1,23 @@
+.DS_Store
+.claude
+.firecrawl
+.hermes
+.hermes.md
+.od-skills
+.vercel-preview-site
+AGENTS.md
+README.md
+critique.json
+design
+design_handoff_conversation_animation
+design_handoff_conversation_animation 2
+design_handoff_conversation_animation 3
+docs
+plexima-design-system.md
+Personal
+Klienti
+emails
+output
+tmp
+node_modules
+.git
