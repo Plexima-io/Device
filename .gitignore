@@ -9,6 +9,7 @@
 !/Fotky/
 !/.vercelignore
 !/.gitignore
+!/vercel.json
 
 # Never track OS junk, even inside allowed folders
 **/.DS_Store

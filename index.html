@@ -110,8 +110,8 @@ section { padding: var(--section-y) 0; }
   border-color: var(--border);
 }
 .btn-ghost:hover { background: var(--soft); border-color: var(--blue); }
-a.btn-ghost[href="dotaznik.html"] { background: var(--white); border-color: var(--ink); }
-a.btn-ghost[href="dotaznik.html"]:hover { background: var(--soft); border-color: var(--ink); }
+a.btn-ghost[href="dotaznik"] { background: var(--white); border-color: var(--ink); }
+a.btn-ghost[href="dotaznik"]:hover { background: var(--soft); border-color: var(--ink); }
 .btn:focus-visible { outline: 2px solid var(--blue); outline-offset: 2px; }
 
 /* ---------- Header ---------- */
@@ -340,25 +340,6 @@ a.btn-ghost[href="dotaznik.html"]:hover { background: var(--soft); border-color:
 }
 .pain-card h3 { font-size: 20px; line-height: 1.3; margin-bottom: 10px; }
 .pain-card p { font-size: 15px; line-height: 1.6; color: var(--muted); }
-
-.scenare-foot { text-align: center; margin-top: 44px; }
-.scenare-q { font: 700 19px/1.4 var(--font-heading); color: var(--ink); margin-bottom: 18px; }
-.scenare-note { font-size: 14px; color: var(--caption); margin-top: 12px; }
-.scenare-link {
-  display: inline-flex;
-  align-items: center;
-  gap: 7px;
-  margin-top: 22px;
-  font: 600 15px/1 var(--font-body);
-  color: var(--muted);
-  text-decoration: none;
-  border-bottom: 1px solid var(--border);
-  padding-bottom: 4px;
-  transition: color .15s ease, border-color .15s ease;
-}
-.scenare-link svg { transition: transform .18s ease; }
-.scenare-link:hover { color: var(--ink); border-color: var(--ink); }
-.scenare-link:hover svg { transform: translateX(3px); }
 
 /* ---------- Skrytá cena ---------- */
 .cost-grid {
@@ -1089,9 +1070,6 @@ input[type="range"]:focus-visible { outline: 2px solid var(--blue); outline-offs
   justify-content: space-between;
   padding: 20px;
 }
-.work-card.is-expanded {
-  flex-basis: clamp(320px, 62vw, 720px);
-}
 .work-card img {
   position: absolute;
   inset: 0;
@@ -1107,30 +1085,6 @@ input[type="range"]:focus-visible { outline: 2px solid var(--blue); outline-offs
   pointer-events: none;
   transition: background .4s ease;
 }
-.work-card.is-expanded::after {
-  background: linear-gradient(to top, rgba(31,23,65,.9) 0%, rgba(31,23,65,.5) 45%, rgba(31,23,65,.18) 100%);
-}
-.work-toggle {
-  position: absolute;
-  top: 16px;
-  right: 16px;
-  z-index: 3;
-  width: 40px;
-  height: 40px;
-  border: none;
-  border-radius: 999px;
-  background: rgba(255,255,255,.92);
-  color: var(--ink);
-  cursor: pointer;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  transition: transform .35s ease, background .15s ease;
-}
-.work-toggle:hover { background: #fff; }
-.work-toggle:focus-visible { outline: 2px solid var(--blue); outline-offset: 2px; }
-.work-toggle svg { width: 16px; height: 16px; }
-.work-card.is-expanded .work-toggle { transform: rotate(45deg); }
 .work-content {
   position: relative;
   z-index: 2;
@@ -1141,26 +1095,26 @@ input[type="range"]:focus-visible { outline: 2px solid var(--blue); outline-offs
   align-self: flex-start;
   position: relative;
   z-index: 2;
+  max-width: 100%;
   padding: 7px 14px;
   border-radius: 999px;
   background: rgba(255,255,255,.88);
   backdrop-filter: blur(6px);
-  font: 700 13px/1 var(--font-body);
+  font: 700 13px/1.25 var(--font-body);
   color: var(--ink);
 }
 .work-headline {
   font: 700 21px/1.3 var(--font-heading);
   color: #fff;
+  min-height: 2.6em;
 }
 .work-desc {
   color: rgba(255,255,255,.82);
   font-size: 15px;
   line-height: 1.5;
   max-width: 460px;
-  overflow: hidden;
-  max-height: 0;
-  opacity: 0;
-  transition: max-height .4s ease, opacity .3s ease, margin-top .4s ease;
+  margin-top: 12px;
+  min-height: 6em;
 }
 .work-case {
   align-self: flex-start;
@@ -1169,31 +1123,22 @@ input[type="range"]:focus-visible { outline: 2px solid var(--blue); outline-offs
   min-height: 42px;
   padding: 10px 18px;
   font-size: 14px;
-  overflow: hidden;
-  max-height: 0;
-  opacity: 0;
-  transform: translateY(6px);
-  transition: max-height .4s ease, opacity .3s ease, transform .3s ease, margin-top .4s ease;
+  margin-top: 18px;
+  text-decoration: none;
 }
 .work-case:hover { background: var(--soft); transform: translateY(-1px); }
-.work-card.is-expanded .work-desc {
-  max-height: 100px;
-  opacity: 1;
-  margin-top: 12px;
-}
-.work-card.is-expanded .work-case {
-  max-height: 60px;
-  opacity: 1;
-  transform: translateY(0);
-  margin-top: 18px;
-}
 .work-placeholder {
   position: absolute;
   inset: 0;
   display: flex;
   align-items: center;
   justify-content: center;
-  background: linear-gradient(180deg, #EFEFF1 0%, #E1E4EA 100%);
+  background: linear-gradient(160deg, #34285F 0%, #1F1741 100%);
+}
+.work-placeholder svg {
+  width: 54px;
+  height: 54px;
+  color: rgba(255,255,255,.26);
 }
 
 /* ---------- Product card (konfigurátor) ---------- */
@@ -1603,8 +1548,9 @@ body.modal-open { overflow: hidden; }
 html.no-motion .how-visual * { animation: none !important; }
 
 /* ---------- Carousel ---------- */
-.carousel { margin-top: 48px; overflow: hidden; }
+.carousel { margin-top: 48px; }
 .carousel .work-cards { margin-top: 0; }
+#scenare { padding-bottom: 0; }
 .carousel-track { scrollbar-width: none; }
 .carousel-track::-webkit-scrollbar { display: none; }
 .uc-track {
@@ -1647,34 +1593,6 @@ html.no-motion .how-visual * { animation: none !important; }
 }
 .car-btn:hover { background: var(--soft); border-color: var(--blue); }
 .car-btn:focus-visible { outline: 2px solid var(--blue); outline-offset: 2px; }
-
-/* ---------- Case study modal ---------- */
-.modal-case { max-width: 720px; }
-.modal-case .scenario-badge { margin-bottom: 14px; display: inline-flex; }
-.case-body h4 {
-  font-size: 15px;
-  letter-spacing: .05em;
-  text-transform: uppercase;
-  color: var(--blue);
-  margin: 22px 0 6px;
-  font-family: var(--font-body);
-  font-weight: 700;
-}
-.case-body h4:first-child { margin-top: 4px; }
-.case-body p { font-size: 15px; line-height: 1.65; color: var(--muted); }
-.case-note {
-  margin-top: 22px;
-  font-size: 13px;
-  color: var(--caption);
-  border-left: 3px solid var(--yellow);
-  padding-left: 14px;
-}
-.case-subscribe {
-  margin-top: 24px;
-  padding-top: 22px;
-  border-top: 1px solid var(--border);
-}
-.case-subscribe p { font-size: 15px; margin-bottom: 12px; }
 
 /* ---------- Trust section ---------- */
 .trust-grid {
@@ -1776,7 +1694,6 @@ html.no-motion .how-visual * { animation: none !important; }
   .scenario-card { flex: 0 0 82%; scroll-snap-align: center; }
   .faq-body { padding-right: 0; }
   .work-card { flex: 0 0 78%; height: 440px; }
-  .work-card.is-expanded { flex-basis: 88%; }
   .trust-cards { grid-template-columns: 1fr; }
   .form-grid { grid-template-columns: 1fr; }
   .footer-top { gap: 32px; }
@@ -1795,12 +1712,11 @@ html.no-motion .how-visual * { animation: none !important; }
     </button>
     <nav class="main-nav" aria-label="Hlavní navigace">
       <a href="#jak-to-funguje">Jak to funguje</a>
-      <a href="#scenare">Scénáře</a>
-      <a href="#produkt">Produkt</a>
-      <a href="#implementace">Služba</a>
+      <a href="#produkt">Omi</a>
+      <a href="#implementace">Nasazení</a>
       <a href="#faq">FAQ</a>
       <i class="nav-sep" aria-hidden="true"></i>
-      <a href="priklady.html">Příklady z praxe</a>
+      <a href="priklady">Příklady z praxe</a>
     </nav>
     <div class="header-cta">
       <button type="button" class="btn btn-primary" data-open="modal-konzultace">Domluvit konzultaci</button>
@@ -1812,57 +1728,176 @@ html.no-motion .how-visual * { animation: none !important; }
 <section class="hero">
   <div class="container hero-grid">
     <div>
-      <span class="eyebrow">Méně ruční administrativy</span>
-      <h1>Co kdyby po schůzce nikdo nemusel psát zápis?</h1>
-      <p class="hero-sub">Rozhovory nemusí končit v poznámkách ani v hlavách lidí. Pošlete jejich výstupy rovnou do CRM nebo ERP. <strong>Automaticky.</strong></p>
+      <span class="eyebrow">Know-how z každého rozhovoru</span>
+      <h1>Každým rozhovorem ztrácíte cenné informace.</h1>
+      <p class="hero-sub">Zachyťte důležité detaily, nápady i souvislosti. Inteligentní vrstva je zpracuje a promění v know-how, <strong>které máte vždy po ruce.</strong></p>
       <div class="hero-cta">
         <button type="button" class="btn btn-primary" data-open="modal-konzultace">Domluvit konzultaci</button>
-        <a href="dotaznik.html" class="btn btn-ghost">Najít řešení</a>
+        <a href="dotaznik" class="btn btn-ghost">Najít řešení</a>
       </div>
       <p class="hero-trust">Technologii Omi dnes používá přes <strong>300&nbsp;000 profesionálů</strong> po celém světě.</p>
       <ul class="hero-benefits">
         <li>
           <svg width="18" height="18" viewBox="0 0 18 18" fill="none"><circle cx="9" cy="9" r="9" fill="#FEC710"/><path d="M5.5 9.2l2.3 2.3 4.7-4.8" stroke="#1F1741" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
-          Méně ručního zapisování po schůzkách
+          Zachycený kontext, nejen přepis
         </li>
         <li>
           <svg width="18" height="18" viewBox="0 0 18 18" fill="none"><circle cx="9" cy="9" r="9" fill="#FEC710"/><path d="M5.5 9.2l2.3 2.3 4.7-4.8" stroke="#1F1741" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
-          Přesnější CRM a ERP data bez zpětného dohledávání
+          Důležité informace vždy dohledatelné
         </li>
         <li>
           <svg width="18" height="18" viewBox="0 0 18 18" fill="none"><circle cx="9" cy="9" r="9" fill="#FEC710"/><path d="M5.5 9.2l2.3 2.3 4.7-4.8" stroke="#1F1741" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
-          Jasné úkoly a odpovědnosti hned po rozhovoru
+          Know-how, které roste každým rozhovorem
         </li>
       </ul>
     </div>
     <div class="hero-visual">
       <figure class="device-figure">
-        <span class="device-tag"><i></i>AI zápisník Omi</span>
+        <span class="device-tag"><i></i>Inteligentní paměť</span>
         <img src="Fotky/WebP Image.webp" alt="AI zápisník Omi, přívěsek na šňůrce">
       </figure>
       <div class="flow-card" id="flow-card" aria-hidden="true">
-        <div class="flow-label"><span class="dot"></span>Záznam schůzky</div>
-        <p class="transcript-line" data-line="1">„…pošleme jim <strong>upravenou nabídku do pátku</strong>…“</p>
-        <p class="transcript-line" data-line="2">„…<strong>Martin zajistí revizi smlouvy</strong> s právníkem…“</p>
-        <p class="transcript-line" data-line="3">„…domluvíme <strong>follow-up na příští úterý</strong>…“</p>
+        <div class="flow-label"><span class="dot"></span>Inteligentní zpracování</div>
+        <p class="transcript-line" data-line="1">„…<strong>klient upřednostňuje stabilitu</strong> před vyšším výnosem…“</p>
+        <p class="transcript-line" data-line="2">„…rozhodnutí <strong>navazuje na revizi z března</strong>…“</p>
+        <p class="transcript-line" data-line="3">„…téma <strong>kapacity týmu se objevuje opakovaně</strong>…“</p>
         <div class="flow-outputs">
           <span class="output-chip chip-yellow" data-chip="1">
             <svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M2.5 6.2l2.2 2.2 4.8-4.9" stroke="#1F1741" stroke-width="1.8" stroke-linecap="round"/></svg>
-            CRM záznam
+            Klíčový kontext
           </span>
           <span class="output-chip chip-blue" data-chip="2">
             <svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M2.5 6.2l2.2 2.2 4.8-4.9" stroke="#1F1741" stroke-width="1.8" stroke-linecap="round"/></svg>
-            Úkol: revize smlouvy
+            Rozhodnutí
           </span>
           <span class="output-chip chip-neutral" data-chip="3">
             <svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M2.5 6.2l2.2 2.2 4.8-4.9" stroke="#54595F" stroke-width="1.8" stroke-linecap="round"/></svg>
-            Follow-up e-mail
+            Nový poznatek
           </span>
           <span class="output-chip chip-blue" data-chip="4">
             <svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M2.5 6.2l2.2 2.2 4.8-4.9" stroke="#1F1741" stroke-width="1.8" stroke-linecap="round"/></svg>
-            Shrnutí schůzky
+            Historická souvislost
           </span>
         </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- VYTVOŘENO PRO SKUTEČNOU PRÁCI -->
+<section class="section-soft" id="scenare">
+  <div class="container">
+    <div class="reveal">
+      <span class="eyebrow">Rozšířená paměť v praxi</span>
+      <h2 class="section-title">Každá profese potřebuje pamatovat něco jiného.</h2>
+      <p class="section-lead">Inteligentní paměť z každého rozhovoru uchová to podstatné a postupně buduje know-how, ke kterému se můžete kdykoli vrátit.</p>
+    </div>
+    <div class="carousel reveal" data-carousel data-interval="4500">
+      <div class="work-cards carousel-track">
+        <!-- FOTKA: finanční poradce na schůzce s klientem -->
+        <article class="work-card">
+          <div class="work-placeholder" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none"><path d="M3 17l5-5 4 3 6-7" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/><path d="M14 8h4v4" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/><path d="M3 21h18" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/></svg>
+          </div>
+          <span class="work-badge">Finanční poradci</span>
+          <div class="work-content">
+            <h3 class="work-headline">Klientský kontext po ruce</h3>
+            <p class="work-desc">Při další schůzce máte po ruce klientovy cíle, priority i důvody jeho dřívějších rozhodnutí.</p>
+            <a href="priklady?tab=profese" class="btn work-case">Zobrazit scénář</a>
+          </div>
+        </article>
+        <!-- FOTKA: realitní makléř na prohlídce nemovitosti se zájemcem -->
+        <article class="work-card">
+          <div class="work-placeholder" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none"><path d="M4 10.5L12 4l8 6.5" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/><path d="M6 9.8V20h12V9.8" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/><path d="M10 20v-5h4v5" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </div>
+          <span class="work-badge">Realitní makléři</span>
+          <div class="work-content">
+            <h3 class="work-headline">Víte, co zájemce hledá</h3>
+            <p class="work-desc">Z prohlídky zůstane přesný obraz potřeb zájemce i důvodů, proč mu nemovitost nesedla.</p>
+            <a href="priklady?tab=profese" class="btn work-case">Zobrazit scénář</a>
+          </div>
+        </article>
+        <!-- FOTKA: účetní nebo daňový poradce při konzultaci s klientem -->
+        <article class="work-card">
+          <div class="work-placeholder" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none"><rect x="5" y="3" width="14" height="18" rx="2" stroke="currentColor" stroke-width="1.7"/><path d="M8.5 7.5h7M8.5 11.5h7M8.5 15.5h4" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/></svg>
+          </div>
+          <span class="work-badge">Daňoví a účetní poradci</span>
+          <div class="work-content">
+            <h3 class="work-headline">Doporučení v celém kontextu</h3>
+            <p class="work-desc">Snadno dohledáte předchozí doporučení, dohodnutý postup i podklady, které klient ještě nedodal.</p>
+            <a href="priklady?tab=profese" class="btn work-case">Zobrazit scénář</a>
+          </div>
+        </article>
+        <!-- FOTKA: veterinář při vyšetření zvířete s majitelem -->
+        <article class="work-card">
+          <div class="work-placeholder" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none"><ellipse cx="12" cy="15.5" rx="4.2" ry="3.4" stroke="currentColor" stroke-width="1.7"/><ellipse cx="6.2" cy="9.6" rx="1.9" ry="2.5" stroke="currentColor" stroke-width="1.7"/><ellipse cx="17.8" cy="9.6" rx="1.9" ry="2.5" stroke="currentColor" stroke-width="1.7"/><ellipse cx="10" cy="6.2" rx="1.8" ry="2.3" stroke="currentColor" stroke-width="1.7"/><ellipse cx="14" cy="6.2" rx="1.8" ry="2.3" stroke="currentColor" stroke-width="1.7"/></svg>
+          </div>
+          <span class="work-badge">Veterináři</span>
+          <div class="work-content">
+            <h3 class="work-headline">Léčba v celém kontextu</h3>
+            <p class="work-desc">Při další kontrole máte po ruce vývoj potíží, reakci na léčbu i postřehy majitele z domácí péče.</p>
+            <a href="priklady?tab=profese" class="btn work-case">Zobrazit scénář</a>
+          </div>
+        </article>
+        <!-- FOTKA: lékař při konzultaci s pacientem v ordinaci -->
+        <article class="work-card">
+          <div class="work-placeholder" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none"><path d="M7 3v6a5 5 0 0010 0V3" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/><path d="M12 14v3a4 4 0 008 0v-1" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/><circle cx="20" cy="14.5" r="1.8" stroke="currentColor" stroke-width="1.7"/><path d="M5 3h4M15 3h4" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/></svg>
+          </div>
+          <span class="work-badge">Lékaři a kliniky</span>
+          <div class="work-content">
+            <h3 class="work-headline">Péče plynule navazuje</h3>
+            <p class="work-desc">Při další návštěvě navážete na dosavadní průběh obtíží i důvody zvoleného postupu.</p>
+            <a href="priklady?tab=profese" class="btn work-case">Zobrazit scénář</a>
+          </div>
+        </article>
+        <!-- FOTKA: terapeutické sezení, dvě křesla proti sobě -->
+        <article class="work-card">
+          <div class="work-placeholder" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none"><path d="M12 4.5c-3.6 0-6.5 2.6-6.5 5.9 0 1.7.8 3.2 2.1 4.3V19h8.8v-4.3c1.3-1.1 2.1-2.6 2.1-4.3 0-3.3-2.9-5.9-6.5-5.9z" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/><path d="M9.6 21h4.8" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/></svg>
+          </div>
+          <span class="work-badge">Psychologové a psychoterapeuti</span>
+          <div class="work-content">
+            <h3 class="work-headline">Každé sezení navazuje</h3>
+            <p class="work-desc">Před dalším sezením si připomenete důležitá témata i změny, které se během terapie objevily.</p>
+            <a href="priklady?tab=profese" class="btn work-case">Zobrazit scénář</a>
+          </div>
+        </article>
+        <!-- FOTKA: architekt nad výkresy s klientem nebo na stavbě -->
+        <article class="work-card">
+          <div class="work-placeholder" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none"><path d="M4 20L20 4" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/><path d="M14.5 3.5l6 6L9 21H3v-6L14.5 3.5z" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/><path d="M11.5 6.5l6 6" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/></svg>
+          </div>
+          <span class="work-badge">Architekti a projektanti</span>
+          <div class="work-content">
+            <h3 class="work-headline">Každá změna má důvod</h3>
+            <p class="work-desc">U každé změny dohledáte původní zadání, důvod rozhodnutí i domluvu mezi účastníky projektu.</p>
+            <a href="priklady?tab=profese" class="btn work-case">Zobrazit scénář</a>
+          </div>
+        </article>
+        <!-- FOTKA: příjem vozidla v autoservisu, mechanik se zákazníkem -->
+        <article class="work-card">
+          <div class="work-placeholder" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none"><path d="M14.8 3.6a4.6 4.6 0 00-1.1 7.6L5 20l1.8 1.8 8.8-8.7a4.6 4.6 0 007.6-1.1l-3.4-3.4-2.3 2.3-2.3-2.3 2.3-2.3-2.7-2.7z" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </div>
+          <span class="work-badge">Autoservisy</span>
+          <div class="work-content">
+            <h3 class="work-headline">Přesnější příjem vozidla</h3>
+            <p class="work-desc">Mechanik dostane přesný popis závady včetně situací, ve kterých se problém objevuje.</p>
+            <a href="priklady?tab=profese" class="btn work-case">Zobrazit scénář</a>
+          </div>
+        </article>
+      </div>
+      <div class="carousel-nav">
+        <button type="button" class="car-btn car-prev" aria-label="Předchozí">
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M10 3L5 8l5 5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </button>
+        <button type="button" class="car-btn car-next" aria-label="Další">
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M6 3l5 5-5 5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </button>
       </div>
     </div>
   </div>
@@ -1907,108 +1942,27 @@ html.no-motion .how-visual * { animation: none !important; }
   <div class="container">
     <div class="flip-grid2">
       <div class="reveal">
-        <span class="eyebrow">Změna</span>
-        <h2 class="section-title">Jak vypadá schůzka s Omi</h2>
-        <p class="section-lead">Hotové výstupy během několika minut.</p>
+        <span class="eyebrow">Inteligentní paměť</span>
+        <h2 class="section-title">Důležité informace zůstávají v souvislostech.</h2>
+        <p class="section-lead">Nové informace navazují na to, co už zaznělo, a zůstávají dostupné pro další práci.</p>
         <div class="flip-list reveal-stagger">
           <div class="flip-item" style="--i:0">
-            <h3>Buďte naplno u jednání</h3>
-            <p>Veškerá pozornost patří lidem u stolu. O zbytek je postaráno.</p>
+            <h3>Podstatné zůstává</h3>
+            <p>Důležité detaily, nápady a důvody rozhodnutí zůstávají spolu s kontextem, ve kterém zazněly.</p>
           </div>
           <div class="flip-item" style="--i:1">
-            <h3>Každé rozhodnutí má další krok</h3>
-            <p>Úkoly, termíny i odpovědnosti jsou připravené bez dohledávání.</p>
+            <h3>Informace se propojují</h3>
+            <p>Rozhovory o stejném klientovi, tématu nebo projektu postupně vytvářejí společný obraz.</p>
           </div>
           <div class="flip-item" style="--i:2">
-            <h3>Follow-up bez čekání</h3>
-            <p>Shrnutí i další kroky mohou odejít téměř okamžitě.</p>
+            <h3>Know-how je po ruce</h3>
+            <p>Před další schůzkou nebo rozhodnutím rychle najdete, co už zaznělo a proč je to důležité.</p>
           </div>
         </div>
       </div>
       <div class="flip-visual reveal">
         <img src="Fotky/zmena.png" alt="Z rozhovoru vznikne shrnutí, úkoly, rozhodnutí a termíny">
       </div>
-    </div>
-  </div>
-</section>
-
-<!-- VYTVOŘENO PRO SKUTEČNOU PRÁCI -->
-<section class="section-soft" id="scenare">
-  <div class="container">
-    <div class="reveal">
-      <span class="eyebrow">Vytvořeno pro skutečnou práci</span>
-      <h2 class="section-title">Vytvořeno pro každou důležitou schůzku</h2>
-      <p class="section-lead">Každá schůzka má jiný cíl. Výsledek je ale stejný. Méně administrativy a více času na skutečnou práci.</p>
-    </div>
-    <div class="carousel reveal" data-carousel data-interval="4500">
-      <div class="work-cards carousel-track">
-        <article class="work-card" data-case="obchod">
-          <img src="Fotky/obchodni-jednani.webp" alt="Dva muži na obchodním jednání s AI zápisníkem Omi na krku">
-          <button type="button" class="work-toggle" aria-label="Zobrazit více" aria-expanded="false">
-            <svg viewBox="0 0 16 16" fill="none"><path d="M8 3v10M3 8h10" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
-          </button>
-          <span class="work-badge">Obchodní jednání</span>
-          <div class="work-content">
-            <h3 class="work-headline">Obchodník prodává, Omi zapisuje</h3>
-            <p class="work-desc">Zařízení nahrává schůzku a automaticky vytváří zápis, follow-up i doporučení pro další jednání. Obchodník se soustředí na klienta, ne na poznámky.</p>
-            <button type="button" class="btn work-case" data-case="obchod">Zobrazit scénář</button>
-          </div>
-        </article>
-        <!-- FOTKA: dodat scénu týmové porady -->
-        <article class="work-card" data-case="porady">
-          <img src="Fotky/obr.3.webp" alt="Tým na poradě s AI zápisníkem Omi na stole">
-          <button type="button" class="work-toggle" aria-label="Zobrazit více" aria-expanded="false">
-            <svg viewBox="0 0 16 16" fill="none"><path d="M8 3v10M3 8h10" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
-          </button>
-          <span class="work-badge">Interní porady</span>
-          <div class="work-content">
-            <h3 class="work-headline">Porady končí úkoly, ne dojmy</h3>
-            <p class="work-desc">Rozhodnutí i úkoly vzniknou automaticky a míří rovnou do Asany.</p>
-            <button type="button" class="btn work-case" data-case="porady">Zobrazit scénář</button>
-          </div>
-        </article>
-        <article class="work-card" data-case="management">
-          <img src="Fotky/manazerske-schuzky.webp" alt="Manažerka s AI zápisníkem Omi na krku pracuje na notebooku">
-          <button type="button" class="work-toggle" aria-label="Zobrazit více" aria-expanded="false">
-            <svg viewBox="0 0 16 16" fill="none"><path d="M8 3v10M3 8h10" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
-          </button>
-          <span class="work-badge">Projektové schůzky</span>
-          <div class="work-content">
-            <h3 class="work-headline">Každý krok dohledatelný</h3>
-            <p class="work-desc">Každé rozhodnutí i závazek najdete během pár vteřin.</p>
-            <button type="button" class="btn work-case" data-case="management">Zobrazit scénář</button>
-          </div>
-        </article>
-        <article class="work-card" data-case="knowhow">
-          <img src="Fotky/skoleni-knowhow.webp" alt="Prezentace a předávání know-how týmu na poradě">
-          <button type="button" class="work-toggle" aria-label="Zobrazit více" aria-expanded="false">
-            <svg viewBox="0 0 16 16" fill="none"><path d="M8 3v10M3 8h10" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
-          </button>
-          <span class="work-badge">Firemní školení</span>
-          <div class="work-content">
-            <h3 class="work-headline">Know-how zůstává ve firmě</h3>
-            <p class="work-desc">Každé školení se promění ve znalosti, které tým znovu využije.</p>
-            <button type="button" class="btn work-case" data-case="knowhow">Zobrazit scénář</button>
-          </div>
-        </article>
-      </div>
-      <div class="carousel-nav">
-        <button type="button" class="car-btn car-prev" aria-label="Předchozí">
-          <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M10 3L5 8l5 5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
-        </button>
-        <button type="button" class="car-btn car-next" aria-label="Další">
-          <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M6 3l5 5-5 5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
-        </button>
-      </div>
-    </div>
-    <div class="reveal scenare-foot">
-      <p class="scenare-q">Nevíte, který scénář je ten váš?</p>
-      <a href="dotaznik.html" class="btn btn-ghost">Najít řešení</a>
-      <p class="scenare-note">Za 2 minuty zjistíte, jestli to u vás dává smysl.</p>
-      <a href="priklady.html" class="scenare-link">
-        Nebo se podívejte, jak Omi používají reálné firmy
-        <svg width="14" height="14" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3 8h9M8 4l4 4-4 4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
-      </a>
     </div>
   </div>
 </section>
@@ -2373,7 +2327,7 @@ html.no-motion .how-visual * { animation: none !important; }
           </div>
         </div>
         <div class="reveal" style="margin-top: 28px;">
-          <a href="dotaznik.html" class="btn btn-ghost">Najít řešení</a>
+          <a href="dotaznik" class="btn btn-ghost">Najít řešení</a>
           <p style="font-size: 14px; color: var(--caption); margin-top: 12px;">Krátký dotazník ukáže, kolik z toho času dokážete získat zpět.</p>
         </div>
       </div>
@@ -2642,7 +2596,7 @@ html.no-motion .how-visual * { animation: none !important; }
     <p>Společně projdeme vaše procesy, odhalíme největší administrativní zátěž a navrhneme konkrétní řešení i další postup.</p>
     <div style="display: flex; gap: 16px; justify-content: center; flex-wrap: wrap;">
       <button type="button" class="btn btn-primary" data-open="modal-konzultace">Domluvit konzultaci</button>
-      <a href="dotaznik.html" class="btn btn-ghost">Najít řešení</a>
+      <a href="dotaznik" class="btn btn-ghost">Najít řešení</a>
     </div>
   </div>
 </section>
@@ -2655,10 +2609,10 @@ html.no-motion .how-visual * { animation: none !important; }
       </div>
       <nav class="footer-links" aria-label="Patičková navigace">
         <a href="#jak-to-funguje">Jak to funguje</a>
-        <a href="#scenare">Scénáře</a>
-        <a href="priklady.html">Příklady z praxe</a>
-        <a href="#produkt">Produkt</a>
+        <a href="#produkt">Omi</a>
+        <a href="#implementace">Nasazení</a>
         <a href="#faq">FAQ</a>
+        <a href="priklady">Příklady z praxe</a>
       </nav>
     </div>
     <div class="footer-mid">
@@ -2792,18 +2746,6 @@ html.no-motion .how-visual * { animation: none !important; }
       <button type="submit" class="btn btn-secondary form-submit">Odeslat objednávku</button>
       <p class="form-status" hidden></p>
     </form>
-  </div>
-</div>
-
-<!-- MODAL: CASE STUDY -->
-<div class="modal-overlay" id="modal-case" aria-hidden="true">
-  <div class="modal modal-case" role="dialog" aria-modal="true" aria-labelledby="case-title">
-    <button type="button" class="modal-close" aria-label="Zavřít">✕</button>
-    <span class="scenario-badge" id="case-badge"></span>
-    <h3 id="case-title"></h3>
-    <div class="case-body" id="case-body"></div>
-    <p class="case-note">Ilustrační příklad nasazení. Konkrétní čísla a rozsah ověříme ve vašem pilotu.</p>
-    <button type="button" class="btn btn-primary" data-open="modal-konzultace" style="margin-top:24px;">Domluvit konzultaci</button>
   </div>
 </div>
 
@@ -3673,15 +3615,12 @@ html.no-motion .how-visual * { animation: none !important; }
     var stop = function () { clearInterval(timer); timer = null; };
     var start = function () {
       if (reducedMotion || timer) return;
-      timer = setInterval(function () {
-        if (track.querySelector('.is-expanded')) return;
-        advance(1);
-      }, interval);
+      timer = setInterval(function () { advance(1); }, interval);
     };
     var prev = root.querySelector('.car-prev');
     var next = root.querySelector('.car-next');
-    if (next) next.addEventListener('click', function () { stop(); advance(1); });
-    if (prev) prev.addEventListener('click', function () { stop(); advance(-1); });
+    if (next) next.addEventListener('click', function () { stop(); advance(1); start(); });
+    if (prev) prev.addEventListener('click', function () { stop(); advance(-1); start(); });
     track.addEventListener('pointerenter', stop);
     track.addEventListener('pointerleave', start);
     track.addEventListener('touchstart', stop, { passive: true });
@@ -3692,46 +3631,6 @@ html.no-motion .how-visual * { animation: none !important; }
     } else {
       start();
     }
-  });
-
-  /* Case studies */
-  var CASES = {
-    obchod: {
-      badge: 'Obchodní jednání',
-      title: 'Obchodní tým: zápisy, follow-upy a koučink bez jediné ruční poznámky',
-      html: '<h4>Situace</h4><p>Obchodník absolvuje několik schůzek denně. Po každé musí ručně psát zápis, připravit follow-up e-mail a aktualizovat CRM. Detaily z rozhovorů se ztrácejí a na přípravu další schůzky nezbývá čas.</p><h4>Řešení</h4><p>Omi zařízení nahrává celé jednání. Z nahrávky automaticky vznikne strukturovaný zápis, návrh follow-upu, seznam dohodnutých kroků a doporučení, co příště udělat jinak.</p><h4>Implementace</h4><p>Výstupy proudí do CRM, e-mailového klienta i aplikace Prospirio, která obchodníkovi dává zpětnou vazbu na jeho prodejní dovednosti a manažerovi přehled o aktivitě týmu.</p><h4>Výsledek</h4><p>Žádné ruční zápisy, konzistentní follow-upy do hodiny po schůzce a obchodníci, kteří se zlepšují s každým dalším jednáním.</p>'
-    },
-    servis: {
-      badge: 'Servis a terén',
-      title: 'Klimatizační servis: report hotový, než technik nastartuje auto',
-      html: '<h4>Situace</h4><p>Servisní firma s 12 techniky v terénu. Každý zásah znamenal 20 až 30 minut ručního psaní reportu, často až večer po směně. Detaily se ztrácely a fakturace čekala na podklady.</p><h4>Řešení</h4><p>Technik má Omi u sebe a během zásahu popisuje, co vidí a co dělá. Z rozhovoru vznikne strukturovaný servisní report, seznam zjištění a úkoly pro další tým.</p><h4>Implementace</h4><p>Výstupy tečou přes Make do interního servisního systému a do Freela. Dispečink vidí report do 10 minut po odjezdu od zákazníka.</p><h4>Výsledek</h4><p>Zhruba 6 hodin týdně na technika ušetřených na administrativě, přesnější servisní historie a rychlejší fakturace.</p>'
-    },
-    porady: {
-      badge: 'Interní schůzky',
-      title: 'Konzultační tým: porady končí úkoly v Asaně, ne slibem zápisu',
-      html: '<h4>Situace</h4><p>Tým 15 konzultantů s poradami dvakrát týdně. Zápis dělal pokaždé někdo jiný, pokaždé jinak. Úkoly bez vlastníků se ztrácely a po týdnu se řešilo, kdo měl co udělat.</p><h4>Řešení</h4><p>Porada se nahrává přes Omi. Vznikne shrnutí, seznam rozhodnutí a úkoly s navrženými vlastníky a termíny, které stačí jen potvrdit.</p><h4>Implementace</h4><p>Úkoly se přes Make zakládají rovnou v Asaně a shrnutí odchází do týmového kanálu ve Slacku. Kdo na poradě nebyl, přečte si přehled za dvě minuty.</p><h4>Výsledek</h4><p>Nulový čas strávený zápisem, dohledatelná rozhodnutí a follow-up hned po poradě, ne za tři dny.</p>'
-    },
-    management: {
-      badge: 'Manažerské porady',
-      title: 'Výrobní firma: rozhodnutí vedení přestala mizet mezi poradami',
-      html: '<h4>Situace</h4><p>Vedení výrobní firmy se schází každé pondělí. Rozhodnutí se zapisovala do sešitu a po měsíci nikdo nevěděl, proč se co rozhodlo a kdo to slíbil.</p><h4>Řešení</h4><p>Z porady vzniká manažerský souhrn: rozhodnutí, odpovědnosti, otevřené otázky a agenda na příští setkání.</p><h4>Implementace</h4><p>Souhrn se ukládá do Notion, vlastníci úkolů dostávají notifikaci a jednatel týdenní digest e-mailem.</p><h4>Výsledek</h4><p>Kontinuita mezi poradami, méně opakovaných diskusí a jasná odpovědnost za každý závazek.</p>'
-    },
-    knowhow: {
-      badge: 'Firemní know-how',
-      title: 'Účetní kancelář: know-how seniorů se mění na interní wiki',
-      html: '<h4>Situace</h4><p>Dva senioři drželi v hlavě postupy pro desítky klientů. Každý nový kolega znamenal týdny opakovaného vysvětlování stejných věcí.</p><h4>Řešení</h4><p>Interní školení a konzultace se nahrávají. Z rozhovorů vznikají návrhy článků, FAQ a checklisty postupů.</p><h4>Implementace</h4><p>Návrhy článků se ukládají do interní wiki v Notion ke schválení a tagují se podle klienta a agendy.</p><h4>Výsledek</h4><p>Onboarding nováčka zkrácený zhruba na polovinu a know-how, které ve firmě zůstane, i když někdo odejde.</p>'
-    }
-  };
-  document.querySelectorAll('.work-case, .uc-more').forEach(function (btn) {
-    btn.addEventListener('click', function (e) {
-      e.stopPropagation();
-      var data = CASES[btn.getAttribute('data-case')];
-      if (!data) return;
-      document.getElementById('case-badge').textContent = data.badge;
-      document.getElementById('case-title').textContent = data.title;
-      document.getElementById('case-body').innerHTML = data.html;
-      openModal('modal-case');
-    });
   });
 
   /* Exit-intent popup */
@@ -3800,28 +3699,6 @@ html.no-motion .how-visual * { animation: none !important; }
       });
     });
   })();
-
-  /* Work cards: expand one at a time */
-  var workCards = document.querySelectorAll('.work-card');
-  workCards.forEach(function (card) {
-    var toggle = card.querySelector('.work-toggle');
-    if (!toggle) return;
-    toggle.addEventListener('click', function () {
-      var willExpand = !card.classList.contains('is-expanded');
-      workCards.forEach(function (c) {
-        c.classList.remove('is-expanded');
-        var t = c.querySelector('.work-toggle');
-        if (t) t.setAttribute('aria-expanded', 'false');
-      });
-      if (willExpand) {
-        card.classList.add('is-expanded');
-        toggle.setAttribute('aria-expanded', 'true');
-        setTimeout(function () {
-          card.scrollIntoView({ behavior: reducedMotion ? 'auto' : 'smooth', inline: 'center', block: 'nearest' });
-        }, 60);
-      }
-    });
-  });
 })();
 </script>
 
