@@ -1,0 +1,681 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Architekti a projektanti: méně sporů a přepracování | Plexima</title>
+<meta name="description" content="Inteligentní paměť projektu propojí zadání, rozhodnutí, změny a kontrolní dny, aby u každé úpravy zůstal dohledatelný její důvod.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@700;800&family=Open+Sans:wght@400;600;700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --yellow: #FEC710;
+  --yellow-hover: #EAB70F;
+  --blue: #6EC1E4;
+  --ink: #1F1741;
+  --ink-soft: #30265E;
+  --white: #FFFFFF;
+  --soft: #F7F8F9;
+  --border: #E6E6E6;
+  --muted: #54595F;
+  --caption: #7A7A7A;
+  --font-heading: "Nunito", system-ui, -apple-system, "Segoe UI", sans-serif;
+  --font-body: "Open Sans", system-ui, -apple-system, "Segoe UI", sans-serif;
+  --radius-sm: 5px;
+  --radius-md: 10px;
+  --radius-lg: 20px;
+  --shadow-sm: 0 2px 8px rgba(31, 23, 65, 0.08);
+  --shadow-md: 0 10px 30px -10px rgba(0, 0, 0, 0.15);
+  --shadow-lg: 0 18px 48px -18px rgba(31, 23, 65, 0.22);
+  --container: 1200px;
+  --measure: 740px;
+  --gutter: clamp(20px, 4vw, 56px);
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+
+body {
+  font: 400 18px/1.7 var(--font-body);
+  color: var(--ink);
+  background: var(--white);
+  -webkit-font-smoothing: antialiased;
+}
+
+h1, h2, h3, h4 { font-family: var(--font-heading); font-weight: 700; }
+img { max-width: 100%; }
+
+.container {
+  max-width: var(--container);
+  margin: 0 auto;
+  padding-left: var(--gutter);
+  padding-right: var(--gutter);
+}
+.col { max-width: var(--measure); margin-left: auto; margin-right: auto; }
+
+/* ---------- Buttons ---------- */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  min-height: 48px;
+  padding: 12px 24px;
+  border-radius: var(--radius-sm);
+  font: 700 16px/1.2 var(--font-body);
+  text-decoration: none;
+  cursor: pointer;
+  transition: background .18s ease, transform .18s ease, border-color .18s ease;
+  border: 1px solid transparent;
+}
+.btn-primary { background: var(--yellow); color: var(--ink); border-color: var(--yellow); }
+.btn-primary:hover { background: var(--yellow-hover); transform: translateY(-1px); }
+.btn-ghost { background: var(--white); color: var(--ink); border-color: var(--ink); }
+.btn-ghost:hover { background: var(--soft); }
+.btn:focus-visible { outline: 2px solid var(--blue); outline-offset: 2px; }
+
+/* ---------- Header ---------- */
+.site-header {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  background: rgba(255,255,255,.92);
+  backdrop-filter: blur(10px);
+  border-bottom: 1px solid transparent;
+  transition: border-color .25s ease, box-shadow .25s ease;
+}
+.site-header.is-scrolled { border-bottom-color: var(--border); box-shadow: var(--shadow-sm); }
+.header-inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 76px;
+  gap: 20px;
+}
+.wordmark { display: inline-flex; align-items: center; text-decoration: none; }
+.wordmark img { height: 28px; width: auto; display: block; }
+.main-nav { display: flex; align-items: center; gap: 4px; }
+.main-nav a {
+  font: 600 15px/1 var(--font-body);
+  color: var(--ink);
+  text-decoration: none;
+  padding: 10px 14px;
+  border-radius: var(--radius-sm);
+  border-bottom: 2px solid transparent;
+  transition: background .15s ease;
+}
+.main-nav a:hover { background: var(--soft); }
+.main-nav a.is-active { border-bottom-color: var(--yellow); }
+.header-cta { flex-shrink: 0; }
+.header-cta .btn { min-height: 42px; padding: 10px 18px; font-size: 15px; }
+.nav-toggle {
+  display: none;
+  width: 44px; height: 44px;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  background: var(--white);
+  cursor: pointer;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  gap: 5px;
+}
+.nav-toggle span { display: block; width: 18px; height: 2px; background: var(--ink); }
+
+/* ---------- Breadcrumb ---------- */
+.crumb {
+  padding-top: 26px;
+  font: 600 13.5px/1 var(--font-body);
+  color: var(--caption);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+.crumb a { color: var(--muted); text-decoration: none; }
+.crumb a:hover { color: var(--ink); }
+.crumb span[aria-current] { color: var(--ink); }
+
+/* ---------- Hero ---------- */
+.case-hero { padding: clamp(40px, 5vw, 68px) 0 0; }
+.scenario-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 7px 15px;
+  border-radius: 999px;
+  background: var(--yellow);
+  font: 700 12.5px/1 var(--font-body);
+  letter-spacing: .04em;
+  color: var(--ink);
+  margin-bottom: 22px;
+}
+.case-hero h1 {
+  font-size: clamp(32px, 4.2vw, 50px);
+  line-height: 1.13;
+  letter-spacing: -0.015em;
+}
+.h1-brk { display: none; }
+@media (min-width: 700px) {
+  .h1-brk { display: inline; }
+}
+.case-hero .lead {
+  font-size: clamp(17px, 1.9vw, 20px);
+  line-height: 1.65;
+  color: var(--muted);
+  margin-top: 22px;
+}
+.case-hero .lead + .lead { margin-top: 16px; }
+.hero-figure { margin-top: clamp(28px, 3.5vw, 42px); }
+.hero-figure img {
+  display: block;
+  width: 100%;
+  height: auto;
+  border-radius: var(--radius-lg);
+}
+.hero-cta { margin-top: 30px; }
+
+/* ---------- Facts: at-a-glance ---------- */
+.facts {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: clamp(14px, 1.6vw, 20px);
+  margin-top: clamp(30px, 3.6vw, 42px);
+}
+.facts > div {
+  position: relative;
+  border-radius: var(--radius-md);
+  padding: clamp(24px, 2.4vw, 30px);
+  background: var(--ink);
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  transition: transform .2s ease, box-shadow .2s ease;
+}
+.facts > div::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 4px;
+  background: var(--yellow);
+}
+.facts > div:hover { transform: translateY(-3px); box-shadow: var(--shadow-lg); }
+.facts dt {
+  font: 700 10.5px/1 var(--font-body);
+  letter-spacing: .14em;
+  text-transform: uppercase;
+  color: var(--yellow);
+  margin-bottom: 13px;
+}
+.facts dd {
+  font: 700 clamp(15.5px, 1.4vw, 16.5px)/1.45 var(--font-heading);
+  color: var(--white);
+}
+
+/* ---------- Article ---------- */
+.case-body { padding: clamp(56px, 7vw, 92px) 0 clamp(48px, 6vw, 80px); }
+.prose > * + * { margin-top: 20px; }
+.prose h2 {
+  font-size: clamp(25px, 2.8vw, 32px);
+  line-height: 1.25;
+  margin-top: clamp(56px, 6vw, 84px);
+}
+.prose h2::after {
+  content: "";
+  display: block;
+  width: 54px;
+  height: 3px;
+  border-radius: 2px;
+  background: var(--yellow);
+  margin-top: 16px;
+}
+.prose h2:first-child { margin-top: 0; }
+.prose h3 { font-size: 19px; line-height: 1.4; margin-top: 34px; }
+.prose p { color: var(--muted); font-size: 17.5px; line-height: 1.8; }
+.prose p strong { color: var(--ink); font-weight: 700; }
+.prose .intro { font-size: 19px; color: var(--ink); line-height: 1.7; }
+
+/* Bulleted list */
+.bullets { list-style: none; margin-top: 20px; display: grid; gap: 13px; }
+.bullets li {
+  position: relative;
+  padding-left: 26px;
+  color: var(--muted);
+  font-size: 17px;
+  line-height: 1.7;
+}
+.bullets li::before {
+  content: "";
+  position: absolute;
+  left: 0; top: 12px;
+  width: 12px; height: 3px;
+  border-radius: 2px;
+  background: var(--yellow);
+}
+
+/* Steps (phases) */
+.steps { list-style: none; margin-top: 34px; counter-reset: step; }
+.steps li { position: relative; padding-left: 54px; padding-bottom: 30px; }
+.steps li:last-child { padding-bottom: 0; }
+.steps li::before {
+  counter-increment: step;
+  content: counter(step);
+  position: absolute;
+  left: 0; top: -2px;
+  width: 32px; height: 32px;
+  border-radius: 50%;
+  background: var(--ink);
+  color: #fff;
+  font: 800 13px/1 var(--font-heading);
+  display: flex; align-items: center; justify-content: center;
+}
+.steps li:not(:last-child)::after {
+  content: "";
+  position: absolute;
+  left: 16px; top: 38px; bottom: 4px;
+  width: 1px;
+  background: var(--border);
+}
+.steps h3 { font-size: 17.5px; line-height: 1.4; margin: 0 0 6px; }
+.steps p { font-size: 16.5px; line-height: 1.7; color: var(--muted); margin: 0; }
+
+/* Yellow claim */
+.prose .claim {
+  margin-top: 28px;
+  padding: 2px 0 2px 22px;
+  border-left: 3px solid var(--yellow);
+  font: 700 clamp(18px, 2vw, 21px)/1.55 var(--font-heading);
+  color: var(--ink);
+}
+
+/* Note / callout */
+.note {
+  margin-top: 26px;
+  padding: clamp(24px, 3vw, 32px);
+  background: var(--soft);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+}
+.note-label {
+  display: block;
+  font: 700 10.5px/1 var(--font-body);
+  letter-spacing: .12em;
+  text-transform: uppercase;
+  color: var(--caption);
+  margin-bottom: 16px;
+}
+.note ul { list-style: none; display: grid; gap: 12px; }
+.note ul li {
+  position: relative;
+  padding-left: 26px;
+  color: var(--ink);
+  font-size: 16.5px;
+  line-height: 1.6;
+  font-weight: 600;
+}
+.note ul li::before {
+  content: "";
+  position: absolute;
+  left: 0; top: 10px;
+  width: 12px; height: 3px;
+  border-radius: 2px;
+  background: var(--blue);
+}
+
+/* Inline CTA */
+.inline-cta { margin-top: 32px; }
+
+/* ---------- Closing ---------- */
+.case-foot {
+  position: relative;
+  background: var(--soft);
+  border-top: 1px solid var(--border);
+  border-bottom: 1px solid var(--border);
+  padding: clamp(56px, 7vw, 88px) 0;
+}
+.case-foot::before {
+  content: "";
+  position: absolute;
+  top: -1px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 72px;
+  height: 4px;
+  border-radius: 0 0 3px 3px;
+  background: var(--yellow);
+}
+.foot-inner { text-align: center; }
+.foot-inner h2 { font-size: clamp(26px, 3.2vw, 36px); line-height: 1.22; max-width: 640px; margin: 0 auto; }
+.foot-inner p { color: var(--muted); margin: 16px auto 0; max-width: 540px; font-size: 17px; }
+.foot-actions { display: flex; gap: 14px; flex-wrap: wrap; justify-content: center; margin-top: 32px; }
+
+/* ---------- Footer ---------- */
+.site-footer {
+  background: var(--ink);
+  color: rgba(255,255,255,.7);
+  padding: 56px 0 40px;
+  font-size: 14px;
+}
+.footer-top { display: flex; justify-content: space-between; align-items: center; gap: 32px; flex-wrap: wrap; }
+.footer-logo { display: inline-flex; }
+.footer-logo img { height: 28px; display: block; filter: grayscale(1) brightness(0) invert(1); }
+.footer-links { display: grid; grid-template-rows: repeat(3, auto); grid-auto-flow: column; gap: 10px 48px; justify-content: end; }
+.footer-links a { color: rgba(255,255,255,.7); text-decoration: none; }
+.footer-links a:hover { color: #fff; text-decoration: underline; text-decoration-color: var(--yellow); text-underline-offset: 4px; }
+.footer-desc { max-width: 420px; line-height: 1.6; margin-top: 20px; }
+.footer-bottom {
+  margin-top: 32px;
+  padding-top: 24px;
+  border-top: 1px solid rgba(255,255,255,.12);
+  display: flex;
+  justify-content: space-between;
+  gap: 16px;
+  flex-wrap: wrap;
+  font-size: 13px;
+  color: rgba(255,255,255,.5);
+}
+.footer-bottom a { color: rgba(255,255,255,.5); }
+.footer-bottom a:hover { color: #fff; }
+
+/* ---------- Motion ---------- */
+.rise { opacity: 0; transform: translateY(14px); animation: rise .7s cubic-bezier(.22,.61,.36,1) forwards; }
+.rise:nth-child(1) { animation-delay: .05s; }
+.rise:nth-child(2) { animation-delay: .13s; }
+.rise:nth-child(3) { animation-delay: .21s; }
+.rise:nth-child(4) { animation-delay: .29s; }
+.rise:nth-child(5) { animation-delay: .37s; }
+@keyframes rise { to { opacity: 1; transform: translateY(0); } }
+
+.reveal { opacity: 0; transform: translateY(16px); transition: opacity .6s ease, transform .6s ease; }
+.reveal.is-visible { opacity: 1; transform: translateY(0); }
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  *, *::before, *::after { animation: none !important; transition: none !important; }
+  .reveal, .rise { opacity: 1; transform: none; }
+}
+
+/* ---------- Responsive ---------- */
+@media (max-width: 1080px) {
+  .main-nav a { padding: 10px 10px; font-size: 14.5px; }
+}
+@media (max-width: 760px) {
+  .facts { grid-template-columns: 1fr; }
+}
+@media (max-width: 768px) {
+  .main-nav {
+    display: none;
+    position: absolute;
+    top: 76px;
+    left: 0; right: 0;
+    background: var(--white);
+    border-bottom: 1px solid var(--border);
+    box-shadow: var(--shadow-md);
+    flex-direction: column;
+    align-items: stretch;
+    padding: 12px var(--gutter) 20px;
+  }
+  .main-nav.is-open { display: flex; }
+  .main-nav a { padding: 14px 10px; }
+  .nav-toggle { display: flex; }
+  .header-cta { display: none; }
+}
+</style>
+</head>
+<body>
+
+<header class="site-header" id="top">
+  <div class="container header-inner">
+    <a href="/" class="wordmark"><img src="Fotky/Logo-Plexima.webp" alt="Plexima"></a>
+    <button class="nav-toggle" aria-label="Otevřít menu" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
+    <nav class="main-nav" aria-label="Hlavní navigace">
+      <a href="/#jak-to-funguje">Jak to funguje</a>
+      <a href="co-je-omi">Co je Omi</a>
+      <a href="priklady" class="is-active" aria-current="page">Příklady z praxe</a>
+    </nav>
+    <div class="header-cta">
+      <button type="button" class="btn btn-primary" data-open="modal-konzultace">Domluvit konzultaci</button>
+    </div>
+  </div>
+</header>
+
+<div class="container">
+  <nav class="crumb col" aria-label="Drobečková navigace">
+    <a href="/">Úvod</a>
+    <span aria-hidden="true">/</span>
+    <a href="priklady?tab=profese">Scénáře podle profese</a>
+    <span aria-hidden="true">/</span>
+    <span aria-current="page">Architekti a projektanti</span>
+  </nav>
+</div>
+
+<article>
+
+<section class="case-hero">
+  <div class="container">
+    <div class="col">
+      <span class="scenario-badge rise">Architekti a projektanti</span>
+      <h1 class="rise">Méně sporů a přepracování <br class="h1-brk">díky dohledatelným rozhodnutím</h1>
+      <p class="lead rise">U každé změny dohledáte původní zadání, důvod rozhodnutí i to, kdo se na čem domluvil. Nemusíte to rekonstruovat z e-mailů a zápisů.</p>
+
+      <figure class="hero-figure rise">
+        <img src="Fotky/projektant.png" alt="Dva členové projektového týmu kontrolují výkres na stavbě" loading="lazy">
+      </figure>
+
+      <dl class="facts">
+        <div>
+          <dt>Při zadání</dt>
+          <dd>Požadavky i jejich důvody pohromadě</dd>
+        </div>
+        <div>
+          <dt>Během projektu</dt>
+          <dd>Každá změna má dohledatelný důvod</dd>
+        </div>
+        <div>
+          <dt>Při realizaci</dt>
+          <dd>Méně sporů a přepracování</dd>
+        </div>
+      </dl>
+    </div>
+  </div>
+</section>
+
+<section class="case-body">
+  <div class="container">
+    <div class="prose col">
+      <h2>1. Zadání vzniká při první schůzce s klientem</h2>
+      <p class="intro">Manželský pár přichází za architektem s plánem postavit rodinný dům. Má základní představu o velikosti, rozpočtu a vzhledu, ale během první schůzky se ukáže, že za jednotlivými požadavky stojí další potřeby.</p>
+      <p>Klienti během rozhovoru popíšou:</p>
+      <ul class="bullets">
+        <li>chtějí velký společný prostor propojený se zahradou,</li>
+        <li>jeden z nich pracuje většinu týdne z domova,</li>
+        <li>potřebují klidnou pracovnu oddělenou od obytné části,</li>
+        <li>mají dvě děti a počítají s tím, že se jejich potřeby budou měnit,</li>
+        <li>chtějí dostatek úložných prostor,</li>
+        <li>nechtějí trávit většinu času údržbou domu,</li>
+        <li>část rozpočtu si potřebují ponechat na vybavení interiéru,</li>
+        <li>chtějí se nastěhovat před začátkem dalšího školního roku.</li>
+      </ul>
+      <p>Inteligentní paměť projektu zachytí nejen jednotlivé místnosti a rozměry, ale také důvody požadavků.</p>
+      <p>Pracovna není pouze další pokoj. Je důležitá kvůli pravidelné práci z domova. Propojení se zahradou souvisí s tím, jak chce rodina trávit společný čas. Část rozpočtu musí zůstat volná, protože klienti nechtějí dokončit stavbu bez prostředků na základní vybavení.</p>
+      <p>Architekt tak od první schůzky nepracuje pouze se seznamem místností. Zná priority, očekávaný způsob používání domu i omezení, podle kterých budou klienti posuzovat další návrhy.</p>
+      <p>Po kontrole může z rozhovoru vzniknout strukturované zadání, seznam otevřených otázek a úkoly pro další fázi projektu.</p>
+
+      <h2>2. První návrh ukáže skutečné priority</h2>
+      <p>Architekt připraví první variantu návrhu. Dům splňuje požadovanou velikost a základní dispoziční program, ale při společném projednání se ukážou nové souvislosti.</p>
+      <p>Velký obytný prostor omezuje velikost pracovny. Technická místnost zabírá část prostoru, který klienti původně očekávali pro skladování. Umístění domu na pozemku vytváří dobré propojení se zahradou, ale mění pohled z některých místností.</p>
+      <p>Během projednání klienti upřesní:</p>
+      <ul class="bullets">
+        <li>samostatná pracovna je pevný požadavek,</li>
+        <li>velikost obytného prostoru lze mírně zmenšit,</li>
+        <li>propojení se zahradou zůstává důležitější než původně požadovaný výhled,</li>
+        <li>část úložných prostor lze přesunout mimo hlavní obytnou část,</li>
+        <li>druhá koupelna je příjemná, ale není nezbytná,</li>
+        <li>některé prvky lze odložit do pozdější etapy,</li>
+        <li>rozpočet zůstává důležitější než zachování všech původních přání.</li>
+      </ul>
+      <p>Inteligentní paměť propojí každé nové rozhodnutí s původním zadáním. U změny je dohledatelné:</p>
+      <ul class="bullets">
+        <li>co se mění,</li>
+        <li>proč změna vznikla,</li>
+        <li>který původní požadavek ovlivňuje,</li>
+        <li>jakou prioritu klient změnou chrání,</li>
+        <li>kdo se změnou souhlasil,</li>
+        <li>které otázky zůstávají otevřené.</li>
+      </ul>
+      <p>Architekt nebo projektant zkontroluje závěry a rozhodne, které informace se mají uložit do projektové dokumentace nebo projektového systému.</p>
+
+      <p class="claim">Udržte každé rozhodnutí spojené s jeho důvodem. Omezíte změny naslepo, spory a drahé přepracování.</p>
+
+      <h2>3. Změny přicházejí v průběhu projektu</h2>
+      <p>Během dalšího zpracování projektu přicházejí nové požadavky od klientů, projektantů profesí i budoucích dodavatelů.</p>
+      <p>Klienti zjistí, že budou z domova pravděpodobně pracovat oba. Projektant technických zařízení upozorní na prostorové nároky některých rozvodů. Dodavatel navrhne jiný materiál kvůli dostupnosti a termínu dodání.</p>
+      <p>V projektu se postupně řeší:</p>
+      <ul class="bullets">
+        <li>zda má pracovna umožnit práci dvou lidí,</li>
+        <li>jak změna ovlivní dispozici sousedních místností,</li>
+        <li>kudy povedou technické rozvody,</li>
+        <li>zda navržený materiál splní požadované vlastnosti,</li>
+        <li>jaká varianta odpovídá stanovenému rozpočtu,</li>
+        <li>které změny ovlivní termín,</li>
+        <li>kdo musí připravit aktualizovaný podklad,</li>
+        <li>kdo má konečnou variantu potvrdit.</li>
+      </ul>
+      <p>Každá změna se spojí s původním požadavkem a předchozími rozhodnutími. Projektový tým tak nevidí pouze novou verzi výkresu. Ví také, proč vznikla a které související části projektu je potřeba znovu ověřit.</p>
+      <p>Z projektové schůzky může inteligentní paměť připravit návrh změnového záznamu:</p>
+      <ul class="bullets">
+        <li>zdroj požadavku,</li>
+        <li>důvod změny,</li>
+        <li>dotčenou část projektu,</li>
+        <li>projednávané varianty,</li>
+        <li>zvolený další postup,</li>
+        <li>otevřené dopady,</li>
+        <li>odpovědné osoby,</li>
+        <li>domluvené termíny.</li>
+      </ul>
+      <p>Odpovědný projektant záznam zkontroluje. Systém sám neposuzuje technickou správnost ani dopad změny do ceny nebo harmonogramu.</p>
+      <p>Po kontrole se vybrané závěry mohou přenést do projektového systému, seznamu úkolů nebo evidence změn.</p>
+
+      <h2>4. Realizace navazuje na celou historii rozhodnutí</h2>
+      <p>Během realizace se na kontrolním dni objeví otázka, zda lze posunout jednu z příček a zvětšit sousední prostor. Samotný požadavek působí jednoduše, ale navazuje na několik dřívějších rozhodnutí.</p>
+      <p>Projektový tým má připravené:</p>
+      <ul class="bullets">
+        <li>proč byla místnost původně navržena v dané velikosti,</li>
+        <li>jak souvisí s požadavkem na práci z domova,</li>
+        <li>které technické rozvody daným místem vedou,</li>
+        <li>jaké varianty byly dříve projednány,</li>
+        <li>kterou variantu klient potvrdil,</li>
+        <li>jaké otázky je potřeba před změnou ověřit,</li>
+        <li>kdo musí případnou změnu odborně posoudit.</li>
+      </ul>
+      <p>Architekt, projektant a další odpovědní účastníci mohou změnu posoudit v celém kontextu. Nemusí rekonstruovat předchozí rozhodnutí z několika e-mailových vláken a zápisů ze schůzek.</p>
+      <p>Z kontrolního dne vznikne návrh přehledu:</p>
+      <ul class="bullets">
+        <li>zjištěný stav,</li>
+        <li>nový požadavek,</li>
+        <li>důvod požadavku,</li>
+        <li>dotčené části projektu,</li>
+        <li>odpovědné osoby,</li>
+        <li>úkoly k ověření,</li>
+        <li>potřebné schválení,</li>
+        <li>termín dalšího rozhodnutí.</li>
+      </ul>
+      <p>Odpovědný pracovník přehled zkontroluje a rozhodne, které body se mají uložit do projektového systému nebo odeslat jednotlivým účastníkům.</p>
+      <p>Inteligentní paměť sama změnu neschvaluje. Nenahrazuje projektovou dokumentaci, autorský dozor, technický dozor ani odpovědnost autorizovaných osob.</p>
+
+      <h2>Projekt si pamatuje, proč se rozhodlo právě takto</h2>
+      <p>Před další projektovou schůzkou nebo kontrolním dnem může mít tým připravené:</p>
+      <ul class="bullets">
+        <li>původní požadavky klienta,</li>
+        <li>důvody jednotlivých priorit,</li>
+        <li>schválené varianty,</li>
+        <li>změny provedené během projektu,</li>
+        <li>zdroje a důvody změnových požadavků,</li>
+        <li>otevřené technické otázky,</li>
+        <li>odpovědné osoby a domluvené termíny,</li>
+        <li>rozhodnutí z předchozích schůzek,</li>
+        <li>návaznosti mezi jednotlivými částmi projektu.</li>
+      </ul>
+      <p>Inteligentní paměť pomáhá udržet návaznost mezi zadáním, návrhem, projektováním a realizací. Důležité rozhodnutí nezůstane pouze ve vzpomínce jednoho člověka nebo v obtížně dohledatelném e-mailu.</p>
+      <p>Po schůzce může systém připravit návrh zápisu, seznam úkolů a změnový záznam. Odpovědný člen týmu vše zkontroluje a rozhodne, co se uloží do projektového systému a co se rozešle účastníkům.</p>
+      <p>Konkrétní způsob propojení závisí na nástrojích, které projektový tým používá. Může využít dostupné API, standardní integraci, podporovaný import nebo jinou ověřenou cestu.</p>
+      <p>Inteligentní paměť sama neurčuje technické řešení, nepočítá cenu ani termín, neschvaluje změnu a nenahrazuje smluvní nebo projektovou dokumentaci. Pomáhá zachovat informace, důvody, návaznosti a odpovědnosti, které odborný tým dále posoudí.</p>
+      <p>Součástí nasazení je také jasné informování o nahrávání, nastavení přístupů a určení, které projektové rozhovory a informace se mají uchovávat.</p>
+    </div>
+  </div>
+</section>
+
+</article>
+
+<section class="case-foot">
+  <div class="container foot-inner">
+    <h2>Chcete vidět, jak by to fungovalo u vás?</h2>
+    <p>Během 60 minut projdeme vaše projektové schůzky, kontrolní dny, změnové řízení a používané systémy. Řekneme otevřeně, kde má inteligentní paměť smysl a kde ne.</p>
+    <div class="foot-actions">
+      <button type="button" class="btn btn-primary" data-open="modal-konzultace">Domluvit konzultaci</button>
+      <a href="/#kontakt" class="btn btn-ghost">Zjistit, kde začít</a>
+    </div>
+  </div>
+</section>
+
+
+<footer class="site-footer">
+  <div class="container">
+    <div class="footer-top">
+      <a href="/" class="footer-logo"><img src="Fotky/Logo-Plexima.webp" alt="Plexima"></a>
+      <nav class="footer-links" aria-label="Patičková navigace">
+        <a href="/#jak-to-funguje">Jak to funguje</a>
+        <a href="co-je-omi">Co je Omi</a>
+        <a href="/#implementace">Nasazení</a>
+        <a href="priklady" aria-current="page">Příklady z praxe</a>
+        <a href="/#faq">FAQ</a>
+        <a href="kontakt">Kontakt</a>
+      </nav>
+    </div>
+    <p class="footer-desc">Propojujeme inteligentní paměť s firemními systémy, aby se rozhovory měnily na využitelné informace, úkoly, reporty a CRM záznamy.</p>
+    <div class="footer-bottom">
+      <span>© 2026 Plexima. Všechna práva vyhrazena.</span>
+      <span><a href="ochrana-osobnich-udaju">Ochrana osobních údajů</a> · <a href="/#faq">Bezpečnost a pravidla nahrávání</a></span>
+    </div>
+  </div>
+</footer>
+
+<script>
+(function () {
+  var header = document.querySelector('.site-header');
+  var onScroll = function () { header.classList.toggle('is-scrolled', window.scrollY > 8); };
+  window.addEventListener('scroll', onScroll, { passive: true });
+  onScroll();
+
+  var toggle = document.querySelector('.nav-toggle');
+  var nav = document.querySelector('.main-nav');
+  toggle.addEventListener('click', function () {
+    var open = nav.classList.toggle('is-open');
+    toggle.setAttribute('aria-expanded', open);
+  });
+  nav.addEventListener('click', function (e) {
+    if (e.target.closest('a')) nav.classList.remove('is-open');
+  });
+
+  var reveals = document.querySelectorAll('.reveal');
+  if ('IntersectionObserver' in window) {
+    var io = new IntersectionObserver(function (entries) {
+      entries.forEach(function (entry) {
+        if (entry.isIntersecting) { entry.target.classList.add('is-visible'); io.unobserve(entry.target); }
+      });
+    }, { threshold: 0.15, rootMargin: '0px 0px -40px' });
+    reveals.forEach(function (el) { io.observe(el); });
+  } else {
+    reveals.forEach(function (el) { el.classList.add('is-visible'); });
+  }
+})();
+</script>
+
+<script src="/assets/konzultace.js" defer></script>
+</body>
+</html>

@@ -1,0 +1,22 @@
+Deck: Plexima x OMI one-pager
+Audience: internal Plexima meeting / product strategy discussion
+Language: Czech
+
+Sources:
+1. User-provided direction in chat:
+   - Product: OMI recording device + Plexima automation layer.
+   - Need: simplify into one-pager / 1-2 slides.
+   - Focus: strategy and positioning.
+   - Add: negotiate partnership with OMI.
+   - Remove: obchodni rozhovor / sales conversation use-case.
+   - Add: seznam firem as an output.
+2. Local note:
+   - /Users/powerfuleight/Workspace/AI-Brain/03. Business/Plexima/plexima-omi-context.md
+   - Used for: Plexima positioning as automation/system implementation partner, OMI as swappable hardware layer, workstreams, risks, value layer.
+3. Official Plexima website:
+   - https://plexima.io/
+   - Accessed 2026-06-15 via web tool.
+   - Used for: brand language around process automation, CRM/ERP implementation, no-code/low-code, consultations, "magical automation" style, clean B2B service framing.
+
+No external metrics, logos, or customer marks were imported.
+The deck uses editable text and shapes only.

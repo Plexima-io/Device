@@ -1,15 +1,50 @@
-# Ignore everything by default, then allow only the web itself
+# Ignore everything by default, then allow the public web and
+# canonical project documentation/artifacts. Client data stays local.
 /*
 
 !/index.html
+!/co-je-omi.html
 !/dotaznik.html
 !/priklady.html
 !/priklady-prospirio.html
+!/kontakt.html
+!/ochrana-osobnich-udaju.html
+!/scenar-financni-poradci.html
+!/scenar-realitni-maklery.html
+!/scenar-veterinari.html
+!/scenar-architekti-projektanti.html
+!/scenar-autoservisy.html
+!/scenar-danovi-poradci.html
+!/scenar-lekari-kliniky.html
+!/scenar-psychologove.html
 !/api/
+!/api/**
 !/Fotky/
+!/Fotky/**
+!/AGENTS.md
+!/README.md
+!/.hermes.md
+!/plexima-design-system.md
+!/docs/
+!/docs/**
+!/design/
+!/design/**
+!/artifacts/
+!/artifacts/**
 !/.vercelignore
 !/.gitignore
 !/vercel.json
 
-# Never track OS junk, even inside allowed folders
+# Local/private/generated content
+.env
+.env.*
+Klienti/
+.firecrawl/
+node_modules/
+dist/
+build/
+coverage/
+*.log
+
+# Never track OS junk, even inside allowed folders.
 **/.DS_Store

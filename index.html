@@ -3,8 +3,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Plexima × Omi. Rozhovory, které se samy promění v úkoly, reporty a CRM záznamy</title>
-<meta name="description" content="Nositelné AI zařízení Omi zachytí schůzky a návštěvy. Plexima z nich automaticky udělá úkoly, reporty a CRM záznamy v systémech, které už používáte.">
+<title>Inteligentní paměť pro pracovní rozhovory | Omi</title>
+<meta name="description" content="Zachyťte důležité informace z rozhovorů, uchovejte jejich kontext a napojte je na CRM, úkoly a další firemní systémy.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@700;800&family=Open+Sans:wght@400;600;700&display=swap" rel="stylesheet">
@@ -110,8 +110,8 @@ section { padding: var(--section-y) 0; }
   border-color: var(--border);
 }
 .btn-ghost:hover { background: var(--soft); border-color: var(--blue); }
-a.btn-ghost[href="dotaznik"] { background: var(--white); border-color: var(--ink); }
-a.btn-ghost[href="dotaznik"]:hover { background: var(--soft); border-color: var(--ink); }
+a.btn-ghost[href^="dotaznik"] { background: var(--white); border-color: var(--ink); }
+a.btn-ghost[href^="dotaznik"]:hover { background: var(--soft); border-color: var(--ink); }
 .btn:focus-visible { outline: 2px solid var(--blue); outline-offset: 2px; }
 
 /* ---------- Header ---------- */
@@ -157,8 +157,8 @@ a.btn-ghost[href="dotaznik"]:hover { background: var(--soft); border-color: var(
 }
 .main-nav a:hover { background: var(--soft); }
 .main-nav a.is-active { border-bottom-color: var(--yellow); }
-.nav-sep { width: 1px; height: 22px; background: var(--border); margin: 0 8px; flex-shrink: 0; }
 .header-cta { flex-shrink: 0; }
+.header-cta .btn { min-height: 42px; padding: 10px 18px; font-size: 15px; }
 .nav-toggle {
   display: none;
   width: 44px; height: 44px;
@@ -341,7 +341,35 @@ a.btn-ghost[href="dotaznik"]:hover { background: var(--soft); border-color: var(
 .pain-card h3 { font-size: 20px; line-height: 1.3; margin-bottom: 10px; }
 .pain-card p { font-size: 15px; line-height: 1.6; color: var(--muted); }
 
+/* ---------- Textové odkazy v sekcích ---------- */
+.section-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  margin-top: 18px;
+  font: 600 16px/1.4 var(--font-body);
+  color: var(--ink);
+  text-decoration: underline;
+  text-decoration-color: var(--yellow);
+  text-decoration-thickness: 2px;
+  text-underline-offset: 5px;
+}
+.section-link svg { transition: transform .18s ease; }
+.section-link:hover { color: var(--ink-soft); }
+.section-link:hover svg { transform: translateX(3px); }
+.section-link:focus-visible { outline: 2px solid var(--blue); outline-offset: 3px; border-radius: 3px; }
+
 /* ---------- Skrytá cena ---------- */
+.cost-actions {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 12px;
+  margin-top: clamp(24px, 3vw, 32px);
+}
+.cost-actions .btn svg { transition: transform .18s ease; }
+.cost-actions .btn:hover svg { transform: translateX(3px); }
+.cost-note { font-size: 14px; color: var(--caption); }
 .cost-grid {
   display: grid;
   grid-template-columns: 46fr 54fr;
@@ -463,7 +491,7 @@ input[type="range"]:focus-visible { outline: 2px solid var(--blue); outline-offs
 }
 .flip-item h3 { font-size: 21px; margin-bottom: 6px; color: var(--ink); }
 .flip-item p { font-size: 15px; line-height: 1.65; color: var(--muted); }
-.flip-visual img { width: 100%; height: auto; display: block; }
+.flip-visual img { width: 80%; height: auto; display: block; margin: 38px auto 0; }
 
 /* ---------- Jak to funguje ---------- */
 .how-tabs {
@@ -598,38 +626,39 @@ input[type="range"]:focus-visible { outline: 2px solid var(--blue); outline-offs
   background: radial-gradient(circle at 40% 35%, #26265A, #17173A);
   display: flex; align-items: center; justify-content: center;
 }
-.proc-title { position: absolute; font: 700 17px/1 Inter, system-ui, sans-serif; color: #17173A; }
-.proc-sub { position: absolute; font: 500 13px/1 Inter, system-ui, sans-serif; color: #8A90A2; }
+.proc-title { position: absolute; font: 700 13px/1 Inter, system-ui, sans-serif; letter-spacing: .09em; color: #17173A; }
+.proc-sub { position: absolute; font: 500 12.5px/1 Inter, system-ui, sans-serif; color: #8A90A2; }
 .proc-divider { position: absolute; height: 1px; background: #ECEEF3; }
 .proc-avatar {
   position: absolute; border-radius: 50%; color: #fff;
   font: 700 11px/1 Inter, system-ui, sans-serif;
   display: flex; align-items: center; justify-content: center;
 }
-.proc-highlight { position: absolute; border-radius: 9px; background: rgba(77,171,247,.10); pointer-events: none; }
-.proc-text-clip { position: absolute; overflow: hidden; white-space: nowrap; }
-.proc-text-clip span { display: inline-block; overflow: hidden; white-space: nowrap; vertical-align: top; font: 500 13.5px/1.2 Inter, system-ui, sans-serif; color: #2B2B47; }
-.proc-caret { display: inline-block; width: 1.5px; height: 15px; background: #4DABF7; vertical-align: top; margin-left: 1px; }
-.proc-checkbox {
-  position: absolute; width: 22px; height: 22px; border-radius: 7px; box-sizing: border-box;
-  display: flex; align-items: center; justify-content: center;
+.proc-name { position: absolute; font: 600 11.5px/1 Inter, system-ui, sans-serif; letter-spacing: .03em; color: #8A90A2; }
+.proc-line { position: absolute; display: flex; overflow: hidden; }
+.proc-line > span {
+  display: inline-block; overflow: hidden; white-space: nowrap;
+  font: 500 14px/22px Inter, system-ui, sans-serif; color: #2B2B47;
 }
-.proc-task-title { position: absolute; font: 600 15px/1 Inter, system-ui, sans-serif; color: #2B2B47; white-space: nowrap; }
-.proc-task-date { position: absolute; display: flex; align-items: center; gap: 6px; font: 500 12.5px/1 Inter, system-ui, sans-serif; color: #8A90A2; }
-.proc-owner { position: absolute; display: flex; align-items: center; gap: 7px; }
-.proc-owner-avatar {
-  width: 20px; height: 20px; border-radius: 50%; color: #fff;
-  font: 700 10px/1 Inter, system-ui, sans-serif;
-  display: flex; align-items: center; justify-content: center;
+.proc-key { padding: 2px 4px; margin: 0 -4px; border-radius: 5px; }
+.proc-block {
+  position: absolute; border-radius: 14px; box-sizing: border-box;
+  padding: 16px 18px; display: flex; flex-direction: column; gap: 9px;
 }
-.proc-owner-name { font: 600 12.5px/1 Inter, system-ui, sans-serif; color: #3A3A6B; }
+.proc-block-row { display: flex; align-items: center; gap: 8px; }
+.proc-block-icon {
+  width: 24px; height: 24px; border-radius: 7px; background: #fff;
+  display: flex; align-items: center; justify-content: center; flex: 0 0 auto;
+}
+.proc-kind { font: 700 11px/1 Inter, system-ui, sans-serif; letter-spacing: .1em; }
+.proc-block-text { font: 600 15px/21px Inter, system-ui, sans-serif; color: #17173A; text-wrap: pretty; }
 .proc-pill {
-  position: absolute; display: flex; align-items: center; gap: 6px;
-  padding: 5px 10px; border-radius: 9px; background: #fff; border: 1px solid #ECEEF3;
-  box-shadow: 0 8px 20px rgba(23,23,58,.14); pointer-events: none;
+  position: absolute; display: flex; align-items: center; gap: 7px;
+  padding: 6px 12px; border-radius: 9px; background: #fff; border: 1px solid #ECEEF3;
+  box-shadow: 0 10px 24px rgba(23,23,58,.16); pointer-events: none;
 }
-.proc-pill-dot { width: 6px; height: 6px; border-radius: 50%; flex: 0 0 auto; }
-.proc-pill-text { font: 600 11.5px/1 Inter, system-ui, sans-serif; color: #17173A; white-space: nowrap; }
+.proc-pill-dot { width: 7px; height: 7px; border-radius: 50%; flex: 0 0 auto; }
+.proc-pill-text { font: 600 12px/1 Inter, system-ui, sans-serif; color: #17173A; white-space: nowrap; }
 
 /* ---------- Connect scene (Napojit animation) ---------- */
 .connect-visual { padding: 0; overflow: hidden; position: relative; min-height: 0; aspect-ratio: 1000 / 800; background: transparent; border-radius: 0; }
@@ -1025,9 +1054,11 @@ input[type="range"]:focus-visible { outline: 2px solid var(--blue); outline-offs
 .subscribe-btn:hover { background: rgba(255,255,255,.86); transform: translateY(-1px); }
 .subscribe-status { width: 100%; font-size: 14px; margin-top: 2px; color: rgba(255,255,255,.7); }
 .footer-links {
-  display: flex;
-  gap: 28px;
-  flex-wrap: wrap;
+  display: grid;
+  grid-template-rows: repeat(3, auto);
+  grid-auto-flow: column;
+  gap: 10px 48px;
+  justify-content: end;
 }
 .footer-subscribe { flex: 0 1 380px; margin-left: auto; }
 .footer-links a { color: rgba(255,255,255,.7); text-decoration: none; }
@@ -1059,63 +1090,114 @@ input[type="range"]:focus-visible { outline: 2px solid var(--blue); outline-offs
 .work-card {
   position: relative;
   flex: 0 0 clamp(280px, 26vw, 340px);
-  height: clamp(400px, 44vw, 520px);
+  height: clamp(420px, 42vw, 492px);
   border-radius: var(--radius-lg);
   overflow: hidden;
   scroll-snap-align: start;
-  background: var(--soft);
+  background: var(--ink);
   transition: flex-basis .45s cubic-bezier(.4,0,.2,1);
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
-  padding: 20px;
 }
-.work-card img {
-  position: absolute;
-  inset: 0;
+.work-media {
+  position: relative;
+  flex: 0 0 42%;
+  overflow: hidden;
+  background: var(--soft);
+}
+.work-media img {
   width: 100%;
   height: 100%;
   object-fit: cover;
-}
-.work-card::after {
-  content: "";
-  position: absolute;
-  inset: 0;
-  background: linear-gradient(to top, rgba(31,23,65,.78) 0%, rgba(31,23,65,.18) 48%, rgba(31,23,65,0) 68%);
-  pointer-events: none;
-  transition: background .4s ease;
+  display: block;
 }
 .work-content {
   position: relative;
   z-index: 2;
+  flex: 1 1 auto;
   display: flex;
   flex-direction: column;
+  padding: 22px 20px;
+  background: var(--ink);
 }
 .work-badge {
   align-self: flex-start;
-  position: relative;
-  z-index: 2;
   max-width: 100%;
-  padding: 7px 14px;
+  margin-bottom: 12px;
+  padding: 6px 12px;
   border-radius: 999px;
-  background: rgba(255,255,255,.88);
-  backdrop-filter: blur(6px);
-  font: 700 13px/1.25 var(--font-body);
+  background: var(--yellow);
+  font: 700 11.5px/1.3 var(--font-body);
+  letter-spacing: .01em;
   color: var(--ink);
 }
 .work-headline {
-  font: 700 21px/1.3 var(--font-heading);
+  font: 700 18px/1.36 var(--font-heading);
+  letter-spacing: -.01em;
   color: #fff;
-  min-height: 2.6em;
 }
-.work-desc {
-  color: rgba(255,255,255,.82);
-  font-size: 15px;
-  line-height: 1.5;
-  max-width: 460px;
-  margin-top: 12px;
-  min-height: 6em;
+.work-sub {
+  font: 400 13.5px/1.5 var(--font-body);
+  color: rgba(255,255,255,.62);
+  margin-top: 6px;
 }
+.work-claim {
+  margin-top: 10px;
+  padding: 8px 11px;
+  border-radius: 8px;
+  background: rgba(254,199,16,.12);
+  font: 600 12.5px/1.5 var(--font-body);
+  color: var(--yellow);
+}
+
+/* mini graf jako důkaz claimu */
+.work-proof {
+  margin-top: 14px;
+  padding-top: 13px;
+  border-top: 1px solid rgba(255,255,255,.13);
+}
+.work-proof-metric {
+  font: 700 11.5px/1.3 var(--font-body);
+  color: rgba(255,255,255,.88);
+}
+.work-proof-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-top: 10px;
+}
+.work-proof-label {
+  flex: 0 0 36px;
+  font: 600 10.5px/1 var(--font-body);
+  color: rgba(255,255,255,.45);
+}
+.work-proof-track {
+  flex: 1 1 auto;
+  display: flex;
+  gap: 2px;
+  height: 9px;
+  border-radius: 999px;
+  background: rgba(255,255,255,.07);
+  overflow: hidden;
+}
+.work-proof-seg {
+  width: 0;
+  border-radius: 999px;
+  transition: width .9s cubic-bezier(.22,1,.36,1);
+}
+.work-proof-seg.is-drag { background: rgba(255,255,255,.24); }
+.work-proof-seg.is-gain { background: var(--yellow); }
+.carousel.is-visible .work-proof-seg { width: var(--w); }
+.work-proof-row + .work-proof-row .work-proof-seg { transition-delay: .18s; }
+.work-proof-value {
+  flex: 0 0 90px;
+  text-align: right;
+  white-space: nowrap;
+  font: 700 11px/1.25 var(--font-body);
+  color: rgba(255,255,255,.6);
+}
+.work-proof-value.is-gain { color: var(--yellow); }
+html.no-motion .work-proof-seg { transition: none; }
 .work-case {
   align-self: flex-start;
   background: #fff;
@@ -1123,7 +1205,7 @@ input[type="range"]:focus-visible { outline: 2px solid var(--blue); outline-offs
   min-height: 42px;
   padding: 10px 18px;
   font-size: 14px;
-  margin-top: 18px;
+  margin-top: auto;
   text-decoration: none;
 }
 .work-case:hover { background: var(--soft); transform: translateY(-1px); }
@@ -1136,8 +1218,8 @@ input[type="range"]:focus-visible { outline: 2px solid var(--blue); outline-offs
   background: linear-gradient(160deg, #34285F 0%, #1F1741 100%);
 }
 .work-placeholder svg {
-  width: 54px;
-  height: 54px;
+  width: 48px;
+  height: 48px;
   color: rgba(255,255,255,.26);
 }
 
@@ -1291,6 +1373,23 @@ input[type="range"]:focus-visible { outline: 2px solid var(--blue); outline-offs
   border: 1px solid var(--ink);
 }
 .buy-big:hover { background: var(--ink-soft); transform: translateY(-1px); }
+.buy-actions { margin-top: 28px; }
+.buy-actions .buy-big { margin-top: 0; }
+.buy-secondary {
+  display: block;
+  width: 100%;
+  margin-top: 12px;
+  text-align: center;
+  font: 700 15px/1.2 var(--font-body);
+  color: var(--ink);
+  text-decoration: underline;
+  text-decoration-color: var(--yellow);
+  text-underline-offset: 4px;
+  padding: 10px 12px;
+  border-radius: var(--radius-sm);
+}
+.buy-secondary:hover { background: var(--soft); }
+.buy-secondary:focus-visible { outline: 2px solid var(--blue); outline-offset: 2px; }
 .product-hint { font-size: 13px; color: var(--caption); margin-top: 12px; }
 .service-panel {
   margin-top: 48px;
@@ -1384,6 +1483,7 @@ input[type="range"]:focus-visible { outline: 2px solid var(--blue); outline-offs
   cursor: pointer;
 }
 .form-check input { width: 20px; height: 20px; margin-top: 1px; accent-color: #FEC710; }
+.form-check a { color: var(--ink); font-weight: 600; }
 .order-summary {
   grid-column: 1 / -1;
   display: flex;
@@ -1572,15 +1672,15 @@ html.no-motion .how-visual * { animation: none !important; }
   padding: 8px 16px;
   font-size: 14px;
 }
-.carousel-nav {
-  display: flex;
-  gap: 10px;
-  justify-content: flex-end;
-  margin-top: 20px;
-}
+.carousel { position: relative; }
+.carousel-nav { display: contents; }
 .car-btn {
-  width: 44px;
-  height: 44px;
+  position: absolute;
+  top: calc(50% - 6px);
+  transform: translateY(-50%);
+  z-index: 4;
+  width: 46px;
+  height: 46px;
   border: 1px solid var(--border);
   border-radius: 999px;
   background: var(--white);
@@ -1589,7 +1689,29 @@ html.no-motion .how-visual * { animation: none !important; }
   display: flex;
   align-items: center;
   justify-content: center;
-  transition: background .15s ease, border-color .15s ease;
+  box-shadow: var(--shadow-md);
+  transition: background .15s ease, border-color .15s ease, transform .15s ease;
+}
+.car-prev { left: -23px; }
+.car-next { right: -23px; }
+@media (min-width: 1340px) {
+  .car-prev { left: -64px; }
+  .car-next { right: -64px; }
+}
+@media (max-width: 767px) {
+  .carousel-nav {
+    display: flex;
+    gap: 10px;
+    justify-content: flex-end;
+    margin-top: 16px;
+  }
+  .car-btn {
+    position: static;
+    transform: none;
+    box-shadow: none;
+    width: 42px;
+    height: 42px;
+  }
 }
 .car-btn:hover { background: var(--soft); border-color: var(--blue); }
 .car-btn:focus-visible { outline: 2px solid var(--blue); outline-offset: 2px; }
@@ -1676,7 +1798,6 @@ html.no-motion .how-visual * { animation: none !important; }
   }
   .main-nav.is-open { display: flex; }
   .main-nav a { padding: 14px 10px; border-bottom: none; }
-  .nav-sep { width: auto; height: 1px; margin: 8px 10px; }
   .nav-toggle { display: flex; }
   .header-cta { display: none; }
   .card-grid, .duo-grid, .integration-grid, .flip-grid2, .consult-steps { grid-template-columns: 1fr; }
@@ -1693,7 +1814,7 @@ html.no-motion .how-visual * { animation: none !important; }
   }
   .scenario-card { flex: 0 0 82%; scroll-snap-align: center; }
   .faq-body { padding-right: 0; }
-  .work-card { flex: 0 0 78%; height: 440px; }
+  .work-card { flex: 0 0 84%; height: 450px; }
   .trust-cards { grid-template-columns: 1fr; }
   .form-grid { grid-template-columns: 1fr; }
   .footer-top { gap: 32px; }
@@ -1712,10 +1833,7 @@ html.no-motion .how-visual * { animation: none !important; }
     </button>
     <nav class="main-nav" aria-label="Hlavní navigace">
       <a href="#jak-to-funguje">Jak to funguje</a>
-      <a href="#produkt">Omi</a>
-      <a href="#implementace">Nasazení</a>
-      <a href="#faq">FAQ</a>
-      <i class="nav-sep" aria-hidden="true"></i>
+      <a href="co-je-omi">Co je Omi</a>
       <a href="priklady">Příklady z praxe</a>
     </nav>
     <div class="header-cta">
@@ -1725,15 +1843,15 @@ html.no-motion .how-visual * { animation: none !important; }
 </header>
 
 <!-- HERO -->
-<section class="hero">
+<section class="hero" id="jak-to-funguje">
   <div class="container hero-grid">
     <div>
       <span class="eyebrow">Know-how z každého rozhovoru</span>
-      <h1>Každým rozhovorem ztrácíte cenné informace.</h1>
-      <p class="hero-sub">Zachyťte důležité detaily, nápady i souvislosti. Inteligentní vrstva je zpracuje a promění v know-how, <strong>které máte vždy po ruce.</strong></p>
+      <h1>To nejdůležitější z rozhovorů často zapadne.</h1>
+      <p class="hero-sub">Z důležitých detailů, nápadů a souvislostí z vašich rozhovorů se postupně buduje <strong>inteligentní paměť firmy</strong>, kterou můžete kdykoli využít.</p>
       <div class="hero-cta">
         <button type="button" class="btn btn-primary" data-open="modal-konzultace">Domluvit konzultaci</button>
-        <a href="dotaznik" class="btn btn-ghost">Najít řešení</a>
+        <a href="co-je-omi" class="btn btn-ghost">Co je Omi</a>
       </div>
       <p class="hero-trust">Technologii Omi dnes používá přes <strong>300&nbsp;000 profesionálů</strong> po celém světě.</p>
       <ul class="hero-benefits">
@@ -1754,7 +1872,7 @@ html.no-motion .how-visual * { animation: none !important; }
     <div class="hero-visual">
       <figure class="device-figure">
         <span class="device-tag"><i></i>Inteligentní paměť</span>
-        <img src="Fotky/WebP Image.webp" alt="AI zápisník Omi, přívěsek na šňůrce">
+        <img src="Fotky/WebP Image.webp" alt="Nahrávací zařízení Omi na šňůrce">
       </figure>
       <div class="flow-card" id="flow-card" aria-hidden="true">
         <div class="flow-label"><span class="dot"></span>Inteligentní zpracování</div>
@@ -1784,110 +1902,266 @@ html.no-motion .how-visual * { animation: none !important; }
   </div>
 </section>
 
+<!-- BOLEST -->
+<section class="section-soft" id="bolest">
+  <div class="container">
+    <div class="reveal">
+      <span class="eyebrow">Kde se ztrácí hodnota</span>
+      <h2 class="section-title">Informace mizí dřív, než je stihnete využít.</h2>
+      <p class="section-lead">Nápady, důvody rozhodnutí a důležité souvislosti postupně mizí z paměti. Když je později potřebujete, už nejsou k dispozici.</p>
+    </div>
+    <h3 class="card-grid-heading reveal">Co z rozhovorů mizí</h3>
+    <div class="card-grid reveal reveal-stagger">
+      <div class="pain-card" style="--i:0">
+        <div class="pain-num">1</div>
+        <h3>Důležité informace zapadnou</h3>
+        <p>Nápady, postřehy a drobné souvislosti se ztratí dřív, než se k nim někdo vrátí.</p>
+      </div>
+      <div class="pain-card" style="--i:1">
+        <div class="pain-num">2</div>
+        <h3>Rozhodnutí ztrácejí kontext</h3>
+        <p>Důvody, omezení a úvahy, které vedly k rozhodnutí, se postupně zapomenou.</p>
+      </div>
+      <div class="pain-card" style="--i:2">
+        <div class="pain-num">3</div>
+        <h3>Know-how zůstává roztříštěné</h3>
+        <p>Část je v hlavách, část v poznámkách a nikdo nemá k dispozici celý obraz.</p>
+      </div>
+      <div class="pain-card" style="--i:3">
+        <div class="pain-num">4</div>
+        <h3>Stejná témata se vracejí</h3>
+        <p>Chybějící souvislosti vedou k tomu, že se už vyřešené otázky probírají znovu.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="zmena">
+  <div class="container">
+    <div class="flip-grid2">
+      <div class="reveal">
+        <span class="eyebrow">Inteligentní paměť</span>
+        <h2 class="section-title">Důležité informace bývají skryté mezi řádky.</h2>
+        <p class="section-lead">Jednotlivé detaily začnou dávat smysl až ve spojení s tím, co zaznělo dříve. Inteligentní paměť je propojí a umožní vám se k nim vracet, ptát se na ně a využívat je při další práci.</p>
+        <div class="flip-list reveal-stagger">
+          <div class="flip-item" style="--i:0">
+            <h3>Podstatné nezapadne</h3>
+            <p>Důležité detaily, nápady a důvody rozhodnutí zůstávají spojené s kontextem, ve kterém zazněly.</p>
+          </div>
+          <div class="flip-item" style="--i:1">
+            <h3>Souvislosti se propojují</h3>
+            <p>Rozhovory o stejném klientovi, tématu nebo projektu postupně skládají ucelenější obraz.</p>
+          </div>
+          <div class="flip-item" style="--i:2">
+            <h3>Odpovědi z kontextu</h3>
+            <p>Zeptejte se na klienta nebo důležité téma. Inteligentní paměť propojí předchozí rozhovory a doporučí, na co se zaměřit dál.</p>
+          </div>
+        </div>
+      </div>
+      <div class="flip-visual reveal">
+        <img src="Fotky/intel.png" alt="Rozhovory se ukládají do inteligentní paměti, která propojuje informace v čase a vytváří dostupný kontext, souvislosti, rozhodnutí a know-how">
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FLIP -->
 <!-- VYTVOŘENO PRO SKUTEČNOU PRÁCI -->
 <section class="section-soft" id="scenare">
   <div class="container">
     <div class="reveal">
-      <span class="eyebrow">Rozšířená paměť v praxi</span>
+      <span class="eyebrow">Inteligentní paměť v praxi</span>
       <h2 class="section-title">Každá profese potřebuje pamatovat něco jiného.</h2>
       <p class="section-lead">Inteligentní paměť z každého rozhovoru uchová to podstatné a postupně buduje know-how, ke kterému se můžete kdykoli vrátit.</p>
+      <a href="priklady" class="section-link">Zobrazit příklady z praxe
+        <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3 8h9M8.5 4.5L12 8l-3.5 3.5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </a>
     </div>
     <div class="carousel reveal" data-carousel data-interval="4500">
       <div class="work-cards carousel-track">
         <!-- FOTKA: finanční poradce na schůzce s klientem -->
         <article class="work-card">
-          <div class="work-placeholder" aria-hidden="true">
-            <svg viewBox="0 0 24 24" fill="none"><path d="M3 17l5-5 4 3 6-7" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/><path d="M14 8h4v4" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/><path d="M3 21h18" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/></svg>
+          <div class="work-media">
+            <img src="Fotky/obchodni-jednani.webp" alt="Finanční poradce na schůzce s klientem, na krku má nahrávací zařízení Omi" loading="lazy">
           </div>
-          <span class="work-badge">Finanční poradci</span>
           <div class="work-content">
-            <h3 class="work-headline">Klientský kontext po ruce</h3>
-            <p class="work-desc">Při další schůzce máte po ruce klientovy cíle, priority i důvody jeho dřívějších rozhodnutí.</p>
-            <a href="priklady?tab=profese" class="btn work-case">Zobrazit scénář</a>
+            <span class="work-badge">Finanční poradci</span>
+            <h3 class="work-headline">Ušetřete desítky minut před každou schůzkou</h3>
+            <div class="work-proof">
+              <div class="work-proof-metric">Příprava na schůzku</div>
+              <div class="work-proof-row">
+                <span class="work-proof-label">Dnes</span>
+                <span class="work-proof-track"><span class="work-proof-seg is-drag" style="--w:100%"></span></span>
+                <span class="work-proof-value">desítky minut</span>
+              </div>
+              <div class="work-proof-row">
+                <span class="work-proof-label">S Omi</span>
+                <span class="work-proof-track"><span class="work-proof-seg is-gain" style="--w:18%"></span></span>
+                <span class="work-proof-value is-gain">pár minut</span>
+              </div>
+            </div>
+            <a href="scenar-financni-poradci" class="btn work-case">Zobrazit scénář</a>
           </div>
         </article>
-        <!-- FOTKA: realitní makléř na prohlídce nemovitosti se zájemcem -->
         <article class="work-card">
-          <div class="work-placeholder" aria-hidden="true">
-            <svg viewBox="0 0 24 24" fill="none"><path d="M4 10.5L12 4l8 6.5" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/><path d="M6 9.8V20h12V9.8" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/><path d="M10 20v-5h4v5" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          <div class="work-media">
+            <img src="Fotky/makler.png" alt="Realitní makléř na prohlídce nemovitosti se zájemcem" loading="lazy">
           </div>
-          <span class="work-badge">Realitní makléři</span>
           <div class="work-content">
-            <h3 class="work-headline">Víte, co zájemce hledá</h3>
-            <p class="work-desc">Z prohlídky zůstane přesný obraz potřeb zájemce i důvodů, proč mu nemovitost nesedla.</p>
-            <a href="priklady?tab=profese" class="btn work-case">Zobrazit scénář</a>
+            <span class="work-badge">Realitní makléři</span>
+            <h3 class="work-headline">Méně zbytečných prohlídek, rychlejší rozhodnutí</h3>
+            <div class="work-proof">
+              <div class="work-proof-metric">Nevhodné nabídky zájemci</div>
+              <div class="work-proof-row">
+                <span class="work-proof-label">Dnes</span>
+                <span class="work-proof-track"><span class="work-proof-seg is-drag" style="--w:100%"></span></span>
+                <span class="work-proof-value">často</span>
+              </div>
+              <div class="work-proof-row">
+                <span class="work-proof-label">S Omi</span>
+                <span class="work-proof-track"><span class="work-proof-seg is-gain" style="--w:22%"></span></span>
+                <span class="work-proof-value is-gain">zřídka</span>
+              </div>
+            </div>
+            <a href="scenar-realitni-maklery" class="btn work-case">Zobrazit scénář</a>
           </div>
         </article>
-        <!-- FOTKA: účetní nebo daňový poradce při konzultaci s klientem -->
         <article class="work-card">
-          <div class="work-placeholder" aria-hidden="true">
-            <svg viewBox="0 0 24 24" fill="none"><rect x="5" y="3" width="14" height="18" rx="2" stroke="currentColor" stroke-width="1.7"/><path d="M8.5 7.5h7M8.5 11.5h7M8.5 15.5h4" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/></svg>
+          <div class="work-media">
+            <img src="Fotky/ucetni.png" alt="Účetní při konzultaci s klientem" loading="lazy">
           </div>
-          <span class="work-badge">Daňoví a účetní poradci</span>
           <div class="work-content">
-            <h3 class="work-headline">Doporučení v celém kontextu</h3>
-            <p class="work-desc">Snadno dohledáte předchozí doporučení, dohodnutý postup i podklady, které klient ještě nedodal.</p>
-            <a href="priklady?tab=profese" class="btn work-case">Zobrazit scénář</a>
+            <span class="work-badge">Daňoví a účetní poradci</span>
+            <h3 class="work-headline">Přestaňte hodiny dohledávat a urgovat podklady</h3>
+            <div class="work-proof">
+              <div class="work-proof-metric">Sběr podkladů od klienta</div>
+              <div class="work-proof-row">
+                <span class="work-proof-label">Dnes</span>
+                <span class="work-proof-track"><span class="work-proof-seg is-drag" style="--w:100%"></span></span>
+                <span class="work-proof-value">hodiny</span>
+              </div>
+              <div class="work-proof-row">
+                <span class="work-proof-label">S Omi</span>
+                <span class="work-proof-track"><span class="work-proof-seg is-gain" style="--w:20%"></span></span>
+                <span class="work-proof-value is-gain">jeden přehled</span>
+              </div>
+            </div>
+            <a href="scenar-danovi-poradci" class="btn work-case">Zobrazit scénář</a>
           </div>
         </article>
-        <!-- FOTKA: veterinář při vyšetření zvířete s majitelem -->
         <article class="work-card">
-          <div class="work-placeholder" aria-hidden="true">
-            <svg viewBox="0 0 24 24" fill="none"><ellipse cx="12" cy="15.5" rx="4.2" ry="3.4" stroke="currentColor" stroke-width="1.7"/><ellipse cx="6.2" cy="9.6" rx="1.9" ry="2.5" stroke="currentColor" stroke-width="1.7"/><ellipse cx="17.8" cy="9.6" rx="1.9" ry="2.5" stroke="currentColor" stroke-width="1.7"/><ellipse cx="10" cy="6.2" rx="1.8" ry="2.3" stroke="currentColor" stroke-width="1.7"/><ellipse cx="14" cy="6.2" rx="1.8" ry="2.3" stroke="currentColor" stroke-width="1.7"/></svg>
+          <div class="work-media">
+            <img src="Fotky/veterinar.png" alt="Veterinář při vyšetření zvířete s majitelem" loading="lazy">
           </div>
-          <span class="work-badge">Veterináři</span>
           <div class="work-content">
-            <h3 class="work-headline">Léčba v celém kontextu</h3>
-            <p class="work-desc">Při další kontrole máte po ruce vývoj potíží, reakci na léčbu i postřehy majitele z domácí péče.</p>
-            <a href="priklady?tab=profese" class="btn work-case">Zobrazit scénář</a>
+            <span class="work-badge">Veterináři</span>
+            <h3 class="work-headline">Celý vývoj pacienta během jedné minuty</h3>
+            <div class="work-proof">
+              <div class="work-proof-metric">Dohledání historie pacienta</div>
+              <div class="work-proof-row">
+                <span class="work-proof-label">Dnes</span>
+                <span class="work-proof-track"><span class="work-proof-seg is-drag" style="--w:100%"></span></span>
+                <span class="work-proof-value">3 záznamy</span>
+              </div>
+              <div class="work-proof-row">
+                <span class="work-proof-label">S Omi</span>
+                <span class="work-proof-track"><span class="work-proof-seg is-gain" style="--w:14%"></span></span>
+                <span class="work-proof-value is-gain">jeden případ</span>
+              </div>
+            </div>
+            <a href="scenar-veterinari" class="btn work-case">Zobrazit scénář</a>
           </div>
         </article>
-        <!-- FOTKA: lékař při konzultaci s pacientem v ordinaci -->
         <article class="work-card">
-          <div class="work-placeholder" aria-hidden="true">
-            <svg viewBox="0 0 24 24" fill="none"><path d="M7 3v6a5 5 0 0010 0V3" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/><path d="M12 14v3a4 4 0 008 0v-1" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/><circle cx="20" cy="14.5" r="1.8" stroke="currentColor" stroke-width="1.7"/><path d="M5 3h4M15 3h4" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/></svg>
+          <div class="work-media">
+            <img src="Fotky/doctor.png" alt="Lékař při konzultaci s pacientem v ordinaci" loading="lazy">
           </div>
-          <span class="work-badge">Lékaři a kliniky</span>
           <div class="work-content">
-            <h3 class="work-headline">Péče plynule navazuje</h3>
-            <p class="work-desc">Při další návštěvě navážete na dosavadní průběh obtíží i důvody zvoleného postupu.</p>
-            <a href="priklady?tab=profese" class="btn work-case">Zobrazit scénář</a>
+            <span class="work-badge">Lékaři a kliniky</span>
+            <h3 class="work-headline">Více času pacientovi, méně skládání historie</h3>
+            <div class="work-proof">
+              <div class="work-proof-metric">Skládání historie pacienta</div>
+              <div class="work-proof-row">
+                <span class="work-proof-label">Dnes</span>
+                <span class="work-proof-track"><span class="work-proof-seg is-drag" style="--w:100%"></span></span>
+                <span class="work-proof-value">minuty</span>
+              </div>
+              <div class="work-proof-row">
+                <span class="work-proof-label">S Omi</span>
+                <span class="work-proof-track"><span class="work-proof-seg is-gain" style="--w:16%"></span></span>
+                <span class="work-proof-value is-gain">pár sekund</span>
+              </div>
+            </div>
+            <a href="scenar-lekari-kliniky" class="btn work-case">Zobrazit scénář</a>
           </div>
         </article>
-        <!-- FOTKA: terapeutické sezení, dvě křesla proti sobě -->
         <article class="work-card">
-          <div class="work-placeholder" aria-hidden="true">
-            <svg viewBox="0 0 24 24" fill="none"><path d="M12 4.5c-3.6 0-6.5 2.6-6.5 5.9 0 1.7.8 3.2 2.1 4.3V19h8.8v-4.3c1.3-1.1 2.1-2.6 2.1-4.3 0-3.3-2.9-5.9-6.5-5.9z" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/><path d="M9.6 21h4.8" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/></svg>
+          <div class="work-media">
+            <img src="Fotky/psycholog.png" alt="Psycholog při terapeutickém sezení" loading="lazy">
           </div>
-          <span class="work-badge">Psychologové a psychoterapeuti</span>
           <div class="work-content">
-            <h3 class="work-headline">Každé sezení navazuje</h3>
-            <p class="work-desc">Před dalším sezením si připomenete důležitá témata i změny, které se během terapie objevily.</p>
-            <a href="priklady?tab=profese" class="btn work-case">Zobrazit scénář</a>
+            <span class="work-badge">Psychologové a psychoterapeuti</span>
+            <h3 class="work-headline">Připravte se na další sezení za pár minut</h3>
+            <div class="work-proof">
+              <div class="work-proof-metric">Poznámky z více sezení</div>
+              <div class="work-proof-row">
+                <span class="work-proof-label">Dnes</span>
+                <span class="work-proof-track"><span class="work-proof-seg is-drag" style="--w:100%"></span></span>
+                <span class="work-proof-value">zvlášť</span>
+              </div>
+              <div class="work-proof-row">
+                <span class="work-proof-label">S Omi</span>
+                <span class="work-proof-track"><span class="work-proof-seg is-gain" style="--w:20%"></span></span>
+                <span class="work-proof-value is-gain">souvislý vývoj</span>
+              </div>
+            </div>
+            <a href="scenar-psychologove" class="btn work-case">Zobrazit scénář</a>
           </div>
         </article>
-        <!-- FOTKA: architekt nad výkresy s klientem nebo na stavbě -->
         <article class="work-card">
-          <div class="work-placeholder" aria-hidden="true">
-            <svg viewBox="0 0 24 24" fill="none"><path d="M4 20L20 4" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/><path d="M14.5 3.5l6 6L9 21H3v-6L14.5 3.5z" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/><path d="M11.5 6.5l6 6" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/></svg>
+          <div class="work-media">
+            <img src="Fotky/projektant.png" alt="Architekt nad výkresy s klientem" loading="lazy">
           </div>
-          <span class="work-badge">Architekti a projektanti</span>
           <div class="work-content">
-            <h3 class="work-headline">Každá změna má důvod</h3>
-            <p class="work-desc">U každé změny dohledáte původní zadání, důvod rozhodnutí i domluvu mezi účastníky projektu.</p>
-            <a href="priklady?tab=profese" class="btn work-case">Zobrazit scénář</a>
+            <span class="work-badge">Architekti a projektanti</span>
+            <h3 class="work-headline">Žádné přepracování kvůli zapomenuté dohodě</h3>
+            <div class="work-proof">
+              <div class="work-proof-metric">Dohledání důvodu rozhodnutí</div>
+              <div class="work-proof-row">
+                <span class="work-proof-label">Dnes</span>
+                <span class="work-proof-track"><span class="work-proof-seg is-drag" style="--w:100%"></span></span>
+                <span class="work-proof-value">hodiny</span>
+              </div>
+              <div class="work-proof-row">
+                <span class="work-proof-label">S Omi</span>
+                <span class="work-proof-track"><span class="work-proof-seg is-gain" style="--w:12%"></span></span>
+                <span class="work-proof-value is-gain">pár sekund</span>
+              </div>
+            </div>
+            <a href="scenar-architekti-projektanti" class="btn work-case">Zobrazit scénář</a>
           </div>
         </article>
-        <!-- FOTKA: příjem vozidla v autoservisu, mechanik se zákazníkem -->
         <article class="work-card">
-          <div class="work-placeholder" aria-hidden="true">
-            <svg viewBox="0 0 24 24" fill="none"><path d="M14.8 3.6a4.6 4.6 0 00-1.1 7.6L5 20l1.8 1.8 8.8-8.7a4.6 4.6 0 007.6-1.1l-3.4-3.4-2.3 2.3-2.3-2.3 2.3-2.3-2.7-2.7z" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          <div class="work-media">
+            <img src="Fotky/autotechnik.png" alt="Příjem vozidla v autoservisu, mechanik se zákazníkem" loading="lazy">
           </div>
-          <span class="work-badge">Autoservisy</span>
           <div class="work-content">
-            <h3 class="work-headline">Přesnější příjem vozidla</h3>
-            <p class="work-desc">Mechanik dostane přesný popis závady včetně situací, ve kterých se problém objevuje.</p>
-            <a href="priklady?tab=profese" class="btn work-case">Zobrazit scénář</a>
+            <span class="work-badge">Autoservisy</span>
+            <h3 class="work-headline">Kratší diagnostika, méně návratů se závadou</h3>
+            <div class="work-proof">
+              <div class="work-proof-metric">Zadání pro mechanika</div>
+              <div class="work-proof-row">
+                <span class="work-proof-label">Dnes</span>
+                <span class="work-proof-track"><span class="work-proof-seg is-drag" style="--w:100%"></span></span>
+                <span class="work-proof-value">od ruky</span>
+              </div>
+              <div class="work-proof-row">
+                <span class="work-proof-label">S Omi</span>
+                <span class="work-proof-track"><span class="work-proof-seg is-gain" style="--w:18%"></span></span>
+                <span class="work-proof-value is-gain">přesné</span>
+              </div>
+            </div>
+            <a href="scenar-autoservisy" class="btn work-case">Zobrazit scénář</a>
           </div>
         </article>
       </div>
@@ -1903,92 +2177,28 @@ html.no-motion .how-visual * { animation: none !important; }
   </div>
 </section>
 
-<!-- BOLEST -->
-<section class="section-soft" id="bolest">
-  <div class="container">
-    <div class="reveal">
-      <span class="eyebrow">Kde se ztrácí hodnota</span>
-      <h2 class="section-title">Proměňte každou schůzku v hotovou práci.</h2>
-      <p class="section-lead">Z jediné nahrávky vznikne zápis, úkoly, CRM i reporty. AI udělá administrativu za váš tým během několika minut.</p>
-    </div>
-    <h3 class="card-grid-heading reveal">Co získáte po každé schůzce</h3>
-    <div class="card-grid reveal reveal-stagger">
-      <div class="pain-card" style="--i:0">
-        <div class="pain-num">1</div>
-        <h3>Zápis během minut</h3>
-        <p>Kompletní přepis i přehledné shrnutí bez ruční práce.</p>
-      </div>
-      <div class="pain-card" style="--i:1">
-        <div class="pain-num">2</div>
-        <h3>Jasné úkoly</h3>
-        <p>S termíny, odpovědnými osobami a připravené pro vaše nástroje.</p>
-      </div>
-      <div class="pain-card" style="--i:2">
-        <div class="pain-num">3</div>
-        <h3>CRM vždy aktuální</h3>
-        <p>Obchodní informace se zapisují automaticky bez ručního přepisování.</p>
-      </div>
-      <div class="pain-card" style="--i:3">
-        <div class="pain-num">4</div>
-        <h3>Firemní paměť</h3>
-        <p>Každá schůzka zůstává dohledatelná a informace zůstávají ve firmě.</p>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- FLIP -->
-<section id="zmena">
-  <div class="container">
-    <div class="flip-grid2">
-      <div class="reveal">
-        <span class="eyebrow">Inteligentní paměť</span>
-        <h2 class="section-title">Důležité informace zůstávají v souvislostech.</h2>
-        <p class="section-lead">Nové informace navazují na to, co už zaznělo, a zůstávají dostupné pro další práci.</p>
-        <div class="flip-list reveal-stagger">
-          <div class="flip-item" style="--i:0">
-            <h3>Podstatné zůstává</h3>
-            <p>Důležité detaily, nápady a důvody rozhodnutí zůstávají spolu s kontextem, ve kterém zazněly.</p>
-          </div>
-          <div class="flip-item" style="--i:1">
-            <h3>Informace se propojují</h3>
-            <p>Rozhovory o stejném klientovi, tématu nebo projektu postupně vytvářejí společný obraz.</p>
-          </div>
-          <div class="flip-item" style="--i:2">
-            <h3>Know-how je po ruce</h3>
-            <p>Před další schůzkou nebo rozhodnutím rychle najdete, co už zaznělo a proč je to důležité.</p>
-          </div>
-        </div>
-      </div>
-      <div class="flip-visual reveal">
-        <img src="Fotky/zmena.png" alt="Z rozhovoru vznikne shrnutí, úkoly, rozhodnutí a termíny">
-      </div>
-    </div>
-  </div>
-</section>
-
 <!-- JAK TO FUNGUJE -->
-<section id="jak-to-funguje">
+<section>
   <div class="container">
     <div class="reveal">
       <span class="eyebrow">Řešení</span>
-      <h2 class="section-title">Zachytit. Zpracovat. Napojit.</h2>
-      <p class="section-lead">Od rozhovoru až po hotové výstupy během několika minut.</p>
+      <h2 class="section-title">Zachytit. Pochopit. Napojit.</h2>
+      <p class="section-lead">Omi zachytí rozhovor. Inteligentní vrstva z něj vybere to podstatné a výstupy napojíme na vaše systémy.</p>
     </div>
     <div class="how-tabs reveal" role="tablist" aria-label="Jak to funguje">
       <button class="how-tab is-active" role="tab" aria-selected="true" data-panel="0"><span class="step-no">1</span>Zachytit</button>
-      <button class="how-tab" role="tab" aria-selected="false" data-panel="1"><span class="step-no">2</span>Zpracovat</button>
+      <button class="how-tab" role="tab" aria-selected="false" data-panel="1"><span class="step-no">2</span>Pochopit</button>
       <button class="how-tab" role="tab" aria-selected="false" data-panel="2"><span class="step-no">3</span>Napojit</button>
     </div>
     <div class="how-panels">
       <div class="how-panel is-active" role="tabpanel">
         <div>
-          <h3>Nic nezapisujte. Jen veďte rozhovor.</h3>
-          <p>Omi zaznamená schůzku, telefonát nebo návštěvu u zákazníka, aniž byste museli dělat poznámky.</p>
+          <h3>Rozhovor můžete vést naplno.</h3>
+          <p>Omi zachytí schůzku, telefonát nebo návštěvu v kanceláři, online i v terénu.</p>
           <ul class="how-list">
-            <li><svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3.5 8.2l3 3 6-6.2" stroke="#6EC1E4" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>Schůzka je připravená k dalšímu zpracování</li>
-            <li><svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3.5 8.2l3 3 6-6.2" stroke="#6EC1E4" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>Není potřeba dělat poznámky během jednání</li>
-            <li><svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3.5 8.2l3 3 6-6.2" stroke="#6EC1E4" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>Funguje v kanceláři, online i v terénu</li>
+            <li><svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3.5 8.2l3 3 6-6.2" stroke="#6EC1E4" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>Zaznamená průběh rozhovoru</li>
+            <li><svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3.5 8.2l3 3 6-6.2" stroke="#6EC1E4" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>Zachová důležité detaily</li>
+            <li><svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3.5 8.2l3 3 6-6.2" stroke="#6EC1E4" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>Připraví obsah pro další zpracování</li>
           </ul>
         </div>
         <div class="how-visual capture-visual">
@@ -2072,128 +2282,110 @@ html.no-motion .how-visual * { animation: none !important; }
       </div>
       <div class="how-panel" role="tabpanel">
         <div>
-          <h3>Během několika minut je vše připravené.</h3>
-          <p>Během několika minut vzniknou hotové výstupy připravené k použití.</p>
+          <h3>Inteligentní vrstva rozpozná, co je podstatné.</h3>
+          <p>Z rozhovoru vybere důležitá témata, rozhodnutí a souvislosti pro další práci.</p>
           <ul class="how-list">
-            <li><svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3.5 8.2l3 3 6-6.2" stroke="#6EC1E4" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>Přehledné shrnutí schůzky</li>
-            <li><svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3.5 8.2l3 3 6-6.2" stroke="#6EC1E4" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>Rozhodnutí, úkoly a odpovědnosti</li>
-            <li><svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3.5 8.2l3 3 6-6.2" stroke="#6EC1E4" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>Otevřené body, rizika a další kroky</li>
+            <li><svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3.5 8.2l3 3 6-6.2" stroke="#6EC1E4" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>Důležité detaily a souvislosti</li>
+            <li><svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3.5 8.2l3 3 6-6.2" stroke="#6EC1E4" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>Rozhodnutí včetně jejich důvodů</li>
+            <li><svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3.5 8.2l3 3 6-6.2" stroke="#6EC1E4" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>Úkoly a další kroky</li>
           </ul>
         </div>
         <div class="how-visual process-visual">
-          <div class="process-stage" id="process-stage" role="img" aria-label="Zápis ze schůzky se automaticky přepíše a úkoly se vytěží do seznamu">
+          <div class="process-stage" id="process-stage" role="img" aria-label="Z rozhovoru se označí klíčové části a inteligentní vrstva z nich složí souvislost, rozhodnutí a další krok">
             <svg style="position:absolute;left:0;top:0;width:1000px;height:800px;overflow:visible">
-              <line x1="458" y1="385" x2="554" y2="385" stroke="#CDD5E1" stroke-width="2" stroke-dasharray="2 7" stroke-linecap="round" opacity=".55"/>
-              <path d="M544 379 l7 6 l-7 6" stroke="#CDD5E1" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round" opacity=".6"/>
+              <line x1="460" y1="385" x2="552" y2="385" stroke="#CDD5E1" stroke-width="2" stroke-dasharray="2 7" stroke-linecap="round" opacity=".5"/>
+              <path d="M542 379 l7 6 l-7 6" stroke="#CDD5E1" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round" opacity=".55"/>
             </svg>
 
             <div class="proc-card" style="left:60px;top:150px;width:392px;height:470px;"></div>
             <div class="proc-icon-tile" style="left:86px;top:176px;">
-              <svg width="18" height="18" viewBox="0 0 18 18"><rect x="3.5" y="2" width="11" height="14" rx="1.6" stroke="#4DABF7" stroke-width="1.4" fill="none"/><path d="M6 6h6 M6 9h6 M6 12h3.5" stroke="#4DABF7" stroke-width="1.3" stroke-linecap="round"/></svg>
+              <svg width="18" height="18" viewBox="0 0 18 18">
+                <path d="M3 4.6a1.6 1.6 0 0 1 1.6-1.6h6.4a1.6 1.6 0 0 1 1.6 1.6v3.8a1.6 1.6 0 0 1-1.6 1.6H6.6L3.9 12V4.6z" stroke="#4DABF7" stroke-width="1.3" fill="none" stroke-linejoin="round"/>
+                <path d="M11.4 6.6h1.9a1.6 1.6 0 0 1 1.6 1.6v3.6a1.6 1.6 0 0 1-1.6 1.6h-.6l-1.6 1.5v-1.5H9.2" stroke="#4DABF7" stroke-width="1.3" fill="none" stroke-linejoin="round" opacity=".65"/>
+              </svg>
             </div>
-            <div class="proc-title" data-note-hdr style="left:140px;top:178px;">Zápis ze schůzky</div>
-            <div class="proc-sub" data-note-hdr style="left:140px;top:200px;">Automatický přepis konverzace</div>
+            <div class="proc-title" data-note-hdr style="left:140px;top:179px;">ROZHOVOR</div>
+            <div class="proc-sub" data-note-hdr style="left:140px;top:200px;">Důležité části konverzace</div>
             <div class="proc-divider" style="left:86px;top:234px;width:340px;"></div>
 
-            <div class="proc-avatar" data-la="0" style="left:84px;top:258px;width:26px;height:26px;background:#3A3A6B;">D</div>
-            <div class="proc-highlight" data-lh="0" style="left:116px;top:253px;width:312px;height:36px;opacity:0;"></div>
-            <div class="proc-text-clip" data-lt="0" style="left:122px;top:261px;width:310px;"><span>Pošlu cenovou nabídku klientovi.</span></div>
+            <div class="proc-avatar" data-la="0" style="left:86px;top:282px;width:26px;height:26px;background:#3A3A6B;">D</div>
+            <div class="proc-name" data-ln="0" style="left:122px;top:280px;">David</div>
+            <div class="proc-line" data-lt="0" style="left:122px;top:299px;width:304px;"><span>Pilot chceme <span class="proc-key">spustit v září</span>.</span></div>
 
-            <div class="proc-avatar" data-la="1" style="left:84px;top:320px;width:26px;height:26px;background:#4DABF7;">A</div>
-            <div class="proc-highlight" data-lh="1" style="left:116px;top:315px;width:312px;height:36px;opacity:0;"></div>
-            <div class="proc-text-clip" data-lt="1" style="left:122px;top:323px;width:310px;"><span>Připravím smlouvu k podpisu.</span></div>
+            <div class="proc-avatar" data-la="1" style="left:86px;top:356px;width:26px;height:26px;background:#4DABF7;">A</div>
+            <div class="proc-name" data-ln="1" style="left:122px;top:354px;">Aneta</div>
+            <div class="proc-line" data-lt="1" style="left:122px;top:373px;width:304px;"><span>Nejdřív <span class="proc-key">potřebujeme napojit CRM</span>.</span></div>
 
-            <div class="proc-avatar" data-la="2" style="left:84px;top:382px;width:26px;height:26px;background:#F5B70A;">P</div>
-            <div class="proc-highlight" data-lh="2" style="left:116px;top:377px;width:312px;height:36px;opacity:0;"></div>
-            <div class="proc-text-clip" data-lt="2" style="left:122px;top:385px;width:310px;"><span>Domluvím další schůzku.</span></div>
+            <div class="proc-avatar" data-la="2" style="left:86px;top:430px;width:26px;height:26px;background:#F5B70A;">P</div>
+            <div class="proc-name" data-ln="2" style="left:122px;top:428px;">Pavel</div>
+            <div class="proc-line" data-lt="2" style="left:122px;top:447px;width:304px;"><span>Začneme <span class="proc-key">s jedním týmem</span>.</span></div>
 
-            <div class="proc-avatar" data-la="3" style="left:84px;top:444px;width:26px;height:26px;background:#3A3A6B;">D</div>
-            <div class="proc-highlight" data-lh="3" style="left:116px;top:439px;width:312px;height:36px;opacity:0;"></div>
-            <div class="proc-text-clip" data-lt="3" style="left:122px;top:447px;width:310px;"><span>Ověřím fakturaci u účetní.</span></div>
-
-            <div class="proc-avatar" data-la="4" style="left:84px;top:506px;width:26px;height:26px;background:#4DABF7;">A</div>
-            <div class="proc-highlight" data-lh="4" style="left:116px;top:501px;width:312px;height:36px;opacity:0;"></div>
-            <div class="proc-text-clip" data-lt="4" style="left:122px;top:509px;width:310px;"><span>Zašlu podklady k projektu.</span></div>
+            <div class="proc-avatar" data-la="3" style="left:86px;top:504px;width:26px;height:26px;background:#3A3A6B;">D</div>
+            <div class="proc-name" data-ln="3" style="left:122px;top:502px;">David</div>
+            <div class="proc-line" data-lt="3" style="left:122px;top:521px;width:304px;"><span><span class="proc-key">Po měsíci vyhodnotíme</span> výsledky.</span></div>
 
             <div class="proc-card" style="left:560px;top:150px;width:392px;height:470px;"></div>
             <div class="proc-icon-tile" style="left:586px;top:176px;">
-              <svg width="18" height="18" viewBox="0 0 18 18"><path d="M4 5.5h10 M4 9h10 M4 12.5h6" stroke="#4DABF7" stroke-width="1.6" stroke-linecap="round"/></svg>
+              <svg width="18" height="18" viewBox="0 0 18 18"><path d="M4 4.5h10 M4 9h10 M4 13.5h6" stroke="#4DABF7" stroke-width="1.5" stroke-linecap="round"/></svg>
             </div>
-            <div class="proc-title" data-task-hdr style="left:640px;top:178px;">Úkoly ze schůzky</div>
-            <div class="proc-sub" data-task-hdr style="left:640px;top:200px;">Automaticky vytěženo ze zápisu</div>
+            <div class="proc-title" data-task-hdr style="left:640px;top:179px;">CO JE PODSTATNÉ</div>
+            <div class="proc-sub" data-task-hdr style="left:640px;top:200px;">Informace připravené pro další práci</div>
             <div class="proc-divider" style="left:586px;top:234px;width:340px;"></div>
 
-            <div class="proc-checkbox" data-cb="0" style="left:586px;top:258px;"></div>
-            <div class="proc-task-title" data-rt="0" style="left:622px;top:255px;">Připravit cenovou nabídku</div>
-            <div class="proc-task-date" data-rd="0" style="left:622px;top:276px;">
-              <svg width="12" height="12" viewBox="0 0 12 12"><rect x="1.5" y="2.5" width="9" height="8" rx="1.6" stroke="#8A90A2" stroke-width="1" fill="none"/><path d="M1.5 4.6h9 M4 1.3v2 M8 1.3v2" stroke="#8A90A2" stroke-width="1" stroke-linecap="round"/></svg>
-              <span>14. 7.</span>
-            </div>
-            <div class="proc-owner" data-ow="0" style="left:834px;top:259px;">
-              <div class="proc-owner-avatar" style="background:#3A3A6B;">D</div>
-              <span class="proc-owner-name">David</span>
-            </div>
-
-            <div class="proc-checkbox" data-cb="1" style="left:586px;top:320px;"></div>
-            <div class="proc-task-title" data-rt="1" style="left:622px;top:317px;">Odeslat smlouvu klientovi</div>
-            <div class="proc-task-date" data-rd="1" style="left:622px;top:338px;">
-              <svg width="12" height="12" viewBox="0 0 12 12"><rect x="1.5" y="2.5" width="9" height="8" rx="1.6" stroke="#8A90A2" stroke-width="1" fill="none"/><path d="M1.5 4.6h9 M4 1.3v2 M8 1.3v2" stroke="#8A90A2" stroke-width="1" stroke-linecap="round"/></svg>
-              <span>15. 7.</span>
-            </div>
-            <div class="proc-owner" data-ow="1" style="left:834px;top:321px;">
-              <div class="proc-owner-avatar" style="background:#4DABF7;">A</div>
-              <span class="proc-owner-name">Aneta</span>
+            <div class="proc-block" data-blk="0" style="left:586px;top:262px;width:340px;height:104px;opacity:0;background:rgba(77,171,247,.05);border:1px solid rgba(77,171,247,.22);">
+              <div class="proc-block-row">
+                <div class="proc-block-icon" style="border:1px solid rgba(77,171,247,.3);">
+                  <svg width="16" height="16" viewBox="0 0 16 16">
+                    <path d="M6.2 9.8 L9.8 6.2" stroke="#4DABF7" stroke-width="1.5" stroke-linecap="round"/>
+                    <path d="M9.1 4.6 L10.4 3.3 a2.4 2.4 0 0 1 3.3 3.3 L12.4 7.9" stroke="#4DABF7" stroke-width="1.5" fill="none" stroke-linecap="round"/>
+                    <path d="M6.9 11.4 L5.6 12.7 a2.4 2.4 0 0 1 -3.3 -3.3 L3.6 8.1" stroke="#4DABF7" stroke-width="1.5" fill="none" stroke-linecap="round"/>
+                  </svg>
+                </div>
+                <span class="proc-kind" style="color:#4DABF7;">SOUVISLOST</span>
+              </div>
+              <span class="proc-block-text">Start pilotu závisí na napojení CRM</span>
             </div>
 
-            <div class="proc-checkbox" data-cb="2" style="left:586px;top:382px;"></div>
-            <div class="proc-task-title" data-rt="2" style="left:622px;top:379px;">Naplánovat schůzku</div>
-            <div class="proc-task-date" data-rd="2" style="left:622px;top:400px;">
-              <svg width="12" height="12" viewBox="0 0 12 12"><rect x="1.5" y="2.5" width="9" height="8" rx="1.6" stroke="#8A90A2" stroke-width="1" fill="none"/><path d="M1.5 4.6h9 M4 1.3v2 M8 1.3v2" stroke="#8A90A2" stroke-width="1" stroke-linecap="round"/></svg>
-              <span>16. 7.</span>
-            </div>
-            <div class="proc-owner" data-ow="2" style="left:834px;top:383px;">
-              <div class="proc-owner-avatar" style="background:#F5B70A;">P</div>
-              <span class="proc-owner-name">Pavel</span>
-            </div>
-
-            <div class="proc-checkbox" data-cb="3" style="left:586px;top:444px;"></div>
-            <div class="proc-task-title" data-rt="3" style="left:622px;top:441px;">Ověřit fakturaci</div>
-            <div class="proc-task-date" data-rd="3" style="left:622px;top:462px;">
-              <svg width="12" height="12" viewBox="0 0 12 12"><rect x="1.5" y="2.5" width="9" height="8" rx="1.6" stroke="#8A90A2" stroke-width="1" fill="none"/><path d="M1.5 4.6h9 M4 1.3v2 M8 1.3v2" stroke="#8A90A2" stroke-width="1" stroke-linecap="round"/></svg>
-              <span>17. 7.</span>
-            </div>
-            <div class="proc-owner" data-ow="3" style="left:834px;top:445px;">
-              <div class="proc-owner-avatar" style="background:#3A3A6B;">D</div>
-              <span class="proc-owner-name">David</span>
+            <div class="proc-block" data-blk="1" style="left:586px;top:378px;width:340px;height:104px;opacity:0;background:rgba(63,178,127,.05);border:1px solid rgba(63,178,127,.22);">
+              <div class="proc-block-row">
+                <div class="proc-block-icon" style="border:1px solid rgba(63,178,127,.3);">
+                  <svg width="16" height="16" viewBox="0 0 16 16">
+                    <circle cx="8" cy="8" r="6" stroke="#3FB27F" stroke-width="1.5" fill="none"/>
+                    <path d="M5.3 8.2 L7.2 10.1 L10.8 6" stroke="#3FB27F" stroke-width="1.6" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+                  </svg>
+                </div>
+                <span class="proc-kind" style="color:#3FB27F;">ROZHODNUTÍ</span>
+              </div>
+              <span class="proc-block-text">Pilot začne v září s jedním týmem</span>
             </div>
 
-            <div class="proc-checkbox" data-cb="4" style="left:586px;top:506px;"></div>
-            <div class="proc-task-title" data-rt="4" style="left:622px;top:503px;">Zaslat podklady k projektu</div>
-            <div class="proc-task-date" data-rd="4" style="left:622px;top:524px;">
-              <svg width="12" height="12" viewBox="0 0 12 12"><rect x="1.5" y="2.5" width="9" height="8" rx="1.6" stroke="#8A90A2" stroke-width="1" fill="none"/><path d="M1.5 4.6h9 M4 1.3v2 M8 1.3v2" stroke="#8A90A2" stroke-width="1" stroke-linecap="round"/></svg>
-              <span>18. 7.</span>
-            </div>
-            <div class="proc-owner" data-ow="4" style="left:834px;top:507px;">
-              <div class="proc-owner-avatar" style="background:#4DABF7;">A</div>
-              <span class="proc-owner-name">Aneta</span>
+            <div class="proc-block" data-blk="2" style="left:586px;top:494px;width:340px;height:104px;opacity:0;background:rgba(245,183,10,.05);border:1px solid rgba(245,183,10,.22);">
+              <div class="proc-block-row">
+                <div class="proc-block-icon" style="border:1px solid rgba(245,183,10,.3);">
+                  <svg width="16" height="16" viewBox="0 0 16 16">
+                    <path d="M3 8h9" stroke="#F5B70A" stroke-width="1.6" stroke-linecap="round"/>
+                    <path d="M9 4.8 L12.4 8 L9 11.2" stroke="#F5B70A" stroke-width="1.6" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+                  </svg>
+                </div>
+                <span class="proc-kind" style="color:#F5B70A;">DALŠÍ KROK</span>
+              </div>
+              <span class="proc-block-text">Po prvním měsíci vyhodnotit výsledky</span>
             </div>
 
-            <div class="proc-pill" data-pill="0" style="opacity:0;"><div class="proc-pill-dot" style="background:#3A3A6B;"></div><span class="proc-pill-text">Připravit cenovou</span></div>
-            <div class="proc-pill" data-pill="1" style="opacity:0;"><div class="proc-pill-dot" style="background:#4DABF7;"></div><span class="proc-pill-text">Odeslat smlouvu</span></div>
-            <div class="proc-pill" data-pill="2" style="opacity:0;"><div class="proc-pill-dot" style="background:#F5B70A;"></div><span class="proc-pill-text">Naplánovat schůzku</span></div>
-            <div class="proc-pill" data-pill="3" style="opacity:0;"><div class="proc-pill-dot" style="background:#3A3A6B;"></div><span class="proc-pill-text">Ověřit fakturaci</span></div>
-            <div class="proc-pill" data-pill="4" style="opacity:0;"><div class="proc-pill-dot" style="background:#4DABF7;"></div><span class="proc-pill-text">Zaslat podklady</span></div>
+            <div class="proc-pill" data-pill="0" style="opacity:0;"><div class="proc-pill-dot" style="background:#4DABF7;"></div><span class="proc-pill-text">Souvislost</span></div>
+            <div class="proc-pill" data-pill="1" style="opacity:0;"><div class="proc-pill-dot" style="background:#3FB27F;"></div><span class="proc-pill-text">Rozhodnutí</span></div>
+            <div class="proc-pill" data-pill="2" style="opacity:0;"><div class="proc-pill-dot" style="background:#F5B70A;"></div><span class="proc-pill-text">Další krok</span></div>
           </div>
         </div>
       </div>
       <div class="how-panel" role="tabpanel">
         <div>
-          <h3>Výstupy pokračují tam, kde pracuje váš tým.</h3>
-          <p>Nemusíte otevírat další aplikaci. Zápisy, úkoly i CRM pokračují přímo do nástrojů, které váš tým používá každý den.</p>
+          <h3>Informace pokračují do vašich systémů.</h3>
+          <p>Napojíme je na nástroje, ve kterých už pracujete, a celý tok nastavíme podle vašich procesů.</p>
           <ul class="how-list">
-            <li><svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3.5 8.2l3 3 6-6.2" stroke="#6EC1E4" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>CRM a obchodní systém</li>
+            <li><svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3.5 8.2l3 3 6-6.2" stroke="#6EC1E4" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>CRM a klientská historie</li>
             <li><svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3.5 8.2l3 3 6-6.2" stroke="#6EC1E4" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>Projektové a úkolové nástroje</li>
-            <li><svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3.5 8.2l3 3 6-6.2" stroke="#6EC1E4" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>E-mail, Teams, Slack nebo API</li>
+            <li><svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3.5 8.2l3 3 6-6.2" stroke="#6EC1E4" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>Dokumenty, komunikace a znalostní báze</li>
           </ul>
         </div>
         <div class="how-visual connect-visual">
@@ -2312,8 +2504,8 @@ html.no-motion .how-visual * { animation: none !important; }
               <svg width="22" height="22" viewBox="0 0 22 22" fill="none"><path d="M11 3l2.4 4.9 5.4.8-3.9 3.8.9 5.4L11 15.3l-4.8 2.6.9-5.4L3.2 8.7l5.4-.8L11 3z" stroke="#1F1741" stroke-width="1.7" stroke-linejoin="round"/></svg>
             </div>
             <div>
-              <h3>Firemní know-how mizí s každým odchodem.</h3>
-              <p>Nejdůležitější zkušenosti vznikají v rozhovorech. Když je nikdo nezachytí, odejdou spolu s lidmi, kteří je mají v hlavě.</p>
+              <h3>Firemní know-how se ztrácí průběžně.</h3>
+              <p>Důležité zkušenosti vznikají v rozhovorech. Pokud zůstanou jen v hlavách a poznámkách, postupně se ztrácí jejich kontext.</p>
             </div>
           </div>
           <div class="loss-item" style="--i:2">
@@ -2326,9 +2518,11 @@ html.no-motion .how-visual * { animation: none !important; }
             </div>
           </div>
         </div>
-        <div class="reveal" style="margin-top: 28px;">
-          <a href="dotaznik" class="btn btn-ghost">Najít řešení</a>
-          <p style="font-size: 14px; color: var(--caption); margin-top: 12px;">Krátký dotazník ukáže, kolik z toho času dokážete získat zpět.</p>
+        <div class="cost-actions reveal">
+          <a href="dotaznik" class="btn btn-ghost">Zjistit, kde začít
+            <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3 8h9M8.5 4.5L12 8l-3.5 3.5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </a>
+          <span class="cost-note">Jedna minuta · Bez registrace</span>
         </div>
       </div>
     </div>
@@ -2336,13 +2530,13 @@ html.no-motion .how-visual * { animation: none !important; }
 </section>
 
 <!-- PRODUKT: KOUPIT -->
-<section id="produkt">
+<section id="produkt" hidden>
   <div class="container">
     <div class="product-card reveal">
       <div class="product-media">
-        <span class="product-badge">Novinka · AI zápisník</span>
+        <span class="product-badge">Nahrávací zařízení s AI</span>
         <div class="product-stage">
-          <img id="gallery-main" src="Fotky/Firefly_Flux_cria_uma_nova_cena_semelhante_a_esta_referencia_com_fundo_escuro_com_o_mesmo_diso_543795 Background Removed.png" alt="AI zápisník Omi, pohled na zařízení">
+          <img id="gallery-main" src="Fotky/Firefly_Flux_cria_uma_nova_cena_semelhante_a_esta_referencia_com_fundo_escuro_com_o_mesmo_diso_543795 Background Removed.png" alt="Nahrávací zařízení Omi, pohled na zařízení">
         </div>
         <div class="product-thumbs" role="tablist" aria-label="Fotografie produktu">
           <button type="button" class="buy-thumb is-active" data-src="Fotky/Firefly_Flux_cria_uma_nova_cena_semelhante_a_esta_referencia_com_fundo_escuro_com_o_mesmo_diso_543795 Background Removed.png">
@@ -2356,7 +2550,7 @@ html.no-motion .how-visual * { animation: none !important; }
       <div class="product-config">
         <span class="eyebrow eyebrow-dot">Nahrávací zařízení</span>
         <h2 class="product-title">OMI AI</h2>
-        <p class="product-desc">Zařízení s aplikací pro mobil, desktop i web. Zachytí schůzku, hovor nebo návštěvu u zákazníka a během několika minut připraví přepis i přehledné shrnutí.</p>
+        <p class="product-desc">Nositelné zařízení s aplikací pro mobil, desktop i web. Zachytí rozhovor a připraví jeho obsah pro další zpracování, vyhledávání a automatizace.</p>
 
         <div class="config-group">
           <span class="config-label">Počet kusů</span>
@@ -2393,7 +2587,10 @@ html.no-motion .how-visual * { animation: none !important; }
           </div>
         </div>
 
-        <button type="button" class="btn buy-big" data-open="modal-objednavka" id="buy-cta">Objednat Omi</button>
+        <div class="buy-actions">
+          <button type="button" class="btn buy-big" data-open="modal-objednavka" id="buy-cta">Objednat Omi</button>
+          <a href="co-je-omi" class="buy-secondary">Více o Omi</a>
+        </div>
       </div>
     </div>
   </div>
@@ -2404,12 +2601,12 @@ html.no-motion .how-visual * { animation: none !important; }
   <div class="container">
     <div class="reveal">
       <span class="eyebrow">Služba</span>
-      <h2 class="section-title">Implementace, která přinese skutečný výsledek.</h2>
-      <p class="section-lead">Pomůžeme vám nastavit procesy i automatizace tak, aby se výstupy dostaly tam, kde vytvářejí hodnotu.</p>
+      <h2 class="section-title">Zařízení zapojíme do vašich procesů.</h2>
+      <p class="section-lead">Nastavíme, které informace se mají z rozhovorů zachytit, kam se uloží a co se s nimi má stát dál.</p>
     </div>
     <div class="service-panel reveal">
       <div>
-        <h3>Z rozhovorů se stanou data.<br> Z dat automatizace.</h3>
+        <h3>Informace z rozhovorů<br> zapojíme do další práce.</h3>
         <p>Navrhneme celý workflow, nastavíme integrace a zajistíme, aby Omi zapadlo do způsobu práce vašeho týmu.</p>
         <button type="button" class="btn btn-primary" data-open="modal-konzultace">Domluvit konzultaci</button>
       </div>
@@ -2430,7 +2627,7 @@ html.no-motion .how-visual * { animation: none !important; }
     <div class="reveal">
       <span class="eyebrow">Proč Plexima</span>
       <h2 class="section-title">Neprodáváme zařízení. Přinášíme výsledek.</h2>
-      <p class="section-lead">Technologie je jen začátek. Hodnotu vytváří správně nastavený proces.</p>
+      <p class="section-lead">Vybereme proces, ve kterém nahrávání dává smysl, nastavíme potřebné integrace a pomůžeme s pilotním provozem.</p>
     </div>
     <div class="trust-cards reveal reveal-stagger">
       <div class="trust-card" style="--i:0">
@@ -2471,33 +2668,32 @@ html.no-motion .how-visual * { animation: none !important; }
     <div class="reveal">
       <span class="eyebrow">Bezplatná konzultace</span>
       <h2 class="section-title">Jak probíhá úvodní konzultace</h2>
-      <p class="section-lead">Během 60 minut společně najdeme proces s největším potenciálem pro automatizaci.</p>
+      <p class="section-lead">Během 60 minut zjistíte, kde z rozhovorů ztrácíte nejvíc hodnoty.</p>
     </div>
     <div class="consult-steps reveal reveal-stagger">
       <div class="consult-step" style="--i:0">
         <span class="consult-num">01</span>
-        <h3>Najdeme správný proces</h3>
-        <p>Vybereme oblast, kde dnes vzniká nejvíce administrativy po schůzkách.</p>
+        <h3>Vybereme důležité rozhovory</h3>
+        <p>Najdeme situace, kde mizí cenné informace nebo vzniká zbytečná ruční práce.</p>
       </div>
       <div class="consult-step" style="--i:1">
         <span class="consult-num">02</span>
-        <h3>Zmapujeme současný stav</h3>
-        <p>Podíváme se, kdo dnes zapisuje informace, kam putují a kde vzniká zbytečná ruční práce.</p>
+        <h3>Zmapujeme cestu informací</h3>
+        <p>Zjistíme, co je potřeba uchovat, kdo s informacemi pracuje a kam se mají dostat.</p>
       </div>
       <div class="consult-step" style="--i:2">
         <span class="consult-num">03</span>
-        <h3>Navrhneme řešení</h3>
-        <p>Ukážeme, jak data z rozhovorů automaticky tečou do vašich systémů.</p>
+        <h3>Navrhneme konkrétní řešení</h3>
+        <p>Ukážeme, jak může zachycený kontext pokračovat do vašich systémů a procesů.</p>
       </div>
       <div class="consult-step" style="--i:3">
         <span class="consult-num">04</span>
-        <h3>Doporučíme další krok</h3>
-        <p>Otevřeně řekneme, jestli to pro vás dává smysl nebo doporučíme jiné řešení.</p>
+        <h3>Doporučíme vhodný další krok</h3>
+        <p>Řekneme, jestli řešení dává smysl, a doporučíme nejvhodnější další postup.</p>
       </div>
     </div>
     <div class="consult-cta reveal">
       <button type="button" class="btn btn-primary" data-open="modal-konzultace">Domluvit konzultaci</button>
-      <span class="consult-meta">Bezplatná analýza · 60 minut · Konkrétní doporučení</span>
     </div>
   </div>
 </section>
@@ -2507,7 +2703,7 @@ html.no-motion .how-visual * { animation: none !important; }
   <div class="container">
     <div class="reveal">
       <span class="eyebrow">Integrace</span>
-      <h2 class="section-title">Napojíme výstupy na systémy,<br> které už používáte</h2>
+      <h2 class="section-title">Řešení napojíme na systémy,<br> které už používáte</h2>
     </div>
     <div class="integration-grid reveal reveal-stagger">
       <div class="int-category" style="--i:0">
@@ -2547,7 +2743,7 @@ html.no-motion .how-visual * { animation: none !important; }
         </div>
       </div>
     </div>
-    <p class="integration-note reveal">Cílem není přidat další izolovanou aplikaci. Cílem je dostat výstupy z rozhovorů<br> <strong>do nástrojů, ve kterých už řídíte procesy, úkoly a provozní agendu.</strong></p>
+    <p class="integration-note reveal">Rozhodnutí, úkoly a důležitý kontext se dostanou přímo do nástrojů,<br> <strong>ve kterých řídíte klienty, projekty a provoz.</strong></p>
   </div>
 </section>
 
@@ -2561,28 +2757,36 @@ html.no-motion .how-visual * { animation: none !important; }
     </div>
     <div class="faq-list reveal">
       <details class="faq-item">
+        <summary>Co znamená inteligentní paměť firmy?<span class="faq-icon"><svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M6 1v10M1 6h10" stroke="#1F1741" stroke-width="1.8" stroke-linecap="round"/></svg></span></summary>
+        <p class="faq-body">Není to jen přepis nebo zápis jedné schůzky. Důležité informace z rozhovorů zůstávají spojené s klientem, projektem nebo tématem, propojují se s dřívějším kontextem a dají se znovu využít při další práci.</p>
+      </details>
+      <details class="faq-item">
         <summary>Je to jen pro Omi?<span class="faq-icon"><svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M6 1v10M1 6h10" stroke="#1F1741" stroke-width="1.8" stroke-linecap="round"/></svg></span></summary>
-        <p class="faq-body">Omi je aktuální technologie, se kterou pracujeme. Řešení ale stavíme tak, aby hardwarová vrstva byla do budoucna vyměnitelná. Automatizace a integrace zůstávají.</p>
+        <p class="faq-body">Omi je aktuální výchozí zařízení, se kterým pracujeme. Hodnota řešení ale stojí hlavně na způsobu zpracování informací, automatizacích a napojení na vaše procesy. Ty navrhujeme tak, aby nebyly trvale závislé na jednom typu hardwaru.</p>
       </details>
       <details class="faq-item">
         <summary>Musíme nahrávat všechny rozhovory?<span class="faq-icon"><svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M6 1v10M1 6h10" stroke="#1F1741" stroke-width="1.8" stroke-linecap="round"/></svg></span></summary>
-        <p class="faq-body">Ne. Naopak doporučujeme začít jedním jasně ohraničeným use casem, kde dává nahrávání smysl a má konkrétní přínos.</p>
+        <p class="faq-body">Ne, není to povinnost. Inteligentní paměť je ale užitečnější, čím více relevantních rozhovorů může propojit. Můžete proto průběžně nahrávat všechny situace, ve kterých to dává smysl a jsou splněná pravidla pro souhlas a práci s daty. Pokud nechcete začít v plném rozsahu, můžete nejdřív zvolit jeden typ schůzek a postupně přidávat další.</p>
       </details>
       <details class="faq-item">
         <summary>Funguje to česky?<span class="faq-icon"><svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M6 1v10M1 6h10" stroke="#1F1741" stroke-width="1.8" stroke-linecap="round"/></svg></span></summary>
-        <p class="faq-body">Ano, funguje to česky. Kvalita přepisu závisí na prostředí a stylu mluvy, ale v běžných podmínkách (kancelář, schůzka, auto) funguje spolehlivě. Přesnost dále vyladíme při nastavení podle vašeho konkrétního prostředí.</p>
+        <p class="faq-body">Ano. Přepis i navazující zpracování lze používat v češtině. Výslednou kvalitu ovlivňuje hluk, vzdálenost mluvčích, odborné názvy i způsob mluvy, proto vhodnost vždy ověřujeme na reálném typu rozhovoru z vašeho provozu.</p>
       </details>
       <details class="faq-item">
         <summary>Jak je to s nahráváním, souhlasem a GDPR?<span class="faq-icon"><svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M6 1v10M1 6h10" stroke="#1F1741" stroke-width="1.8" stroke-linecap="round"/></svg></span></summary>
-        <p class="faq-body">Tohle bereme vážně a řešíme to s vámi hned na začátku. Součástí pilotu je nastavení pravidel pro souhlas, přístupová práva, retenci dat i interní směrnici. Vše přizpůsobíme vašemu provozu tak, aby nahrávání bylo v souladu s GDPR a zároveň prakticky použitelné.</p>
+        <p class="faq-body">Nahrávání musí mít jasný účel a pravidla. Při návrhu řešení projdeme, kdy se nahrává, jak se řeší souhlas účastníků, kdo má přístup k výstupům a jak dlouho se data uchovávají. Připravíme technické podklady a konkrétní nastavení se následně posoudí podle vašeho provozu a právních požadavků.</p>
+      </details>
+      <details class="faq-item">
+        <summary>Kam se rozhovory a výstupy ukládají?<span class="faq-icon"><svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M6 1v10M1 6h10" stroke="#1F1741" stroke-width="1.8" stroke-linecap="round"/></svg></span></summary>
+        <p class="faq-body">Záleží na zvoleném nastavení a navazujících systémech. Před nasazením popíšeme tok dat od záznamu přes zpracování až po cílové úložiště, včetně přístupů, exportu, mazání a pravidel uchování. Výstupy mohou pokračovat například do CRM, úkolového nástroje, dokumentů nebo znalostní báze.</p>
       </details>
       <details class="faq-item">
         <summary>Co když už máme CRM nebo úkolový systém?<span class="faq-icon"><svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M6 1v10M1 6h10" stroke="#1F1741" stroke-width="1.8" stroke-linecap="round"/></svg></span></summary>
-        <p class="faq-body">To je ideální. Cílem je napojit výstupy na systémy, které už používáte, ne nutit firmu do další izolované aplikace.</p>
+        <p class="faq-body">To je obvykle výhoda. Cílem není přidat další izolovanou aplikaci, ale dostat rozhodnutí, úkoly a důležitý kontext do nástrojů, ve kterých už tým pracuje. Pokud integrace na začátku nedává smysl, lze nejdřív ověřit kvalitu výstupů a napojení doplnit až následně.</p>
       </details>
       <details class="faq-item">
         <summary>Kolik času zabere nasazení?<span class="faq-icon"><svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M6 1v10M1 6h10" stroke="#1F1741" stroke-width="1.8" stroke-linecap="round"/></svg></span></summary>
-        <p class="faq-body">Záleží na rozsahu. Kolik procesů chcete automatizovat a na jaké systémy se napojujete. Jednodušší nasazení zvládneme do týdne, složitější konfigurace s více integracemi zabere 2 až 4 týdny. Přesný harmonogram stanovíme po úvodní konzultaci.</p>
+        <p class="faq-body">Záleží na tom, co od řešení očekáváte, kolik lidí ho bude používat, kam se mají informace ukládat a co se s nimi má dít dál. Nejdřív společně zmapujeme vaše potřeby a současný způsob práce. Podle toho navrhneme rozsah řešení, potřebná napojení a reálný postup nasazení.</p>
       </details>
     </div>
   </div>
@@ -2592,11 +2796,11 @@ html.no-motion .how-visual * { animation: none !important; }
 <section class="final-cta" id="kontakt">
   <div class="container reveal">
     <span class="eyebrow">Další krok</span>
-    <h2>Během 60 minut zjistíte, kde má automatizace největší přínos.</h2>
-    <p>Společně projdeme vaše procesy, odhalíme největší administrativní zátěž a navrhneme konkrétní řešení i další postup.</p>
+    <h2>Během 60 minut zjistíte, kde z rozhovorů ztrácíte nejvíc hodnoty.</h2>
+    <p>Projdeme vybraný proces a navrhneme, jak důležité informace uchovat a zapojit do další práce.</p>
     <div style="display: flex; gap: 16px; justify-content: center; flex-wrap: wrap;">
       <button type="button" class="btn btn-primary" data-open="modal-konzultace">Domluvit konzultaci</button>
-      <a href="dotaznik" class="btn btn-ghost">Najít řešení</a>
+      <a href="dotaznik" class="btn btn-ghost">Zjistit, kde začít</a>
     </div>
   </div>
 </section>
@@ -2609,18 +2813,19 @@ html.no-motion .how-visual * { animation: none !important; }
       </div>
       <nav class="footer-links" aria-label="Patičková navigace">
         <a href="#jak-to-funguje">Jak to funguje</a>
-        <a href="#produkt">Omi</a>
+        <a href="co-je-omi">Co je Omi</a>
         <a href="#implementace">Nasazení</a>
-        <a href="#faq">FAQ</a>
         <a href="priklady">Příklady z praxe</a>
+        <a href="#faq">FAQ</a>
+        <a href="kontakt">Kontakt</a>
       </nav>
     </div>
     <div class="footer-mid">
-      <p class="footer-desc">Propojujeme AI zápisník s firemními systémy, aby se rozhovory automaticky měnily na zápisy, úkoly, reporty a CRM záznamy.</p>
+      <p class="footer-desc">Uchováváme kontext z důležitých rozhovorů a napojujeme ho na firemní systémy a procesy.</p>
     </div>
     <div class="footer-bottom">
       <span>© 2026 Plexima. Všechna práva vyhrazena.</span>
-      <a href="#faq">Bezpečnost a pravidla nahrávání</a>
+      <span><a href="ochrana-osobnich-udaju">Ochrana osobních údajů</a> · <a href="#faq">Bezpečnost a pravidla nahrávání</a></span>
     </div>
   </div>
 </footer>
@@ -2675,7 +2880,7 @@ html.no-motion .how-visual * { animation: none !important; }
         </div>
         <label class="form-check">
           <input type="checkbox" name="souhlas" required>
-          Souhlasím se zpracováním osobních údajů za účelem vyřízení poptávky. <span class="req">*</span>
+          Souhlasím se zpracováním osobních údajů za účelem vyřízení poptávky v souladu se <a href="ochrana-osobnich-udaju" target="_blank" rel="noopener" onclick="event.stopPropagation()">zásadami ochrany osobních údajů</a>. <span class="req">*</span>
         </label>
         <button type="submit" class="btn btn-primary form-submit">Odeslat</button>
         <p class="form-status" hidden></p>
@@ -2689,7 +2894,7 @@ html.no-motion .how-visual * { animation: none !important; }
 <div class="modal-overlay" id="modal-objednavka" aria-hidden="true">
   <div class="modal" role="dialog" aria-modal="true" aria-labelledby="objednavka-title">
     <button type="button" class="modal-close" aria-label="Zavřít">✕</button>
-    <h3 id="objednavka-title">Objednat AI zápisník Omi</h3>
+    <h3 id="objednavka-title">Objednat zařízení Omi</h3>
     <p class="modal-lead">Bez platby předem. Objednávku potvrdíme e-mailem a domluvíme doručení i fakturaci.</p>
     <form class="form-grid" data-type="objednavka" novalidate>
       <div class="form-field">
@@ -2741,7 +2946,7 @@ html.no-motion .how-visual * { animation: none !important; }
       </div>
       <label class="form-check">
         <input type="checkbox" name="souhlas" required>
-        Souhlasím se zpracováním osobních údajů za účelem vyřízení objednávky. <span class="req">*</span>
+        Souhlasím se zpracováním osobních údajů za účelem vyřízení objednávky v souladu se <a href="ochrana-osobnich-udaju" target="_blank" rel="noopener" onclick="event.stopPropagation()">zásadami ochrany osobních údajů</a>. <span class="req">*</span>
       </label>
       <button type="submit" class="btn btn-secondary form-submit">Odeslat objednávku</button>
       <p class="form-status" hidden></p>
@@ -2933,23 +3138,37 @@ html.no-motion .how-visual * { animation: none !important; }
     });
   };
 
-  var startRotation = function () {
-    if (reducedMotion) return;
-    rotateTimer = setInterval(function () {
-      var next = (currentTab + 1) % tabs.length;
-      activateTab(next);
-      if (animResets[next]) animResets[next]();
-    }, 5000);
-  };
-
   var animResets = [
     function () { if (window._captureReset) window._captureReset(); },
     function () { if (window._processReset) window._processReset(); },
     function () { if (window._connectReset) window._connectReset(); }
   ];
+
+  // Each tab holds until its animation has run its full course, then advances.
+  // Durations = the length of each scene's story (ms):
+  //   Zachytit: full 10s round-robin loop
+  //   Pochopit: build + settle, before the loop's fade-to-empty at 9.15s
+  //   Napojit:  chips + dispatch + all tiles confirmed, before the re-arm at 5.7s
+  var TAB_DURATION = [10000, 9000, 5600];
+
+  var scheduleNextRotation = function () {
+    if (reducedMotion) return;
+    rotateTimer = setTimeout(function () {
+      var next = (currentTab + 1) % tabs.length;
+      activateTab(next);
+      if (animResets[next]) animResets[next]();
+      scheduleNextRotation();
+    }, TAB_DURATION[currentTab]);
+  };
+
+  var startRotation = function () {
+    if (reducedMotion) return;
+    scheduleNextRotation();
+  };
+
   tabs.forEach(function (tab, i) {
     tab.addEventListener('click', function () {
-      clearInterval(rotateTimer);
+      clearTimeout(rotateTimer);
       activateTab(i);
       animResets[i]();
     });
@@ -3113,31 +3332,37 @@ html.no-motion .how-visual * { animation: none !important; }
     var stage = document.getElementById('process-stage');
     if (!stage) return;
     var wrap = stage.parentElement;
-    var D = 11;
-    var TRAVEL = 0.6;
-    var Y0 = 258, RH = 62;
-    var NOTE = { x: 60, w: 392 };
-    var TASK = { x: 560, w: 392 };
-    var ITEMS = [
-      { ll: 0.55, ex: 3.05 },
-      { ll: 1.15, ex: 3.65 },
-      { ll: 1.75, ex: 4.25 },
-      { ll: 2.35, ex: 4.85 },
-      { ll: 2.95, ex: 5.45 }
+    var D = 10;
+    var TRAVEL = 0.7;
+    var Y0 = 280, RH = 74;
+    var TALK = { x: 60, w: 392 };
+    var CTX = { x: 560, w: 392 };
+    var BY0 = 262, BH = 104, BGAP = 12;
+    var LINES = [
+      { at: 0.35 },
+      { at: 0.95 },
+      { at: 1.55 },
+      { at: 2.15 }
+    ];
+    var PHASES = [
+      { at: 3.10, lines: [0, 1] },
+      { at: 4.85, lines: [0, 2] },
+      { at: 6.60, lines: [3] }
     ];
 
     var noteHdrs = stage.querySelectorAll('[data-note-hdr]');
     var taskHdrs = stage.querySelectorAll('[data-task-hdr]');
-    var las = [], lhs = [], lts = [], cbs = [], rts = [], rds = [], ows = [], pills = [];
-    for (var i = 0; i < 5; i++) {
+    var las = [], lns = [], lts = [], keys = [];
+    for (var i = 0; i < LINES.length; i++) {
       las.push(stage.querySelector('[data-la="' + i + '"]'));
-      lhs.push(stage.querySelector('[data-lh="' + i + '"]'));
+      lns.push(stage.querySelector('[data-ln="' + i + '"]'));
       lts.push(stage.querySelector('[data-lt="' + i + '"]'));
-      cbs.push(stage.querySelector('[data-cb="' + i + '"]'));
-      rts.push(stage.querySelector('[data-rt="' + i + '"]'));
-      rds.push(stage.querySelector('[data-rd="' + i + '"]'));
-      ows.push(stage.querySelector('[data-ow="' + i + '"]'));
-      pills.push(stage.querySelector('[data-pill="' + i + '"]'));
+      keys.push(stage.querySelector('[data-lt="' + i + '"] .proc-key'));
+    }
+    var blocks = [], pills = [];
+    for (var j = 0; j < PHASES.length; j++) {
+      blocks.push(stage.querySelector('[data-blk="' + j + '"]'));
+      pills.push(stage.querySelector('[data-pill="' + j + '"]'));
     }
 
     var clamp01 = function (v, a, b) { return Math.max(a, Math.min(b, v)); };
@@ -3148,84 +3373,59 @@ html.no-motion .how-visual * { animation: none !important; }
     var bez = function (p, A, C, B) { var q = 1 - p; return { x: q*q*A.x + 2*q*p*C.x + p*p*B.x, y: q*q*A.y + 2*q*p*C.y + p*p*B.y }; };
 
     var renderProcess = function (t) {
-      var resetOut = smooth(t, 7.1, 7.75);
-      var present = 1 - resetOut;
+      var present = 1 - smooth(t, 9.15, 9.8);
       var hdr = rise(t, 0.15, 0.4) * present;
 
-      noteHdrs.forEach(function (el) { el.style.opacity = 0.4 + hdr * 0.6; });
-      taskHdrs.forEach(function (el) { el.style.opacity = 0.4 + hdr * 0.6; });
+      noteHdrs.forEach(function (el) { el.style.opacity = 0.45 + hdr * 0.55; });
+      taskHdrs.forEach(function (el) { el.style.opacity = 0.45 + hdr * 0.55; });
 
-      for (var i = 0; i < 5; i++) {
-        var it = ITEMS[i];
-        var y = Y0 + i * RH;
-        var write = easeOutCubic(rise(t, it.ll, 0.6)) * present;
-        var appear = rise(t, it.ll, 0.25) * present;
-        var writing = write > 0.02 && write < 0.99;
+      for (var i = 0; i < LINES.length; i++) {
+        var L = LINES[i];
+        var appear = smooth(t, L.at, L.at + 0.45) * present;
+        var write = easeOutCubic(rise(t, L.at + 0.05, 0.55));
 
-        var hi = (smooth(t, it.ex - 0.1, it.ex + 0.15) * (1 - smooth(t, it.ex + 0.45, it.ex + 0.9))) * present;
+        var mark = 0, pulse = 0;
+        for (var k = 0; k < PHASES.length; k++) {
+          var P = PHASES[k];
+          if (P.lines.indexOf(i) < 0) continue;
+          mark = Math.max(mark, smooth(t, P.at, P.at + 0.35));
+          pulse = Math.max(pulse, smooth(t, P.at, P.at + 0.3) * (1 - smooth(t, P.at + 0.7, P.at + 1.3)));
+        }
+        mark *= present;
+        pulse *= present;
 
         las[i].style.opacity = appear;
-        lhs[i].style.opacity = hi;
-        lhs[i].style.borderColor = 'rgba(77,171,247,' + (0.25 * hi) + ')';
-
-        var textSpan = lts[i].querySelector('span');
-        textSpan.style.width = (write * 100) + '%';
+        lns[i].style.opacity = appear;
         lts[i].style.opacity = appear;
-        var caret = lts[i].querySelector('.proc-caret');
-        if (writing && !caret) {
-          caret = document.createElement('span');
-          caret.className = 'proc-caret';
-          lts[i].appendChild(caret);
-        } else if (!writing && caret) {
-          caret.remove();
-        }
+        lts[i].querySelector('span').style.width = (write * 100) + '%';
 
-        var arrive = it.ex + TRAVEL;
-        var rowIn = smooth(t, arrive - 0.05, arrive + 0.35) * present;
-        var assigned = smooth(t, arrive + 0.15, arrive + 0.5) * present;
-        var done = assigned > 0.5;
-        var slide = (1 - rowIn) * 8;
+        keys[i].style.background = 'rgba(77,171,247,' + (0.05 + 0.11 * mark + 0.07 * pulse) + ')';
+        keys[i].style.boxShadow = 'inset 0 -1.5px 0 rgba(77,171,247,' + (0.18 * mark + 0.3 * pulse) + ')';
+        keys[i].style.color = mark > 0.4 ? '#17173A' : '#2B2B47';
+        keys[i].style.fontWeight = mark > 0.4 ? 600 : 500;
+      }
 
-        cbs[i].style.opacity = rowIn;
-        cbs[i].style.border = '2px solid ' + (done ? '#4DABF7' : '#D6DBE6');
-        cbs[i].style.background = done ? '#4DABF7' : '#fff';
-        var check = cbs[i].querySelector('svg');
-        if (!check) {
-          check = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
-          check.setAttribute('width', '12');
-          check.setAttribute('height', '12');
-          check.setAttribute('viewBox', '0 0 12 12');
-          var path = document.createElementNS('http://www.w3.org/2000/svg', 'path');
-          path.setAttribute('d', 'M2.6 6.2 L5 8.6 L9.4 3.6');
-          path.setAttribute('stroke', '#fff');
-          path.setAttribute('stroke-width', '1.8');
-          path.setAttribute('fill', 'none');
-          path.setAttribute('stroke-linecap', 'round');
-          path.setAttribute('stroke-linejoin', 'round');
-          check.appendChild(path);
-          cbs[i].appendChild(check);
-        }
-        check.style.opacity = assigned;
+      for (var m = 0; m < PHASES.length; m++) {
+        var Ph = PHASES[m];
+        var arrive = Ph.at + TRAVEL;
+        var inn = smooth(t, arrive, arrive + 0.45) * present;
+        blocks[m].style.opacity = inn;
+        blocks[m].style.transform = 'translateY(' + ((1 - inn) * 10) + 'px)';
 
-        rts[i].style.opacity = rowIn;
-        rts[i].style.transform = 'translateY(' + slide + 'px)';
-        rds[i].style.opacity = rowIn;
-        rds[i].style.transform = 'translateY(' + slide + 'px)';
-        ows[i].style.opacity = assigned;
-        ows[i].style.transform = 'translateY(' + ((1 - assigned) * 8) + 'px)';
-
-        var p = easeInOutCubic(rise(t, it.ex, TRAVEL));
+        var p = easeInOutCubic(rise(t, Ph.at + 0.25, TRAVEL));
         if (p <= 0.02 || p >= 0.99 || present < 0.5) {
-          pills[i].style.opacity = 0;
+          pills[m].style.opacity = 0;
         } else {
-          var from = { x: NOTE.x + NOTE.w - 20, y: y + 13 };
-          var to = { x: TASK.x + 40, y: y + 11 };
-          var ctrl = { x: (from.x + to.x) / 2, y: Math.min(from.y, to.y) - 34 };
+          var srcY = Y0 + Ph.lines[Ph.lines.length - 1] * RH + 24;
+          var dstY = BY0 + m * (BH + BGAP) + 26;
+          var from = { x: TALK.x + TALK.w - 30, y: srcY };
+          var to = { x: CTX.x + 46, y: dstY };
+          var ctrl = { x: (from.x + to.x) / 2, y: Math.min(from.y, to.y) - 40 };
           var pos = bez(p, from, ctrl, to);
-          var fade = p < 0.14 ? p / 0.14 : (p > 0.86 ? (1 - p) / 0.14 : 1);
-          pills[i].style.left = (pos.x - 50) + 'px';
-          pills[i].style.top = (pos.y - 13) + 'px';
-          pills[i].style.opacity = fade;
+          var fade = p < 0.15 ? p / 0.15 : (p > 0.85 ? (1 - p) / 0.15 : 1);
+          pills[m].style.left = (pos.x - 46) + 'px';
+          pills[m].style.top = (pos.y - 15) + 'px';
+          pills[m].style.opacity = fade;
         }
       }
     };
@@ -3238,7 +3438,7 @@ html.no-motion .how-visual * { animation: none !important; }
     window.addEventListener('resize', scaleStage);
 
     if (reducedMotion) {
-      renderProcess(6);
+      renderProcess(8.5);
       return;
     }
 
