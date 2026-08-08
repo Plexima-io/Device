@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
+  <style>
+    .mark { stroke-width: 16; stroke-linecap: round; fill: none; }
+    @media (prefers-color-scheme: dark) { .ink { stroke: #FFFFFF; } }
+  </style>
+  <path class="mark" stroke="#FEC710" d="M16 16 L39 39"/>
+  <path class="mark" stroke="#ED3E84" d="M84 16 L61 39"/>
+  <path class="mark" stroke="#46C4D7" d="M16 84 L39 61"/>
+  <path class="mark ink" stroke="#1F1741" d="M84 84 L61 61"/>
+</svg>
