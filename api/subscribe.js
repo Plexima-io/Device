@@ -8,10 +8,17 @@ const ZDROJE = {
   'exit-intent': 'newsletter'
 };
 
-const SKIP = ['type', 'email', 'telefon', 'jmeno', 'souhlas', 'page'];
+const SKIP = ['type', 'email', 'telefon', 'jmeno', 'souhlas', 'page', 'firma'];
+
+const UTM_POLE = {
+  utm_source: 'UtmSourceStr',
+  utm_medium: 'UtmMediumStr',
+  utm_campaign: 'UtmCampaignStr',
+  utm_content: 'UtmContentStr',
+  utm_term: 'UtmTermStr'
+};
 
 const LABELS = {
-  firma: 'Firma',
   ico: 'IČO',
   pozice: 'Pozice',
   pocet: 'Počet kusů',
@@ -40,9 +47,23 @@ function splitName(jmeno) {
   return { first: parts.slice(0, -1).join(' '), last: parts[parts.length - 1] };
 }
 
+function utmPole(page) {
+  const out = {};
+  let params;
+  try {
+    params = new URL(page).searchParams;
+  } catch (e) {
+    return out;
+  }
+  Object.keys(UTM_POLE).forEach(function (key) {
+    const value = params.get(key);
+    if (value) out[UTM_POLE[key]] = value;
+  });
+  return out;
+}
+
 function buildCommentary(body, zdroj) {
   const lines = ['Zdroj: ' + zdroj];
-  if (body.page) lines.push('Stránka: ' + body.page);
   Object.keys(body).forEach(function (key) {
     if (SKIP.includes(key)) return;
     const value = body[key];
@@ -71,20 +92,25 @@ export default async function handler(req, res) {
   }
 
   const name = splitName(body.jmeno);
+  const lead = Object.assign({
+    EntityName: 'Lead',
+    UsrFirstName: name.first,
+    UsrLastName: name.last,
+    MobilePhone: body.telefon || '',
+    Email: body.email,
+    Commentary: buildCommentary(body, zdroj),
+    LeadTypeId: '96ed75a6-1718-4311-a690-a577d4c873b1',
+    OwnerId: '9043f9e8-1bd1-4340-86d0-d74aa5a12e81',
+    LeadSourceId: 'f82c416e-0cb2-4080-b4a3-58a0eeb82f24'
+  }, utmPole(body.page));
+
+  if (body.firma) lead.Account = body.firma;
+  if (body.page) lead.BpmRef = body.page;
+
   const r = await fetch(CREATIO_WEBHOOK, {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify({
-      EntityName: 'Lead',
-      UsrFirstName: name.first,
-      UsrLastName: name.last,
-      MobilePhone: body.telefon || '',
-      Email: body.email,
-      Commentary: buildCommentary(body, zdroj),
-      LeadTypeId: '96ed75a6-1718-4311-a690-a577d4c873b1',
-      OwnerId: '9043f9e8-1bd1-4340-86d0-d74aa5a12e81',
-      LeadSourceId: 'f82c416e-0cb2-4080-b4a3-58a0eeb82f24'
-    })
+    body: JSON.stringify(lead)
   });
 
   if (!r.ok) {
