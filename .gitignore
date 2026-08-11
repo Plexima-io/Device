@@ -1,33 +1,39 @@
-# Ignorujeme všechno a povolujeme jen to, co má být ve verzování.
-# Data klientů a osobní věci zůstávají lokálně.
+# Ignore everything by default, then allow the public web and
+# canonical project documentation/artifacts. Client data stays local.
 /*
 
-# Publikovaný web. Vercel má Root Directory nastavené na web/.
-!/web/
-!/web/**
-
-# Dokumentace a zdrojové podklady k webu.
-!/dokumentace/
-!/dokumentace/**
-!/podklady/
-!/podklady/**
-
-# Vstupní body v kořeni. AGENTS.md musí zůstat tady, v podsložce ho
-# nástroje nenajdou.
+# Všechny stránky v kořeni a ve scenare/ jsou veřejný web.
+!/*.html
+!/scenare/
+!/scenare/**
+!/assets/
+!/assets/**
+!/api/
+!/api/**
+!/Fotky/
+!/Fotky/**
 !/AGENTS.md
 !/README.md
-!/MEMORY.md
-!/reference/
-!/reference/**
-
+!/.hermes.md
+!/plexima-design-system.md
+!/docs/
+!/docs/**
+!/design/
+!/design/**
+!/artifacts/
+!/artifacts/**
+!/.vercelignore
 !/.gitignore
+!/vercel.json
+!/favicon.ico
+!/favicon.svg
+!/apple-touch-icon.png
+!/icon-512.png
 
-# Lokální, privátní a generovaný obsah
+# Local/private/generated content
 .env
 .env.*
-klienti/
-archiv/
-Personal/
+Klienti/
 .firecrawl/
 node_modules/
 dist/
@@ -35,5 +41,5 @@ build/
 coverage/
 *.log
 
-# OS smetí nikdy, ani v povolených složkách.
+# Never track OS junk, even inside allowed folders.
 **/.DS_Store

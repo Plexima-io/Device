@@ -1,0 +1,40 @@
+Mode: create
+Output: /Users/powerfuleight/Workspace/Plexima/artifacts/omi-onepager/final/plexima-omi-onepager.pptx
+Slide count: 2
+
+Deck style:
+- Format: 1280 x 720 px, 16:9.
+- Brand cues: clean B2B consulting style, white space, soft purple "magical automation" accent, structured implementation language.
+- Colors:
+  - Background: #F7F8FC
+  - Main text: #17142A
+  - Muted text: #5F6473
+  - Plexima purple accent: #7357FF
+  - Secondary violet: #EDE9FF
+  - Soft cyan accent: #23D7C3
+  - Card white: #FFFFFF
+- Fonts:
+  - Heading: Aptos Display
+  - Body: Aptos
+  - Numeric / tags: Aptos
+- Type scale:
+  - Slide title: 38-46 px
+  - Section labels: 18-22 px
+  - Body bullets: 16-19 px
+  - Eyebrow/footer: 11-13 px
+
+Slide 1: "Strategie a positioning"
+- One-page strategic frame.
+- Message: Plexima sells the service layer, not the recorder.
+- Four areas:
+  1. Positioning
+  2. ICP + painpointy
+  3. Use-casy pro validaci
+  4. Partnerstvi s OMI
+- Exclude obchodni rozhovor / sales conversation.
+
+Slide 2: "Co musi vzniknout"
+- Concrete deliverables for first phase.
+- Include: seznam firem as one required output.
+- Include: pilot offer, web/CTA, sales materials, risk checklist.
+- Close with CTA line: "Domluvit pilotni konzultaci".
