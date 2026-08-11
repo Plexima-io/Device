@@ -447,11 +447,30 @@ img { max-width: 100%; }
 <section class="page-hero">
   <div class="container content-narrow reveal">
     <h1 id="t-title">Děkujeme, ozveme se vám</h1>
+    <p class="hero-lead" id="t-lead">Do jednoho pracovního dne vás kontaktujeme a domluvíme termín konzultace.</p>
   </div>
 </section>
 
 <section class="content">
   <div class="container content-narrow">
+
+    <div class="content-block">
+      <h2>Co bude následovat</h2>
+      <ol class="steps" id="t-steps">
+        <li>
+          <h3>Ukážeme možnosti</h3>
+          <p>Ukážeme vám, co inteligentní paměť dokáže a kde ji lze ve firmě prakticky využít.</p>
+        </li>
+        <li>
+          <h3>Projdeme situaci</h3>
+          <p>Projdeme, jak dnes pracujete s informacemi a kde se vám ztrácí důležitý kontext.</p>
+        </li>
+        <li>
+          <h3>Doporučíme postup</h3>
+          <p>Doporučíme, kde začít a jaký první krok bude pro vaši firmu dávat největší smysl.</p>
+        </li>
+      </ol>
+    </div>
 
     <div class="content-block">
       <div class="thanks-note">
@@ -533,15 +552,30 @@ img { max-width: 100%; }
 
 <script>
 (function () {
-  var TITULKY = {
-    objednavka: 'Děkujeme za objednávku'
+  var VARIANTY = {
+    objednavka: {
+      title: 'Děkujeme za objednávku',
+      lead: 'Objednávku máme. Ozveme se vám do jednoho pracovního dne, potvrdíme dostupnost a domluvíme doručení i fakturaci. Předem nic neplatíte.',
+      steps: [
+        ['Potvrdíme objednávku', 'Ozveme se telefonicky nebo e-mailem, ověříme fakturační údaje a počet kusů.'],
+        ['Domluvíme doručení', 'Řekneme si termín a způsob předání, ať to sedne vašemu provozu.'],
+        ['Pomůžeme s rozjezdem', 'Ukážeme, jak zařízení spárovat a nastavit, aby fungovalo od prvního dne.']
+      ]
+    }
   };
 
-  var titulek = TITULKY[new URLSearchParams(location.search).get('typ')];
-  if (!titulek) return;
+  var v = VARIANTY[new URLSearchParams(location.search).get('typ')];
+  if (!v) return;
 
-  document.getElementById('t-title').textContent = titulek;
-  document.title = titulek + ' | Plexima';
+  document.getElementById('t-title').textContent = v.title;
+  document.getElementById('t-lead').textContent = v.lead;
+  document.title = v.title + ' | Plexima';
+
+  var items = document.getElementById('t-steps').children;
+  v.steps.forEach(function (step, i) {
+    items[i].querySelector('h3').textContent = step[0];
+    items[i].querySelector('p').textContent = step[1];
+  });
 })();
 </script>
 
