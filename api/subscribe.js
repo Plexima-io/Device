@@ -17,6 +17,8 @@ const LABELS = {
   pocet: 'Počet kusů',
   poznamka: 'Poznámka',
   implementace: 'Zájem o implementaci',
+  cena_za_kus: 'Cena za kus',
+  celkem: 'Celkem',
   kategorie: 'Kategorie',
   score: 'Skóre',
   odhad_hodin_mesicne: 'Odhad hodin měsíčně',

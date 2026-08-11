@@ -45,7 +45,7 @@
     '<p class="modal-lead">Vyberte, jak se vám to hodí.</p>',
     '<div class="modal-choice">',
     '<button type="button" class="btn btn-primary" id="choice-zavolejte">Zavolejte mi</button>',
-    '<a href="#" class="btn btn-ghost" id="choice-calendly">Zobrazit volné termíny</a>',
+    '<a href="https://calendar.app.google/tFQ44WGe7dbUEiS99" class="btn btn-ghost" id="choice-calendly" target="_blank" rel="noopener">Zobrazit volné termíny</a>',
     '</div></div>',
     '<div class="modal-view" id="konzultace-form">',
     '<button type="button" class="modal-back" id="konzultace-back">← Zpět</button>',
@@ -136,8 +136,7 @@
         body: JSON.stringify(payload)
       }).then(function (res) {
         if (!res.ok) throw new Error(res.status);
-        showStatus(true, 'Odesláno. Ozveme se vám do jednoho pracovního dne.');
-        form.reset();
+        location.href = '/dekujeme';
       }).catch(function () {
         showStatus(false, 'Odeslání se nepovedlo. Zkuste to prosím znovu, nebo napište na info@plexima.io.');
       });

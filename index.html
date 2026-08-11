@@ -2848,7 +2848,7 @@ html.no-motion .how-visual * { animation: none !important; }
       <p class="modal-lead">Vyberte, jak se vám to hodí.</p>
       <div class="modal-choice">
         <button type="button" class="btn btn-primary" id="choice-zavolejte">Zavolejte mi</button>
-        <a href="#" class="btn btn-ghost" id="choice-calendly">Zobrazit volné termíny</a>
+        <a href="https://calendar.app.google/tFQ44WGe7dbUEiS99" class="btn btn-ghost" id="choice-calendly" target="_blank" rel="noopener">Zobrazit volné termíny</a>
       </div>
     </div>
 
@@ -3717,8 +3717,7 @@ html.no-motion .how-visual * { animation: none !important; }
       body: JSON.stringify(payload)
     }).then(function (res) {
       if (!res.ok) throw new Error(res.status);
-      showStatus(true, 'Odesláno. Ozveme se vám do jednoho pracovního dne.');
-      form.reset();
+      location.href = payload.type === 'objednavka' ? '/dekujeme?typ=objednavka' : '/dekujeme';
     }).catch(function () {
       showStatus(false, 'Odeslání se nepovedlo. Zkuste to prosím znovu, nebo napište na info@plexima.io.');
     });
