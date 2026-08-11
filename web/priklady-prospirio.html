@@ -1,0 +1,694 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Prospirio Hub: vyšší úspěšnost prodeje | Příklady z praxe | Plexima</title>
+<meta name="description" content="Případová studie Prospirio Hub. Jak přepis obchodních schůzek a zpětná analýza zvýšily úspěšnost prodeje.">
+<link rel="icon" href="/Fotky/favicon.ico" sizes="32x32">
+<link rel="icon" href="/Fotky/favicon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="/Fotky/apple-touch-icon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@700;800&family=Open+Sans:wght@400;600;700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --yellow: #FEC710;
+  --yellow-hover: #EAB70F;
+  --blue: #6EC1E4;
+  --ink: #1F1741;
+  --ink-soft: #30265E;
+  --white: #FFFFFF;
+  --soft: #F7F8F9;
+  --border: #E6E6E6;
+  --muted: #54595F;
+  --caption: #7A7A7A;
+  --font-heading: "Nunito", system-ui, -apple-system, "Segoe UI", sans-serif;
+  --font-body: "Open Sans", system-ui, -apple-system, "Segoe UI", sans-serif;
+  --radius-sm: 5px;
+  --radius-md: 10px;
+  --radius-lg: 20px;
+  --shadow-sm: 0 2px 8px rgba(31, 23, 65, 0.08);
+  --shadow-md: 0 10px 30px -10px rgba(0, 0, 0, 0.15);
+  --container: 1200px;
+  --measure: 740px;
+  --gutter: clamp(20px, 4vw, 56px);
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+
+body {
+  font: 400 18px/1.7 var(--font-body);
+  color: var(--ink);
+  background: var(--white);
+  -webkit-font-smoothing: antialiased;
+}
+
+h1, h2, h3, h4 { font-family: var(--font-heading); font-weight: 700; }
+img { max-width: 100%; }
+
+.container {
+  max-width: var(--container);
+  margin: 0 auto;
+  padding-left: var(--gutter);
+  padding-right: var(--gutter);
+}
+/* Everything in the article shares one column width */
+.col { max-width: var(--measure); margin-left: auto; margin-right: auto; }
+
+/* ---------- Buttons ---------- */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  min-height: 48px;
+  padding: 12px 24px;
+  border-radius: var(--radius-sm);
+  font: 700 16px/1.2 var(--font-body);
+  text-decoration: none;
+  cursor: pointer;
+  transition: background .18s ease, transform .18s ease, border-color .18s ease;
+  border: 1px solid transparent;
+}
+.btn-primary { background: var(--yellow); color: var(--ink); border-color: var(--yellow); }
+.btn-primary:hover { background: var(--yellow-hover); transform: translateY(-1px); }
+.btn-ghost { background: var(--white); color: var(--ink); border-color: var(--ink); }
+.btn-ghost:hover { background: var(--soft); }
+.btn:focus-visible { outline: 2px solid var(--blue); outline-offset: 2px; }
+
+/* ---------- Header ---------- */
+.site-header {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  background: rgba(255,255,255,.92);
+  backdrop-filter: blur(10px);
+  border-bottom: 1px solid transparent;
+  transition: border-color .25s ease, box-shadow .25s ease;
+}
+.site-header.is-scrolled { border-bottom-color: var(--border); box-shadow: var(--shadow-sm); }
+.header-inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 76px;
+  gap: 20px;
+}
+.wordmark { display: inline-flex; align-items: center; text-decoration: none; }
+.wordmark img { height: 28px; width: auto; display: block; }
+.main-nav { display: flex; align-items: center; gap: 4px; }
+.main-nav a {
+  font: 600 15px/1 var(--font-body);
+  color: var(--ink);
+  text-decoration: none;
+  padding: 10px 14px;
+  border-radius: var(--radius-sm);
+  border-bottom: 2px solid transparent;
+  transition: background .15s ease;
+}
+.main-nav a:hover { background: var(--soft); }
+.main-nav a.is-active { border-bottom-color: var(--yellow); }
+.header-cta { flex-shrink: 0; }
+.header-cta .btn { min-height: 42px; padding: 10px 18px; font-size: 15px; }
+.nav-toggle {
+  display: none;
+  width: 44px; height: 44px;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  background: var(--white);
+  cursor: pointer;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  gap: 5px;
+}
+.nav-toggle span { display: block; width: 18px; height: 2px; background: var(--ink); }
+
+/* ---------- Breadcrumb ---------- */
+.crumb {
+  padding-top: 26px;
+  font: 600 13.5px/1 var(--font-body);
+  color: var(--caption);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+.crumb a { color: var(--muted); text-decoration: none; }
+.crumb a:hover { color: var(--ink); }
+.crumb span[aria-current] { color: var(--ink); }
+
+/* ---------- Hero ---------- */
+.case-hero { padding: clamp(44px, 5vw, 76px) 0 0; }
+.case-hero h1 {
+  font-size: clamp(32px, 4.2vw, 50px);
+  line-height: 1.13;
+  letter-spacing: -0.015em;
+  text-wrap: balance;
+}
+.case-hero .lead {
+  font-size: clamp(17px, 1.9vw, 20px);
+  line-height: 1.65;
+  color: var(--muted);
+  margin-top: 22px;
+}
+
+/* Client identity block */
+.client {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+  flex-wrap: wrap;
+  margin-top: 34px;
+  padding: 18px 22px;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  background: var(--soft);
+}
+.client-id { display: flex; align-items: center; gap: 16px; min-width: 0; }
+.client-label {
+  font: 700 10.5px/1 var(--font-body);
+  letter-spacing: .12em;
+  text-transform: uppercase;
+  color: var(--caption);
+  padding-right: 16px;
+  border-right: 1px solid var(--border);
+  flex-shrink: 0;
+}
+.client-logo { height: 24px; width: auto; display: block; }
+.client-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font: 600 14px/1 var(--font-body);
+  color: var(--muted);
+  text-decoration: none;
+  transition: color .15s ease;
+}
+.client-link svg { flex-shrink: 0; transition: transform .18s ease; }
+.client-link:hover { color: var(--ink); }
+.client-link:hover svg { transform: translate(2px, -2px); }
+
+/* Hero image, same width as the text column */
+.hero-figure {
+  margin-top: clamp(36px, 4.5vw, 56px);
+  border-radius: var(--radius-md);
+  overflow: hidden;
+  aspect-ratio: 16 / 9;
+  background: var(--soft);
+}
+.hero-figure img { width: 100%; height: 100%; object-fit: cover; display: block; }
+
+/* ---------- Facts: four squares ---------- */
+.facts {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 14px;
+  margin-top: 14px;
+}
+.facts > div {
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  padding: 22px 24px;
+  background: var(--white);
+  transition: border-color .2s ease;
+  display: flex;
+  flex-direction: column;
+}
+.facts > div:hover { border-color: var(--blue); }
+.facts dt {
+  font: 700 10.5px/1 var(--font-body);
+  letter-spacing: .12em;
+  text-transform: uppercase;
+  color: var(--caption);
+  margin-bottom: 9px;
+}
+.facts dd { font: 600 16px/1.5 var(--font-body); color: var(--ink); }
+
+/* ---------- Article ---------- */
+.case-body { padding: clamp(60px, 7vw, 96px) 0 clamp(48px, 6vw, 80px); }
+.prose > * + * { margin-top: 20px; }
+.prose h2 {
+  font-size: clamp(25px, 2.8vw, 32px);
+  line-height: 1.25;
+  margin-top: clamp(56px, 6vw, 84px);
+}
+.prose h2::after {
+  content: "";
+  display: block;
+  width: 54px;
+  height: 3px;
+  border-radius: 2px;
+  background: var(--yellow);
+  margin-top: 16px;
+}
+.prose h2:first-child { margin-top: 0; }
+.prose p { color: var(--muted); font-size: 17.5px; line-height: 1.8; }
+.prose p strong { color: var(--ink); font-weight: 700; }
+.prose .intro { font-size: 19px; color: var(--ink); line-height: 1.7; }
+
+.chips { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 24px; }
+.chips span {
+  padding: 7px 14px;
+  border-radius: 999px;
+  background: var(--soft);
+  font: 600 14px/1 var(--font-body);
+  color: var(--muted);
+}
+
+/* Steps */
+.steps { list-style: none; margin-top: 34px; counter-reset: step; }
+.steps li { position: relative; padding-left: 54px; padding-bottom: 30px; }
+.steps li:last-child { padding-bottom: 0; }
+.steps li::before {
+  counter-increment: step;
+  content: counter(step);
+  position: absolute;
+  left: 0; top: -2px;
+  width: 32px; height: 32px;
+  border-radius: 50%;
+  background: var(--ink);
+  color: #fff;
+  font: 800 13px/1 var(--font-heading);
+  display: flex; align-items: center; justify-content: center;
+}
+.steps li:not(:last-child)::after {
+  content: "";
+  position: absolute;
+  left: 16px; top: 38px; bottom: 4px;
+  width: 1px;
+  background: var(--border);
+}
+.steps h3 { font-size: 17.5px; line-height: 1.4; margin-bottom: 6px; }
+.steps p { font-size: 16.5px; line-height: 1.7; color: var(--muted); margin: 0; }
+
+/* ---------- Result ---------- */
+.result-panel {
+  display: flex;
+  align-items: center;
+  gap: clamp(24px, 4vw, 44px);
+  margin-top: 14px;
+  padding: clamp(28px, 3.5vw, 40px);
+  background: var(--ink);
+  border-radius: var(--radius-md);
+  flex-wrap: wrap;
+}
+.result-num {
+  font: 800 clamp(56px, 7.5vw, 82px)/.9 var(--font-heading);
+  color: #fff;
+  letter-spacing: -0.03em;
+  flex-shrink: 0;
+  display: block;
+}
+.result-num em { color: var(--yellow); font-style: normal; }
+.result-cap {
+  font-size: 16.5px;
+  line-height: 1.6;
+  color: rgba(255,255,255,.8);
+  max-width: 340px;
+  margin: 0;
+  padding-left: clamp(24px, 4vw, 40px);
+  border-left: 1px solid rgba(255,255,255,.2);
+}
+.result-cap strong { color: #fff; font-weight: 700; }
+
+.result-list { list-style: none; margin-top: 28px; display: grid; gap: 26px; }
+.result-list li { padding-left: 26px; position: relative; }
+.result-list li::before {
+  content: "";
+  position: absolute;
+  left: 0; top: 11px;
+  width: 12px; height: 3px;
+  border-radius: 2px;
+  background: var(--yellow);
+}
+.result-list h3 { font-size: 17px; margin-bottom: 5px; }
+.result-list p { font-size: 16.5px; line-height: 1.7; color: var(--muted); margin: 0; }
+
+.quote {
+  margin-top: 48px;
+  padding: clamp(32px, 4vw, 48px);
+  background: var(--soft);
+  border-radius: var(--radius-md);
+  position: relative;
+}
+.quote::before {
+  content: "\201C";
+  position: absolute;
+  top: clamp(4px, 1vw, 12px);
+  left: clamp(20px, 3vw, 34px);
+  font: 800 92px/1 var(--font-heading);
+  color: var(--yellow);
+}
+.quote blockquote {
+  font: 700 clamp(19px, 2.2vw, 24px)/1.5 var(--font-heading);
+  color: var(--ink);
+  margin: 0;
+  position: relative;
+  padding-top: clamp(28px, 3vw, 40px);
+}
+.quote figcaption {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  margin-top: 26px;
+  padding-top: 24px;
+  border-top: 1px solid var(--border);
+}
+.quote-avatar {
+  width: 48px; height: 48px;
+  border-radius: 50%;
+  background: var(--ink);
+  color: #fff;
+  font: 800 17px/1 var(--font-heading);
+  display: flex; align-items: center; justify-content: center;
+  flex-shrink: 0;
+}
+.quote-name { font: 700 16px/1.3 var(--font-heading); color: var(--ink); }
+.quote-role { font-size: 14px; color: var(--muted); margin-top: 2px; }
+
+/* ---------- Closing (kept as is) ---------- */
+.case-foot { border-top: 1px solid var(--border); padding: clamp(56px, 7vw, 88px) 0; }
+.foot-inner { text-align: center; }
+.foot-inner h2 { font-size: clamp(26px, 3.2vw, 36px); line-height: 1.22; max-width: 640px; margin: 0 auto; }
+.foot-inner p { color: var(--muted); margin: 16px auto 0; max-width: 540px; font-size: 17px; }
+.foot-actions { display: flex; gap: 14px; flex-wrap: wrap; justify-content: center; margin-top: 32px; }
+.back-strip { padding: 28px 0 44px; }
+.back-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font: 700 15px/1 var(--font-body);
+  color: var(--muted);
+  text-decoration: none;
+}
+.back-link svg { transition: transform .2s ease; }
+.back-link:hover { color: var(--ink); }
+.back-link:hover svg { transform: translateX(-4px); }
+
+/* ---------- Footer ---------- */
+.site-footer {
+  background: var(--ink);
+  color: rgba(255,255,255,.7);
+  padding: 56px 0 40px;
+  font-size: 14px;
+}
+.footer-top { display: flex; justify-content: space-between; align-items: center; gap: 32px; flex-wrap: wrap; }
+.footer-logo { display: inline-flex; }
+.footer-logo img { height: 28px; display: block; filter: grayscale(1) brightness(0) invert(1); }
+.footer-links { display: grid; grid-template-rows: repeat(3, auto); grid-auto-flow: column; gap: 10px 48px; justify-content: end; }
+.footer-links a { color: rgba(255,255,255,.7); text-decoration: none; }
+.footer-links a:hover { color: #fff; text-decoration: underline; text-decoration-color: var(--yellow); text-underline-offset: 4px; }
+.footer-desc { max-width: 420px; line-height: 1.6; margin-top: 20px; }
+.footer-bottom {
+  margin-top: 32px;
+  padding-top: 24px;
+  border-top: 1px solid rgba(255,255,255,.12);
+  display: flex;
+  justify-content: space-between;
+  gap: 16px;
+  flex-wrap: wrap;
+  font-size: 13px;
+  color: rgba(255,255,255,.5);
+}
+.footer-bottom a { color: rgba(255,255,255,.5); }
+.footer-bottom a:hover { color: #fff; }
+
+/* ---------- Motion ---------- */
+.rise { opacity: 0; transform: translateY(14px); animation: rise .7s cubic-bezier(.22,.61,.36,1) forwards; }
+.rise:nth-child(1) { animation-delay: .05s; }
+.rise:nth-child(2) { animation-delay: .13s; }
+.rise:nth-child(3) { animation-delay: .21s; }
+.rise:nth-child(4) { animation-delay: .29s; }
+@keyframes rise { to { opacity: 1; transform: translateY(0); } }
+
+.reveal { opacity: 0; transform: translateY(16px); transition: opacity .6s ease, transform .6s ease; }
+.reveal.is-visible { opacity: 1; transform: translateY(0); }
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  *, *::before, *::after { animation: none !important; transition: none !important; }
+  .reveal, .rise { opacity: 1; transform: none; }
+}
+
+/* ---------- Responsive ---------- */
+@media (max-width: 1080px) {
+  .main-nav a { padding: 10px 10px; font-size: 14.5px; }
+}
+@media (max-width: 640px) {
+  .facts { grid-template-columns: 1fr; }
+  .client { flex-direction: column; align-items: flex-start; gap: 14px; }
+  .result-panel { gap: 20px; }
+  .result-cap { padding-left: 0; border-left: none; max-width: none; }
+}
+@media (max-width: 768px) {
+  .main-nav {
+    display: none;
+    position: absolute;
+    top: 76px;
+    left: 0; right: 0;
+    background: var(--white);
+    border-bottom: 1px solid var(--border);
+    box-shadow: var(--shadow-md);
+    flex-direction: column;
+    align-items: stretch;
+    padding: 12px var(--gutter) 20px;
+  }
+  .main-nav.is-open { display: flex; }
+  .main-nav a { padding: 14px 10px; }
+  .nav-toggle { display: flex; }
+  .header-cta { display: none; }
+}
+</style>
+</head>
+<body>
+
+<header class="site-header" id="top">
+  <div class="container header-inner">
+    <a href="/" class="wordmark"><img src="Fotky/Logo-Plexima.webp" alt="Plexima"></a>
+    <button class="nav-toggle" aria-label="Otevřít menu" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
+    <nav class="main-nav" aria-label="Hlavní navigace">
+      <a href="/#jak-to-funguje">Jak to funguje</a>
+      <a href="co-je-omi">Co je Omi</a>
+      <a href="priklady" class="is-active" aria-current="page">Příklady z praxe</a>
+    </nav>
+    <div class="header-cta">
+      <button type="button" class="btn btn-primary" data-open="modal-konzultace">Domluvit konzultaci</button>
+    </div>
+  </div>
+</header>
+
+<div class="container">
+  <nav class="crumb col" aria-label="Drobečková navigace">
+    <a href="/">Úvod</a>
+    <span aria-hidden="true">/</span>
+    <a href="priklady">Příklady z praxe</a>
+    <span aria-hidden="true">/</span>
+    <span aria-current="page">Prospirio Hub</span>
+  </nav>
+</div>
+
+<article>
+
+<section class="case-hero">
+  <div class="container">
+    <div class="col">
+      <h1 class="rise">Díky přepisu schůzek a zpětné analýze vzrostla úspěšnost prodeje o 23 %</h1>
+      <p class="lead rise">Prospirio Hub učí obchodníky prodávat lépe. Aby ale mohl poradit, potřebuje vědět, co se na schůzce doopravdy odehrálo. Zařízení Omi zachytí celé jednání a pošle z něj hotové výstupy rovnou do aplikace.</p>
+
+      <div class="client rise">
+        <div class="client-id">
+          <span class="client-label">Klient</span>
+          <img class="client-logo" src="Fotky/loga/prospirio.png" alt="Prospirio Hub">
+        </div>
+        <a href="https://hub.prospirio.cz/" class="client-link" target="_blank" rel="noopener">
+          hub.prospirio.cz
+          <svg width="13" height="13" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M5 11L11 5M6 5h5v5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </a>
+      </div>
+
+      <div class="hero-figure rise">
+        <img src="Fotky/obchodni-jednani.webp" alt="Obchodní jednání dvou lidí, jeden má na krku zápisník Omi">
+      </div>
+
+      <!-- Číslo potvrdit s Prospiriem před zveřejněním -->
+      <div class="result-panel">
+        <span class="result-num">+23<em>%</em></span>
+        <p class="result-cap"><strong>vyšší úspěšnost prodeje</strong> poté, co rozbor jednání začal vycházet z přepisu místo z poznámek.</p>
+      </div>
+
+      <dl class="facts">
+        <div>
+          <dt>Obor</dt>
+          <dd>Školení obchodních dovedností</dd>
+        </div>
+        <div>
+          <dt>Výstup</dt>
+          <dd>Přepis, shrnutí, úkoly a rozbor jednání</dd>
+        </div>
+      </dl>
+    </div>
+  </div>
+</section>
+
+<section class="case-body">
+  <div class="container">
+    <div class="prose col">
+
+      <h2>Kdo je Prospirio Hub</h2>
+      <p class="intro">Česká aplikace, která pomáhá obchodníkům zlepšovat se po každé schůzce. Nevznikla u stolu, ale na tisících skutečných obchodních případů holdingu Channel Partners.</p>
+      <p>Za produktem stojí <strong>25 let zkušeností z českého firemního prodeje</strong> a databáze více než 180 prodejních strategií. Aplikace pracuje ve dvou rovinách. Obchodníkovi dává shrnutí schůzky, úkoly a konkrétní rady, co příště udělat jinak. Jeho vedoucímu dává přehled o týmu, rozjednaných obchodech a o tom, co slyší od trhu.</p>
+      <div class="chips" role="list" aria-label="Firmy využívající Prospirio Hub">
+        <span role="listitem">O2</span>
+        <span role="listitem">ČSOB</span>
+        <span role="listitem">Alza</span>
+        <span role="listitem">E.ON</span>
+        <span role="listitem">T-Mobile</span>
+        <span role="listitem">Vodafone</span>
+        <span role="listitem">Komerční banka</span>
+        <span role="listitem">Česká spořitelna</span>
+      </div>
+
+      <h2>Kde byla slabina</h2>
+      <p>Obchodník absolvuje několik jednání denně. Mezi schůzkami sedí v autě nebo v kavárně a dohání papírování. Zápis, e-mail se shrnutím, aktualizace evidence zákazníků. Každá schůzka si vezme dalších dvacet až třicet minut, které už nejde věnovat prodeji.</p>
+      <p>Vážnější než ztracený čas byla ale kvalita podkladu. Zápis psaný večer po paměti je vždycky chudší než samotný rozhovor. Vypadnou z něj námitky, formulace, kterými zákazník popsal svůj problém, i zmínky o konkurenci. Aplikace tak radila na základě toho, co si obchodník zapamatoval, ne na základě toho, co se skutečně řeklo.</p>
+
+      <h2>Řešení</h2>
+      <p>Omi je zápisník, který obchodník nosí na krku. Nezabírá ruce, nestojí na stole a po zapnutí na začátku dne o něm celý den neví. Zachytí jednání v kvalitě, se kterou jde dál pracovat, i když se mluví přes okolní hluk.</p>
+      <p>Vůči Prospiriu není Omi konkurence ani náhrada. Je to <strong>vrstva, která aplikaci dodá lepší vstup</strong>. Obě firmy patří do stejného holdingu, takže se produkty doplňují místo toho, aby si překážely.</p>
+
+      <h2>Jak to funguje</h2>
+      <ol class="steps">
+        <li>
+          <h3>Obchodník ráno zapne Omi</h3>
+          <p>Zařízení má na krku po celý den. Nemusí před každou schůzkou nic otevírat ani spouštět.</p>
+        </li>
+        <li>
+          <h3>Jednání se zachytí celé</h3>
+          <p>Nahrává se celý rozhovor včetně námitek a vět, kterými zákazník popsal svou situaci. Obchodník si nedělá poznámky a drží oční kontakt.</p>
+        </li>
+        <li>
+          <h3>Vznikne přepis a shrnutí</h3>
+          <p>Z nahrávky se během několika minut vytvoří přepis, souhrn jednání a seznam toho, co bylo dohodnuto.</p>
+        </li>
+        <li>
+          <h3>Výstupy jdou do aplikace</h3>
+          <p>Prospirio Hub obchodníkovi připraví e-mail se shrnutím a rozbor jednání. Automatizace zároveň založí úkoly a doplní záznam u zákazníka.</p>
+        </li>
+        <li>
+          <h3>Obchodník už jen potvrzuje</h3>
+          <p>Místo psaní od nuly kontroluje a odesílá. Vedoucí vidí, co se na jednáních skutečně dělo, aniž by na nich musel být.</p>
+        </li>
+      </ol>
+
+      <h2>Co se tím změnilo</h2>
+      <ul class="result-list">
+        <li>
+          <h3>Papírování zmizelo z večerů</h3>
+          <p>Shrnutí i navazující e-mail nevznikají po směně z paměti, ale krátce po schůzce ze skutečného obsahu jednání.</p>
+        </li>
+        <li>
+          <h3>Rady stojí na datech</h3>
+          <p>Doporučení nevychází z toho, co si obchodník zapamatoval, ale z toho, jak jednání opravdu proběhlo.</p>
+        </li>
+        <li>
+          <h3>Vedoucí slyší hlas trhu</h3>
+          <p>Opakující se námitky a zmínky o konkurenci přestaly být historkou z porady a staly se daty.</p>
+        </li>
+      </ul>
+
+      <figure class="quote reveal">
+        <blockquote>Nejvíc mě překvapilo, že se obchodníci přestali hádat o tom, co na schůzce padlo. Máme přepis, takže rozbor jednání konečně stojí na faktech a ne na dojmech. Za pár týdnů se to promítlo přímo do čísel.</blockquote>
+        <figcaption>
+          <span class="quote-avatar" aria-hidden="true">JL</span>
+          <span>
+            <span class="quote-name">Jan Laibl</span>
+            <span class="quote-role">CEO, Prospirio Hub</span>
+          </span>
+        </figcaption>
+      </figure>
+
+    </div>
+  </div>
+</section>
+
+</article>
+
+<section class="case-foot">
+  <div class="container foot-inner">
+    <h2>Chcete vidět, jak by to fungovalo u vás?</h2>
+    <p>Během 60 minut projdeme vaše schůzky, ukážeme reálné výstupy a řekneme otevřeně, kde má nahrávání smysl a kde ne.</p>
+    <div class="foot-actions">
+      <button type="button" class="btn btn-primary" data-open="modal-konzultace">Domluvit konzultaci</button>
+      <a href="priklady" class="btn btn-ghost">Další příklady</a>
+    </div>
+  </div>
+</section>
+
+<div class="container back-strip">
+  <a href="priklady" class="back-link">
+    <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M13 8H4M8 4L4 8l4 4" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    Zpět na příklady z praxe
+  </a>
+</div>
+
+<footer class="site-footer">
+  <div class="container">
+    <div class="footer-top">
+      <a href="/" class="footer-logo"><img src="Fotky/Logo-Plexima.webp" alt="Plexima"></a>
+      <nav class="footer-links" aria-label="Patičková navigace">
+        <a href="/#jak-to-funguje">Jak to funguje</a>
+        <a href="co-je-omi">Co je Omi</a>
+        <a href="/#implementace">Nasazení</a>
+        <a href="priklady" aria-current="page">Příklady z praxe</a>
+        <a href="/#faq">FAQ</a>
+        <a href="kontakt">Kontakt</a>
+      </nav>
+    </div>
+    <p class="footer-desc">Propojujeme AI zápisník s firemními systémy, aby se rozhovory automaticky měnily na zápisy, úkoly, reporty a CRM záznamy.</p>
+    <div class="footer-bottom">
+      <span>© 2026 Plexima. Všechna práva vyhrazena.</span>
+      <span><a href="ochrana-osobnich-udaju">Ochrana osobních údajů</a> · <a href="/#faq">Bezpečnost a pravidla nahrávání</a></span>
+    </div>
+  </div>
+</footer>
+
+<script>
+(function () {
+  var header = document.querySelector('.site-header');
+  var onScroll = function () { header.classList.toggle('is-scrolled', window.scrollY > 8); };
+  window.addEventListener('scroll', onScroll, { passive: true });
+  onScroll();
+
+  var toggle = document.querySelector('.nav-toggle');
+  var nav = document.querySelector('.main-nav');
+  toggle.addEventListener('click', function () {
+    var open = nav.classList.toggle('is-open');
+    toggle.setAttribute('aria-expanded', open);
+  });
+  nav.addEventListener('click', function (e) {
+    if (e.target.closest('a')) nav.classList.remove('is-open');
+  });
+
+  var reveals = document.querySelectorAll('.reveal');
+  if ('IntersectionObserver' in window) {
+    var io = new IntersectionObserver(function (entries) {
+      entries.forEach(function (entry) {
+        if (entry.isIntersecting) { entry.target.classList.add('is-visible'); io.unobserve(entry.target); }
+      });
+    }, { threshold: 0.15, rootMargin: '0px 0px -40px' });
+    reveals.forEach(function (el) { io.observe(el); });
+  } else {
+    reveals.forEach(function (el) { el.classList.add('is-visible'); });
+  }
+})();
+</script>
+
+<script src="/assets/konzultace.js" defer></script>
+</body>
+</html>

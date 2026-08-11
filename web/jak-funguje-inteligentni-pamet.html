@@ -1,0 +1,613 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Jak funguje inteligentní paměť ve firmě | Plexima</title>
+<meta name="description" content="Jak inteligentní paměť pracuje s firemními rozhovory, propojuje souvislosti v čase a pomáhá odpovídat na otázky, na které běžné zápisy nestačí.">
+<link rel="icon" href="/Fotky/favicon.ico" sizes="32x32">
+<link rel="icon" href="/Fotky/favicon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="/Fotky/apple-touch-icon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@700;800&family=Open+Sans:wght@400;600;700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --yellow: #FEC710;
+  --yellow-hover: #EAB70F;
+  --blue: #6EC1E4;
+  --ink: #1F1741;
+  --ink-soft: #30265E;
+  --white: #FFFFFF;
+  --soft: #F7F8F9;
+  --border: #E6E6E6;
+  --muted: #54595F;
+  --caption: #7A7A7A;
+  --font-heading: "Nunito", system-ui, -apple-system, "Segoe UI", sans-serif;
+  --font-body: "Open Sans", system-ui, -apple-system, "Segoe UI", sans-serif;
+  --radius-sm: 5px;
+  --radius-md: 10px;
+  --radius-lg: 20px;
+  --shadow-sm: 0 2px 8px rgba(31, 23, 65, 0.08);
+  --shadow-md: 0 10px 30px -10px rgba(0, 0, 0, 0.15);
+  --container: 1200px;
+  --gutter: clamp(20px, 4vw, 56px);
+  --section-y: clamp(64px, 8vw, 112px);
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+
+body {
+  font: 400 18px/1.65 var(--font-body);
+  color: var(--ink);
+  background: var(--white);
+  -webkit-font-smoothing: antialiased;
+}
+
+h1, h2, h3, h4 { font-family: var(--font-heading); font-weight: 700; }
+img { max-width: 100%; }
+
+.container {
+  max-width: var(--container);
+  margin: 0 auto;
+  padding-left: var(--gutter);
+  padding-right: var(--gutter);
+}
+.content-narrow { max-width: 820px; }
+
+.eyebrow {
+  display: inline-block;
+  font: 700 13px/1.45 var(--font-body);
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--muted);
+  margin-bottom: 16px;
+}
+
+/* ---------- Buttons ---------- */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  min-height: 48px;
+  padding: 12px 24px;
+  border-radius: var(--radius-sm);
+  font: 700 16px/1.2 var(--font-body);
+  text-decoration: none;
+  cursor: pointer;
+  transition: background .18s ease, transform .18s ease, border-color .18s ease;
+  border: 1px solid transparent;
+}
+.btn-primary { background: var(--yellow); color: var(--ink); border-color: var(--yellow); }
+.btn-primary:hover { background: var(--yellow-hover); transform: translateY(-1px); }
+.btn-ghost { background: var(--white); color: var(--ink); border-color: var(--ink); }
+.btn-ghost:hover { background: var(--soft); }
+.btn:focus-visible { outline: 2px solid var(--blue); outline-offset: 2px; }
+
+/* ---------- Header ---------- */
+.site-header {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  background: rgba(255,255,255,.92);
+  backdrop-filter: blur(10px);
+  border-bottom: 1px solid transparent;
+  transition: border-color .25s ease, box-shadow .25s ease;
+}
+.site-header.is-scrolled { border-bottom-color: var(--border); box-shadow: var(--shadow-sm); }
+.header-inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 76px;
+  gap: 20px;
+}
+.wordmark { display: inline-flex; align-items: center; text-decoration: none; }
+.wordmark img { height: 28px; width: auto; display: block; }
+.main-nav { display: flex; align-items: center; gap: 4px; }
+.main-nav a {
+  font: 600 15px/1 var(--font-body);
+  color: var(--ink);
+  text-decoration: none;
+  padding: 10px 14px;
+  border-radius: var(--radius-sm);
+  border-bottom: 2px solid transparent;
+  transition: background .15s ease;
+}
+.main-nav a:hover { background: var(--soft); }
+.main-nav a.is-active { border-bottom-color: var(--yellow); }
+.main-nav a:focus-visible { outline: 2px solid var(--blue); outline-offset: 2px; }
+.header-cta { flex-shrink: 0; }
+.header-cta .btn { min-height: 42px; padding: 10px 18px; font-size: 15px; }
+.nav-toggle {
+  display: none;
+  width: 44px; height: 44px;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  background: var(--white);
+  cursor: pointer;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  gap: 5px;
+}
+.nav-toggle span { display: block; width: 18px; height: 2px; background: var(--ink); }
+
+/* ---------- Breadcrumb ---------- */
+.crumb {
+  padding-top: 28px;
+  font: 600 14px/1 var(--font-body);
+  color: var(--caption);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+.crumb a { color: var(--muted); text-decoration: none; }
+.crumb a:hover { color: var(--ink); text-decoration: underline; text-underline-offset: 3px; }
+.crumb a:focus-visible { outline: 2px solid var(--blue); outline-offset: 2px; border-radius: 3px; }
+.crumb span[aria-current] { color: var(--ink); }
+
+/* ---------- Hero ---------- */
+.page-hero { padding: clamp(36px, 5vw, 64px) 0 0; }
+.hero-stack { max-width: 820px; margin: 0 auto; text-align: center; }
+.page-hero h1 {
+  font-size: clamp(30px, 4vw, 44px);
+  line-height: 1.14;
+  letter-spacing: -0.01em;
+}
+.page-hero .hero-lead {
+  font-size: clamp(16px, 1.7vw, 18px);
+  line-height: 1.6;
+  color: var(--muted);
+  margin: 20px auto 0;
+  max-width: 660px;
+}
+
+/* ---------- Content ---------- */
+.content { padding-bottom: var(--section-y); }
+.content-block { margin-top: clamp(40px, 5vw, 64px); }
+.content-block > h2 {
+  font-size: clamp(24px, 3vw, 32px);
+  line-height: 1.2;
+  letter-spacing: -0.01em;
+  margin-bottom: 20px;
+}
+.content-block p { color: var(--muted); max-width: 720px; }
+.content-block p + p { margin-top: 16px; }
+.lead-tight { font-size: 17px; }
+
+/* Otázky v úvodu */
+.ask-block {
+  margin-top: 34px;
+  padding: 26px 30px;
+  background: var(--soft);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+}
+.ask-block p { color: var(--ink); font: 600 17.5px/1.55 var(--font-body); max-width: 640px; }
+.ask-block p + p { margin-top: 12px; }
+
+/* Zvýrazněná myšlenka */
+.callout {
+  margin-top: 26px;
+  padding: 22px 26px;
+  border-left: 3px solid var(--yellow);
+  background: var(--soft);
+  border-radius: 0 var(--radius-md) var(--radius-md) 0;
+}
+.callout p { color: var(--ink); font-weight: 600; max-width: 640px; }
+
+/* Fotografie s popiskem */
+.figure-wide { margin-top: clamp(40px, 5vw, 64px); }
+.figure-wide img { display: block; width: 100%; height: auto; border-radius: var(--radius-lg); }
+.figure-wide figcaption {
+  margin-top: 14px;
+  font-size: 14.5px;
+  line-height: 1.55;
+  color: var(--caption);
+  text-align: center;
+  max-width: 620px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/* Seznam otázek */
+.q-list { list-style: none; display: grid; gap: 10px; margin-top: 24px; }
+.q-list li {
+  display: flex;
+  align-items: flex-start;
+  gap: 14px;
+  padding: 16px 20px;
+  background: var(--white);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  font-size: 16.5px;
+  line-height: 1.5;
+  transition: border-color .18s ease, box-shadow .18s ease;
+}
+.q-list li:hover { border-color: var(--blue); box-shadow: var(--shadow-sm); }
+.q-list svg { flex: 0 0 20px; margin-top: 3px; }
+
+/* Odrážky */
+.mini-list { list-style: none; margin: 20px 0 4px; display: grid; gap: 10px; max-width: 720px; }
+.mini-list li { display: flex; align-items: flex-start; gap: 12px; font-size: 16.5px; line-height: 1.5; }
+.mini-list svg { flex: 0 0 18px; margin-top: 4px; }
+
+/* Přínosy */
+.benefits { background: var(--soft); padding: var(--section-y) 0; }
+.benefits-head { max-width: 720px; }
+.benefits-head h2 { font-size: clamp(24px, 3vw, 32px); line-height: 1.2; letter-spacing: -0.01em; }
+.benefits-head p { color: var(--muted); margin-top: 16px; font-size: 17px; }
+.benefit-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(420px, 1fr));
+  gap: 20px;
+  margin-top: 40px;
+}
+.benefit-card:last-child { grid-column: 1 / -1; }
+.benefit-card:last-child p { max-width: 760px; }
+.benefit-card {
+  background: var(--white);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  padding: 28px 28px 30px;
+}
+.benefit-card h3 { font-size: 19px; line-height: 1.3; margin-bottom: 10px; }
+.benefit-card p { font-size: 16px; line-height: 1.6; color: var(--muted); }
+.benefit-card p + p { margin-top: 12px; }
+.benefit-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 42px; height: 42px;
+  border-radius: var(--radius-md);
+  background: rgba(254,199,16,.18);
+  margin-bottom: 16px;
+}
+
+.note-muted { font-size: 14.5px; color: var(--caption); margin-top: 14px; }
+
+/* ---------- CTA band ---------- */
+.cta-band { padding: var(--section-y) 0; text-align: center; border-top: 1px solid var(--border); }
+.cta-band h2 { font-size: clamp(26px, 3.4vw, 38px); line-height: 1.18; max-width: 760px; margin: 0 auto; }
+.cta-band p { font-size: 17.5px; color: var(--muted); max-width: 640px; margin: 18px auto 0; }
+.cta-actions { display: flex; gap: 16px; justify-content: center; flex-wrap: wrap; margin-top: 32px; }
+
+/* ---------- Footer ---------- */
+.site-footer {
+  background: var(--ink);
+  color: rgba(255,255,255,.7);
+  padding: 56px 0 40px;
+  font-size: 14px;
+}
+.footer-top { display: flex; justify-content: space-between; align-items: center; gap: 32px; flex-wrap: wrap; }
+.footer-logo { display: inline-flex; }
+.footer-logo img { height: 28px; display: block; filter: grayscale(1) brightness(0) invert(1); }
+.footer-links { display: grid; grid-template-rows: repeat(3, auto); grid-auto-flow: column; gap: 10px 48px; justify-content: end; }
+.footer-links a { color: rgba(255,255,255,.7); text-decoration: none; }
+.footer-links a:hover { color: #fff; text-decoration: underline; text-decoration-color: var(--yellow); text-underline-offset: 4px; }
+.footer-links a:focus-visible { outline: 2px solid var(--blue); outline-offset: 2px; border-radius: 3px; }
+.footer-links a[aria-current] { color: #fff; }
+.footer-desc { max-width: 420px; line-height: 1.6; margin-top: 20px; }
+.footer-bottom {
+  margin-top: 32px;
+  padding-top: 24px;
+  border-top: 1px solid rgba(255,255,255,.12);
+  display: flex;
+  justify-content: space-between;
+  gap: 16px;
+  flex-wrap: wrap;
+  font-size: 13px;
+  color: rgba(255,255,255,.5);
+}
+.footer-bottom a { color: rgba(255,255,255,.5); }
+.footer-bottom a:hover { color: #fff; }
+
+/* ---------- Reveal ---------- */
+.reveal { opacity: 0; transform: translateY(16px); transition: opacity .55s ease, transform .55s ease; }
+.reveal.is-visible { opacity: 1; transform: translateY(0); }
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  *, *::before, *::after { animation: none !important; transition: none !important; }
+  .reveal { opacity: 1; transform: none; }
+}
+
+/* ---------- Responsive ---------- */
+@media (max-width: 1080px) {
+  .main-nav a { padding: 10px 10px; font-size: 14.5px; }
+}
+@media (max-width: 900px) {
+  .figure-wide img { border-radius: var(--radius-md); }
+  .ask-block { padding: 22px 22px; }
+}
+@media (max-width: 768px) {
+  .main-nav {
+    display: none;
+    position: absolute;
+    top: 76px;
+    left: 0; right: 0;
+    background: var(--white);
+    border-bottom: 1px solid var(--border);
+    box-shadow: var(--shadow-md);
+    flex-direction: column;
+    align-items: stretch;
+    padding: 12px var(--gutter) 20px;
+  }
+  .main-nav.is-open { display: flex; }
+  .main-nav a { padding: 14px 10px; }
+  .nav-toggle { display: flex; }
+  .header-cta { display: none; }
+}
+</style>
+</head>
+<body>
+
+<header class="site-header" id="top">
+  <div class="container header-inner">
+    <a href="/" class="wordmark"><img src="Fotky/Logo-Plexima.webp" alt="Plexima"></a>
+    <button class="nav-toggle" aria-label="Otevřít menu" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
+    <nav class="main-nav" aria-label="Hlavní navigace">
+      <a href="/#jak-to-funguje">Jak to funguje</a>
+      <a href="co-je-omi">Co je Omi</a>
+      <a href="priklady">Příklady z praxe</a>
+    </nav>
+    <div class="header-cta">
+      <button type="button" class="btn btn-primary" data-open="modal-konzultace">Domluvit konzultaci</button>
+    </div>
+  </div>
+</header>
+
+<div class="container">
+  <nav class="crumb" aria-label="Drobečková navigace">
+    <a href="/">Úvod</a>
+    <span aria-hidden="true">/</span>
+    <span aria-current="page">Jak funguje inteligentní paměť</span>
+  </nav>
+</div>
+
+<section class="page-hero">
+  <div class="container">
+    <div class="hero-stack reveal">
+      <span class="eyebrow">Inteligentní paměť</span>
+      <h1>Co kdyby se vaše firma mohla zeptat vlastní minulosti?</h1>
+      <p class="hero-lead">Odpovědi na důležité otázky ve firmě většinou existují. Jen nejsou na jednom místě a s časem se z nich vytrácí to nejcennější, tedy souvislosti.</p>
+    </div>
+  </div>
+</section>
+
+<section class="content">
+  <div class="container content-narrow">
+
+    <div class="content-block reveal">
+      <div class="ask-block">
+        <p>Proč klient při posledním jednání změnil názor?</p>
+        <p>Co jeho reakci předcházelo?</p>
+        <p>Nezazněl během některého z dřívějších rozhovorů detail, který tehdy zapadl, ale dnes by mohl změnit naše rozhodnutí?</p>
+      </div>
+      <p style="margin-top:28px;">Odpovědi na podobné otázky ve firmě často existují. Jen nejsou na jednom místě.</p>
+      <p>Část informací zůstane v zápisu ze schůzky, část v e-mailu a něco se uloží do CRM. Mnoho důležitých souvislostí ale zazní pouze během rozhovoru. Když se k tématu po několika týdnech nebo měsících vrátíte, bývá obtížné zjistit, co přesně se stalo a proč.</p>
+      <p>Do systému se často zapíše konečný výsledek. Cesta, která k němu vedla, se postupně vytratí.</p>
+      <div class="callout">
+        <p>Co kdyby se firma mohla ke své vlastní historii kdykoliv vrátit a jednoduše se jí zeptat?</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="container content-narrow">
+    <figure class="figure-wide reveal">
+      <img src="Fotky/obchodni-jednani.webp" alt="Obchodní jednání dvou lidí u stolu, jeden z nich má na šňůrce nahrávací zařízení Omi" width="1536" height="1024" loading="lazy">
+      <figcaption>Důležité rozhovory lze zachytit přímo tam, kde přirozeně vznikají.</figcaption>
+    </figure>
+  </div>
+
+  <div class="container content-narrow">
+    <div class="content-block reveal">
+      <h2>Nahrávkou to teprve začíná</h2>
+      <p>Pomocí zařízení nebo aplikace lze zachytit vybrané schůzky, hovory a další situace, během kterých vznikají důležité firemní informace.</p>
+      <p>Samotná nahrávka má ale omezenou hodnotu. Pokud chcete najít konkrétní informaci, musíte vědět, ve kterém rozhovoru zazněla, a záznam si znovu poslechnout. Přepis hledání usnadní, ale pořád pracujete pouze s jedním rozhovorem.</p>
+      <div class="callout">
+        <p>Inteligentní paměť jde dál.</p>
+      </div>
+      <p style="margin-top:26px;">Zachycené informace průběžně propojuje s předchozími rozhovory, rozhodnutími a zkušenostmi. Díky tomu nepracuje jen s tím, co zaznělo naposledy, ale také s kontextem, který se ve firmě vytvářel delší dobu.</p>
+      <p>Pokud klient při poslední schůzce změní svůj požadavek, můžete dohledat, jak se jeho potřeba postupně vyvíjela. Pokud tým řeší známý problém, inteligentní paměť může připomenout podobnou situaci a ukázat, jaký postup se tehdy osvědčil. A když nový kolega potřebuje pochopit důvod staršího rozhodnutí, nemusí se spoléhat pouze na stručnou poznámku v systému.</p>
+    </div>
+
+    <div class="content-block reveal">
+      <h2>Nejde jen o to vědět, co zaznělo</h2>
+      <p>Důležité informace mají hodnotu až ve chvíli, kdy je dokážete použít.</p>
+      <p>Inteligentní paměť proto nehledá pouze jednotlivá slova nebo věty. Pracuje s dostupným kontextem a pomáhá odpovídat na otázky, které se týkají vývoje situace, předchozích rozhodnutí a zkušeností firmy.</p>
+      <p class="lead-tight" style="margin-top:22px;">Můžete se například zeptat:</p>
+      <ul class="q-list">
+        <li><svg width="20" height="20" viewBox="0 0 20 20" fill="none" aria-hidden="true"><circle cx="10" cy="10" r="9" fill="#FEC710"/><path d="M7.6 7.7c.1-1.2 1.1-2 2.4-2 1.3 0 2.3.8 2.3 2 0 .9-.5 1.4-1.3 1.9-.7.4-1 .8-1 1.5v.3" stroke="#1F1741" stroke-width="1.6" stroke-linecap="round"/><circle cx="10" cy="14.2" r="1" fill="#1F1741"/></svg>Co klient během předchozích jednání skutečně požadoval?</li>
+        <li><svg width="20" height="20" viewBox="0 0 20 20" fill="none" aria-hidden="true"><circle cx="10" cy="10" r="9" fill="#FEC710"/><path d="M7.6 7.7c.1-1.2 1.1-2 2.4-2 1.3 0 2.3.8 2.3 2 0 .9-.5 1.4-1.3 1.9-.7.4-1 .8-1 1.5v.3" stroke="#1F1741" stroke-width="1.6" stroke-linecap="round"/><circle cx="10" cy="14.2" r="1" fill="#1F1741"/></svg>Kdy se jeho postoj změnil a co tomu předcházelo?</li>
+        <li><svg width="20" height="20" viewBox="0 0 20 20" fill="none" aria-hidden="true"><circle cx="10" cy="10" r="9" fill="#FEC710"/><path d="M7.6 7.7c.1-1.2 1.1-2 2.4-2 1.3 0 2.3.8 2.3 2 0 .9-.5 1.4-1.3 1.9-.7.4-1 .8-1 1.5v.3" stroke="#1F1741" stroke-width="1.6" stroke-linecap="round"/><circle cx="10" cy="14.2" r="1" fill="#1F1741"/></svg>Řešili jsme už někdy podobnou situaci?</li>
+        <li><svg width="20" height="20" viewBox="0 0 20 20" fill="none" aria-hidden="true"><circle cx="10" cy="10" r="9" fill="#FEC710"/><path d="M7.6 7.7c.1-1.2 1.1-2 2.4-2 1.3 0 2.3.8 2.3 2 0 .9-.5 1.4-1.3 1.9-.7.4-1 .8-1 1.5v.3" stroke="#1F1741" stroke-width="1.6" stroke-linecap="round"/><circle cx="10" cy="14.2" r="1" fill="#1F1741"/></svg>Jaký postup se nám v minulosti osvědčil?</li>
+        <li><svg width="20" height="20" viewBox="0 0 20 20" fill="none" aria-hidden="true"><circle cx="10" cy="10" r="9" fill="#FEC710"/><path d="M7.6 7.7c.1-1.2 1.1-2 2.4-2 1.3 0 2.3.8 2.3 2 0 .9-.5 1.4-1.3 1.9-.7.4-1 .8-1 1.5v.3" stroke="#1F1741" stroke-width="1.6" stroke-linecap="round"/><circle cx="10" cy="14.2" r="1" fill="#1F1741"/></svg>Které požadavky se v rozhovorech opakují?</li>
+        <li><svg width="20" height="20" viewBox="0 0 20 20" fill="none" aria-hidden="true"><circle cx="10" cy="10" r="9" fill="#FEC710"/><path d="M7.6 7.7c.1-1.2 1.1-2 2.4-2 1.3 0 2.3.8 2.3 2 0 .9-.5 1.4-1.3 1.9-.7.4-1 .8-1 1.5v.3" stroke="#1F1741" stroke-width="1.6" stroke-linecap="round"/><circle cx="10" cy="14.2" r="1" fill="#1F1741"/></svg>Jaký další krok dává podle dostupných informací smysl?</li>
+      </ul>
+      <p style="margin-top:24px;">Odpověď pak nemusí vycházet pouze z jednoho zápisu. Inteligentní paměť může pracovat s více zachycenými situacemi a ukázat souvislosti, které by při běžném hledání zůstaly skryté.</p>
+    </div>
+  </div>
+
+  <div class="container content-narrow">
+    <figure class="figure-wide reveal">
+      <img src="Fotky/obr.3.webp" alt="Nahrávací zařízení Omi na jednacím stole vedle telefonu a notebooků" width="1376" height="768" loading="lazy">
+      <figcaption>Zařízení zachytí rozhovor. Inteligentní vrstva z něj vytvoří kontext, který lze později znovu využít.</figcaption>
+    </figure>
+  </div>
+</section>
+
+<section class="benefits">
+  <div class="container">
+    <div class="benefits-head reveal">
+      <h2>Co může inteligentní paměť přinést vaší firmě?</h2>
+      <p>Pět oblastí, ve kterých se rozdíl mezi uloženou nahrávkou a použitelným kontextem projeví nejdřív.</p>
+    </div>
+    <div class="benefit-grid">
+      <article class="benefit-card reveal">
+        <span class="benefit-icon" aria-hidden="true">
+          <svg width="22" height="22" viewBox="0 0 22 22" fill="none"><circle cx="9.8" cy="9.8" r="6.3" stroke="#1F1741" stroke-width="1.7"/><path d="M14.6 14.6l4 4" stroke="#1F1741" stroke-width="1.7" stroke-linecap="round"/></svg>
+        </span>
+        <h3>Odpovědi z vlastní firemní historie</h3>
+        <p>Nemusíte ručně procházet staré zápisy, e-maily a různé systémy. Položíte otázku a získáte odpověď založenou na informacích, které se firma rozhodla zachytit.</p>
+        <p>Součástí odpovědi může být i původní kontext, ze kterého vychází. Snadněji tak ověříte nejen výsledek, ale také to, co mu předcházelo.</p>
+      </article>
+
+      <article class="benefit-card reveal">
+        <span class="benefit-icon" aria-hidden="true">
+          <svg width="22" height="22" viewBox="0 0 22 22" fill="none"><circle cx="5" cy="6" r="2.4" stroke="#1F1741" stroke-width="1.7"/><circle cx="17" cy="11" r="2.4" stroke="#1F1741" stroke-width="1.7"/><circle cx="6" cy="16.5" r="2.4" stroke="#1F1741" stroke-width="1.7"/><path d="M7.2 7.1l7.6 3.1M14.6 12.4L8.1 15.6" stroke="#1F1741" stroke-width="1.7" stroke-linecap="round"/></svg>
+        </span>
+        <h3>Souvislosti napříč rozhovory</h3>
+        <p>Jeden rozhovor často nedává úplný obraz. Požadavky se mění, rozhodnutí se vyvíjejí a nové informace mohou změnit význam toho, co zaznělo dříve.</p>
+        <p>Inteligentní paměť pomáhá tyto změny sledovat. Může upozornit na opakující se téma, rozdíl mezi původním a současným požadavkem nebo zkušenost, která souvisí s právě řešenou situací.</p>
+      </article>
+
+      <article class="benefit-card reveal">
+        <span class="benefit-icon" aria-hidden="true">
+          <svg width="22" height="22" viewBox="0 0 22 22" fill="none"><path d="M11 3.2a5.4 5.4 0 00-3.1 9.8v2.2h6.2V13A5.4 5.4 0 0011 3.2z" stroke="#1F1741" stroke-width="1.7" stroke-linejoin="round"/><path d="M8.9 17.8h4.2M9.6 19.9h2.8" stroke="#1F1741" stroke-width="1.7" stroke-linecap="round"/></svg>
+        </span>
+        <h3>Doporučení založená na dostupném kontextu</h3>
+        <p>Pokud firma podobnou situaci řešila v minulosti, inteligentní paměť může tuto zkušenost připomenout a využít ji při návrhu dalšího postupu.</p>
+        <p>Nejde o nahrazení lidského rozhodování. Člověk stále posuzuje situaci a nese odpovědnost za konečný krok. Má ale k dispozici více relevantních informací a nemusí začínat pokaždé od nuly.</p>
+      </article>
+
+      <article class="benefit-card reveal">
+        <span class="benefit-icon" aria-hidden="true">
+          <svg width="22" height="22" viewBox="0 0 22 22" fill="none"><path d="M4.5 4.6h8.2a2 2 0 012 2v10.8H6.5a2 2 0 01-2-2V4.6z" stroke="#1F1741" stroke-width="1.7" stroke-linejoin="round"/><path d="M14.7 8.1h2.8v9.3H14.7M7.6 8.4h4.4M7.6 11.5h4.4" stroke="#1F1741" stroke-width="1.7" stroke-linecap="round"/></svg>
+        </span>
+        <h3>Know-how, které ve firmě zůstává</h3>
+        <p>Zkušenosti často zůstávají spojené s konkrétními lidmi, projekty nebo obdobími. Při změně role, předání klienta nebo nástupu nového kolegy se část kontextu ztratí.</p>
+        <p>Inteligentní paměť pomáhá zachovat důvody rozhodnutí, vývoj vztahu s klientem i praktické zkušenosti z předchozí práce. Nový kolega tak nemusí pouze zjistit, co se udělalo. Může pochopit i proč.</p>
+      </article>
+
+      <article class="benefit-card reveal">
+        <span class="benefit-icon" aria-hidden="true">
+          <svg width="22" height="22" viewBox="0 0 22 22" fill="none"><path d="M3.6 11h6.1M9.7 11L7.4 8.4M9.7 11l-2.3 2.6" stroke="#1F1741" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/><rect x="12.4" y="4.3" width="6" height="13.4" rx="1.8" stroke="#1F1741" stroke-width="1.7"/></svg>
+        </span>
+        <h3>Výstupy, se kterými lze dál pracovat</h3>
+        <p>Zachycený rozhovor nemusí skončit jen jako text uložený v další aplikaci. Podle konkrétního procesu z něj mohou vzniknout úkoly, podklady pro rozhodování, reporty, návrhy dalšího postupu nebo strukturované informace pro CRM, projektové řízení a další firemní systémy.</p>
+        <p>Cílem není přidat další místo, které budou lidé muset ručně kontrolovat. Informace se mají dostat tam, kde už firma svoji práci řídí.</p>
+      </article>
+    </div>
+  </div>
+</section>
+
+<section class="content">
+  <div class="container content-narrow">
+    <div class="content-block reveal">
+      <h2>Každý další rozhovor rozšiřuje firemní kontext</h2>
+      <p>Běžná nahrávka zachycuje jeden okamžik. Inteligentní paměť se postupně rozšiřuje.</p>
+      <p>Nová schůzka může doplnit starší informace, potvrdit předchozí předpoklad nebo ukázat, že se situace změnila. Čím více relevantních zkušeností firma zachytí, tím lépe lze její historii využít při další práci.</p>
+      <p>Postupně tak vzniká znalostní vrstva, která pomáhá udržovat kontinuitu napříč klienty, projekty i týmy.</p>
+      <p>Firma se nemusí spoléhat pouze na to, co se podařilo zapsat bezprostředně po schůzce. Může se vracet i k důvodům, reakcím a souvislostem, které při běžném zápisu často chybějí.</p>
+    </div>
+  </div>
+
+  <div class="container content-narrow">
+    <figure class="figure-wide reveal">
+      <img src="Fotky/skoleni-knowhow.webp" alt="Interní porada týmu v zasedací místnosti, prezentující má na šňůrce nahrávací zařízení Omi" width="1536" height="1024" loading="lazy">
+      <figcaption>Kontext nevzniká jen na obchodních schůzkách. Často zazní i na interní poradě nebo při předávání zkušeností.</figcaption>
+    </figure>
+  </div>
+
+  <div class="container content-narrow">
+    <div class="content-block reveal">
+      <h2>Není potřeba zaznamenávat všechno</h2>
+      <p>Inteligentní paměť nemusí od prvního dne pokrývat celou firmu ani každý rozhovor.</p>
+      <p>Lepší je začít tam, kde se dnes ztrácí nejvíce hodnotného kontextu. Může jít například o obchodní schůzky, předávání klientů, servisní návštěvy, projektová rozhodnutí nebo interní porady.</p>
+      <p class="lead-tight" style="margin-top:22px;">Pro vybraný proces lze určit:</p>
+      <ul class="mini-list">
+        <li><svg width="18" height="18" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3.5 8.2l3 3 6-6.2" stroke="#6EC1E4" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>které situace má smysl zachytit</li>
+        <li><svg width="18" height="18" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3.5 8.2l3 3 6-6.2" stroke="#6EC1E4" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>kdo má mít k informacím přístup</li>
+        <li><svg width="18" height="18" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3.5 8.2l3 3 6-6.2" stroke="#6EC1E4" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>jaké odpovědi a výstupy firma potřebuje</li>
+        <li><svg width="18" height="18" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3.5 8.2l3 3 6-6.2" stroke="#6EC1E4" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>kam se mají důležité informace předávat</li>
+        <li><svg width="18" height="18" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3.5 8.2l3 3 6-6.2" stroke="#6EC1E4" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>ve kterých chvílích má inteligentní paměť člověka podpořit</li>
+      </ul>
+      <p style="margin-top:24px;">Začít lze jedním týmem a jedním konkrétním scénářem. Podle výsledků se pak rozhodne, zda a kam má smysl paměť rozšířit.</p>
+    </div>
+
+    <div class="content-block reveal">
+      <h2>Zařízení je vstup. Hodnota vzniká při dalším využití informací</h2>
+      <p>Zařízení usnadňuje zachycení rozhovorů během běžného pracovního dne. Nemusí být hlavním systémem, ve kterém bude firma informace později hledat nebo zpracovávat.</p>
+      <p>Skutečný přínos vzniká propojením zachycených informací, inteligentní vrstvy a systémů, které už firma používá.</p>
+      <p>Podle vybraného scénáře lze nastavit, jak se mají rozhovory zpracovat, jaké informace z nich mají vzniknout a kam se mají předat. Firma tak nezíská pouze nové zařízení, ale použitelný způsob, jak uchovat a využívat vlastní zkušenosti.</p>
+    </div>
+  </div>
+</section>
+
+<section class="cta-band">
+  <div class="container reveal">
+    <h2>Kde by mohla inteligentní paměť pomoci právě vám?</h2>
+    <p>Prohlédněte si konkrétní scénáře využití inteligentní paměti v různých oborech. Uvidíte, jak může pracovat s kontextem klientských rozhovorů, terénních návštěv, odborných konzultací i interního předávání zkušeností.</p>
+    <p>Pokud už máte vlastní představu nebo proces, ve kterém dnes důležité informace mizí, můžeme ho společně projít na nezávazné konzultaci.</p>
+    <div class="cta-actions">
+      <a href="priklady" class="btn btn-primary">Prohlédnout scénáře využití</a>
+      <button type="button" class="btn btn-ghost" data-open="modal-konzultace">Domluvit konzultaci</button>
+    </div>
+  </div>
+</section>
+
+<footer class="site-footer">
+  <div class="container">
+    <div class="footer-top">
+      <a href="/" class="footer-logo"><img src="Fotky/Logo-Plexima.webp" alt="Plexima"></a>
+      <nav class="footer-links" aria-label="Patičková navigace">
+        <a href="/#jak-to-funguje">Jak to funguje</a>
+        <a href="co-je-omi">Co je Omi</a>
+        <a href="/#implementace">Nasazení</a>
+        <a href="priklady">Příklady z praxe</a>
+        <a href="/#faq">FAQ</a>
+        <a href="kontakt">Kontakt</a>
+      </nav>
+    </div>
+    <p class="footer-desc">Inteligentní paměť zachytí důležité informace z rozhovorů, propojí je v čase a vrátí vám je ve chvíli, kdy s nimi chcete pracovat.</p>
+    <div class="footer-bottom">
+      <span>© 2026 Plexima. Všechna práva vyhrazena.</span>
+      <span><a href="ochrana-osobnich-udaju">Ochrana osobních údajů</a> · <a href="/#faq">Bezpečnost a pravidla nahrávání</a></span>
+    </div>
+  </div>
+</footer>
+
+<script>
+(function () {
+  var header = document.querySelector('.site-header');
+  var onScroll = function () { header.classList.toggle('is-scrolled', window.scrollY > 8); };
+  window.addEventListener('scroll', onScroll, { passive: true });
+  onScroll();
+
+  var toggle = document.querySelector('.nav-toggle');
+  var nav = document.querySelector('.main-nav');
+  toggle.addEventListener('click', function () {
+    var open = nav.classList.toggle('is-open');
+    toggle.setAttribute('aria-expanded', open);
+  });
+  nav.addEventListener('click', function (e) {
+    if (e.target.closest('a')) nav.classList.remove('is-open');
+  });
+
+  var reveals = document.querySelectorAll('.reveal');
+  if (!('IntersectionObserver' in window)) {
+    reveals.forEach(function (el) { el.classList.add('is-visible'); });
+    return;
+  }
+  var io = new IntersectionObserver(function (entries) {
+    entries.forEach(function (entry) {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('is-visible');
+        io.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.12, rootMargin: '0px 0px -40px' });
+  reveals.forEach(function (el) { io.observe(el); });
+})();
+</script>
+
+<script src="/assets/konzultace.js" defer></script>
+</body>
+</html>

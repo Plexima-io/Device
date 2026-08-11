@@ -1,52 +1,25 @@
-# Ignore everything by default, then allow the public web and
-# canonical project documentation/artifacts. Client data stays local.
+# Ignorujeme všechno a povolujeme jen to, co má být ve verzování.
+# Data klientů a osobní věci zůstávají lokálně.
 /*
 
-!/index.html
-!/co-je-omi.html
-!/dotaznik.html
-!/priklady.html
-!/priklady-prospirio.html
-!/kontakt.html
-!/ochrana-osobnich-udaju.html
-!/scenar-financni-poradci.html
-!/scenar-realitni-maklery.html
-!/scenar-veterinari.html
-!/scenar-architekti-projektanti.html
-!/scenar-autoservisy.html
-!/scenar-danovi-poradci.html
-!/scenar-lekari-kliniky.html
-!/scenar-psychologove.html
-!/scenar-danovi-ucetni.html
-!/dekujeme.html
-!/assets/
-!/assets/**
-!/api/
-!/api/**
-!/Fotky/
-!/Fotky/**
-!/AGENTS.md
-!/README.md
-!/.hermes.md
-!/plexima-design-system.md
-!/docs/
-!/docs/**
-!/design/
-!/design/**
-!/artifacts/
-!/artifacts/**
-!/.vercelignore
-!/.gitignore
-!/vercel.json
-!/favicon.ico
-!/favicon.svg
-!/apple-touch-icon.png
-!/icon-512.png
+# Publikovaný web. Vercel má Root Directory nastavené na web/.
+!/web/
+!/web/**
 
-# Local/private/generated content
+# Dokumentace a zdrojové podklady k webu.
+!/dokumentace/
+!/dokumentace/**
+!/podklady/
+!/podklady/**
+
+!/.gitignore
+
+# Lokální, privátní a generovaný obsah
 .env
 .env.*
-Klienti/
+klienti/
+archiv/
+Personal/
 .firecrawl/
 node_modules/
 dist/
@@ -54,5 +27,5 @@ build/
 coverage/
 *.log
 
-# Never track OS junk, even inside allowed folders.
+# OS smetí nikdy, ani v povolených složkách.
 **/.DS_Store

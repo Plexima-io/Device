@@ -1,6 +1,0 @@
-Visual QA:
-- Rendered both final slides to PNG and montage.
-- Checked layout intent: no visible overlapping text in generated geometry.
-- Deck uses editable shapes/text only; no unverified logo or external image assets.
-- Slide count: 2.
-- Final PPTX: /Users/powerfuleight/Workspace/Plexima/artifacts/omi-onepager/final/plexima-omi-onepager.pptx

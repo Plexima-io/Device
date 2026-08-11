@@ -1,0 +1,7 @@
+{
+  "cleanUrls": true,
+  "trailingSlash": false,
+  "redirects": [
+    { "source": "/scenar-:slug", "destination": "/scenare/:slug", "permanent": true }
+  ]
+}
