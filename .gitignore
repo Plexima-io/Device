@@ -12,6 +12,14 @@
 !/podklady/
 !/podklady/**
 
+# Vstupní body v kořeni. AGENTS.md musí zůstat tady, v podsložce ho
+# nástroje nenajdou.
+!/AGENTS.md
+!/README.md
+!/MEMORY.md
+!/reference/
+!/reference/**
+
 !/.gitignore
 
 # Lokální, privátní a generovaný obsah
