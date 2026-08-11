@@ -181,14 +181,29 @@ img { max-width: 100%; }
 
 /* Otázky v úvodu */
 .ask-block {
+  list-style: none;
   margin-top: 34px;
-  padding: 26px 30px;
-  background: var(--soft);
-  border: 1px solid var(--border);
-  border-radius: var(--radius-lg);
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
 }
-.ask-block p { color: var(--ink); font: 600 17.5px/1.55 var(--font-body); max-width: 640px; }
-.ask-block p + p { margin-top: 12px; }
+.ask-block li {
+  display: flex;
+  gap: 14px;
+  align-items: flex-start;
+  color: var(--ink);
+  font: 600 17.5px/1.55 var(--font-body);
+  max-width: 640px;
+}
+.ask-block li::before {
+  content: "";
+  flex-shrink: 0;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: var(--yellow);
+  margin-top: 9px;
+}
 
 /* Zvýrazněná myšlenka */
 .callout {
@@ -320,7 +335,6 @@ img { max-width: 100%; }
 }
 @media (max-width: 900px) {
   .figure-wide img { border-radius: var(--radius-md); }
-  .ask-block { padding: 22px 22px; }
 }
 @media (max-width: 768px) {
   .main-nav {
@@ -383,16 +397,16 @@ img { max-width: 100%; }
   <div class="container content-narrow">
 
     <div class="content-block reveal">
-      <div class="ask-block">
-        <p>Proč klient při posledním jednání změnil názor?</p>
-        <p>Co jeho reakci předcházelo?</p>
-        <p>Nezazněl dříve detail, který by dnes změnil naše rozhodnutí?</p>
-      </div>
+      <ul class="ask-block">
+        <li>Proč klient při posledním jednání změnil názor?</li>
+        <li>Co jeho reakci předcházelo?</li>
+        <li>Nezazněl dříve detail, který by dnes změnil naše rozhodnutí?</li>
+      </ul>
       <p style="margin-top:28px;">Odpovědi na podobné otázky ve firmě často existují. Jen nejsou na jednom místě.</p>
       <p>Část informací zůstane v zápisu ze schůzky, část v e-mailu a něco se uloží do CRM. Mnoho důležitých souvislostí ale zazní pouze během rozhovoru. Když se k tématu po několika týdnech nebo měsících vrátíte, bývá obtížné zjistit, co přesně se stalo a proč.</p>
       <p>Do systému se často zapíše konečný výsledek. Cesta, která k němu vedla, se postupně vytratí.</p>
       <div class="callout">
-        <p>Co kdybyste se mohli kdykoliv vrátit k historii firmy a zjistit nejen co se stalo, ale také proč?</p>
+        <p>Co kdybyste při dalším rozhodování nemuseli pokaždé začínat od nuly?</p>
       </div>
     </div>
   </div>
