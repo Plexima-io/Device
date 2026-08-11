@@ -398,12 +398,19 @@ h1, h2, h3 { font-family: var(--font-heading); font-weight: 700; }
   background: var(--yellow);
   margin-top: 7px;
 }
+.quiz-result .result-lead {
+  font-size: 16px;
+  color: var(--muted);
+  max-width: 520px;
+  margin: 0 auto 22px;
+}
 .quiz-result .result-text {
   font-size: 17px;
   color: var(--muted);
   max-width: 520px;
   margin: 0 auto 28px;
 }
+.quiz-result .result-text p + p { margin-top: 14px; }
 .quiz-result .result-note {
   font-size: 14px;
   color: var(--caption);
@@ -698,14 +705,15 @@ h1, h2, h3 { font-family: var(--font-heading); font-weight: 700; }
     <span class="result-badge" id="result-badge"></span>
     <div class="result-estimate" id="result-estimate" hidden>
       <span class="result-hours" id="result-hours"></span>
-      <span class="result-hours-label">cca tolik času u vás spolkne nadbytečná administrativa po schůzkách</span>
+      <span class="result-hours-label">lze získat zpět</span>
     </div>
+    <p class="result-lead" id="result-lead"></p>
     <h2 id="result-title"></h2>
     <div class="result-summary">
       <h3>Co jsme vyčetli z vašich odpovědí</h3>
       <ul id="result-summary-list"></ul>
     </div>
-    <p class="result-text" id="result-text"></p>
+    <div class="result-text" id="result-text"></div>
     <div class="result-actions" id="result-actions">
       <p class="result-confirm" id="result-confirm" hidden>Máme na vás telefon. Zavoláme vám do jednoho pracovního dne.</p>
       <button type="button" class="btn btn-primary" id="result-zavolejte">Zavolejte mi</button>
@@ -871,20 +879,35 @@ h1, h2, h3 { font-family: var(--font-heading); font-weight: 700; }
     A: {
       badge: 'Vysoký potenciál',
       badgeClass: 'a',
-      title: 'Automatizace u vás dává jasný smysl',
-      text: 'Máte objem schůzek i systémy, do kterých mohou výstupy automaticky téct. Na konzultaci vám ukážeme konkrétní workflow pro váš proces a řekneme, co by pilot obnášel.'
+      lead: 'To je ale jen viditelná část hodnoty. Ještě víc firmu stojí rozhodnutí, souvislosti a zkušenosti, které po rozhovorech zůstanou v hlavách lidí nebo se ztratí mezi poznámkami a systémy.',
+      title: 'U vás dává smysl inteligentní paměť',
+      text: [
+        'Nejde jen o automatický zápis po schůzce. Inteligentní paměť průběžně uchovává rozhodnutí, důvody, závazky a souvislosti z vašich rozhovorů, propojuje je s používanými systémy a vrací je lidem ve chvíli, kdy je znovu potřebují.',
+        'Přepis a automatizace mohou být první vrstvou. Skutečná hodnota vzniká ve chvíli, kdy firma nemusí znovu hledat nebo objevovat to, co už jednou věděla.'
+      ],
+      cta: 'Zavolejte mi'
     },
     B: {
-      badge: 'Dobrý potenciál',
+      badge: 'Střední potenciál',
       badgeClass: 'b',
-      title: 'Automatizace vám může pomoct, chce to upřesnit kde',
-      text: 'Ve vaší situaci se vyplatí vybrat jeden konkrétní proces a spočítat, jestli se automatizace zaplatí. Přesně to je náplň bezplatné konzultace. Projdeme váš případ a otevřeně řekneme, co dává smysl.'
+      lead: 'To je ale jen viditelná část hodnoty. Z vašich odpovědí zatím není jednoznačné, ve kterém procesu způsobuje ztráta informací největší problém.',
+      title: 'Máte dobrý základ pro inteligentní paměť',
+      text: [
+        'Nemusíte hned propojovat všechny schůzky a firemní systémy. Největší smysl dává vybrat jeden typ rozhovoru, ve kterém se pravidelně ztrácejí důležitá rozhodnutí, závazky nebo souvislosti.',
+        'Na něm lze ověřit, jak inteligentní paměť zachytí podstatný kontext, propojí jej s navazující prací a připomene ho ve chvíli, kdy ho lidé znovu potřebují. Podle skutečného přínosu se potom rozhodne, zda má smysl řešení rozšířit.'
+      ],
+      cta: 'Najít první využití'
     },
     C: {
-      badge: 'Zatím omezený přínos',
+      badge: 'Nízký potenciál',
       badgeClass: 'c',
-      title: 'Plná automatizace by se vám teď nejspíš nezaplatila',
-      text: 'Při menším objemu schůzek se složitější napojení nevyplatí. Co ale smysl dávat může, je samotné nahrávání a automatické zápisy bez integrace na další systémy. Rádi vám poradíme, jak začít v malém.'
+      lead: 'Podle vašich odpovědí by se rozsáhlé řešení a propojování více systémů v této chvíli pravděpodobně nevyplatilo.',
+      title: 'Inteligentní paměť u vás může začít jednoduše',
+      text: [
+        'To neznamená, že informace z vašich rozhovorů nemají hodnotu. Jen zatím není důvod budovat rozsáhlou automatizaci nebo složité integrace.',
+        'Smysluplným začátkem může být zachytit vybrané rozhovory, automaticky z nich vytvořit přehled rozhodnutí a úkolů a uchovat jejich obsah tak, aby se dal později snadno dohledat. Pokud poroste počet schůzek, tým nebo potřeba sdílet kontext, může se tato jednoduchá paměť postupně rozšířit.'
+      ],
+      cta: 'Zavolejte mi'
     }
   };
 
@@ -905,27 +928,34 @@ h1, h2, h3 { font-family: var(--font-heading); font-weight: 700; }
     return 'hodin';
   };
 
-  var buildSummary = function () {
+  var buildSummary = function (category) {
     var items = [];
     if (answers.pocet_lidi) items.push('Schůzky u vás pravidelně vede ' + answers.pocet_lidi + ' lidí');
     if (answers.pocet_schuzek) {
       items.push('Týdně proběhne ' + (answers.pocet_schuzek === 'Do 5' || answers.pocet_schuzek === 'Více než 40'
         ? answers.pocet_schuzek.toLowerCase() : answers.pocet_schuzek) + ' schůzek');
     }
-    var problemy = answers.problemy || [];
-    var realProblemy = problemy.filter(function (p) { return p !== 'Něco jiného'; });
-    if (realProblemy.length) {
-      items.push('Nejvíc vás pálí: ' + realProblemy.slice(0, 2).map(function (p) {
-        return p.charAt(1) === p.charAt(1).toLowerCase() ? p.charAt(0).toLowerCase() + p.slice(1) : p;
-      }).join(', '));
+
+    if (category === 'A') {
+      items.push('Důležité výstupy nejsou jednotné ani snadno dohledatelné');
+    } else {
+      var realProblemy = (answers.problemy || []).filter(function (p) { return p !== 'Něco jiného'; });
+      if (realProblemy.length) {
+        items.push('Nejvíc vás pálí: ' + realProblemy.slice(0, 2).map(function (p) {
+          return p.charAt(1) === p.charAt(1).toLowerCase() ? p.charAt(0).toLowerCase() + p.slice(1) : p;
+        }).join(', '));
+      }
     }
+
     var systemy = (answers.systemy || []).filter(function (s) {
       return s !== 'Žádné CRM' && s !== 'Jiné' && s !== 'Excel / tabulky';
     });
-    if (systemy.length) {
-      items.push('Používáte ' + systemy.slice(0, 3).join(', ') + '. Na to se dají výstupy napojit');
+    if (!systemy.length) {
+      items.push('Zatím nepoužíváte CRM nebo obdobný systém pro navazující výstupy');
+    } else if (category === 'A') {
+      items.push('Informace se dnes dělí mezi ' + systemy.slice(0, 3).join(', ') + ' a hlavy lidí');
     } else {
-      items.push('Zatím nemáte systém, kam výstupy automaticky posílat');
+      items.push('Pro práci používáte ' + systemy.slice(0, 3).join(', ') + ', které je potřeba zohlednit v návrhu');
     }
     return items;
   };
@@ -943,8 +973,16 @@ h1, h2, h3 { font-family: var(--font-heading); font-weight: 700; }
     var badge = document.getElementById('result-badge');
     badge.textContent = r.badge;
     badge.className = 'result-badge ' + r.badgeClass;
+    document.getElementById('result-lead').textContent = r.lead;
     document.getElementById('result-title').textContent = r.title;
-    document.getElementById('result-text').textContent = r.text;
+    document.getElementById('result-zavolejte').textContent = r.cta;
+    var textWrap = document.getElementById('result-text');
+    textWrap.innerHTML = '';
+    r.text.forEach(function (odstavec) {
+      var p = document.createElement('p');
+      p.textContent = odstavec;
+      textWrap.appendChild(p);
+    });
 
     var hodiny = estimateHours();
     var estimateWrap = document.getElementById('result-estimate');
@@ -958,7 +996,7 @@ h1, h2, h3 { font-family: var(--font-heading); font-weight: 700; }
 
     var list = document.getElementById('result-summary-list');
     list.innerHTML = '';
-    buildSummary().forEach(function (text) {
+    buildSummary(category).forEach(function (text) {
       var li = document.createElement('li');
       li.textContent = text;
       list.appendChild(li);
