@@ -1,45 +1,44 @@
-# Ignore everything by default, then allow the public web and
-# canonical project documentation/artifacts. Client data stays local.
+# Ignoruj vše, povoluj celé složky. Nikdy soubor po souboru, jinak
+# zapomenutá položka znamená chybějící stránku na produkci.
 /*
 
-# Všechny stránky v kořeni a ve scenare/ jsou veřejný web.
-!/*.html
-!/scenare/
-!/scenare/**
-!/assets/
-!/assets/**
-!/api/
-!/api/**
-!/Fotky/
-!/Fotky/**
-!/AGENTS.md
-!/README.md
-!/.hermes.md
-!/plexima-design-system.md
+!/web/
+!/web/**
+!/podklady/
+!/podklady/**
+!/dokumentace/
+!/dokumentace/**
 !/docs/
 !/docs/**
 !/design/
 !/design/**
+!/reference/
+!/reference/**
 !/artifacts/
 !/artifacts/**
-!/.vercelignore
-!/.gitignore
-!/vercel.json
-!/favicon.ico
-!/favicon.svg
-!/apple-touch-icon.png
-!/icon-512.png
 
-# Local/private/generated content
+!/AGENTS.md
+!/README.md
+!/MEMORY.md
+!/.hermes.md
+!/.gitignore
+
+# Lokální, citlivé a generované
 .env
 .env.*
 Klienti/
-.firecrawl/
+klienti/
+Personal/
+archiv/
+emails/
+output/
+tmp/
 node_modules/
 dist/
 build/
 coverage/
 *.log
+.firecrawl/
 
-# Never track OS junk, even inside allowed folders.
+# OS smetí, i uvnitř povolených složek
 **/.DS_Store

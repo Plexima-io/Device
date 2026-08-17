@@ -23,7 +23,19 @@ Strategie nabídky, validace, web, partnerství a budoucí automatizovaný outre
 | Klientský kontext a výstupy | `Klienti/<klient>/` |
 | Omi webové podklady | `docs/plexima-omi-web-struktura-cz.md`, `docs/homepage-wireframe-copy-cz.md`, `docs/use-cases-cz.md` |
 | Design systém | `design/plexima-design-system.md`, `design/brand-spec.md` |
-| Zdroj webu | `index.html`, související HTML a assets |
+| Zdroj webu | `web/` |
+
+## Kam jít
+
+| Složka | Co tam je |
+|---|---|
+| `web/` | Publikovaný web včetně `api/`, `assets/`, `Fotky/`, `scenare/` a `vercel.json`. Nasazuje se na `memory.plexima.io`, Vercel má Root Directory nastavené na `web`. |
+| `docs/` | Naše specifikace, rozhodnutí a handoff. |
+| `design/` | Design systém a brand spec. |
+| `artifacts/` | Hotové výstupy, decky a PDF. |
+| `Klienti/`, `Personal/` | Lokální, mimo git. |
+
+Do kořene nepatří nic nového. Kód webu vždy do `web/`.
 
 ## Agentní vstup
 
