@@ -10,7 +10,7 @@ Klientské složky, podklady, přepisy, interní analýzy potřeb, návrhy řeš
 
 ### Omi / firemní paměť
 
-Strategie nabídky, validace, web, partnerství a budoucí automatizovaný outreach. Cílová doména je `device.plexima.io`; současný veřejný obsah není aktuálním zdrojem pravdy.
+Strategie nabídky, validace, web, partnerství a budoucí automatizovaný outreach. Aktuální produkční doména je `memory.plexima.io` a její nasazený obsah je správná aktuální varianta webu.
 
 ## Mapa autorit
 

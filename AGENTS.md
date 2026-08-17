@@ -133,12 +133,23 @@ Zachycuj technická fakta o přístupech, uložení, přenosech, retenci, export
 - Hlavní hodnotou je firemní paměť a navazující služba, ne samotný gadget.
 - Omi je výchozí hardware, ale vrstva musí zůstat nahraditelná.
 - ICP zatím není definovaný. Nevymýšlej jej a neprezentuj hypotézu jako rozhodnutí.
-- `device.plexima.io` je cílová doména. Její současný veřejný obsah není aktuální autorita a nesmí se používat jako zdroj strategie nebo positioningu.
+- `memory.plexima.io` je aktuální produkční doména a její nasazený obsah je správná aktuální varianta webu. `device.plexima.io` je zastaralá cesta a nesmí se používat pro ověřování produkce.
 - Současný obchodní cíl je získat první klienty a feedback.
 - Apollo, Clay a další nástroje jsou kandidáti pro budoucí automatizovaný outreach, nikoliv schválený stack.
 - Aktivace placených nástrojů, kampaní, sekvencí nebo automatického odesílání vyžaduje schválení.
 
 Pro web a vizuály načti až podle konkrétní mise `design/plexima-design-system.md`, `design/brand-spec.md` a příslušné copy dokumenty. Nekopíruj vizuál Omi.
+
+## Copy na webu: prodávej přínos, ne produkt
+
+Každý nadpis, podnadpis a claim má čtenáři říct, co získá. Nejsi informační deska.
+
+- Popisuj výhodu a výsledek, ne to, co je na stránce nebo co produkt umí.
+- Nepiš návod k orientaci ("nejdřív podle profese, pak příklady"). To si čtenář přečte z rozhraní.
+- Nezmiňuj konkrétní hardware v místech, kde jde o přínos. Zařízení je nahraditelné, výhoda ne.
+- Silnější je vždy formulace typu "podívejte se, jakou výhodu ve svém oboru získáte" než "tady je přehled scénářů".
+- Neuváděj čísla a social proof, která nemáme ověřená. Přínos ano, vymyšlená autorita ne.
+- Neslibuj za Pleximu výsledek, který dodává klientův vlastní proces. Přínos formuluj přes to, co řešení umožní.
 
 ## Evidence, komunikace a kvalita
 
@@ -152,7 +163,7 @@ Pro web a vizuály načti až podle konkrétní mise `design/plexima-design-syst
 ## Data, scope a externí akce
 
 - Klientská data zůstávají v klientské složce a nepatří do Hermes memory ani reusable skillů.
-- Externí zprávy lze připravit, ale ne odeslat bez schválení.
+- Externí e-maily a zprávy: nejdřív návrh ke konzultaci s DRAKO (příjemce, předmět, tělo); odeslání jen po výslovném svolení. Nikdy neodesílat „pro jistotu“ ani po tichém souhlasu s obsahem bez pokynu k odeslání.
 - Bez schválení nevytvářej cenu, závazný scope či termín, nezahajuj implementaci, neměň klientská nebo produkční data, neaktivuj placený nástroj, cron nebo outreach.
 - Necommituj, nepushuj a nedeployuj bez výslovného pokynu.
 - Neměň jiné Workspace projekty, profily, credentials, skills, memory nebo crony bez explicitního scope.

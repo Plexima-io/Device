@@ -20,6 +20,18 @@ const UTM_POLE = {
 
 const LABELS = {
   ico: 'IČO',
+  zarizeni: 'Zařízení',
+  ulice: 'Ulice a číslo',
+  mesto: 'Město',
+  psc: 'PSČ',
+  automatizace: 'Zájem o integraci a automatizaci',
+  fakturace: 'Fakturační údaje',
+  fakt_firma: 'Fakturační firma',
+  fakt_ico: 'Fakturační IČO',
+  fakt_dic: 'DIČ',
+  fakt_ulice: 'Fakturační ulice',
+  fakt_mesto: 'Fakturační město',
+  fakt_psc: 'Fakturační PSČ',
   pozice: 'Pozice',
   pocet: 'Počet kusů',
   poznamka: 'Poznámka',
@@ -101,11 +113,12 @@ export default async function handler(req, res) {
     Commentary: buildCommentary(body, zdroj),
     LeadTypeId: '96ed75a6-1718-4311-a690-a577d4c873b1',
     OwnerId: '9043f9e8-1bd1-4340-86d0-d74aa5a12e81',
-    LeadSourceId: 'f82c416e-0cb2-4080-b4a3-58a0eeb82f24'
+    LeadSourceId: 'f82c416e-0cb2-4080-b4a3-58a0eeb82f24',
+    UsrZdrojDevice: zdroj
   }, utmPole(body.page));
 
   if (body.firma) lead.Account = body.firma;
-  if (body.page) lead.BpmRef = body.page;
+  if (body.page) lead.BpmHref = body.page;
 
   const r = await fetch(CREATIO_WEBHOOK, {
     method: 'POST',

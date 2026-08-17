@@ -1,6 +1,6 @@
 # CURRENT_STATE.md — DRAKO × Plexima
 
-Aktualizováno: 2026-08-01
+Aktualizováno: 2026-08-12
 
 ## Celkový stav
 
@@ -31,7 +31,7 @@ Při další klientské misi použít nový dvoustupňový workflow na skutečn�
 - DRAKO vlastní strategii, nikoliv každodenní provedení.
 - Současný cíl je oslovit první potenciální klienty a získat feedback.
 - Omi je výchozí hardware, ale hodnota a positioning stojí na firemní paměti a navazující službě.
-- Cílová doména je `device.plexima.io`; její současný veřejný obsah není aktuální autorita.
+- Aktuální produkční doména je `memory.plexima.io`; její nasazený obsah je správná aktuální varianta webu.
 - Apollo, Clay a další nástroje jsou pouze kandidáti pro budoucí automatizovaný outreach.
 
 ### Hlavní blocker
@@ -45,7 +45,7 @@ Definovat první ICP hypotézu a validační kohortu; potom navrhnout messaging,
 ## Co teď nedělat
 
 - nepřidávat další univerzální router nebo metodickou vrstvu;
-- nenačítat starý obsah `device.plexima.io` jako aktuální strategii;
+- nepoužívat zastaralou cestu `device.plexima.io` pro ověřování aktuální produkce;
 - nespouštět plošný Omi outreach bez ICP a schválení;
 - nepřenášet klientská data nebo předpoklady mezi složkami;
 - neměnit web, klientská data, placené nástroje, crony, commit ani deployment bez explicitního scope.

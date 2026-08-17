@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Inteligentní paměť pro pracovní rozhovory | Omi</title>
+<title>Inteligentní paměť pro pracovní rozhovory | Plexima</title>
 <meta name="description" content="Zachyťte důležité informace z rozhovorů, uchovejte jejich kontext a napojte je na CRM, úkoly a další firemní systémy.">
 <link rel="icon" href="/Fotky/favicon.ico" sizes="32x32">
 <link rel="icon" href="/Fotky/favicon.svg" type="image/svg+xml">
@@ -11,6 +11,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@700;800&family=Open+Sans:wght@400;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/assets/nav.css">
 <style>
 :root {
   --yellow: #FEC710;
@@ -228,12 +229,26 @@ a.btn-ghost[href^="dotaznik"]:hover { background: var(--soft); border-color: var
   overflow: hidden;
   padding: clamp(16px, 3vw, 32px);
 }
-.device-figure img {
-  display: block;
+.device-stack {
+  position: relative;
   width: 100%;
   max-width: 360px;
+  aspect-ratio: 1 / 1;
   margin: 44px auto 0;
+}
+.device-slide {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  opacity: 0;
+  transition: opacity .7s ease;
   mix-blend-mode: multiply;
+}
+.device-slide.is-active { opacity: 1; }
+@media (prefers-reduced-motion: reduce) {
+  .device-slide { transition: none; }
 }
 .device-tag {
   position: absolute;
@@ -904,9 +919,10 @@ input[type="range"]:focus-visible { outline: 2px solid var(--blue); outline-offs
   background: var(--blue);
   display: inline-block;
 }
-.int-chips { display: flex; flex-wrap: wrap; gap: 8px; }
+.int-chips { display: grid; grid-template-columns: minmax(0, 1fr); gap: 8px; }
 .int-chips span {
-  padding: 7px 13px;
+  padding: 8px 12px;
+  min-width: 0;
   border-radius: 999px;
   background: var(--soft);
   border: 1px solid var(--border);
@@ -915,13 +931,12 @@ input[type="range"]:focus-visible { outline: 2px solid var(--blue); outline-offs
   transition: border-color .15s ease, background .15s ease;
 }
 .int-chips span:hover { border-color: var(--blue); background: rgba(110,193,228,.08); }
-.integration-note {
-  margin-top: 36px;
-  font-size: 17px;
+.int-more {
+  margin-top: 18px;
+  font-size: 12px;
   color: var(--muted);
-  max-width: 720px;
+  text-align: center;
 }
-.integration-note strong { color: var(--ink); }
 
 /* ---------- Pilot ---------- */
 .pilot-panel {
@@ -958,7 +973,7 @@ input[type="range"]:focus-visible { outline: 2px solid var(--blue); outline-offs
 .pilot-price { font-size: 14px; color: rgba(255,255,255,.6); }
 
 /* ---------- FAQ ---------- */
-.faq-list { max-width: 760px; margin: 48px auto 0; }
+.faq-list { max-width: 780px; margin: 48px 0 0; }
 .faq-item {
   border-bottom: 1px solid var(--border);
 }
@@ -989,6 +1004,158 @@ input[type="range"]:focus-visible { outline: 2px solid var(--blue); outline-offs
   padding: 0 44px 24px 0;
   font-size: 16px;
   color: var(--muted);
+}
+
+/* ---------- Partner banner ---------- */
+.partner-band { padding: var(--section-y) 0 0; overflow: hidden; }
+.partner-intro {
+  max-width: 640px;
+  margin: 0 auto clamp(56px, 7vw, 104px);
+  padding-top: 34px;
+  border-top: 1px solid var(--border);
+  text-align: center;
+}
+.partner-intro .eyebrow { margin-bottom: 12px; }
+.partner-intro h2 {
+  font-size: clamp(23px, 2.6vw, 28px);
+  line-height: 1.25;
+}
+.partner-intro p {
+  font-size: 16px;
+  color: var(--muted);
+  margin-top: 12px;
+}
+.partner-card {
+  position: relative;
+  display: grid;
+  grid-template-columns: minmax(0, 1.15fr) minmax(0, .85fr);
+  gap: clamp(24px, 3vw, 40px);
+  align-items: center;
+  padding: clamp(26px, 3vw, 40px);
+  border-radius: var(--radius-lg);
+  background: var(--ink);
+  box-shadow: var(--shadow-lg);
+}
+.partner-card::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  background: radial-gradient(circle at 74% 8%, rgba(110,193,228,.18), transparent 60%);
+  pointer-events: none;
+}
+
+.partner-visual::before {
+  content: "";
+  position: absolute;
+  right: 2%;
+  top: 0;
+  width: 42%;
+  height: 74%;
+  border-radius: 50%;
+  background: radial-gradient(ellipse at center, rgba(110,193,228,.3), rgba(110,193,228,0) 68%);
+  filter: blur(30px);
+}
+.partner-visual img {
+  position: absolute;
+  z-index: 2;
+  right: 0;
+  top: 50%;
+  transform: translateY(-58%);
+  width: 48%;
+  max-width: none;
+  height: auto;
+  pointer-events: none;
+  filter: drop-shadow(0 26px 40px rgba(0,0,0,.45));
+}
+.partner-copy { position: relative; z-index: 1; }
+.partner-tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 14px;
+  font: 700 11px/1.3 var(--font-body);
+  letter-spacing: .07em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,.62);
+}
+.partner-tag img { height: 17px; width: auto; display: block; }
+.partner-card h2 {
+  font-size: clamp(23px, 2.5vw, 30px);
+  line-height: 1.22;
+  color: #fff;
+  max-width: 30ch;
+}
+.partner-card .partner-lead {
+  margin-top: 12px;
+  font-size: clamp(15px, 1.5vw, 16px);
+  line-height: 1.55;
+  color: rgba(255,255,255,.68);
+  max-width: 56ch;
+}
+.partner-actions { display: flex; align-items: center; gap: 18px; flex-wrap: wrap; margin-top: 22px; }
+.partner-actions .btn-primary { background: #fff; border-color: #fff; color: var(--ink); }
+.partner-actions .btn-primary:hover { background: rgba(255,255,255,.86); border-color: rgba(255,255,255,.86); }
+.partner-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  min-height: 44px;
+  font: 700 15.5px/1 var(--font-body);
+  color: #fff;
+  text-decoration: none;
+  border-bottom: 2px solid rgba(255,255,255,.32);
+  transition: border-color .18s ease;
+}
+.partner-link:hover { border-bottom-color: #fff; }
+.partner-link svg { transition: transform .18s ease; }
+.partner-link:hover svg { transform: translateX(3px); }
+.partner-link:focus-visible { outline: 2px solid var(--blue); outline-offset: 4px; border-radius: 3px; }
+
+.partner-stats {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px 16px;
+  margin-top: 20px;
+  list-style: none;
+}
+.partner-stats li {
+  display: flex;
+  align-items: baseline;
+  gap: 6px;
+  font: 400 12.5px/1.4 var(--font-body);
+  color: rgba(255,255,255,.6);
+}
+.partner-stats li + li { padding-left: 16px; border-left: 1px solid rgba(255,255,255,.14); }
+.partner-stat-value {
+  font: 700 14px/1.4 var(--font-body);
+  font-variant-numeric: tabular-nums;
+  color: var(--yellow);
+}
+
+@media (max-width: 900px) {
+  .partner-card { grid-template-columns: 1fr; padding-bottom: 0; }
+  .partner-card h2 { max-width: none; }
+  .partner-visual { margin-top: 4px; }
+  .partner-visual img {
+    position: relative;
+    right: auto;
+    top: auto;
+    transform: none;
+    width: 108%;
+    margin: 0 -4% -10% auto;
+  }
+  .partner-visual::before { right: 0; top: auto; bottom: 8%; width: 90%; height: 60%; }
+}
+@media (max-width: 560px) {
+  .partner-tag { flex-direction: column; align-items: flex-start; gap: 10px; }
+  .partner-tag img { height: 20px; }
+  .partner-visual img { width: 112%; margin: 0 -6% -8% auto; }
+  .partner-stats li + li { padding-left: 0; border-left: 0; }
+  .partner-stats li.partner-stat-wide { display: none; }
+  .partner-actions { flex-direction: column; align-items: stretch; gap: 14px; }
+  .partner-actions .btn { width: 100%; }
+  .partner-link { align-self: center; }
 }
 
 /* ---------- Final CTA ---------- */
@@ -1030,7 +1197,7 @@ input[type="range"]:focus-visible { outline: 2px solid var(--blue); outline-offs
 }
 .footer-desc { flex: 1; max-width: 420px; line-height: 1.6; margin: 0; }
 .footer-logo { display: inline-flex; }
-.footer-logo img { height: 28px; display: block; filter: grayscale(1) brightness(0) invert(1); }
+.footer-logo img { height: 28px; width: auto; display: block; filter: grayscale(1) brightness(0) invert(1); }
 .footer-subscribe { max-width: 480px; }
 .footer-subscribe h3 { font: 700 18px/1.3 var(--font-heading); color: #fff; margin-bottom: 12px; }
 .subscribe-form { display: flex; gap: 10px; flex-wrap: wrap; }
@@ -1093,7 +1260,7 @@ input[type="range"]:focus-visible { outline: 2px solid var(--blue); outline-offs
 .work-card {
   position: relative;
   flex: 0 0 clamp(280px, 26vw, 340px);
-  height: clamp(420px, 42vw, 492px);
+  height: clamp(450px, 44vw, 516px);
   border-radius: var(--radius-lg);
   overflow: hidden;
   scroll-snap-align: start;
@@ -1153,54 +1320,22 @@ input[type="range"]:focus-visible { outline: 2px solid var(--blue); outline-offs
   color: var(--yellow);
 }
 
-/* mini graf jako důkaz claimu */
+/* krátký popis místo grafu */
 .work-proof {
   margin-top: 14px;
+  margin-bottom: 22px;
   padding-top: 13px;
   border-top: 1px solid rgba(255,255,255,.13);
 }
-.work-proof-metric {
-  font: 700 11.5px/1.3 var(--font-body);
-  color: rgba(255,255,255,.88);
-}
-.work-proof-row {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  margin-top: 10px;
-}
-.work-proof-label {
-  flex: 0 0 36px;
-  font: 600 10.5px/1 var(--font-body);
-  color: rgba(255,255,255,.45);
-}
-.work-proof-track {
-  flex: 1 1 auto;
-  display: flex;
-  gap: 2px;
-  height: 9px;
-  border-radius: 999px;
-  background: rgba(255,255,255,.07);
-  overflow: hidden;
-}
-.work-proof-seg {
-  width: 0;
-  border-radius: 999px;
-  transition: width .9s cubic-bezier(.22,1,.36,1);
-}
-.work-proof-seg.is-drag { background: rgba(255,255,255,.24); }
-.work-proof-seg.is-gain { background: var(--yellow); }
-.carousel.is-visible .work-proof-seg { width: var(--w); }
-.work-proof-row + .work-proof-row .work-proof-seg { transition-delay: .18s; }
-.work-proof-value {
-  flex: 0 0 90px;
-  text-align: right;
-  white-space: nowrap;
-  font: 700 11px/1.25 var(--font-body);
+.work-proof-now {
+  font: 400 13.5px/1.5 var(--font-body);
   color: rgba(255,255,255,.6);
 }
-.work-proof-value.is-gain { color: var(--yellow); }
-html.no-motion .work-proof-seg { transition: none; }
+.work-proof-gain {
+  margin-top: 8px;
+  font: 600 13.5px/1.5 var(--font-body);
+  color: #fff;
+}
 .work-case {
   align-self: flex-start;
   background: #fff;
@@ -1758,7 +1893,7 @@ html.no-motion .how-visual * { animation: none !important; }
 .trust-card p { font-size: 14px; line-height: 1.55; color: var(--muted); }
 
 /* ---------- Integration logos ---------- */
-.int-chips span { display: inline-flex; align-items: center; gap: 8px; }
+.int-chips span { display: flex; align-items: center; gap: 9px; }
 .int-chips img { width: 18px; height: 18px; object-fit: contain; border-radius: 3px; }
 
 /* ---------- Scroll reveal ---------- */
@@ -1822,7 +1957,7 @@ html.no-motion .how-visual * { animation: none !important; }
   }
   .scenario-card { flex: 0 0 82%; scroll-snap-align: center; }
   .faq-body { padding-right: 0; }
-  .work-card { flex: 0 0 84%; height: 450px; }
+  .work-card { flex: 0 0 84%; height: 494px; }
   .trust-cards { grid-template-columns: 1fr; }
   .form-grid { grid-template-columns: 1fr; }
   .footer-top { gap: 32px; }
@@ -1841,7 +1976,15 @@ html.no-motion .how-visual * { animation: none !important; }
     </button>
     <nav class="main-nav" aria-label="Hlavní navigace">
       <a href="#jak-to-funguje">Jak to funguje</a>
-      <a href="co-je-omi">Co je Omi</a>
+      <div class="nav-dd">
+        <button type="button" class="nav-dd-toggle" aria-expanded="false">Zařízení
+          <svg width="12" height="12" viewBox="0 0 12 12" fill="none" aria-hidden="true"><path d="M2.5 4.5L6 8l3.5-3.5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </button>
+        <div class="nav-dd-menu">
+          <a href="/co-je-plaud">Plaud</a>
+          <a href="/co-je-omi">Omi</a>
+        </div>
+      </div>
       <a href="priklady">Příklady z praxe</a>
     </nav>
     <div class="header-cta">
@@ -1856,12 +1999,12 @@ html.no-motion .how-visual * { animation: none !important; }
     <div>
       <span class="eyebrow">Know-how z každého rozhovoru</span>
       <h1>To nejdůležitější z rozhovorů často zapadne.</h1>
-      <p class="hero-sub">Z důležitých detailů, nápadů a souvislostí z vašich rozhovorů se postupně buduje <strong>inteligentní paměť firmy</strong>, kterou můžete kdykoli využít.</p>
+      <p class="hero-sub">Z důležitých detailů, nápadů a souvislostí z vašich rozhovorů se postupně buduje <strong>inteligentní paměť firmy</strong>.</p>
       <div class="hero-cta">
         <button type="button" class="btn btn-primary" data-open="modal-konzultace">Domluvit konzultaci</button>
-        <a href="co-je-omi" class="btn btn-ghost">Co je Omi</a>
+        <a href="#scenare" class="btn btn-ghost">Zjistit, kde začít</a>
       </div>
-      <p class="hero-trust">Technologii Omi dnes používá přes <strong>300&nbsp;000 profesionálů</strong> po celém světě.</p>
+      <p class="hero-trust">Firemní kontext máte k dispozici <strong>vždy, když se zeptáte</strong>.</p>
       <ul class="hero-benefits">
         <li>
           <svg width="18" height="18" viewBox="0 0 18 18" fill="none"><circle cx="9" cy="9" r="9" fill="#FEC710"/><path d="M5.5 9.2l2.3 2.3 4.7-4.8" stroke="#1F1741" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
@@ -1879,8 +2022,11 @@ html.no-motion .how-visual * { animation: none !important; }
     </div>
     <div class="hero-visual">
       <figure class="device-figure">
-        <span class="device-tag"><i></i>Inteligentní paměť</span>
-        <img src="Fotky/WebP Image.webp" alt="Nahrávací zařízení Omi na šňůrce">
+        <span class="device-tag"><i></i><span id="device-label">Plaud</span></span>
+        <div class="device-stack" id="device-stack">
+          <img class="device-slide is-active" data-label="Plaud" src="Fotky/plaud/plaud-note-front-transparent.webp" alt="Nahrávací zařízení Plaud Note Pro, pohled zepředu" width="1000" height="1000" fetchpriority="high" decoding="async">
+          <img class="device-slide" data-label="Omi" src="Fotky/WebP Image.webp" alt="Nahrávací zařízení Omi na šňůrce" width="1920" height="1920" decoding="async">
+        </div>
       </figure>
       <div class="flow-card" id="flow-card" aria-hidden="true">
         <div class="flow-label"><span class="dot"></span>Inteligentní zpracování</div>
@@ -1996,17 +2142,8 @@ html.no-motion .how-visual * { animation: none !important; }
             <span class="work-badge">Finanční poradci</span>
             <h3 class="work-headline">Ušetřete desítky minut před každou schůzkou</h3>
             <div class="work-proof">
-              <div class="work-proof-metric">Příprava na schůzku</div>
-              <div class="work-proof-row">
-                <span class="work-proof-label">Dnes</span>
-                <span class="work-proof-track"><span class="work-proof-seg is-drag" style="--w:100%"></span></span>
-                <span class="work-proof-value">desítky minut</span>
-              </div>
-              <div class="work-proof-row">
-                <span class="work-proof-label">S Omi</span>
-                <span class="work-proof-track"><span class="work-proof-seg is-gain" style="--w:18%"></span></span>
-                <span class="work-proof-value is-gain">pár minut</span>
-              </div>
+              <p class="work-proof-now">Před schůzkou si vybavíte jen to, co jste si sami zapsali.</p>
+              <p class="work-proof-gain">Víte, co klient minule odmítl a jaké obavy se u něj opakují.</p>
             </div>
             <a href="/scenare/financni-poradci" class="btn work-case">Zobrazit scénář</a>
           </div>
@@ -2019,17 +2156,8 @@ html.no-motion .how-visual * { animation: none !important; }
             <span class="work-badge">Realitní makléři</span>
             <h3 class="work-headline">Méně zbytečných prohlídek, rychlejší rozhodnutí</h3>
             <div class="work-proof">
-              <div class="work-proof-metric">Nevhodné nabídky zájemci</div>
-              <div class="work-proof-row">
-                <span class="work-proof-label">Dnes</span>
-                <span class="work-proof-track"><span class="work-proof-seg is-drag" style="--w:100%"></span></span>
-                <span class="work-proof-value">často</span>
-              </div>
-              <div class="work-proof-row">
-                <span class="work-proof-label">S Omi</span>
-                <span class="work-proof-track"><span class="work-proof-seg is-gain" style="--w:22%"></span></span>
-                <span class="work-proof-value is-gain">zřídka</span>
-              </div>
+              <p class="work-proof-now">Zájemce řekne, co chce, a rozhodne se podle něčeho jiného.</p>
+              <p class="work-proof-gain">Z hovorů vyjde, podle čeho se rozhoduje, i když to sám nepojmenuje.</p>
             </div>
             <a href="/scenare/realitni-maklery" class="btn work-case">Zobrazit scénář</a>
           </div>
@@ -2042,17 +2170,8 @@ html.no-motion .how-visual * { animation: none !important; }
             <span class="work-badge">Daňoví a účetní poradci</span>
             <h3 class="work-headline">Přestaňte hodiny dohledávat a urgovat podklady</h3>
             <div class="work-proof">
-              <div class="work-proof-metric">Sběr podkladů od klienta</div>
-              <div class="work-proof-row">
-                <span class="work-proof-label">Dnes</span>
-                <span class="work-proof-track"><span class="work-proof-seg is-drag" style="--w:100%"></span></span>
-                <span class="work-proof-value">hodiny</span>
-              </div>
-              <div class="work-proof-row">
-                <span class="work-proof-label">S Omi</span>
-                <span class="work-proof-track"><span class="work-proof-seg is-gain" style="--w:20%"></span></span>
-                <span class="work-proof-value is-gain">jeden přehled</span>
-              </div>
+              <p class="work-proof-now">Sběr podkladů od klienta standardně zabere hodiny.</p>
+              <p class="work-proof-gain">Víte dopředu, které podklady u kterého klienta chybí opakovaně.</p>
             </div>
             <a href="/scenare/danovi-poradci" class="btn work-case">Zobrazit scénář</a>
           </div>
@@ -2065,17 +2184,8 @@ html.no-motion .how-visual * { animation: none !important; }
             <span class="work-badge">Veterináři</span>
             <h3 class="work-headline">Celý vývoj pacienta během jedné minuty</h3>
             <div class="work-proof">
-              <div class="work-proof-metric">Dohledání historie pacienta</div>
-              <div class="work-proof-row">
-                <span class="work-proof-label">Dnes</span>
-                <span class="work-proof-track"><span class="work-proof-seg is-drag" style="--w:100%"></span></span>
-                <span class="work-proof-value">3 záznamy</span>
-              </div>
-              <div class="work-proof-row">
-                <span class="work-proof-label">S Omi</span>
-                <span class="work-proof-track"><span class="work-proof-seg is-gain" style="--w:14%"></span></span>
-                <span class="work-proof-value is-gain">jeden případ</span>
-              </div>
+              <p class="work-proof-now">Historie pacienta je roztříštěná do samostatných záznamů.</p>
+              <p class="work-proof-gain">Vidíte, které potíže se vracejí a co jim v minulosti předcházelo.</p>
             </div>
             <a href="/scenare/veterinari" class="btn work-case">Zobrazit scénář</a>
           </div>
@@ -2088,17 +2198,8 @@ html.no-motion .how-visual * { animation: none !important; }
             <span class="work-badge">Lékaři a kliniky</span>
             <h3 class="work-headline">Více času pacientovi, méně skládání historie</h3>
             <div class="work-proof">
-              <div class="work-proof-metric">Skládání historie pacienta</div>
-              <div class="work-proof-row">
-                <span class="work-proof-label">Dnes</span>
-                <span class="work-proof-track"><span class="work-proof-seg is-drag" style="--w:100%"></span></span>
-                <span class="work-proof-value">minuty</span>
-              </div>
-              <div class="work-proof-row">
-                <span class="work-proof-label">S Omi</span>
-                <span class="work-proof-track"><span class="work-proof-seg is-gain" style="--w:16%"></span></span>
-                <span class="work-proof-value is-gain">pár sekund</span>
-              </div>
+              <p class="work-proof-now">Historii pacienta skládáte na začátku návštěvy z poznámek.</p>
+              <p class="work-proof-gain">Souhrn upozorní na změny a nesrovnalosti, které se snadno přehlédnou.</p>
             </div>
             <a href="/scenare/lekari-kliniky" class="btn work-case">Zobrazit scénář</a>
           </div>
@@ -2111,17 +2212,8 @@ html.no-motion .how-visual * { animation: none !important; }
             <span class="work-badge">Psychologové a psychoterapeuti</span>
             <h3 class="work-headline">Připravte se na další sezení za pár minut</h3>
             <div class="work-proof">
-              <div class="work-proof-metric">Poznámky z více sezení</div>
-              <div class="work-proof-row">
-                <span class="work-proof-label">Dnes</span>
-                <span class="work-proof-track"><span class="work-proof-seg is-drag" style="--w:100%"></span></span>
-                <span class="work-proof-value">zvlášť</span>
-              </div>
-              <div class="work-proof-row">
-                <span class="work-proof-label">S Omi</span>
-                <span class="work-proof-track"><span class="work-proof-seg is-gain" style="--w:20%"></span></span>
-                <span class="work-proof-value is-gain">souvislý vývoj</span>
-              </div>
+              <p class="work-proof-now">Každé sezení zůstává v poznámkách samo za sebe.</p>
+              <p class="work-proof-gain">Uvidíte témata, která se u klienta vracejí, i když je pojmenuje jinak.</p>
             </div>
             <a href="/scenare/psychologove" class="btn work-case">Zobrazit scénář</a>
           </div>
@@ -2134,17 +2226,8 @@ html.no-motion .how-visual * { animation: none !important; }
             <span class="work-badge">Architekti a projektanti</span>
             <h3 class="work-headline">Žádné přepracování kvůli zapomenuté dohodě</h3>
             <div class="work-proof">
-              <div class="work-proof-metric">Dohledání důvodu rozhodnutí</div>
-              <div class="work-proof-row">
-                <span class="work-proof-label">Dnes</span>
-                <span class="work-proof-track"><span class="work-proof-seg is-drag" style="--w:100%"></span></span>
-                <span class="work-proof-value">hodiny</span>
-              </div>
-              <div class="work-proof-row">
-                <span class="work-proof-label">S Omi</span>
-                <span class="work-proof-track"><span class="work-proof-seg is-gain" style="--w:12%"></span></span>
-                <span class="work-proof-value is-gain">pár sekund</span>
-              </div>
+              <p class="work-proof-now">Proč se rozhodlo takhle, dohledáváte hodiny v mailech a zápisech.</p>
+              <p class="work-proof-gain">Doložíte, kdo změnu vyžádal a s jakým zadáním, dřív než vznikne spor.</p>
             </div>
             <a href="/scenare/architekti-projektanti" class="btn work-case">Zobrazit scénář</a>
           </div>
@@ -2157,17 +2240,8 @@ html.no-motion .how-visual * { animation: none !important; }
             <span class="work-badge">Autoservisy</span>
             <h3 class="work-headline">Kratší diagnostika, méně návratů se závadou</h3>
             <div class="work-proof">
-              <div class="work-proof-metric">Zadání pro mechanika</div>
-              <div class="work-proof-row">
-                <span class="work-proof-label">Dnes</span>
-                <span class="work-proof-track"><span class="work-proof-seg is-drag" style="--w:100%"></span></span>
-                <span class="work-proof-value">od ruky</span>
-              </div>
-              <div class="work-proof-row">
-                <span class="work-proof-label">S Omi</span>
-                <span class="work-proof-track"><span class="work-proof-seg is-gain" style="--w:18%"></span></span>
-                <span class="work-proof-value is-gain">přesné</span>
-              </div>
+              <p class="work-proof-now">Zadání pro mechanika vzniká od ruky a detaily v něm chybí.</p>
+              <p class="work-proof-gain">Poznáte, které závady se u stejného modelu opakují, a zkrátíte diagnostiku.</p>
             </div>
             <a href="/scenare/autoservisy" class="btn work-case">Zobrazit scénář</a>
           </div>
@@ -2180,6 +2254,41 @@ html.no-motion .how-visual * { animation: none !important; }
         <button type="button" class="car-btn car-next" aria-label="Další">
           <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M6 3l5 5-5 5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
         </button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PARTNER: PROSPIRIO HUB -->
+<section class="partner-band" aria-labelledby="partner-title">
+  <div class="container">
+    <div class="partner-intro reveal">
+      <span class="eyebrow">Partnerské řešení</span>
+      <h2 id="partner-title">Zjistěte, proč se obchody vyhrávají nebo ztrácejí</h2>
+      <p>Inteligentní paměť zaměřená na výkon celého obchodního týmu.</p>
+    </div>
+    <div class="partner-card reveal">
+      <div class="partner-copy">
+        <span class="partner-tag">
+          <img src="Fotky/loga/prospirio-white.png" alt="Prospirio Hub">
+          Pro majitele firem a sales manažery
+        </span>
+        <h2>Co byste změnili, kdybyste slyšeli každý obchodní hovor?</h2>
+        <p class="partner-lead">Odhalte, co funguje, kde obchod vázne a co má tým udělat dál.</p>
+        <div class="partner-actions">
+          <a href="prospirio-hub" class="btn btn-primary">Jak to funguje</a>
+          <a href="https://hub.prospirio.cz/" class="partner-link" target="_blank" rel="noopener">Zobrazit Prospirio Hub
+            <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3 8h9M8.5 4.5L12 8l-3.5 3.5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </a>
+        </div>
+        <ul class="partner-stats">
+          <li class="partner-stat-wide"><span class="partner-stat-value">100 %</span> viditelnost hovorů</li>
+          <li><span class="partner-stat-value">−20 %</span> kratší onboarding</li>
+          <li><span class="partner-stat-value">+25 %</span> přesnost prognóz</li>
+        </ul>
+      </div>
+      <div class="partner-visual">
+        <img src="Fotky/prospirio-hub-macbook.webp" alt="Analýza schůzek v aplikaci Prospirio Hub na notebooku" width="1400" height="1001" loading="lazy">
       </div>
     </div>
   </div>
@@ -2711,16 +2820,17 @@ html.no-motion .how-visual * { animation: none !important; }
   <div class="container">
     <div class="reveal">
       <span class="eyebrow">Integrace</span>
-      <h2 class="section-title">Řešení napojíme na systémy,<br> které už používáte</h2>
+      <h2 class="section-title">Řešení napojíme na systémy, které už používáte</h2>
+      <p class="section-lead">Rozhodnutí, úkoly a důležitý kontext se dostanou přímo tam, kde řídíte klienty, projekty a provoz.</p>
     </div>
     <div class="integration-grid reveal reveal-stagger">
       <div class="int-category" style="--i:0">
-        <h3><i></i>CRM</h3>
+        <h3><i></i>CRM a obchod</h3>
         <div class="int-chips">
           <span><img src="Fotky/loga/creatio.png" alt="">Creatio</span>
-          <span><img src="Fotky/loga/hubspot.png" alt="">HubSpot</span>
           <span><img src="Fotky/loga/pipedrive.png" alt="">Pipedrive</span>
           <span><img src="Fotky/loga/salesforce.png" alt="">Salesforce</span>
+          <span><img src="Fotky/loga/prospirio-symbol.png" alt="">Prospirio Hub</span>
         </div>
       </div>
       <div class="int-category" style="--i:1">
@@ -2751,7 +2861,7 @@ html.no-motion .how-visual * { animation: none !important; }
         </div>
       </div>
     </div>
-    <p class="integration-note reveal">Rozhodnutí, úkoly a důležitý kontext se dostanou přímo do nástrojů,<br> <strong>ve kterých řídíte klienty, projekty a provoz.</strong></p>
+    <p class="int-more reveal">Tohle je jen nejčastější výběr, napojit umíme téměř jakýkoli nástroj.</p>
   </div>
 </section>
 
@@ -2759,9 +2869,9 @@ html.no-motion .how-visual * { animation: none !important; }
 <!-- FAQ -->
 <section class="section-soft" id="faq">
   <div class="container">
-    <div class="reveal" style="text-align:center">
+    <div class="reveal">
       <span class="eyebrow">Časté otázky</span>
-      <h2 class="section-title" style="margin:0 auto">Na co se firmy ptají nejčastěji</h2>
+      <h2 class="section-title">Na co se firmy ptají nejčastěji</h2>
     </div>
     <div class="faq-list reveal">
       <details class="faq-item">
@@ -2769,8 +2879,12 @@ html.no-motion .how-visual * { animation: none !important; }
         <p class="faq-body">Není to jen přepis nebo zápis jedné schůzky. Důležité informace z rozhovorů zůstávají spojené s klientem, projektem nebo tématem, propojují se s dřívějším kontextem a dají se znovu využít při další práci.</p>
       </details>
       <details class="faq-item">
-        <summary>Je to jen pro Omi?<span class="faq-icon"><svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M6 1v10M1 6h10" stroke="#1F1741" stroke-width="1.8" stroke-linecap="round"/></svg></span></summary>
-        <p class="faq-body">Omi je aktuální výchozí zařízení, se kterým pracujeme. Hodnota řešení ale stojí hlavně na způsobu zpracování informací, automatizacích a napojení na vaše procesy. Ty navrhujeme tak, aby nebyly trvale závislé na jednom typu hardwaru.</p>
+        <summary>Na jakém zařízení to běží?<span class="faq-icon"><svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M6 1v10M1 6h10" stroke="#1F1741" stroke-width="1.8" stroke-linecap="round"/></svg></span></summary>
+        <p class="faq-body">Pracujeme se dvěma zařízeními. <a href="co-je-omi">Omi</a> se nosí na krku nebo na klipu, <a href="co-je-plaud">Plaud Note Pro</a> má velikost kreditní karty a zvládne i telefonní hovory. Hodnota řešení ale stojí hlavně na způsobu zpracování informací, automatizacích a napojení na vaše procesy. Ty navrhujeme tak, aby nebyly trvale závislé na jednom typu hardwaru.</p>
+      </details>
+      <details class="faq-item">
+        <summary>Potřebujeme k tomu předplatné?<span class="faq-icon"><svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M6 1v10M1 6h10" stroke="#1F1741" stroke-width="1.8" stroke-linecap="round"/></svg></span></summary>
+        <p class="faq-body">Obě zařízení mají tarif zdarma s měsíčním limitem minut přepisu, který na začátek obvykle stačí. Placené tarify limit zvedají. Při návrhu s vámi projdeme, kolik rozhovorů budete zpracovávat, aby vám rozsah odpovídal skutečnému provozu, ne odhadu.</p>
       </details>
       <details class="faq-item">
         <summary>Musíme nahrávat všechny rozhovory?<span class="faq-icon"><svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M6 1v10M1 6h10" stroke="#1F1741" stroke-width="1.8" stroke-linecap="round"/></svg></span></summary>
@@ -2822,7 +2936,7 @@ html.no-motion .how-visual * { animation: none !important; }
       <nav class="footer-links" aria-label="Patičková navigace">
         <a href="#jak-to-funguje">Jak to funguje</a>
         <a href="co-je-omi">Co je Omi</a>
-        <a href="#implementace">Nasazení</a>
+        <a href="co-je-plaud">Co je Plaud</a>
         <a href="priklady">Příklady z praxe</a>
         <a href="#faq">FAQ</a>
         <a href="kontakt">Kontakt</a>
@@ -3009,6 +3123,19 @@ html.no-motion .how-visual * { animation: none !important; }
     if (e.target.tagName === 'A') nav.classList.remove('is-open');
   });
 
+  /* Rotace zařízení v hero sekci */
+  var deviceSlides = document.querySelectorAll('#device-stack .device-slide');
+  var deviceLabel = document.getElementById('device-label');
+  if (deviceSlides.length > 1) {
+    var deviceIndex = 0;
+    setInterval(function () {
+      deviceSlides[deviceIndex].classList.remove('is-active');
+      deviceIndex = (deviceIndex + 1) % deviceSlides.length;
+      deviceSlides[deviceIndex].classList.add('is-active');
+      deviceLabel.textContent = deviceSlides[deviceIndex].getAttribute('data-label');
+    }, 5000);
+  }
+
   /* Scroll reveal */
   var revealEls = document.querySelectorAll('.reveal');
   if (!reducedMotion && 'IntersectionObserver' in window) {
@@ -3029,7 +3156,9 @@ html.no-motion .how-visual * { animation: none !important; }
   var navLinks = document.querySelectorAll('.main-nav a');
   var sections = [];
   navLinks.forEach(function (link) {
-    var target = document.querySelector(link.getAttribute('href'));
+    var href = link.getAttribute('href') || '';
+    if (href.charAt(0) !== '#') return;
+    var target = document.querySelector(href);
     if (target) sections.push({ link: link, el: target });
   });
   if ('IntersectionObserver' in window) {
@@ -3909,5 +4038,6 @@ html.no-motion .how-visual * { animation: none !important; }
 })();
 </script>
 
+<script src="/assets/nav.js" defer></script>
 </body>
 </html>

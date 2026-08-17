@@ -3,14 +3,15 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Scénáře a příklady | Plexima × Omi</title>
-<meta name="description" content="Jak AI zápisník Omi funguje ve vašem oboru a reálná nasazení v českých firmách. Konkrétní procesy, konkrétní napojení, konkrétní výsledky.">
+<title>Přínos podle oboru | Plexima</title>
+<meta name="description" content="Jakou výhodu získáte ve svém oboru: méně ztracených informací, kratší příprava, souvislosti napříč schůzkami. Plus reálná nasazení v českých firmách.">
 <link rel="icon" href="/Fotky/favicon.ico" sizes="32x32">
 <link rel="icon" href="/Fotky/favicon.svg" type="image/svg+xml">
 <link rel="apple-touch-icon" href="/Fotky/apple-touch-icon.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@700;800&family=Open+Sans:wght@400;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/assets/nav.css">
 <style>
 :root {
   --yellow: #FEC710;
@@ -163,7 +164,6 @@ img { max-width: 100%; }
   margin-top: 20px;
   max-width: 680px;
 }
-.page-hero .hero-cta { margin-top: 28px; }
 
 /* ---------- Case grid ---------- */
 .cases { padding-bottom: var(--section-y); }
@@ -417,7 +417,7 @@ img { max-width: 100%; }
 }
 .footer-top { display: flex; justify-content: space-between; align-items: center; gap: 32px; flex-wrap: wrap; }
 .footer-logo { display: inline-flex; }
-.footer-logo img { height: 28px; display: block; filter: grayscale(1) brightness(0) invert(1); }
+.footer-logo img { height: 28px; width: auto; display: block; filter: grayscale(1) brightness(0) invert(1); }
 .footer-links { display: grid; grid-template-rows: repeat(3, auto); grid-auto-flow: column; gap: 10px 48px; justify-content: end; }
 .footer-links a { color: rgba(255,255,255,.7); text-decoration: none; }
 .footer-links a:hover { color: #fff; text-decoration: underline; text-decoration-color: var(--yellow); text-underline-offset: 4px; }
@@ -485,7 +485,15 @@ img { max-width: 100%; }
     </button>
     <nav class="main-nav" aria-label="Hlavní navigace">
       <a href="/#jak-to-funguje">Jak to funguje</a>
-      <a href="co-je-omi">Co je Omi</a>
+      <div class="nav-dd">
+        <button type="button" class="nav-dd-toggle" aria-expanded="false">Zařízení
+          <svg width="12" height="12" viewBox="0 0 12 12" fill="none" aria-hidden="true"><path d="M2.5 4.5L6 8l3.5-3.5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </button>
+        <div class="nav-dd-menu">
+          <a href="/co-je-plaud">Plaud</a>
+          <a href="/co-je-omi">Omi</a>
+        </div>
+      </div>
       <a href="priklady" class="is-active" aria-current="page">Příklady z praxe</a>
     </nav>
     <div class="header-cta">
@@ -504,10 +512,9 @@ img { max-width: 100%; }
 
 <section class="page-hero">
   <div class="container reveal">
-    <span class="eyebrow">Scénáře a příklady</span>
-    <h1>Jak Omi funguje ve vašem oboru</h1>
-    <p class="hero-lead">Nejdřív obecně podle profese, kde má nahrávání a automatizace smysl. Pak reálná nasazení v konkrétních firmách, i s tím, co se díky nim změnilo.</p>
-    <a href="dotaznik" class="btn btn-ghost hero-cta">Zjistit, kde začít</a>
+    <span class="eyebrow">Podle oboru</span>
+    <h1>Co se dá získat z rozhovorů<br>ve vašem oboru</h1>
+    <p class="hero-lead">Podívejte se, jakou výhodu můžete ve svém oboru získat a kde vám inteligentní paměť ušetří nejvíc času i chyb.</p>
   </div>
 </section>
 
@@ -694,7 +701,7 @@ img { max-width: 100%; }
       <nav class="footer-links" aria-label="Patičková navigace">
         <a href="/#jak-to-funguje">Jak to funguje</a>
         <a href="co-je-omi">Co je Omi</a>
-        <a href="/#implementace">Nasazení</a>
+        <a href="co-je-plaud">Co je Plaud</a>
         <a href="priklady" aria-current="page">Příklady z praxe</a>
         <a href="/#faq">FAQ</a>
         <a href="kontakt">Kontakt</a>
@@ -768,5 +775,6 @@ img { max-width: 100%; }
 </script>
 
 <script src="/assets/konzultace.js" defer></script>
+<script src="/assets/nav.js" defer></script>
 </body>
 </html>

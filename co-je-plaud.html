@@ -3,15 +3,15 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Omi: nositelná inteligentní paměť pro schůzky | Plexima</title>
-<meta name="description" content="Omi nosíte na sobě, zachytí rozhovor a vrátí ho jako zápis, úkoly a souvislosti. Nastavení, pravidla používání a napojení na vaše nástroje řeší Plexima.">
-<link rel="canonical" href="https://memory.plexima.io/co-je-omi">
+<title>Plaud Note Pro: AI záznamník pro schůzky a hovory | Plexima</title>
+<meta name="description" content="Plaud Note Pro zachytí osobní jednání i telefonní hovor, převede je na zápis a úkoly a napojí je na nástroje, se kterými pracujete. Nastavení a zavedení řeší Plexima.">
+<link rel="canonical" href="https://memory.plexima.io/co-je-plaud">
 <meta name="theme-color" content="#1F1741">
 <meta property="og:type" content="product">
-<meta property="og:title" content="Omi: nositelná inteligentní paměť pro schůzky">
-<meta property="og:description" content="Nositelné zařízení, které promění rozhovory ve firemní znalost. Nastavení a napojení na vaše nástroje řeší Plexima.">
-<meta property="og:url" content="https://memory.plexima.io/co-je-omi">
-<meta property="og:image" content="https://memory.plexima.io/Fotky/co-je-omi-hero.webp">
+<meta property="og:title" content="Plaud Note Pro: AI záznamník pro schůzky a hovory">
+<meta property="og:description" content="Zařízení velikosti kreditní karty, které promění rozhovory ve firemní znalost. Nastavení a napojení na vaše nástroje řeší Plexima.">
+<meta property="og:url" content="https://memory.plexima.io/co-je-plaud">
+<meta property="og:image" content="https://memory.plexima.io/Fotky/plaud/plaud-note-hero.webp">
 <meta property="og:locale" content="cs_CZ">
 <meta name="twitter:card" content="summary_large_image">
 <link rel="icon" href="/Fotky/favicon.ico" sizes="32x32">
@@ -264,6 +264,7 @@ img { max-width: 100%; }
   width: 100%;
   max-width: 380px;
   height: auto;
+  filter: drop-shadow(0 30px 44px rgba(31,23,65,.22));
 }
 .stage-chip {
   position: absolute;
@@ -841,7 +842,6 @@ img { max-width: 100%; }
 
 /* ---------- Responsive ---------- */
 @media (min-width: 640px) {
-  .proof-grid { grid-template-columns: repeat(4, 1fr); }
   .docs-links { max-width: 760px; }
 }
 @media (min-width: 768px) {
@@ -849,6 +849,7 @@ img { max-width: 100%; }
   .uc-grid { grid-template-columns: repeat(2, 1fr); }
   .uc-card img { height: 340px; }
   .spec-highlights { grid-template-columns: repeat(4, 1fr); }
+  .proof-grid { grid-template-columns: repeat(4, 1fr); }
 }
 @media (min-width: 1024px) {
   .hero-grid { grid-template-columns: 1.05fr .95fr; }
@@ -896,8 +897,8 @@ img { max-width: 100%; }
           <svg width="12" height="12" viewBox="0 0 12 12" fill="none" aria-hidden="true"><path d="M2.5 4.5L6 8l3.5-3.5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
         </button>
         <div class="nav-dd-menu">
-          <a href="/co-je-plaud">Plaud</a>
-          <a href="/co-je-omi" aria-current="page">Omi</a>
+          <a href="/co-je-plaud" aria-current="page">Plaud</a>
+          <a href="/co-je-omi">Omi</a>
         </div>
       </div>
       <a href="priklady">Příklady z praxe</a>
@@ -912,7 +913,7 @@ img { max-width: 100%; }
   <nav class="crumb" aria-label="Drobečková navigace">
     <a href="/">Úvod</a>
     <span aria-hidden="true">/</span>
-    <span aria-current="page">Omi</span>
+    <span aria-current="page">Plaud Note Pro</span>
   </nav>
 </div>
 
@@ -924,33 +925,33 @@ img { max-width: 100%; }
     <div class="hero-grid">
       <div class="hero-copy reveal">
         <div class="award-row">
-          <span class="award-tag">Nositelné zařízení</span>
-          <span class="award-tag">Nahrává i offline</span>
-          <span class="award-tag">iOS, Android, Mac i web</span>
+          <span class="award-tag"><svg width="13" height="13" viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="M8 1l2 4.3 4.7.6-3.4 3.3.8 4.7L8 11.7 3.9 13.9l.8-4.7L1.3 5.9 6 5.3 8 1z"/></svg>iF Design Award 2024</span>
+          <span class="award-tag"><svg width="13" height="13" viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="M8 1l2 4.3 4.7.6-3.4 3.3.8 4.7L8 11.7 3.9 13.9l.8-4.7L1.3 5.9 6 5.3 8 1z"/></svg>Red Dot 2024</span>
+          <span class="award-tag"><svg width="13" height="13" viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="M8 1l2 4.3 4.7.6-3.4 3.3.8 4.7L8 11.7 3.9 13.9l.8-4.7L1.3 5.9 6 5.3 8 1z"/></svg>Good Design 2024</span>
         </div>
-        <h1>Rozhovory skončí. Hodnota zůstane.</h1>
-        <p class="hero-lead">Omi nosíte na sobě. Zachytí, co na schůzce zaznělo, propojí to se souvislostmi z minulých jednání a vrátí vám to jako zápis, úkoly a podklady.</p>
+        <h1>Karta, která si pamatuje každou schůzku.</h1>
+        <p class="hero-lead">Plaud Note Pro zachytí osobní jednání i telefonní hovor, převede je na zápis, úkoly a podklady a vrátí vám je ve chvíli, kdy s nimi potřebujete pracovat.</p>
         <div class="hero-actions">
           <button type="button" class="btn btn-primary" data-open="modal-konzultace">Domluvit konzultaci</button>
           <a href="#objednavka" class="btn btn-ghost">Prohlédnout zařízení</a>
         </div>
       </div>
       <div class="hero-stage reveal">
-        <img src="Fotky/WebP Image.webp" alt="Zařízení Omi na šňůrce na krk" width="1000" height="1000" fetchpriority="high" decoding="async">
-        <span class="stage-chip"><span class="dot" aria-hidden="true"></span>Nosíte na krku nebo na ruce</span>
+        <img src="Fotky/plaud/plaud-note-phone-transparent.webp" alt="Plaud Note Pro přichycený na zadní straně telefonu" width="1000" height="1000" fetchpriority="high" decoding="async">
+        <span class="stage-chip"><span class="dot" aria-hidden="true"></span>Nahrávání jedním stiskem</span>
       </div>
     </div>
   </div>
 </section>
 
 <!-- 2. Sociální důkaz -->
-<section class="proof" aria-label="Klíčové údaje">
+<section class="proof" aria-label="Ocenění a hodnocení">
   <div class="container">
     <div class="proof-grid">
-      <div class="proof-item"><span class="proof-num">300 000+</span><span class="proof-label">profesionálů po světě</span></div>
-      <div class="proof-item"><span class="proof-num">10–14 h</span><span class="proof-label">nahrávání na nabití</span></div>
-      <div class="proof-item"><span class="proof-num">2,5 cm</span><span class="proof-label">průměr zařízení</span></div>
-      <div class="proof-item"><span class="proof-num">25</span><span class="proof-label">podporovaných jazyků</span></div>
+      <div class="proof-item"><span class="proof-num">1 mil.+</span><span class="proof-label">uživatelů po celém světě</span></div>
+      <div class="proof-item"><span class="proof-num">4,9</span><span class="proof-label">hodnocení na App Store</span></div>
+      <div class="proof-item"><span class="proof-num">30 h</span><span class="proof-label">nepřetržitého nahrávání</span></div>
+      <div class="proof-item"><span class="proof-num">112</span><span class="proof-label">podporovaných jazyků</span></div>
     </div>
   </div>
 </section>
@@ -961,16 +962,16 @@ img { max-width: 100%; }
     <div class="section-head reveal">
       <span class="eyebrow">Proč to řešit</span>
       <h2>Nejcennější informace zaznívají tam, kde je nikdo nezapisuje</h2>
-      <p>Na schůzce padne detail o klientovi, cestou zpátky vás napadne řešení, po jednání vznikne pět úkolů. Za dva týdny si to pamatuje jeden člověk. Za dva měsíce nikdo.</p>
+      <p>Na schůzce padne detail o klientovi, na telefonu se domluví změna termínu, po jednání vznikne pět úkolů. Za dva týdny si to pamatuje jeden člověk. Za dva měsíce nikdo.</p>
     </div>
     <ol class="steps reveal">
       <li>
         <h3>Zachytí, co zaznělo</h3>
-        <p>Zařízení nosíte na krku nebo na ruce, takže ho nemusíte hledat ani pokládat na stůl. Nahrává i bez telefonu v ruce.</p>
+        <p>Jedním stiskem nahrajete osobní jednání i telefonní hovor. Zařízení nosíte v peněžence nebo na zadní straně telefonu, takže je po ruce vždycky.</p>
       </li>
       <li>
-        <h3>Propojí to s kontextem</h3>
-        <p>Přepis s rozpoznáním mluvčích, shrnutí, klíčové body a úkoly. Důležité detaily se spojí s tím, co už o klientovi nebo tématu víte z dřívějška.</p>
+        <h3>Převede to na použitelný obsah</h3>
+        <p>Přepis s rozpoznáním mluvčích, shrnutí, klíčové body a úkoly. Struktura výstupu se nastaví podle typu rozhovoru, který vedete.</p>
       </li>
       <li>
         <h3>Vrátí to zpátky do práce</h3>
@@ -984,25 +985,25 @@ img { max-width: 100%; }
 <section class="usecases">
   <div class="container">
     <div class="section-head reveal">
-      <span class="eyebrow" style="color:rgba(255,255,255,.6)">Kde se hodí</span>
-      <h2>Nosíte ho na sobě, nebo položíte na stůl</h2>
-      <p>Omi nepotřebuje přípravu ani aplikaci otevřenou na displeji. Zapnete ho a věnujete se rozhovoru.</p>
+      <span class="eyebrow" style="color:rgba(255,255,255,.6)">Dva režimy, jeden přepínač</span>
+      <h2>Funguje u stolu i na telefonu</h2>
+      <p>Fyzický přepínač na boku zařízení volí režim. Žádná aplikace, kterou musíte v tu chvíli hledat.</p>
     </div>
     <div class="uc-grid reveal">
       <article class="uc-card">
-        <img src="Fotky/manazerske-schuzky.webp" alt="Žena se zařízením Omi na šňůrce při pracovní schůzce" width="1537" height="1023" loading="lazy" decoding="async">
+        <img src="Fotky/plaud/plaud-pouziti-hovory.webp" alt="Telefonát s Plaud Note Pro přichyceným na telefonu" width="760" height="1062" loading="lazy" decoding="async">
         <div class="uc-body">
-          <span class="uc-mode">Na sobě</span>
-          <h3>Schůzky a jednání v terénu</h3>
-          <p>U klienta, na stavbě, mezi dveřmi. Zařízení máte na krku nebo na ruce a nemusíte řešit, kam ho položit a jestli ho tam nezapomenete.</p>
+          <span class="uc-mode">Režim hovoru</span>
+          <h3>Telefonní hovory</h3>
+          <p>Zařízení se magneticky přichytí na zadní stranu telefonu a zaznamená obě strany hovoru. Vhodné tam, kde se domlouvají termíny, ceny a zadání po telefonu.</p>
         </div>
       </article>
       <article class="uc-card">
-        <img src="Fotky/obr.3.webp" alt="Zařízení Omi na jednacím stole během porady" width="1376" height="768" loading="lazy" decoding="async">
+        <img src="Fotky/plaud/plaud-pouziti-poznamky.webp" alt="Nahrávání poznámky do Plaud Note Pro drženého v ruce" width="760" height="1062" loading="lazy" decoding="async">
         <div class="uc-body">
-          <span class="uc-mode">Na stole</span>
-          <h3>Porady a konzultace</h3>
-          <p>Dva mikrofony s redukcí hluku a rozpoznáním mluvčích. Ve výstupu je vidět, kdo co řekl, ne jen jeden slitý text.</p>
+          <span class="uc-mode">Režim diktafonu</span>
+          <h3>Jednání a poznámky</h3>
+          <p>Osobní schůzka, porada nebo poznámka cestou z jednání. Dva mikrofony se záběrem do tří metrů zachytí celý stůl, ne jen toho, kdo sedí nejblíž.</p>
         </div>
       </article>
     </div>
@@ -1057,7 +1058,7 @@ img { max-width: 100%; }
   <div class="container">
     <div class="split split-reverse">
       <div class="split-media reveal">
-        <img src="Fotky/co-je-omi-hero.webp" alt="Zařízení Omi na stole v jednací místnosti" width="1672" height="941" loading="lazy" decoding="async">
+        <img src="Fotky/plaud/plaud-note-hero.webp" alt="Plaud Note Pro a telefon s přepisem schůzky na pracovním stole" width="1080" height="924" loading="lazy" decoding="async">
       </div>
       <div class="reveal">
         <span class="eyebrow">Nasazení</span>
@@ -1091,29 +1092,32 @@ img { max-width: 100%; }
       <div class="product-media">
         <span class="product-badge">Nahrávací zařízení s AI</span>
         <div class="product-stage">
-          <img id="gallery-main" src="Fotky/Firefly_Flux_cria_uma_nova_cena_semelhante_a_esta_referencia_com_fundo_escuro_com_o_mesmo_diso_543795 Background Removed.png" alt="Zařízení Omi zblízka" width="1376" height="768" loading="lazy" decoding="async">
+          <img id="gallery-main" src="Fotky/plaud/plaud-note-front-transparent.webp" alt="Plaud Note Pro, pohled zepředu" width="1000" height="1000" loading="lazy" decoding="async">
         </div>
         <div class="product-thumbs" aria-label="Fotografie produktu">
-          <button type="button" class="buy-thumb is-active" data-src="Fotky/Firefly_Flux_cria_uma_nova_cena_semelhante_a_esta_referencia_com_fundo_escuro_com_o_mesmo_diso_543795 Background Removed.png" data-alt="Zařízení Omi zblízka" aria-label="Zobrazit zařízení zblízka">
-            <img src="Fotky/Firefly_Flux_cria_uma_nova_cena_semelhante_a_esta_referencia_com_fundo_escuro_com_o_mesmo_diso_543795 Background Removed.png" alt="" width="68" height="68" loading="lazy">
+          <button type="button" class="buy-thumb is-active" data-src="Fotky/plaud/plaud-note-front-transparent.webp" data-alt="Plaud Note Pro, pohled zepředu" aria-label="Zobrazit pohled zepředu">
+            <img src="Fotky/plaud/plaud-note-front-transparent.webp" alt="" width="68" height="68" loading="lazy">
           </button>
-          <button type="button" class="buy-thumb" data-src="Fotky/WebP Image.webp" data-alt="Omi na šňůrce na krk" aria-label="Zobrazit Omi na šňůrce">
-            <img src="Fotky/WebP Image.webp" alt="" width="68" height="68" loading="lazy">
+          <button type="button" class="buy-thumb" data-src="Fotky/plaud/plaud-note-phone-transparent.webp" data-alt="Plaud Note Pro přichycený na telefonu" aria-label="Zobrazit zařízení na telefonu">
+            <img src="Fotky/plaud/plaud-note-phone-transparent.webp" alt="" width="68" height="68" loading="lazy">
           </button>
-          <button type="button" class="buy-thumb" data-src="Fotky/omi23.webp" data-alt="Omi položené na stole" aria-label="Zobrazit Omi na stole">
-            <img src="Fotky/omi23.webp" alt="" width="68" height="68" loading="lazy">
+          <button type="button" class="buy-thumb" data-src="Fotky/plaud/plaud-note-profil-transparent.webp" data-alt="Boční profil Plaud Note Pro, tloušťka 3 mm" aria-label="Zobrazit boční profil">
+            <img src="Fotky/plaud/plaud-note-profil-transparent.webp" alt="" width="68" height="68" loading="lazy">
+          </button>
+          <button type="button" class="buy-thumb" data-src="Fotky/plaud/plaud-note-baleni-transparent.webp" data-alt="Obsah balení: Plaud Note Pro, pouzdro, kabel a příslušenství" aria-label="Zobrazit obsah balení">
+            <img src="Fotky/plaud/plaud-note-baleni-transparent.webp" alt="" width="68" height="68" loading="lazy">
           </button>
         </div>
       </div>
       <div class="product-config">
         <span class="eyebrow eyebrow-dot">Inteligentní paměť</span>
-        <h2 class="product-title">OMI AI</h2>
-        <p class="product-desc">Nositelné zařízení s aplikací pro mobil, desktop i web. Zachytí rozhovor a připraví jeho obsah pro další zpracování, vyhledávání a automatizace.</p>
+        <h2 class="product-title">PLAUD NOTE PRO</h2>
+        <p class="product-desc">Zařízení velikosti kreditní karty s aplikací pro mobil, desktop i web. Nahraje osobní rozhovor i telefonní hovor a připraví jeho obsah pro další zpracování, vyhledávání a automatizace.</p>
 
         <div class="config-group">
           <span class="config-label">Cena zařízení</span>
           <div class="price-box">
-            <span class="price-value">4 790 Kč</span>
+            <span class="price-value">4 590 Kč</span>
           </div>
           <label class="check-box">
             <input type="checkbox" name="automatizace" value="1">
@@ -1124,7 +1128,7 @@ img { max-width: 100%; }
           </label>
         </div>
 
-        <button type="button" class="btn buy-big" data-open="modal-objednavka">Objednat Omi</button>
+        <button type="button" class="btn buy-big" data-open="modal-objednavka">Objednat Plaud</button>
       </div>
     </div>
   </div>
@@ -1140,17 +1144,16 @@ img { max-width: 100%; }
     </div>
     <div class="trust-grid reveal">
       <div class="trust-badge"><span class="t-name">GDPR</span><span class="t-desc">Zpracování dat podle evropského nařízení</span></div>
-      <div class="trust-badge"><span class="t-name">SOC 2</span><span class="t-desc">Auditované kontroly, Type II v přípravě</span></div>
+      <div class="trust-badge"><span class="t-name">SOC 2</span><span class="t-desc">Auditovaná bezpečnost provozu</span></div>
       <div class="trust-badge"><span class="t-name">HIPAA</span><span class="t-desc">Standard pro citlivé zdravotní údaje</span></div>
-      <div class="trust-badge"><span class="t-name">AES‑256 a TLS</span><span class="t-desc">Šifrování při uložení i přenosu</span></div>
-      <div class="trust-badge"><span class="t-name">Bez trénování AI</span><span class="t-desc">Nahrávky se bez souhlasu nepoužijí</span></div>
+      <div class="trust-badge"><span class="t-name">ISO/IEC 27001</span><span class="t-desc">Systém řízení bezpečnosti informací</span></div>
+      <div class="trust-badge"><span class="t-name">EN 18031</span><span class="t-desc">Kybernetická bezpečnost zařízení</span></div>
     </div>
-    <p class="note-muted">Podle údajů výrobce, ISO/IEC 27001 je v přípravě. Doklady k jednotlivým standardům najdete v jeho <a href="https://www.omi.me/trust" target="_blank" rel="noopener noreferrer">trust centru</a>.</p>
     <div class="info-block reveal">
       <ul>
-        <li><svg width="20" height="20" viewBox="0 0 20 20" fill="none" aria-hidden="true"><circle cx="10" cy="10" r="8.4" stroke="#6EC1E4" stroke-width="1.6"/><path d="M10 6v5" stroke="#6EC1E4" stroke-width="1.8" stroke-linecap="round"/><circle cx="10" cy="13.6" r="1" fill="#6EC1E4"/></svg>Omi může zachytit i ostatní osoby v okolí.</li>
+        <li><svg width="20" height="20" viewBox="0 0 20 20" fill="none" aria-hidden="true"><circle cx="10" cy="10" r="8.4" stroke="#6EC1E4" stroke-width="1.6"/><path d="M10 6v5" stroke="#6EC1E4" stroke-width="1.8" stroke-linecap="round"/><circle cx="10" cy="13.6" r="1" fill="#6EC1E4"/></svg>Plaud Note Pro může zachytit i ostatní osoby v okolí.</li>
         <li><svg width="20" height="20" viewBox="0 0 20 20" fill="none" aria-hidden="true"><circle cx="10" cy="10" r="8.4" stroke="#6EC1E4" stroke-width="1.6"/><path d="M10 6v5" stroke="#6EC1E4" stroke-width="1.8" stroke-linecap="round"/><circle cx="10" cy="13.6" r="1" fill="#6EC1E4"/></svg>Před nahráváním je nutné respektovat souhlas účastníků a platná pravidla.</li>
-        <li><svg width="20" height="20" viewBox="0 0 20 20" fill="none" aria-hidden="true"><circle cx="10" cy="10" r="8.4" stroke="#6EC1E4" stroke-width="1.6"/><path d="M10 6v5" stroke="#6EC1E4" stroke-width="1.8" stroke-linecap="round"/><circle cx="10" cy="13.6" r="1" fill="#6EC1E4"/></svg>Rozhovory lze podle zvoleného nastavení ukládat v telefonu nebo v cloudu.</li>
+        <li><svg width="20" height="20" viewBox="0 0 20 20" fill="none" aria-hidden="true"><circle cx="10" cy="10" r="8.4" stroke="#6EC1E4" stroke-width="1.6"/><path d="M10 6v5" stroke="#6EC1E4" stroke-width="1.8" stroke-linecap="round"/><circle cx="10" cy="13.6" r="1" fill="#6EC1E4"/></svg>Nahrávky se ukládají v zařízení a podle zvoleného nastavení se synchronizují do aplikace a cloudu.</li>
         <li><svg width="20" height="20" viewBox="0 0 20 20" fill="none" aria-hidden="true"><circle cx="10" cy="10" r="8.4" stroke="#6EC1E4" stroke-width="1.6"/><path d="M10 6v5" stroke="#6EC1E4" stroke-width="1.8" stroke-linecap="round"/><circle cx="10" cy="13.6" r="1" fill="#6EC1E4"/></svg>Data lze kdykoli exportovat i smazat.</li>
         <li><svg width="20" height="20" viewBox="0 0 20 20" fill="none" aria-hidden="true"><circle cx="10" cy="10" r="8.4" stroke="#6EC1E4" stroke-width="1.6"/><path d="M10 6v5" stroke="#6EC1E4" stroke-width="1.8" stroke-linecap="round"/><circle cx="10" cy="13.6" r="1" fill="#6EC1E4"/></svg>Výrobce deklaruje šifrování při přenosu i při uložení.</li>
         <li><svg width="20" height="20" viewBox="0 0 20 20" fill="none" aria-hidden="true"><circle cx="10" cy="10" r="8.4" stroke="#6EC1E4" stroke-width="1.6"/><path d="M10 6v5" stroke="#6EC1E4" stroke-width="1.8" stroke-linecap="round"/><circle cx="10" cy="13.6" r="1" fill="#6EC1E4"/></svg>Zařízení není voděodolné.</li>
@@ -1170,27 +1173,31 @@ img { max-width: 100%; }
     <div class="faq-list reveal">
       <details class="faq-item">
         <summary>Potřebujeme předplatné?<span class="faq-icon"><svg width="12" height="12" viewBox="0 0 12 12" fill="none" aria-hidden="true"><path d="M6 1v10M1 6h10" stroke="#1F1741" stroke-width="1.8" stroke-linecap="round"/></svg></span></summary>
-        <p class="faq-body">Základní tarif je zdarma a zahrnuje 1 200 minut poslechu měsíčně, neomezené přepisy i poznatky. Neomezený tarif stojí 19 dolarů měsíčně nebo 199 dolarů ročně. Bez předplatného se nahrávky ukládají lokálně a vy vyberete, které se mají přepsat.</p>
+        <p class="faq-body">Ne. Ke každému zařízení patří tarif Starter s 300 minutami přepisu měsíčně zdarma. Samotné nahrávání je vždy bez limitu.</p>
       </details>
       <details class="faq-item">
-        <summary>Funguje to česky?<span class="faq-icon"><svg width="12" height="12" viewBox="0 0 12 12" fill="none" aria-hidden="true"><path d="M6 1v10M1 6h10" stroke="#1F1741" stroke-width="1.8" stroke-linecap="round"/></svg></span></summary>
-        <p class="faq-body">Ano, čeština je v seznamu podporovaných jazyků. Nejstabilnější je angličtina, u dalších jazyků může přepis občas vynechat slovo. Nastavit lze jeden hlavní jazyk, nebo režim více jazyků současně.</p>
+        <summary>Co se stane, když minuty vyčerpáme?<span class="faq-icon"><svg width="12" height="12" viewBox="0 0 12 12" fill="none" aria-hidden="true"><path d="M6 1v10M1 6h10" stroke="#1F1741" stroke-width="1.8" stroke-linecap="round"/></svg></span></summary>
+        <p class="faq-body">Nahrávky zůstanou uložené a čekají, dokud se limit další měsíc neobnoví nebo dokud tarif nenavýšíte. O nic nepřijdete.</p>
       </details>
       <details class="faq-item">
-        <summary>Jak dlouho vydrží baterie?<span class="faq-icon"><svg width="12" height="12" viewBox="0 0 12 12" fill="none" aria-hidden="true"><path d="M6 1v10M1 6h10" stroke="#1F1741" stroke-width="1.8" stroke-linecap="round"/></svg></span></summary>
-        <p class="faq-body">Přibližně 10 až 14 hodin podle způsobu používání. Kapacita baterie je 150 mAh, nabíjí se v doku.</p>
+        <summary>Funguje to bez internetu?<span class="faq-icon"><svg width="12" height="12" viewBox="0 0 12 12" fill="none" aria-hidden="true"><path d="M6 1v10M1 6h10" stroke="#1F1741" stroke-width="1.8" stroke-linecap="round"/></svg></span></summary>
+        <p class="faq-body">Nahrávání ano. Přepis a AI zpracování potřebují připojení.</p>
       </details>
       <details class="faq-item">
-        <summary>Potřebuje to internet?<span class="faq-icon"><svg width="12" height="12" viewBox="0 0 12 12" fill="none" aria-hidden="true"><path d="M6 1v10M1 6h10" stroke="#1F1741" stroke-width="1.8" stroke-linecap="round"/></svg></span></summary>
-        <p class="faq-body">Přepis a navazující zpracování běží v cloudu, takže ano. Bez připojení se záznam uloží a přepíše se, jakmile je telefon online.</p>
+        <summary>Jak spolehlivě rozpozná, kdo mluví?<span class="faq-icon"><svg width="12" height="12" viewBox="0 0 12 12" fill="none" aria-hidden="true"><path d="M6 1v10M1 6h10" stroke="#1F1741" stroke-width="1.8" stroke-linecap="round"/></svg></span></summary>
+        <p class="faq-body">Ve většině situací spolehlivě. Při rychlém překřikování může repliku přiřadit špatně. Přesnost výrazně zvýší, když na začátku pojmenujete účastníky.</p>
       </details>
       <details class="faq-item">
-        <summary>Kde se data ukládají a jak jsou chráněná?<span class="faq-icon"><svg width="12" height="12" viewBox="0 0 12 12" fill="none" aria-hidden="true"><path d="M6 1v10M1 6h10" stroke="#1F1741" stroke-width="1.8" stroke-linecap="round"/></svg></span></summary>
-        <p class="faq-body">V cloudu výrobce, šifrovaně při přenosu (TLS) i při uložení (AES‑256). Přepis běží na jeho vlastní infrastruktuře. Data lze kdykoli exportovat i smazat a bez výslovného souhlasu se nepoužívají k trénování modelů.</p>
+        <summary>Kde se nahrávky ukládají?<span class="faq-icon"><svg width="12" height="12" viewBox="0 0 12 12" fill="none" aria-hidden="true"><path d="M6 1v10M1 6h10" stroke="#1F1741" stroke-width="1.8" stroke-linecap="round"/></svg></span></summary>
+        <p class="faq-body">Primárně v zařízení. Do cloudu jdou jen na dobu zpracování, šifrovaně při přenosu (TLS 1.2 a výš) i při uložení (AES‑256).</p>
       </details>
       <details class="faq-item">
-        <summary>Musí mít Omi každý účastník schůzky?<span class="faq-icon"><svg width="12" height="12" viewBox="0 0 12 12" fill="none" aria-hidden="true"><path d="M6 1v10M1 6h10" stroke="#1F1741" stroke-width="1.8" stroke-linecap="round"/></svg></span></summary>
-        <p class="faq-body">Ne. Zařízení potřebuje jen ten, kdo rozhovor zaznamenává. Souhlas ostatních účastníků je ale nutné mít vždy.</p>
+        <summary>Jak se zařízení nabíjí?<span class="faq-icon"><svg width="12" height="12" viewBox="0 0 12 12" fill="none" aria-hidden="true"><path d="M6 1v10M1 6h10" stroke="#1F1741" stroke-width="1.8" stroke-linecap="round"/></svg></span></summary>
+        <p class="faq-body">Přiloženým kabelem s vlastním čtyřpinovým konektorem. Běžný kabel USB‑C není kompatibilní a může zařízení poškodit.</p>
+      </details>
+      <details class="faq-item">
+        <summary>Musí mít Plaud každý účastník schůzky?<span class="faq-icon"><svg width="12" height="12" viewBox="0 0 12 12" fill="none" aria-hidden="true"><path d="M6 1v10M1 6h10" stroke="#1F1741" stroke-width="1.8" stroke-linecap="round"/></svg></span></summary>
+        <p class="faq-body">Ne. Zařízení a tarif potřebuje jen ten, kdo rozhovor zaznamenává. Souhlas ostatních účastníků je ale nutné mít vždy.</p>
       </details>
     </div>
   </div>
@@ -1204,29 +1211,30 @@ img { max-width: 100%; }
       <h2>Čísla, na kterých záleží</h2>
     </div>
     <div class="spec-highlights reveal">
-      <div class="spec-cell"><span class="s-num">2,5 cm</span><span class="s-label">průměr, 1,5 cm na výšku</span></div>
-      <div class="spec-cell"><span class="s-num">10–14 h</span><span class="s-label">nahrávání na jedno nabití</span></div>
-      <div class="spec-cell"><span class="s-num">2</span><span class="s-label">mikrofony s redukcí hluku</span></div>
-      <div class="spec-cell"><span class="s-num">25</span><span class="s-label">podporovaných jazyků včetně češtiny</span></div>
+      <div class="spec-cell"><span class="s-num">3 mm</span><span class="s-label">tenké, velikost kreditní karty</span></div>
+      <div class="spec-cell"><span class="s-num">30 h</span><span class="s-label">nepřetržitého nahrávání</span></div>
+      <div class="spec-cell"><span class="s-num">64 GB</span><span class="s-label">paměť, přibližně 480 hodin</span></div>
+      <div class="spec-cell"><span class="s-num">112</span><span class="s-label">podporovaných jazyků</span></div>
     </div>
 
     <details class="spec-details reveal">
       <summary>Zobrazit všechny technické parametry</summary>
       <div class="table-wrap">
         <table class="param-table">
-          <caption class="visually-hidden" style="position:absolute;left:-9999px;">Technické parametry zařízení Omi</caption>
+          <caption class="visually-hidden" style="position:absolute;left:-9999px;">Technické parametry Plaud Note Pro</caption>
           <tbody>
-            <tr><th scope="row">Rozměry</th><td>přibližně 2,5 cm v průměru a 1,5 cm na výšku</td></tr>
-            <tr><th scope="row">Výdrž baterie</th><td>přibližně 10 až 14 hodin podle používání</td></tr>
-            <tr><th scope="row">Kapacita baterie</th><td>150 mAh</td></tr>
-            <tr><th scope="row">Mikrofony</th><td>2</td></tr>
-            <tr><th scope="row">Redukce hluku</th><td>ano</td></tr>
-            <tr><th scope="row">Připojení</th><td>Bluetooth 5.1, Wi-Fi 2,4/5 GHz</td></tr>
-            <tr><th scope="row">Nabíjení</th><td>nabíjecí dok</td></tr>
-            <tr><th scope="row">Jazyky přepisu</th><td>25 jazyků včetně češtiny</td></tr>
+            <tr><th scope="row">Rozměry</th><td>85,6 × 54,1 × 3 mm</td></tr>
+            <tr><th scope="row">Hmotnost</th><td>přibližně 30 g</td></tr>
+            <tr><th scope="row">Kapacita baterie</th><td>400 mAh</td></tr>
+            <tr><th scope="row">Pohotovostní režim</th><td>přibližně 60 dní</td></tr>
+            <tr><th scope="row">Mikrofony</th><td>2 MEMS mikrofony s hlasovým procesorem, záběr do 3 metrů</td></tr>
+            <tr><th scope="row">Režimy nahrávání</th><td>osobní rozhovor a telefonní hovor, fyzický přepínač</td></tr>
+            <tr><th scope="row">Připojení</th><td>Bluetooth 5.2 (BLE)</td></tr>
+            <tr><th scope="row">Nabíjení</th><td>kabelem</td></tr>
+            <tr><th scope="row">Offline nahrávání</th><td>ano</td></tr>
             <tr><th scope="row">Rozpoznání mluvčích</th><td>ano</td></tr>
-            <tr><th scope="row">Nošení</th><td>šňůrka na krk nebo náramek na ruku</td></tr>
-            <tr><th scope="row">Kompatibilita</th><td>iOS, Android, Mac a web</td></tr>
+            <tr><th scope="row">Jazyky přepisu</th><td>112 jazyků včetně češtiny</td></tr>
+            <tr><th scope="row">Kompatibilita</th><td>iOS, Android, desktop a web</td></tr>
             <tr><th scope="row">Voděodolnost</th><td>ne</td></tr>
           </tbody>
         </table>
@@ -1242,20 +1250,20 @@ img { max-width: 100%; }
     <div class="section-head reveal">
       <span class="eyebrow">Technické podklady</span>
       <h2>Chcete si ověřit detaily u výrobce?</h2>
-      <p>Při návrhu a zavedení vycházíme z aktuální dokumentace výrobce. Podrobnosti o zařízení a možnostech platformy najdete přímo u něj.</p>
+      <p>Při návrhu a zavedení vycházíme z aktuální dokumentace výrobce. Podrobnosti o zařízení, platformě a předplatném najdete přímo u něj.</p>
     </div>
     <div class="docs-links reveal">
-      <a class="docs-link" href="https://docs.omi.me/doc/get_started/introduction" target="_blank" rel="noopener noreferrer">
+      <a class="docs-link" href="https://support.plaud.ai/hc/en-us/categories/57470373045913" target="_blank" rel="noopener noreferrer">
         <span>
-          <span class="d-title">Začínáme s Omi</span>
-          <span class="d-url">docs.omi.me/doc/get_started/introduction</span>
+          <span class="d-title">Aplikace pro mobil, web a desktop</span>
+          <span class="d-url">support.plaud.ai · App &amp; Software</span>
         </span>
         <svg class="d-arrow" width="18" height="18" viewBox="0 0 18 18" fill="none" aria-hidden="true"><path d="M5 13L13 5M13 5H6.5M13 5v6.5" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></svg>
       </a>
-      <a class="docs-link" href="https://docs.omi.me/doc/hardware/OmiConsumer" target="_blank" rel="noopener noreferrer">
+      <a class="docs-link" href="https://support.plaud.ai/hc/en-us/categories/50605662219417" target="_blank" rel="noopener noreferrer">
         <span>
-          <span class="d-title">Technické informace o zařízení</span>
-          <span class="d-url">docs.omi.me/doc/hardware/OmiConsumer</span>
+          <span class="d-title">Předplatné a rozsah AI funkcí</span>
+          <span class="d-url">support.plaud.ai · Subscription</span>
         </span>
         <svg class="d-arrow" width="18" height="18" viewBox="0 0 18 18" fill="none" aria-hidden="true"><path d="M5 13L13 5M13 5H6.5M13 5v6.5" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></svg>
       </a>
@@ -1283,8 +1291,8 @@ img { max-width: 100%; }
       <a href="/" class="footer-logo"><img src="Fotky/Logo-Plexima.webp" alt="Plexima" width="120" height="28"></a>
       <nav class="footer-links" aria-label="Patičková navigace">
         <a href="/#jak-to-funguje">Jak to funguje</a>
-        <a href="co-je-omi" aria-current="page">Co je Omi</a>
-        <a href="co-je-plaud">Co je Plaud</a>
+        <a href="co-je-omi">Co je Omi</a>
+        <a href="co-je-plaud" aria-current="page">Co je Plaud</a>
         <a href="priklady">Příklady z praxe</a>
         <a href="/#faq">FAQ</a>
         <a href="kontakt">Kontakt</a>
@@ -1306,21 +1314,20 @@ img { max-width: 100%; }
       "@type": "BreadcrumbList",
       "itemListElement": [
         { "@type": "ListItem", "position": 1, "name": "Úvod", "item": "https://memory.plexima.io/" },
-        { "@type": "ListItem", "position": 2, "name": "Omi", "item": "https://memory.plexima.io/co-je-omi" }
+        { "@type": "ListItem", "position": 2, "name": "Plaud Note Pro", "item": "https://memory.plexima.io/co-je-plaud" }
       ]
     },
     {
       "@type": "Product",
-      "name": "Omi AI",
-      "description": "Nositelné nahrávací zařízení s AI pro schůzky a pracovní rozhovory, včetně nastavení a napojení na firemní nástroje.",
-      "brand": { "@type": "Brand", "name": "Omi" },
-      "image": "https://memory.plexima.io/Fotky/co-je-omi-hero.webp",
+      "name": "Plaud Note Pro",
+      "description": "AI hlasový záznamník velikosti kreditní karty pro osobní jednání i telefonní hovory, včetně nastavení a napojení na firemní nástroje.",
+      "brand": { "@type": "Brand", "name": "Plaud" },
+      "image": "https://memory.plexima.io/Fotky/plaud/plaud-note-front-transparent.webp",
       "offers": {
         "@type": "Offer",
         "availability": "https://schema.org/InStock",
-        "price": "4790",
         "priceCurrency": "CZK",
-        "url": "https://memory.plexima.io/co-je-omi#objednavka",
+        "url": "https://memory.plexima.io/co-je-plaud#objednavka",
         "seller": { "@type": "Organization", "name": "Plexima" }
       }
     }

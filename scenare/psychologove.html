@@ -11,6 +11,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@700;800&family=Open+Sans:wght@400;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/assets/nav.css">
 <style>
 :root {
   --yellow: #FEC710;
@@ -364,7 +365,7 @@ img { max-width: 100%; }
 }
 .footer-top { display: flex; justify-content: space-between; align-items: center; gap: 32px; flex-wrap: wrap; }
 .footer-logo { display: inline-flex; }
-.footer-logo img { height: 28px; display: block; filter: grayscale(1) brightness(0) invert(1); }
+.footer-logo img { height: 28px; width: auto; display: block; filter: grayscale(1) brightness(0) invert(1); }
 .footer-links { display: grid; grid-template-rows: repeat(3, auto); grid-auto-flow: column; gap: 10px 48px; justify-content: end; }
 .footer-links a { color: rgba(255,255,255,.7); text-decoration: none; }
 .footer-links a:hover { color: #fff; text-decoration: underline; text-decoration-color: var(--yellow); text-underline-offset: 4px; }
@@ -438,7 +439,15 @@ img { max-width: 100%; }
     </button>
     <nav class="main-nav" aria-label="Hlavní navigace">
       <a href="/#jak-to-funguje">Jak to funguje</a>
-      <a href="/co-je-omi">Co je Omi</a>
+      <div class="nav-dd">
+        <button type="button" class="nav-dd-toggle" aria-expanded="false">Zařízení
+          <svg width="12" height="12" viewBox="0 0 12 12" fill="none" aria-hidden="true"><path d="M2.5 4.5L6 8l3.5-3.5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </button>
+        <div class="nav-dd-menu">
+          <a href="/co-je-plaud">Plaud</a>
+          <a href="/co-je-omi">Omi</a>
+        </div>
+      </div>
       <a href="/priklady" class="is-active" aria-current="page">Příklady z praxe</a>
     </nav>
     <div class="header-cta">
@@ -607,7 +616,7 @@ img { max-width: 100%; }
       <nav class="footer-links" aria-label="Patičková navigace">
         <a href="/#jak-to-funguje">Jak to funguje</a>
         <a href="/co-je-omi">Co je Omi</a>
-        <a href="/#implementace">Nasazení</a>
+        <a href="/co-je-plaud">Co je Plaud</a>
         <a href="/priklady" aria-current="page">Příklady z praxe</a>
         <a href="/#faq">FAQ</a>
         <a href="/kontakt">Kontakt</a>
@@ -653,5 +662,6 @@ img { max-width: 100%; }
 </script>
 
 <script src="/assets/konzultace.js" defer></script>
+<script src="/assets/nav.js" defer></script>
 </body>
 </html>

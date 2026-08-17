@@ -44,9 +44,9 @@ Aktivace placeného nástroje, kampaně nebo automatického odesílání je samo
 
 ## Web
 
-- Cílová doména: `device.plexima.io`.
-- Současná veřejná verze není aktuální a nesmí sloužit jako zdroj positioningu, strategie nebo stavu.
-- Nová verze má vycházet z potvrzené nabídky a validačních zjištění, ne opačně.
+- Aktuální produkční doména: `memory.plexima.io`.
+- Nasazený obsah na `memory.plexima.io` je správná aktuální varianta webu a přímá autorita pro ověřování produkčního stavu.
+- `device.plexima.io` je zastaralá cesta a nesmí se používat pro produkční ověřování.
 - Vizuál vychází z Pleximy, nikoliv z kopírování Omi.
 
 ## Potvrzené anti-goals

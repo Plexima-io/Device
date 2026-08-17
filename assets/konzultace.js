@@ -27,7 +27,8 @@
     '.form-field input,.form-field select{min-height:48px;padding:12px 16px;border:1px solid var(--border);border-radius:var(--radius-md);background:var(--soft);color:var(--ink);font:400 16px/1.4 var(--font-body);width:100%}',
     '.form-field input:focus,.form-field select:focus{border-color:var(--blue);outline:2px solid rgba(110,193,228,.25)}',
     '.form-check{grid-column:1/-1;display:flex;align-items:flex-start;gap:10px;font-size:14px;color:var(--muted);cursor:pointer}',
-    '.form-check input{width:20px;height:20px;margin-top:1px;accent-color:#FEC710}',
+    '.form-check input[type=checkbox]{flex:0 0 20px;width:20px;height:20px;margin:1px 0 0;accent-color:#FEC710}',
+    '.form-check .fc-text{flex:1 1 auto}',
     '.form-check a{color:var(--ink);font-weight:600}',
     '.form-submit{grid-column:1/-1;margin-top:4px;width:100%}',
     '.form-status{grid-column:1/-1;border-radius:var(--radius-md);padding:14px 16px;font-size:14px;border:1px solid}',
@@ -61,7 +62,7 @@
     '<option>Majitel / jednatel</option><option>Ředitel</option><option>Vedoucí obchodu</option><option>Vedoucí provozu</option><option>Projektový manažer</option><option>Office / administrativa</option><option>Jiná</option>',
     '</select></div>',
     '<label class="form-check"><input type="checkbox" name="souhlas" required>',
-    'Souhlasím se zpracováním osobních údajů za účelem vyřízení poptávky v souladu se <a href="/ochrana-osobnich-udaju" target="_blank" rel="noopener" onclick="event.stopPropagation()">zásadami ochrany osobních údajů</a>. <span class="req">*</span></label>',
+    '<span class="fc-text">Souhlasím se zpracováním osobních údajů za účelem vyřízení poptávky v souladu se <a href="/ochrana-osobnich-udaju" target="_blank" rel="noopener" onclick="event.stopPropagation()">zásadami ochrany osobních údajů</a>. <span class="req">*</span></span></label>',
     '<button type="submit" class="btn btn-primary form-submit">Odeslat</button>',
     '<p class="form-status" hidden></p>',
     '</form></div></div></div>'

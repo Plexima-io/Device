@@ -57,3 +57,7 @@ Doména je určena pro Omi nabídku, ale aktuálně nasazený obsah je zastaral�
 ### D-013 — Outreach stack až po ICP
 
 Apollo, Clay a další nástroje se budou porovnávat až podle validačního segmentu, dat, kanálu, personalizace a provozního modelu. Placené účty a automatické odesílání vyžadují schválení.
+
+### D-014 — `memory.plexima.io` je aktuální produkční autorita
+
+Nasazený obsah na `memory.plexima.io` je správná aktuální varianta webu. `device.plexima.io` je zastaralá cesta a nesmí se používat pro ověřování produkčního stavu. Toto rozhodnutí nahrazuje D-012 v části o cílové doméně a autoritě nasazeného obsahu.
