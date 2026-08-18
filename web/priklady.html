@@ -165,154 +165,10 @@ img { max-width: 100%; }
   max-width: 680px;
 }
 
-/* ---------- Case grid ---------- */
+/* ---------- Sekce se scénáři ---------- */
 .cases { padding-bottom: var(--section-y); }
-.case-grid {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: clamp(24px, 3vw, 36px);
-}
-.case-card {
-  display: flex;
-  flex-direction: column;
-  background: var(--white);
-  border: 1px solid var(--border);
-  border-radius: var(--radius-lg);
-  overflow: hidden;
-  text-decoration: none;
-  color: inherit;
-  transition: box-shadow .25s ease, border-color .25s ease, transform .25s ease;
-}
-.case-card:hover { box-shadow: var(--shadow-lg); border-color: var(--blue); transform: translateY(-4px); }
-.case-card:focus-visible { outline: 2px solid var(--blue); outline-offset: 3px; }
-.case-media {
-  position: relative;
-  aspect-ratio: 16 / 10;
-  overflow: hidden;
-  background: var(--soft);
-}
-.case-media img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  display: block;
-  transition: transform .5s cubic-bezier(.4,0,.2,1);
-}
-.case-card:hover .case-media img { transform: scale(1.04); }
-.case-media::after {
-  content: "";
-  position: absolute;
-  inset: 0;
-  background: linear-gradient(to top, rgba(31,23,65,.42) 0%, rgba(31,23,65,0) 55%);
-  pointer-events: none;
-}
-.case-tag {
-  position: absolute;
-  top: 18px; left: 18px;
-  z-index: 2;
-  padding: 7px 14px;
-  border-radius: 999px;
-  background: rgba(255,255,255,.94);
-  backdrop-filter: blur(6px);
-  font: 700 12.5px/1 var(--font-body);
-  color: var(--ink);
-}
-.case-body {
-  padding: clamp(24px, 2.4vw, 32px);
-  display: flex;
-  flex-direction: column;
-  flex: 1;
-}
-.case-brand {
-  display: flex;
-  align-items: center;
-  gap: 12px;
-  margin-bottom: 20px;
-}
-.case-logo { height: 26px; width: auto; display: block; }
-.case-card h2 {
-  font-size: clamp(21px, 2.2vw, 25px);
-  line-height: 1.28;
-  margin-bottom: 12px;
-}
-.case-desc {
-  font-size: 16px;
-  line-height: 1.65;
-  color: var(--muted);
-}
-.case-stats {
-  display: flex;
-  gap: 20px;
-  flex-wrap: wrap;
-  margin-top: 22px;
-  padding-top: 20px;
-  border-top: 1px dashed var(--border);
-}
-.case-stats div { display: flex; flex-direction: column; }
-.case-stats .s-num { font: 800 19px/1.15 var(--font-heading); color: var(--ink); }
-.case-stats .s-lab { font-size: 13px; color: var(--caption); margin-top: 3px; }
-.case-more {
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
-  margin-top: 24px;
-  font: 700 15px/1 var(--font-body);
-  color: var(--ink);
-}
-.case-more svg { transition: transform .2s ease; }
-.case-card:hover .case-more svg { transform: translateX(4px); }
-.case-more::before {
-  content: "";
-  flex: 0 0 22px;
-  height: 2px;
-  border-radius: 2px;
-  background: var(--yellow);
-}
 
-/* Placeholder tile for upcoming cases */
-.case-soon {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: flex-start;
-  gap: 12px;
-  padding: clamp(28px, 3vw, 44px);
-  border: 1px dashed var(--border);
-  border-radius: var(--radius-lg);
-  background: var(--soft);
-  min-height: 260px;
-}
-.case-soon h3 { font-size: 20px; line-height: 1.3; }
-.case-soon p { font-size: 15px; color: var(--muted); max-width: 340px; }
-.case-soon .btn { margin-top: 6px; }
-
-/* ---------- Tab switch ---------- */
-.tab-switch-wrap { text-align: center; margin-top: clamp(4px, 1vw, 12px); margin-bottom: clamp(32px, 5vw, 56px); }
-.tab-switch {
-  display: inline-flex;
-  gap: 4px;
-  padding: 5px;
-  background: var(--soft);
-  border: 1px solid var(--border);
-  border-radius: 999px;
-}
-.tab-switch button {
-  border: none;
-  background: transparent;
-  font: 700 15px/1 var(--font-body);
-  color: var(--muted);
-  padding: 12px 24px;
-  border-radius: 999px;
-  cursor: pointer;
-  transition: background .18s ease, color .18s ease;
-}
-.tab-switch button.is-active { background: var(--white); color: var(--ink); box-shadow: var(--shadow-sm); }
-.tab-switch button:focus-visible { outline: 2px solid var(--blue); outline-offset: 2px; }
-
-.tab-panel { display: none; }
-.tab-panel.is-active { display: block; }
-
-/* ---------- Segment grid (Jak to funguje) ---------- */
+/* ---------- Segment grid ---------- */
 .seg-grid {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
@@ -381,26 +237,6 @@ img { max-width: 100%; }
 .seg-card:hover .seg-cta svg { transform: translateX(3px); }
 
 /* ---------- Pagination ---------- */
-.pager {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 10px;
-  margin-top: clamp(40px, 5vw, 64px);
-}
-.pager a, .pager span {
-  min-width: 42px; height: 42px;
-  padding: 0 12px;
-  border-radius: var(--radius-sm);
-  border: 1px solid var(--border);
-  display: inline-flex; align-items: center; justify-content: center;
-  font: 700 15px/1 var(--font-body);
-  color: var(--muted);
-  text-decoration: none;
-  background: var(--white);
-}
-.pager .is-current { background: var(--ink); border-color: var(--ink); color: #fff; }
-.pager .is-disabled { opacity: .4; pointer-events: none; }
 
 /* ---------- CTA band ---------- */
 .cta-band { background: var(--soft); padding: var(--section-y) 0; text-align: center; }
@@ -452,7 +288,6 @@ img { max-width: 100%; }
   .main-nav a { padding: 10px 10px; font-size: 14.5px; }
 }
 @media (max-width: 900px) {
-  .case-grid { grid-template-columns: 1fr; }
   .seg-grid { grid-template-columns: 1fr; }
 }
 @media (max-width: 768px) {
@@ -518,166 +353,104 @@ img { max-width: 100%; }
   </div>
 </section>
 
-<div class="container tab-switch-wrap">
-  <div class="tab-switch" role="tablist" aria-label="Zobrazení scénářů">
-    <button type="button" role="tab" data-tab="profese" class="is-active" aria-selected="true" aria-controls="panel-profese">Podle profese</button>
-    <button type="button" role="tab" data-tab="praxe" aria-selected="false" aria-controls="panel-praxe">Příklady z praxe</button>
-  </div>
-</div>
-
 <section class="cases">
   <div class="container">
 
-    <!-- PANEL: Jak to funguje -->
-    <div class="tab-panel is-active" id="panel-profese" role="tabpanel">
-      <div class="seg-grid reveal-stagger">
+    <div class="seg-grid reveal-stagger">
 
-        <div class="seg-card reveal" style="--i:0">
-          <div class="seg-media">
-            <img src="Fotky/obchodni-jednani.webp" alt="Finanční poradce na schůzce s klientem, na krku má nahrávací zařízení Omi" loading="lazy">
-          </div>
-          <div class="seg-body">
-            <h3>Finanční poradci</h3>
-            <p>Při další schůzce máte po ruce klientovy cíle, priority i důvody jeho dřívějších rozhodnutí.</p>
-            <a href="/scenare/financni-poradci" class="seg-cta">Zobrazit scénář <svg width="14" height="14" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3 8h9M8 4l4 4-4 4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
-          </div>
+      <div class="seg-card reveal" style="--i:0">
+        <div class="seg-media">
+          <img src="Fotky/obchodni-jednani.webp" alt="Finanční poradce na schůzce s klientem, na krku má nahrávací zařízení Omi" loading="lazy">
         </div>
-
-        <div class="seg-card reveal" style="--i:1">
-          <div class="seg-media">
-            <img src="Fotky/makler.png" alt="Realitní makléř na prohlídce nemovitosti se zájemcem" loading="lazy">
-          </div>
-          <div class="seg-body">
-            <h3>Realitní makléři</h3>
-            <p>Z prohlídky zůstane přesný obraz potřeb zájemce i důvodů, proč mu nemovitost nesedla.</p>
-            <a href="/scenare/realitni-maklery" class="seg-cta">Zobrazit scénář <svg width="14" height="14" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3 8h9M8 4l4 4-4 4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
-          </div>
+        <div class="seg-body">
+          <h3>Finanční poradci</h3>
+          <p>Při další schůzce máte po ruce klientovy cíle, priority i důvody jeho dřívějších rozhodnutí.</p>
+          <a href="/scenare/financni-poradci" class="seg-cta">Zobrazit scénář <svg width="14" height="14" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3 8h9M8 4l4 4-4 4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
         </div>
-
-        <div class="seg-card reveal" style="--i:2">
-          <div class="seg-media">
-            <span class="seg-soon">Připravujeme</span>
-            <img src="Fotky/ucetni.png" alt="Účetní při konzultaci s klientem" loading="lazy">
-          </div>
-          <div class="seg-body">
-            <h3>Daňoví a účetní poradci</h3>
-            <p>Snadno dohledáte předchozí doporučení, dohodnutý postup i podklady, které klient ještě nedodal.</p>
-            <a href="/scenare/danovi-poradci" class="seg-cta">Zobrazit scénář <svg width="14" height="14" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3 8h9M8 4l4 4-4 4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
-          </div>
-        </div>
-
-        <div class="seg-card reveal" style="--i:3">
-          <div class="seg-media">
-            <img src="Fotky/veterinar.png" alt="Veterinář při vyšetření zvířete s majitelem" loading="lazy">
-          </div>
-          <div class="seg-body">
-            <h3>Veterináři</h3>
-            <p>Při další kontrole máte po ruce vývoj potíží, reakci na léčbu i postřehy majitele z domácí péče.</p>
-            <a href="/scenare/veterinari" class="seg-cta">Zobrazit scénář <svg width="14" height="14" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3 8h9M8 4l4 4-4 4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
-          </div>
-        </div>
-
-        <div class="seg-card reveal" style="--i:4">
-          <div class="seg-media">
-            <span class="seg-soon">Připravujeme</span>
-            <img src="Fotky/doctor.png" alt="Lékař při konzultaci s pacientem v ordinaci" loading="lazy">
-          </div>
-          <div class="seg-body">
-            <h3>Lékaři a kliniky</h3>
-            <p>Při další návštěvě navážete na dosavadní průběh obtíží i důvody zvoleného postupu.</p>
-            <a href="/scenare/lekari-kliniky" class="seg-cta">Zobrazit scénář <svg width="14" height="14" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3 8h9M8 4l4 4-4 4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
-          </div>
-        </div>
-
-        <div class="seg-card reveal" style="--i:5">
-          <div class="seg-media">
-            <span class="seg-soon">Připravujeme</span>
-            <img src="Fotky/psycholog.png" alt="Psycholog při terapeutickém sezení" loading="lazy">
-          </div>
-          <div class="seg-body">
-            <h3>Psychologové a psychoterapeuti</h3>
-            <p>Před dalším sezením si připomenete důležitá témata i změny, které se během terapie objevily.</p>
-            <a href="/scenare/psychologove" class="seg-cta">Zobrazit scénář <svg width="14" height="14" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3 8h9M8 4l4 4-4 4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
-          </div>
-        </div>
-
-        <div class="seg-card reveal" style="--i:6">
-          <div class="seg-media">
-            <span class="seg-soon">Připravujeme</span>
-            <img src="Fotky/projektant.png" alt="Architekt nad výkresy s klientem" loading="lazy">
-          </div>
-          <div class="seg-body">
-            <h3>Architekti a projektanti</h3>
-            <p>U každé změny dohledáte původní zadání, důvod rozhodnutí i domluvu mezi účastníky projektu.</p>
-            <a href="/scenare/architekti-projektanti" class="seg-cta">Zobrazit scénář <svg width="14" height="14" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3 8h9M8 4l4 4-4 4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
-          </div>
-        </div>
-
-        <div class="seg-card reveal" style="--i:7">
-          <div class="seg-media">
-            <span class="seg-soon">Připravujeme</span>
-            <img src="Fotky/autotechnik.png" alt="Příjem vozidla v autoservisu, mechanik se zákazníkem" loading="lazy">
-          </div>
-          <div class="seg-body">
-            <h3>Autoservisy</h3>
-            <p>Mechanik dostane přesný popis závady včetně situací, ve kterých se problém objevuje.</p>
-            <a href="/scenare/autoservisy" class="seg-cta">Zobrazit scénář <svg width="14" height="14" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3 8h9M8 4l4 4-4 4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
-          </div>
-        </div>
-
-      </div>
-    </div>
-
-    <!-- PANEL: Příklady z praxe -->
-    <div class="tab-panel" id="panel-praxe" role="tabpanel">
-    <div class="case-grid reveal-stagger">
-
-      <a href="priklady-prospirio" class="case-card reveal" style="--i:0">
-        <div class="case-media">
-          <span class="case-tag">Obchodní týmy</span>
-          <img src="Fotky/obchodni-jednani.webp" alt="Obchodník na jednání s AI zápisníkem Omi na krku" loading="lazy">
-        </div>
-        <div class="case-body">
-          <div class="case-brand">
-            <img class="case-logo" src="Fotky/loga/prospirio.png" alt="Prospirio Hub">
-          </div>
-          <h2>Díky přepisu schůzek a zpětné analýze vzrostla úspěšnost prodeje o 23 %</h2>
-          <p class="case-desc">Prospirio Hub učí obchodníky prodávat lépe. Aby ale mohl poradit, potřebuje vědět, co se na schůzce doopravdy odehrálo. Omi zachytí celé jednání a pošle hotové výstupy rovnou do aplikace.</p>
-          <div class="case-stats">
-            <div>
-              <span class="s-num">+23 %</span>
-              <span class="s-lab">úspěšnost prodeje</span>
-            </div>
-            <div>
-              <span class="s-num">25 let</span>
-              <span class="s-lab">zkušeností v prodeji</span>
-            </div>
-            <div>
-              <span class="s-num">180+</span>
-              <span class="s-lab">prodejních strategií</span>
-            </div>
-          </div>
-          <span class="case-more">
-            Zobrazit případovou studii
-            <svg width="15" height="15" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3 8h9M8 4l4 4-4 4" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
-          </span>
-        </div>
-      </a>
-
-      <div class="case-soon reveal" style="--i:1">
-        <span class="eyebrow" style="margin-bottom:4px;">Připravujeme</span>
-        <h3>Další příklady přibývají</h3>
-        <p>Pracujeme na případových studiích ze servisu, výroby a interních porad. Chcete být mezi nimi?</p>
-        <button type="button" class="btn btn-ghost" data-open="modal-konzultace">Domluvit konzultaci</button>
       </div>
 
-    </div>
+      <div class="seg-card reveal" style="--i:1">
+        <div class="seg-media">
+          <img src="Fotky/makler.png" alt="Realitní makléř na prohlídce nemovitosti se zájemcem" loading="lazy">
+        </div>
+        <div class="seg-body">
+          <h3>Realitní makléři</h3>
+          <p>Z prohlídky zůstane přesný obraz potřeb zájemce i důvodů, proč mu nemovitost nesedla.</p>
+          <a href="/scenare/realitni-maklery" class="seg-cta">Zobrazit scénář <svg width="14" height="14" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3 8h9M8 4l4 4-4 4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+        </div>
+      </div>
 
-    <nav class="pager" aria-label="Stránkování">
-      <span class="is-disabled" aria-hidden="true">←</span>
-      <span class="is-current" aria-current="page">1</span>
-      <span class="is-disabled" aria-hidden="true">→</span>
-    </nav>
+      <div class="seg-card reveal" style="--i:2">
+        <div class="seg-media">
+          <span class="seg-soon">Připravujeme</span>
+          <img src="Fotky/ucetni.png" alt="Účetní při konzultaci s klientem" loading="lazy">
+        </div>
+        <div class="seg-body">
+          <h3>Daňoví a účetní poradci</h3>
+          <p>Snadno dohledáte předchozí doporučení, dohodnutý postup i podklady, které klient ještě nedodal.</p>
+          <a href="/scenare/danovi-poradci" class="seg-cta">Zobrazit scénář <svg width="14" height="14" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3 8h9M8 4l4 4-4 4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+        </div>
+      </div>
+
+      <div class="seg-card reveal" style="--i:3">
+        <div class="seg-media">
+          <img src="Fotky/veterinar.png" alt="Veterinář při vyšetření zvířete s majitelem" loading="lazy">
+        </div>
+        <div class="seg-body">
+          <h3>Veterináři</h3>
+          <p>Při další kontrole máte po ruce vývoj potíží, reakci na léčbu i postřehy majitele z domácí péče.</p>
+          <a href="/scenare/veterinari" class="seg-cta">Zobrazit scénář <svg width="14" height="14" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3 8h9M8 4l4 4-4 4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+        </div>
+      </div>
+
+      <div class="seg-card reveal" style="--i:4">
+        <div class="seg-media">
+          <span class="seg-soon">Připravujeme</span>
+          <img src="Fotky/doctor.png" alt="Lékař při konzultaci s pacientem v ordinaci" loading="lazy">
+        </div>
+        <div class="seg-body">
+          <h3>Lékaři a kliniky</h3>
+          <p>Při další návštěvě navážete na dosavadní průběh obtíží i důvody zvoleného postupu.</p>
+          <a href="/scenare/lekari-kliniky" class="seg-cta">Zobrazit scénář <svg width="14" height="14" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3 8h9M8 4l4 4-4 4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+        </div>
+      </div>
+
+      <div class="seg-card reveal" style="--i:5">
+        <div class="seg-media">
+          <span class="seg-soon">Připravujeme</span>
+          <img src="Fotky/psycholog.png" alt="Psycholog při terapeutickém sezení" loading="lazy">
+        </div>
+        <div class="seg-body">
+          <h3>Psychologové a psychoterapeuti</h3>
+          <p>Před dalším sezením si připomenete důležitá témata i změny, které se během terapie objevily.</p>
+          <a href="/scenare/psychologove" class="seg-cta">Zobrazit scénář <svg width="14" height="14" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3 8h9M8 4l4 4-4 4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+        </div>
+      </div>
+
+      <div class="seg-card reveal" style="--i:6">
+        <div class="seg-media">
+          <span class="seg-soon">Připravujeme</span>
+          <img src="Fotky/projektant.png" alt="Architekt nad výkresy s klientem" loading="lazy">
+        </div>
+        <div class="seg-body">
+          <h3>Architekti a projektanti</h3>
+          <p>U každé změny dohledáte původní zadání, důvod rozhodnutí i domluvu mezi účastníky projektu.</p>
+          <a href="/scenare/architekti-projektanti" class="seg-cta">Zobrazit scénář <svg width="14" height="14" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3 8h9M8 4l4 4-4 4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+        </div>
+      </div>
+
+      <div class="seg-card reveal" style="--i:7">
+        <div class="seg-media">
+          <span class="seg-soon">Připravujeme</span>
+          <img src="Fotky/autotechnik.png" alt="Příjem vozidla v autoservisu, mechanik se zákazníkem" loading="lazy">
+        </div>
+        <div class="seg-body">
+          <h3>Autoservisy</h3>
+          <p>Mechanik dostane přesný popis závady včetně situací, ve kterých se problém objevuje.</p>
+          <a href="/scenare/autoservisy" class="seg-cta">Zobrazit scénář <svg width="14" height="14" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3 8h9M8 4l4 4-4 4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+        </div>
+      </div>
+
     </div>
 
   </div>
@@ -731,31 +504,6 @@ img { max-width: 100%; }
   nav.addEventListener('click', function (e) {
     if (e.target.closest('a')) nav.classList.remove('is-open');
   });
-
-  /* Tab switch: Jak to funguje / Příklady z praxe */
-  var tabBtns = document.querySelectorAll('.tab-switch button');
-  var panels = { profese: document.getElementById('panel-profese'), praxe: document.getElementById('panel-praxe') };
-  var activateTab = function (name) {
-    if (!panels[name]) name = 'profese';
-    tabBtns.forEach(function (b) {
-      var on = b.getAttribute('data-tab') === name;
-      b.classList.toggle('is-active', on);
-      b.setAttribute('aria-selected', on ? 'true' : 'false');
-    });
-    Object.keys(panels).forEach(function (key) {
-      panels[key].classList.toggle('is-active', key === name);
-    });
-    panels[name].querySelectorAll('.reveal').forEach(function (el) { el.classList.add('is-visible'); });
-  };
-  tabBtns.forEach(function (b) {
-    b.addEventListener('click', function () {
-      var name = b.getAttribute('data-tab');
-      activateTab(name);
-      history.replaceState(null, '', '?tab=' + name);
-    });
-  });
-  var params = new URLSearchParams(location.search);
-  activateTab(params.get('tab') === 'praxe' ? 'praxe' : 'profese');
 
   var reveals = document.querySelectorAll('.reveal');
   if (!('IntersectionObserver' in window)) {
