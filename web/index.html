@@ -1096,21 +1096,6 @@ input[type="range"]:focus-visible { outline: 2px solid var(--blue); outline-offs
 .partner-actions { display: flex; align-items: center; gap: 18px; flex-wrap: wrap; margin-top: 22px; }
 .partner-actions .btn-primary { background: #fff; border-color: #fff; color: var(--ink); }
 .partner-actions .btn-primary:hover { background: rgba(255,255,255,.86); border-color: rgba(255,255,255,.86); }
-.partner-link {
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
-  min-height: 44px;
-  font: 700 15.5px/1 var(--font-body);
-  color: #fff;
-  text-decoration: none;
-  border-bottom: 2px solid rgba(255,255,255,.32);
-  transition: border-color .18s ease;
-}
-.partner-link:hover { border-bottom-color: #fff; }
-.partner-link svg { transition: transform .18s ease; }
-.partner-link:hover svg { transform: translateX(3px); }
-.partner-link:focus-visible { outline: 2px solid var(--blue); outline-offset: 4px; border-radius: 3px; }
 
 .partner-stats {
   display: flex;
@@ -1155,7 +1140,6 @@ input[type="range"]:focus-visible { outline: 2px solid var(--blue); outline-offs
   .partner-stats li.partner-stat-wide { display: none; }
   .partner-actions { flex-direction: column; align-items: stretch; gap: 14px; }
   .partner-actions .btn { width: 100%; }
-  .partner-link { align-self: center; }
 }
 
 /* ---------- Final CTA ---------- */
@@ -2273,13 +2257,10 @@ html.no-motion .how-visual * { animation: none !important; }
           <img src="Fotky/loga/prospirio-white.png" alt="Prospirio Hub">
           Pro majitele firem a sales manažery
         </span>
-        <h2>Co byste změnili, kdybyste slyšeli každý obchodní hovor?</h2>
-        <p class="partner-lead">Odhalte, co funguje, kde obchod vázne a co má tým udělat dál.</p>
+        <h2>Co byste ve firmě změnili, kdybyste byli na každé schůzce?</h2>
+        <p class="partner-lead">Prospirio Hub tam je za celý váš tým. Z přepisů schůzek složí celý kontext, odhalí vzorce a navrhne konkrétní kroky ke zlepšení.</p>
         <div class="partner-actions">
           <a href="prospirio-hub" class="btn btn-primary">Jak to funguje</a>
-          <a href="https://hub.prospirio.cz/" class="partner-link" target="_blank" rel="noopener">Zobrazit Prospirio Hub
-            <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3 8h9M8.5 4.5L12 8l-3.5 3.5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
-          </a>
         </div>
         <ul class="partner-stats">
           <li class="partner-stat-wide"><span class="partner-stat-value">100 %</span> viditelnost hovorů</li>
