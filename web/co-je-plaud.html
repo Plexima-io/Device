@@ -190,6 +190,16 @@ img { max-width: 100%; }
   flex-wrap: wrap;
 }
 .crumb a { color: var(--muted); text-decoration: none; }
+.text-link {
+  color: var(--ink);
+  font-weight: 600;
+  text-decoration: underline;
+  text-decoration-color: var(--yellow);
+  text-decoration-thickness: 2px;
+  text-underline-offset: 3px;
+}
+.text-link:hover { text-decoration-color: var(--ink); }
+.text-link:focus-visible { outline: 2px solid var(--blue); outline-offset: 3px; border-radius: 2px; }
 .crumb a:hover { color: var(--ink); text-decoration: underline; text-underline-offset: 3px; }
 .crumb a:focus-visible { outline: 2px solid var(--blue); outline-offset: 2px; border-radius: 3px; }
 .crumb span[aria-current] { color: var(--ink); }
@@ -1005,7 +1015,7 @@ img { max-width: 100%; }
     <div class="section-head reveal">
       <span class="eyebrow">Co to změní</span>
       <h2>Z rozhovorů se stane firemní znalost</h2>
-      <p>Nejde o další zápisník ani o zařízení na poličku. Jde o to, aby důležité informace nezmizely mezi schůzkami, poznámkami a hlavami lidí.</p>
+      <p>Nejde o další zápisník ani o zařízení na poličku. Jde o to, aby důležité informace nezmizely mezi schůzkami, poznámkami a hlavami lidí. Podrobně to rozebíráme v článku <a href="/jak-funguje-inteligentni-pamet" class="text-link">jak funguje inteligentní paměť ve firmě</a>.</p>
     </div>
     <div class="benefit-grid reveal">
       <article class="benefit">
