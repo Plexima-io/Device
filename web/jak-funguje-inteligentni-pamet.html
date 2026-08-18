@@ -219,6 +219,7 @@ img { max-width: 100%; }
 /* Fotografie s popiskem */
 .figure-wide { margin-top: clamp(40px, 5vw, 64px); }
 .figure-wide img { display: block; width: 100%; height: auto; border-radius: var(--radius-lg); }
+.figure-pair-media { display: grid; grid-template-columns: 1fr 1fr; gap: clamp(12px, 2vw, 20px); }
 .figure-wide figcaption {
   margin-top: 14px;
   font-size: 14.5px;
@@ -457,9 +458,12 @@ img { max-width: 100%; }
   </div>
 
   <div class="container content-narrow">
-    <figure class="figure-wide reveal">
-      <img src="Fotky/obr.3.webp" alt="Nahrávací zařízení Omi na jednacím stole vedle telefonu a notebooků" width="1376" height="768" loading="lazy">
-      <figcaption>Zařízení zachytí rozhovor. Inteligentní vrstva z něj vytvoří kontext, který lze později znovu využít.</figcaption>
+    <figure class="figure-wide figure-pair reveal">
+      <div class="figure-pair-media">
+        <img src="Fotky/plaud/plaud-pouziti-hovory.webp" alt="Telefonát s nahrávacím zařízením Plaud Note Pro přichyceným na telefonu" width="760" height="1062" loading="lazy">
+        <img src="Fotky/plaud/plaud-pouziti-poznamky.webp" alt="Nahrávání poznámky do Plaud Note Pro drženého v ruce" width="760" height="1062" loading="lazy">
+      </div>
+      <figcaption>Osobní jednání i telefonní hovor zachytí stejné zařízení. Inteligentní vrstva z nich vytvoří kontext, který lze později znovu využít.</figcaption>
     </figure>
   </div>
 </section>
