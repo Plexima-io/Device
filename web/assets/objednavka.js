@@ -58,6 +58,7 @@
     var digits = price.replace(/[^0-9]/g, '');
     var unitPrice = digits ? parseInt(digits, 10) : 0;
     var formatCzk = function (value) { return value.toLocaleString('cs-CZ') + ' Kč'; };
+    var buyLabel = /plaud/i.test(device) ? 'Koupit Plaud' : (/omi/i.test(device) ? 'Koupit Omi' : 'Koupit');
 
     var MARKUP = [
       '<div class="modal-overlay" id="modal-objednavka" aria-hidden="true">',
@@ -96,7 +97,7 @@
       '<label class="form-check"><input type="checkbox" id="o-automatizace" name="automatizace"><span class="fc-text">Mám zájem o nastavení <strong>integrace a automatizace</strong></span></label>',
       '<label class="form-check"><input type="checkbox" name="souhlas" required>',
       '<span class="fc-text">Souhlasím se zpracováním osobních údajů za účelem vyřízení objednávky v souladu se <a href="/ochrana-osobnich-udaju" target="_blank" rel="noopener" onclick="event.stopPropagation()">zásadami ochrany osobních údajů</a>. <span class="req">*</span></span></label>',
-      '<button type="submit" class="btn btn-primary form-submit">Odeslat objednávku</button>',
+      '<button type="submit" class="btn btn-primary form-submit">' + buyLabel + '</button>',
       '<p class="form-status" hidden></p>',
       '</form></div></div>'
     ].join('');
