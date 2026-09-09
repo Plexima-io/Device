@@ -296,14 +296,6 @@ h1, h2, h3 { font-family: var(--font-heading); font-weight: 700; }
 .form-check input { width: 20px; height: 20px; margin-top: 1px; accent-color: var(--yellow); flex-shrink: 0; }
 .form-check a { color: var(--ink); font-weight: 600; }
 .form-check .req { color: #D9534F; }
-.form-status {
-  grid-column: 1 / -1;
-  border-radius: var(--radius-md);
-  padding: 14px 16px;
-  font-size: 14px;
-  border: 1px solid;
-}
-.form-status.err { background: rgba(217,83,79,.10); border-color: rgba(217,83,79,.36); color: var(--ink); }
 
 /* Result */
 .quiz-result {
@@ -691,7 +683,6 @@ h1, h2, h3 { font-family: var(--font-heading); font-weight: 700; }
         <input type="checkbox" name="souhlas" required>
         <span>Souhlasím se zpracováním osobních údajů za účelem přípravy doporučení a kontaktování v souladu se <a href="ochrana-osobnich-udaju" target="_blank" rel="noopener" onclick="event.stopPropagation()">zásadami ochrany osobních údajů</a>. <span class="req">*</span></span>
       </label>
-      <div class="form-status err" hidden></div>
     </form>
     <div class="quiz-nav">
       <button type="button" class="btn btn-ghost" data-back>Zpět</button>
@@ -962,9 +953,7 @@ h1, h2, h3 { font-family: var(--font-heading); font-weight: 700; }
 
   /* Submit */
   var form = document.getElementById('contact-form');
-  var status = form.querySelector('.form-status');
   var submitBtn = document.getElementById('submit-quiz');
-  var lastContact = {};
 
   var showResult = function (category) {
     var r = RESULTS[category];
@@ -1006,6 +995,46 @@ h1, h2, h3 { font-family: var(--font-heading); font-weight: 700; }
     window.scrollTo({ top: 0, behavior: 'smooth' });
   };
 
+  /* Lead se odesílá jednou, se zdrojem podle toho, co uživatel na výsledku udělal */
+  var TYPES = { dotaznik: 'dotaznik', hovor: 'dotaznik-hovor', kalendar: 'dotaznik-kalendar' };
+  var leadPayload = null;
+  var leadTimer = null;
+  var sentType = null;
+  var pendingType = null;
+
+  var sendLead = function (typeKey, beacon) {
+    if (!leadPayload) return;
+    if (pendingType && typeKey === TYPES.dotaznik) typeKey = pendingType;
+    if (sentType && (typeKey === TYPES.dotaznik || sentType !== TYPES.dotaznik)) return;
+    sentType = typeKey;
+    if (typeKey !== TYPES.dotaznik) pendingType = typeKey;
+    clearTimeout(leadTimer);
+    leadPayload.type = typeKey;
+    var body = JSON.stringify(leadPayload);
+    if (beacon && navigator.sendBeacon) {
+      navigator.sendBeacon(SUBSCRIBE_ENDPOINT, new Blob([body], { type: 'application/json' }));
+      return;
+    }
+    fetch(SUBSCRIBE_ENDPOINT, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: body,
+      keepalive: true
+    }).then(function (res) {
+      if (!res.ok) throw new Error(res.status);
+    }).catch(function () {
+      sentType = null;
+    });
+  };
+
+  var armFallback = function () {
+    leadTimer = setTimeout(function () { sendLead(TYPES.dotaznik, false); }, 60000);
+    window.addEventListener('pagehide', function () { sendLead(TYPES.dotaznik, true); });
+    document.addEventListener('visibilitychange', function () {
+      if (document.visibilityState === 'hidden') sendLead(TYPES.dotaznik, true);
+    });
+  };
+
   submitBtn.addEventListener('click', function () {
     if (!form.checkValidity()) {
       form.reportValidity();
@@ -1013,7 +1042,6 @@ h1, h2, h3 { font-family: var(--font-heading); font-weight: 700; }
     }
     var result = evaluate();
     var payload = {
-      type: 'dotaznik',
       page: location.href,
       score: result.score,
       kategorie: result.category,
@@ -1023,50 +1051,22 @@ h1, h2, h3 { font-family: var(--font-heading); font-weight: 700; }
     var jineInput = document.getElementById('systemy-jine');
     if (jineInput.value.trim()) payload.systemy_jine = jineInput.value.trim();
     new FormData(form).forEach(function (v, k) { payload[k] = v; });
-    lastContact = { jmeno: payload.jmeno, firma: payload.firma, telefon: payload.telefon, email: payload.email };
+    leadPayload = payload;
 
-    submitBtn.disabled = true;
-    submitBtn.textContent = 'Odesílám…';
-
-    var done = function () {
-      sessionStorage.removeItem(STORAGE_KEY);
-      showResult(result.category);
-    };
-    var fail = function () {
-      submitBtn.disabled = false;
-      submitBtn.textContent = 'Připravit doporučení';
-      status.hidden = false;
-      status.textContent = 'Odeslání se nepovedlo. Zkuste to prosím znovu, nebo napište na info@plexima.io.';
-    };
-
-    fetch(SUBSCRIBE_ENDPOINT, {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(payload)
-    }).then(function (res) {
-      if (!res.ok) throw new Error(res.status);
-      done();
-    }).catch(fail);
+    sessionStorage.removeItem(STORAGE_KEY);
+    showResult(result.category);
+    armFallback();
   });
 
-  /* Zavolejte mi: kontakt už máme z formuláře, rovnou potvrdíme */
   var zavolejteBtn = document.getElementById('result-zavolejte');
   zavolejteBtn.addEventListener('click', function () {
-    var payload = {
-      type: 'zavolejte-mi',
-      page: location.href,
-      jmeno: lastContact.jmeno,
-      firma: lastContact.firma,
-      telefon: lastContact.telefon,
-      email: lastContact.email
-    };
-    fetch(SUBSCRIBE_ENDPOINT, {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(payload)
-    });
+    sendLead(TYPES.hovor, false);
     zavolejteBtn.hidden = true;
     document.getElementById('result-confirm').hidden = false;
+  });
+
+  document.getElementById('result-calendly').addEventListener('click', function () {
+    sendLead(TYPES.kalendar, false);
   });
 })();
 </script>

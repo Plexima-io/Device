@@ -2,8 +2,9 @@ const CREATIO_WEBHOOK = 'https://webhooks.creatio.com/webhooks/f59dc400-875e-423
 
 const ZDROJE = {
   konzultace: 'hovor',
-  'zavolejte-mi': 'hovor',
   dotaznik: 'dotazník',
+  'dotaznik-hovor': 'zavolej mi',
+  'dotaznik-kalendar': 'kalendář',
   objednavka: 'objednávka',
   'exit-intent': 'newsletter'
 };
