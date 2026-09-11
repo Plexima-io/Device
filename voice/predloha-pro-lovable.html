@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>AI asistent Plexo vás zve na diskuzi | Plexima Diskuze</title>
+<meta name="robots" content="noindex, follow">
+<meta property="og:title" content="AI asistent Plexo vás zve na diskuzi společnosti Plexima.">
+<meta property="og:description" content="Hovory vyřizuje 24 hodin denně. Zavolejte a uslyšíte, jak by mohl znít i váš AI asistent. Plexima Diskuze, 15. října 2026, Praha.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink:#1a1740;
+    --ink-deep:#131132;
+    --violet:oklch(34% .10 295);
+    --magenta:oklch(59% .24 355);
+    --cyan:oklch(72% .13 215);
+    --yellow:oklch(85% .15 88);
+    --yellow-hover:oklch(80% .15 88);
+    --white:#fff;
+    --font:"Inter",ui-sans-serif,system-ui,sans-serif;
+  }
+  *{box-sizing:border-box}
+  html,body{margin:0;padding:0}
+  body{
+    font-family:var(--font);
+    font-size:16px;line-height:1.6;
+    color:var(--white);
+    background:var(--ink-deep);
+    -webkit-font-smoothing:antialiased;
+  }
+
+  /* ---------- minimal top bar ---------- */
+  .topbar{
+    position:absolute;top:0;left:0;right:0;z-index:50;
+    max-width:1180px;margin:0 auto;
+    padding:26px 24px 0;
+    display:flex;align-items:center;justify-content:space-between;gap:16px;
+  }
+  .topbar img{height:24px;width:auto;display:block;filter:brightness(0) invert(1);opacity:.92}
+  .top-cta{
+    display:inline-flex;align-items:center;gap:9px;
+    background:var(--yellow);color:var(--ink);
+    font-size:14px;font-weight:700;text-decoration:none;
+    border-radius:999px;padding:11px 20px;
+    transition:background .2s ease,transform .2s ease;
+  }
+  .top-cta:hover{background:var(--yellow-hover);transform:scale(1.04)}
+  .top-cta svg{width:15px;height:15px;fill:var(--ink)}
+
+  /* ---------- hero ---------- */
+  .hero{position:relative;min-height:calc(100vh - 54px);display:flex;align-items:center;overflow:hidden}
+  .hero::before{
+    content:"";position:absolute;inset:0;z-index:0;
+    background:
+      radial-gradient(ellipse 60% 70% at 12% 8%, oklch(42% .12 300 / .75) 0%, transparent 60%),
+      radial-gradient(ellipse 55% 65% at 88% 62%, oklch(38% .11 275 / .70) 0%, transparent 62%),
+      linear-gradient(160deg, #221c52 0%, #1a1740 48%, #141133 100%);
+  }
+  .hero-inner{
+    position:relative;z-index:2;
+    width:100%;max-width:1180px;margin:0 auto;
+    padding:108px 24px 40px;
+    display:grid;grid-template-columns:1.24fr .76fr;gap:44px;align-items:center;
+  }
+
+  .eyebrow{
+    display:inline-flex;align-items:center;gap:10px;
+    border:1px solid rgba(255,255,255,.22);
+    background:rgba(255,255,255,.05);
+    border-radius:999px;padding:7px 18px;margin-bottom:22px;
+    font-size:12.5px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;
+    color:rgba(255,255,255,.92);
+  }
+  .eyebrow .dot{
+    width:8px;height:8px;border-radius:50%;background:var(--yellow);
+    animation:pulse 2.4s infinite;
+  }
+  @keyframes pulse{
+    0%{box-shadow:0 0 0 0 oklch(85% .15 88 / .55)}
+    70%{box-shadow:0 0 0 11px oklch(85% .15 88 / 0)}
+    100%{box-shadow:0 0 0 0 oklch(85% .15 88 / 0)}
+  }
+
+  h1{
+    font-size:clamp(29px,2.65vw,38px);
+    line-height:1.2;font-weight:800;letter-spacing:-.022em;
+    margin:0 0 18px;text-wrap:balance;
+  }
+  h1 em{font-style:normal;color:var(--yellow)}
+  .lead{
+    font-size:clamp(16px,1.25vw,18.5px);
+    line-height:1.6;color:rgba(255,255,255,.84);
+    max-width:33em;margin:0 0 26px;
+  }
+
+  /* ---------- phone CTA ---------- */
+  .call{
+    display:block;text-decoration:none;color:inherit;
+    background:rgba(255,255,255,.06);
+    border:1px solid rgba(255,255,255,.16);
+    border-radius:22px;padding:22px 28px;
+    max-width:520px;margin:0 0 28px;text-align:center;
+    transition:border-color .2s ease,background .2s ease,transform .2s ease;
+  }
+  .call:hover{background:rgba(255,255,255,.09);border-color:oklch(85% .15 88 / .5);transform:translateY(-2px)}
+  .call.flash{animation:flash 1.5s ease-out 2}
+  @keyframes flash{
+    0%{border-color:oklch(85% .15 88 / .95);box-shadow:0 0 0 0 oklch(85% .15 88 / .45)}
+    100%{border-color:rgba(255,255,255,.16);box-shadow:0 0 0 22px oklch(85% .15 88 / 0)}
+  }
+  .call-action{
+    display:block;font-size:14.5px;font-weight:600;
+    color:rgba(255,255,255,.72);margin-bottom:9px;
+  }
+  .call-number{
+    display:flex;align-items:center;justify-content:center;gap:14px;
+    font-size:clamp(27px,2.9vw,40px);
+    font-weight:800;letter-spacing:-.02em;line-height:1.1;
+    white-space:nowrap;color:var(--yellow);
+  }
+  .call-number svg{flex:0 0 auto;width:.62em;height:.62em;fill:var(--yellow)}
+  .call-meta{
+    display:flex;flex-wrap:wrap;justify-content:center;gap:8px 18px;margin-top:16px;
+    font-size:13px;font-weight:600;color:#fff;
+  }
+  .call-meta span{display:inline-flex;align-items:center;gap:7px}
+  .call-meta svg{width:13px;height:13px;fill:rgba(255,255,255,.55)}
+
+  /* ---------- outcomes ---------- */
+  .outcomes-title{
+    font-size:12.5px;font-weight:700;letter-spacing:.11em;text-transform:uppercase;
+    color:rgba(255,255,255,.5);margin:0 0 14px;
+  }
+  .outcomes{list-style:none;margin:0;padding:0;display:grid;gap:11px;max-width:36em}
+  .outcomes li{display:flex;gap:13px}
+  .outcomes svg{flex:0 0 auto;width:18px;height:18px;margin-top:4px;fill:var(--yellow)}
+  .outcomes b{display:block;font-size:16.5px;font-weight:700;color:#fff;line-height:1.35}
+  .outcomes small{display:block;font-size:13.5px;line-height:1.5;color:rgba(255,255,255,.55);margin-top:2px}
+
+  /* ---------- robot visual ---------- */
+  .visual{position:relative;display:flex;flex-direction:column;align-items:center;text-align:center}
+  .robot-stage{position:relative;width:100%;display:flex;justify-content:center}
+  .robot-stage img{
+    position:relative;z-index:2;
+    width:auto;max-width:100%;
+    max-height:min(70vh,600px);
+    filter:drop-shadow(0 30px 60px rgba(0,0,0,.45));
+  }
+  .halo{
+    position:absolute;z-index:0;left:50%;top:52%;transform:translate(-50%,-50%);
+    width:min(100%,420px);aspect-ratio:1;border-radius:50%;
+    background:radial-gradient(circle, oklch(48% .14 300 / .75) 0%, oklch(40% .12 285 / .35) 45%, transparent 70%);
+    filter:blur(6px);
+  }
+  .robot-stage picture{position:relative;display:inline-block;z-index:2}
+  .rings{position:absolute;z-index:-1;left:41%;top:13%;width:0;height:0}
+  .ring{
+    position:absolute;left:50%;top:50%;
+    width:70px;height:70px;margin:-35px 0 0 -35px;border-radius:50%;
+    border:1.5px solid oklch(85% .15 88 / .55);
+    animation:ripple 3.6s cubic-bezier(.2,.6,.3,1) infinite;opacity:0;
+  }
+  .ring:nth-child(2){animation-delay:1.2s}
+  .ring:nth-child(3){animation-delay:2.4s}
+  @keyframes ripple{
+    0%{transform:scale(1);opacity:.7}
+    80%{opacity:0}
+    100%{transform:scale(3.1);opacity:0}
+  }
+
+  /* ---------- static info strip ---------- */
+  .strip{position:relative;z-index:2;border-top:1px solid rgba(255,255,255,.1);background:rgba(0,0,0,.22)}
+  .strip-inner{
+    max-width:1180px;margin:0 auto;padding:15px 24px;
+    display:flex;flex-wrap:wrap;align-items:center;justify-content:center;gap:8px 26px;
+    font-size:14px;color:rgba(255,255,255,.66);
+  }
+  .strip-inner strong{color:#fff;font-weight:600}
+  .strip-inner .sep{opacity:.3}
+
+  @media (max-width:920px){
+    .hero{min-height:0}
+    .hero-inner{grid-template-columns:minmax(0,1fr);gap:36px;padding:104px 20px 40px}
+    h1{max-width:none}
+    .call{max-width:none}
+    .call-number{font-size:clamp(25px,7.2vw,34px)}
+    .robot-stage img{max-height:min(52vh,420px)}
+    .strip-inner{gap:5px 16px;font-size:13px;text-align:center}
+    .strip-inner .sep{display:none}
+  }
+  @media (prefers-reduced-motion:reduce){
+    *{animation:none!important;transition:none!important}
+    .ring{opacity:.3;transform:scale(1.9)}
+    .ring:nth-child(2){transform:scale(2.6)}
+    .ring:nth-child(3){display:none}
+  }
+</style>
+</head>
+<body>
+
+<header class="hero">
+  <div class="topbar">
+    <img src="/plexima-logo.png" alt="Plexima">
+    <a class="top-cta" href="tel:+420295562218" data-call-cta>
+      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6.6 10.8c1.4 2.8 3.8 5.1 6.6 6.6l2.2-2.2c.3-.3.7-.4 1-.2 1.2.4 2.4.6 3.7.6.6 0 1 .4 1 1V20c0 .6-.4 1-1 1C10.6 21 3 13.4 3 4c0-.6.4-1 1-1h3.5c.6 0 1 .4 1 1 0 1.3.2 2.5.6 3.7.1.3 0 .7-.2 1l-2.3 2.1z"/></svg>
+      Zavolat
+    </a>
+  </div>
+
+  <div class="hero-inner">
+    <div>
+      <span class="eyebrow"><span class="dot"></span>Hlasový AI asistent Plexo</span>
+
+      <h1>AI asistent Plexo vás zve na <em>diskuzi společnosti Plexima.</em></h1>
+
+      <p class="lead">Hovory vyřizuje 24 hodin denně, i o víkendu. Zároveň uslyšíte, jak by mohl znít i ten váš. Stojí vás to jen pár minut.</p>
+
+      <a class="call" href="tel:+420295562218">
+        <span class="call-action">Zavolejte na:</span>
+        <span class="call-number">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6.6 10.8c1.4 2.8 3.8 5.1 6.6 6.6l2.2-2.2c.3-.3.7-.4 1-.2 1.2.4 2.4.6 3.7.6.6 0 1 .4 1 1V20c0 .6-.4 1-1 1C10.6 21 3 13.4 3 4c0-.6.4-1 1-1h3.5c.6 0 1 .4 1 1 0 1.3.2 2.5.6 3.7.1.3 0 .7-.2 1l-2.3 2.1z"/></svg>
+          +420 295 562 218
+        </span>
+        <span class="call-meta">
+          <span class="free"><svg viewBox="0 0 24 24"><path d="M12 2 4 5v6c0 5 3.4 9.7 8 11 4.6-1.3 8-6 8-11V5l-8-3zm-1 15-4-4 1.4-1.4L11 14.2l4.6-4.6L17 11l-6 6z"/></svg>Hovor zdarma</span>
+          <span><svg viewBox="0 0 24 24"><path d="M9 16.2 4.8 12l-1.4 1.4L9 19 21 7l-1.4-1.4z"/></svg>Žádné čekání</span>
+          <span><svg viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8l-6-6zm2 16H8v-2h8v2zm0-4H8v-2h8v2zm-3-5V3.5L18.5 9H13z"/></svg>Bez vyplňování</span>
+        </span>
+      </a>
+
+      <p class="outcomes-title">Co pro vás Plexo může udělat</p>
+      <ul class="outcomes">
+        <li>
+          <svg viewBox="0 0 24 24"><path d="M9 16.2 4.8 12l-1.4 1.4L9 19 21 7l-1.4-1.4z"/></svg>
+          <span><b>Vysvětlí, jaký přínos má diskuze pro vaši firmu</b></span>
+        </li>
+        <li>
+          <svg viewBox="0 0 24 24"><path d="M9 16.2 4.8 12l-1.4 1.4L9 19 21 7l-1.4-1.4z"/></svg>
+          <span><b>Sdělí organizační informace o diskuzi</b></span>
+        </li>
+        <li>
+          <svg viewBox="0 0 24 24"><path d="M9 16.2 4.8 12l-1.4 1.4L9 19 21 7l-1.4-1.4z"/></svg>
+          <span><b>Zaregistruje vám místo, pokud budete chtít</b></span>
+        </li>
+      </ul>
+    </div>
+
+    <div class="visual">
+      <div class="robot-stage">
+        <span class="halo"></span>
+        <picture>
+          <span class="rings">
+            <span class="ring"></span><span class="ring"></span><span class="ring"></span>
+          </span>
+          <img src="/plexo-robot.png" alt="Plexo, hlasový AI průvodce, s telefonem u ucha">
+        </picture>
+      </div>
+    </div>
+  </div>
+</header>
+
+<div class="strip">
+  <div class="strip-inner">
+    <span><strong>15. října 2026</strong> · 9:00 až 13:00</span>
+    <span class="sep">|</span>
+    <span>FLEKSI Beta, Brumlovka, Praha 4</span>
+    <span class="sep">|</span>
+    <span><strong>990 Kč</strong> + DPH, v ceně coffee break</span>
+  </div>
+</div>
+
+<script>
+  const cta = document.querySelector('[data-call-cta]');
+  const card = document.querySelector('.call');
+  const canDial = window.matchMedia('(hover: none), (pointer: coarse)').matches;
+  if (!canDial) {
+    cta.addEventListener('click', e => {
+      e.preventDefault();
+      card.scrollIntoView({behavior: 'smooth', block: 'center'});
+      card.classList.remove('flash');
+      void card.offsetWidth;
+      card.classList.add('flash');
+    });
+  }
+</script>
+
+</body>
+</html>
