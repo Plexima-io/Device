@@ -9,6 +9,8 @@
 <link rel="icon" href="/Fotky/favicon.ico" sizes="32x32">
 <link rel="icon" href="/Fotky/favicon.svg" type="image/svg+xml">
 <link rel="apple-touch-icon" href="/Fotky/apple-touch-icon.png">
+<!-- OpenAI pixel -->
+<script>!function(w,d,s,u){if(w.oaiq)return;var q=function(){q.q.push(arguments)};q.q=[];w.oaiq=q;var j=d.createElement(s);j.async=1;j.src=u;var f=d.getElementsByTagName(s)[0];f.parentNode.insertBefore(j,f)}(window,document,"script","https://bzrcdn.openai.com/sdk/oaiq.min.js");oaiq("init",{pixelId:"HFNN5hLCtY4DnT6svjq37Z",debug:false});</script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@700;800&family=Open+Sans:wght@400;600;700&display=swap" rel="stylesheet">
@@ -455,8 +457,8 @@ img { max-width: 100%; }
 
 <section class="page-hero">
   <div class="container content-narrow reveal">
-    <h1 id="t-title">Děkujeme, ozveme se vám</h1>
-    <p class="hero-lead" id="t-lead">Do jednoho pracovního dne vás kontaktujeme a domluvíme termín konzultace.</p>
+    <h1 id="t-title">Děkujeme za váš zájem</h1>
+    <p class="hero-lead" id="t-lead">Ozveme se vám do jednoho pracovního dne a dohodneme další postup.</p>
   </div>
 </section>
 
@@ -497,7 +499,7 @@ img { max-width: 100%; }
     <p>Mrkněte, jak inteligentní paměť funguje v praxi u firem, které ji už používají.</p>
     <div class="cta-actions">
       <a href="priklady" class="btn btn-primary">Příklady z praxe</a>
-      <a href="co-je-omi" class="btn btn-ghost">Co je Omi</a>
+      <a href="dotaznik" class="btn btn-ghost">Zjistit, jak začít</a>
     </div>
   </div>
 </section>
@@ -564,7 +566,7 @@ img { max-width: 100%; }
   var VARIANTY = {
     objednavka: {
       title: 'Děkujeme za objednávku',
-      lead: 'Objednávku máme. Ozveme se vám do jednoho pracovního dne, potvrdíme dostupnost a domluvíme doručení i fakturaci. Předem nic neplatíte.',
+      lead: 'Objednávku máme. Ozveme se vám do jednoho pracovního dne, potvrdíme dostupnost a domluvíme doručení i fakturaci.',
       steps: [
         ['Potvrdíme objednávku', 'Ozveme se telefonicky nebo e-mailem, ověříme fakturační údaje a počet kusů.'],
         ['Domluvíme doručení', 'Řekneme si termín a způsob předání, ať to sedne vašemu provozu.'],
@@ -573,7 +575,14 @@ img { max-width: 100%; }
     }
   };
 
-  var v = VARIANTY[new URLSearchParams(location.search).get('typ')];
+  var typ = new URLSearchParams(location.search).get('typ');
+
+  /* Konverzní event pro OpenAI pixel */
+  if (window.oaiq) {
+    oaiq('measure', 'appointment_scheduled', { type: 'customer_action' });
+  }
+
+  var v = VARIANTY[typ];
   if (!v) return;
 
   document.getElementById('t-title').textContent = v.title;

@@ -5,6 +5,7 @@ const ZDROJE = {
   dotaznik: 'dotazník',
   'dotaznik-hovor': 'zavolej mi',
   'dotaznik-kalendar': 'kalendář',
+  reklama: 'reklama',
   objednavka: 'objednávka',
   'exit-intent': 'newsletter'
 };
