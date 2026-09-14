@@ -3,6 +3,11 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<!-- OpenAI pixel -->
+<script>
+!function(w,d,s,u){if(w.oaiq)return;var q=function(){q.q.push(arguments)};q.q=[];w.oaiq=q;var j=d.createElement(s);j.async=1;j.src=u;var f=d.getElementsByTagName(s)[0];f.parentNode.insertBefore(j,f)}(window,document,"script","https://bzrcdn.openai.com/sdk/oaiq.min.js");
+oaiq("init",{pixelId:"HFNN5hLCtY4DnT6svjq37Z"});
+</script>
 <title>Shrnutí ze schůzky je jen začátek | Plexima</title>
 <meta name="description" content="Úkoly, follow-upy a kontext ze schůzek dostanete tam, kam patří. Zjistěte na poznávacím hovoru, jak by to mohlo fungovat u vás ve firmě.">
 <meta name="robots" content="noindex, follow">
@@ -16,8 +21,6 @@
 <meta name="theme-color" content="#FFFFFF">
 <link rel="icon" href="/Fotky/favicon.ico" sizes="32x32">
 <link rel="apple-touch-icon" href="/Fotky/apple-touch-icon.png">
-<!-- OpenAI pixel -->
-<script>!function(w,d,s,u){if(w.oaiq)return;var q=function(){q.q.push(arguments)};q.q=[];w.oaiq=q;var j=d.createElement(s);j.async=1;j.src=u;var f=d.getElementsByTagName(s)[0];f.parentNode.insertBefore(j,f)}(window,document,"script","https://bzrcdn.openai.com/sdk/oaiq.min.js");oaiq("init",{pixelId:"HFNN5hLCtY4DnT6svjq37Z",debug:false});</script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@700;800&family=Open+Sans:wght@400;600;700&display=swap" rel="stylesheet">
@@ -1403,7 +1406,7 @@ body.pop-open { overflow: hidden; }
       body: JSON.stringify(payload)
     }).then(function (res) {
       if (!res.ok) throw new Error(res.status);
-      location.href = '/dekujeme';
+      location.href = '/dekujeme?typ=konzultace';
     }).catch(function () {
       button.disabled = false;
       button.textContent = 'Chci návrh pro naši firmu';

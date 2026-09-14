@@ -3,14 +3,17 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<!-- OpenAI pixel -->
+<script>
+!function(w,d,s,u){if(w.oaiq)return;var q=function(){q.q.push(arguments)};q.q=[];w.oaiq=q;var j=d.createElement(s);j.async=1;j.src=u;var f=d.getElementsByTagName(s)[0];f.parentNode.insertBefore(j,f)}(window,document,"script","https://bzrcdn.openai.com/sdk/oaiq.min.js");
+oaiq("init",{pixelId:"HFNN5hLCtY4DnT6svjq37Z"});
+</script>
 <title>Děkujeme | Plexima</title>
 <meta name="description" content="Vaši žádost o konzultaci jsme přijali. Ozveme se do jednoho pracovního dne a domluvíme termín.">
 <meta name="robots" content="noindex, follow">
 <link rel="icon" href="/Fotky/favicon.ico" sizes="32x32">
 <link rel="icon" href="/Fotky/favicon.svg" type="image/svg+xml">
 <link rel="apple-touch-icon" href="/Fotky/apple-touch-icon.png">
-<!-- OpenAI pixel -->
-<script>!function(w,d,s,u){if(w.oaiq)return;var q=function(){q.q.push(arguments)};q.q=[];w.oaiq=q;var j=d.createElement(s);j.async=1;j.src=u;var f=d.getElementsByTagName(s)[0];f.parentNode.insertBefore(j,f)}(window,document,"script","https://bzrcdn.openai.com/sdk/oaiq.min.js");oaiq("init",{pixelId:"HFNN5hLCtY4DnT6svjq37Z",debug:false});</script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@700;800&family=Open+Sans:wght@400;600;700&display=swap" rel="stylesheet">
@@ -578,8 +581,16 @@ img { max-width: 100%; }
   var typ = new URLSearchParams(location.search).get('typ');
 
   /* Konverzní event pro OpenAI pixel */
-  if (window.oaiq) {
-    oaiq('measure', 'appointment_scheduled', { type: 'customer_action' });
+  var EVENTY = {
+    objednavka: ['order_created', { type: 'customer_action', amount: 479000, currency: 'CZK' }],
+    konzultace: ['appointment_scheduled', { type: 'customer_action' }],
+    dotaznik: ['lead_created', { type: 'customer_action' }]
+  };
+
+  var ev = EVENTY[typ];
+  if (ev && !sessionStorage.getItem('oaiq_fired_' + typ)) {
+    sessionStorage.setItem('oaiq_fired_' + typ, '1');
+    oaiq('measure', ev[0], ev[1], { event_id: typ + '-' + Date.now() });
   }
 
   var v = VARIANTY[typ];

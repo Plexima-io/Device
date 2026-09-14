@@ -3,6 +3,11 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<!-- OpenAI pixel -->
+<script>
+!function(w,d,s,u){if(w.oaiq)return;var q=function(){q.q.push(arguments)};q.q=[];w.oaiq=q;var j=d.createElement(s);j.async=1;j.src=u;var f=d.getElementsByTagName(s)[0];f.parentNode.insertBefore(j,f)}(window,document,"script","https://bzrcdn.openai.com/sdk/oaiq.min.js");
+oaiq("init",{pixelId:"HFNN5hLCtY4DnT6svjq37Z"});
+</script>
 <title>Inteligentní paměť pro pracovní rozhovory | Plexima</title>
 <meta name="description" content="Zachyťte důležité informace z rozhovorů, uchovejte jejich kontext a napojte je na CRM, úkoly a další firemní systémy.">
 <link rel="icon" href="/Fotky/favicon.ico" sizes="32x32">
@@ -3838,7 +3843,7 @@ html.no-motion .how-visual * { animation: none !important; }
       body: JSON.stringify(payload)
     }).then(function (res) {
       if (!res.ok) throw new Error(res.status);
-      location.href = payload.type === 'objednavka' ? '/dekujeme?typ=objednavka' : '/dekujeme';
+      location.href = payload.type === 'objednavka' ? '/dekujeme?typ=objednavka' : '/dekujeme?typ=konzultace';
     }).catch(function () {
       showStatus(false, 'Odeslání se nepovedlo. Zkuste to prosím znovu, nebo napište na info@plexima.io.');
     });

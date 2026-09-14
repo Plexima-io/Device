@@ -195,7 +195,7 @@
         body: JSON.stringify(payload)
       }).then(function (res) {
         if (!res.ok) throw new Error(res.status);
-        location.href = '/dekujeme';
+        location.href = '/dekujeme?typ=objednavka';
       }).catch(function () {
         status.hidden = false;
         status.classList.remove('ok');

@@ -137,7 +137,7 @@
         body: JSON.stringify(payload)
       }).then(function (res) {
         if (!res.ok) throw new Error(res.status);
-        location.href = '/dekujeme';
+        location.href = '/dekujeme?typ=konzultace';
       }).catch(function () {
         showStatus(false, 'Odeslání se nepovedlo. Zkuste to prosím znovu, nebo napište na info@plexima.io.');
       });
