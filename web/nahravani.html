@@ -744,18 +744,6 @@ input[type="range"]:focus-visible { outline: 2px solid var(--blue); outline-offs
 }
 .pop-option:hover { border-color: var(--ink); background: var(--white); }
 .pop-option:focus-visible { outline: 2px solid var(--blue); outline-offset: 2px; }
-.pop-skip {
-  margin-top: 18px;
-  background: none;
-  border: 0;
-  padding: 0;
-  font: 400 14px/1.4 var(--font-body);
-  color: var(--muted);
-  text-decoration: underline;
-  cursor: pointer;
-  align-self: flex-start;
-}
-.pop-skip:hover { color: var(--ink); }
 .pop-visual {
   border-radius: var(--radius-md);
   overflow: hidden;
@@ -975,7 +963,7 @@ body.pop-open { overflow: hidden; }
         <p class="calc-days">Zhruba <strong id="calc-days">0 pracovních dní</strong> každý měsíc.</p>
       </div>
     </div>
-    <p class="calc-after reveal"><strong>A to je jen čas.</strong> Informace, které se nikam nezapsaly, v tom čísle nejsou.</p>
+    <p class="calc-after reveal"><strong>A to je jen čas.</strong> To podstatnější jsou informace, nápady a rozhodnutí, které nelze vyčíslit.</p>
   </div>
 </section>
 
@@ -983,7 +971,7 @@ body.pop-open { overflow: hidden; }
 <section class="reframe">
   <div class="container">
     <h2 class="reveal">Opravdový přínos vzniká, když víte, co s tím</h2>
-    <p class="reveal">Zařízení a shrnutí jsou dobrý začátek. Hodnota vzniká až tím, že z rozhovoru vznikne úkol u konkrétního člověka, odeslaný follow-up a kontext, který najdete i za půl roku.</p>
+    <p class="reveal">Přepisy schůzek jsou teprve začátek. Hodnota vzniká až tím, že z rozhovoru vznikne úkol u konkrétního člověka, odeslaný follow-up a kontext, který najdete i za půl roku.</p>
   </div>
 </section>
 
@@ -995,12 +983,12 @@ body.pop-open { overflow: hidden; }
       <article class="flow-item reveal">
         <span class="step-num" aria-hidden="true">1</span>
         <h3>Schůzka a nahrávka</h3>
-        <p>Rozhovor vedete jako vždycky. Zařízení ho zachytí, vy si nic nepíšete a na nic nemyslíte.</p>
+        <p>Zařízení zachytí vaši konverzaci a vy se můžete maximálně soustředit na rozhovor. Žádné psaní poznámek ani dělání zápisu.</p>
       </article>
       <article class="flow-item reveal">
         <span class="step-num" aria-hidden="true">2</span>
         <h3>Strukturovaný výstup</h3>
-        <p>Z nahrávky vznikne výstup ve struktuře, kterou daný typ jednání potřebuje. Jiný pro poradu, jiný pro konzultaci.</p>
+        <p>Z nahrávky vznikne strukturovaný výstup podle typu schůzky. Jiný pro poradu a jiný pro schůzku s klientem.</p>
       </article>
       <article class="flow-item reveal">
         <span class="step-num" aria-hidden="true">3</span>
@@ -1054,7 +1042,7 @@ body.pop-open { overflow: hidden; }
 <section id="zarizeni" class="section-tint">
   <div class="container">
     <h2 class="section-title reveal">Chcete zatím jen zařízení?</h2>
-    <p class="section-lead reveal">Obě zařízení prodáváme samostatně. Nahrávání a shrnutí zvládnou hned, napojení na vaše systémy řešíme až ve druhém kroku.</p>
+    <p class="section-lead reveal">Obě zařízení prodáváme samostatně. Nahrávání a strukturovaný výstup zvládnou hned, napojení na vaše systémy řešíme až ve druhém kroku.</p>
     <div class="device-grid">
       <article class="device-card reveal">
         <div class="device-media">
@@ -1109,7 +1097,7 @@ body.pop-open { overflow: hidden; }
   <div class="container call-grid">
     <div>
       <h2 class="section-title reveal">Zjistěte, jak by to mohlo fungovat u vás ve firmě</h2>
-      <p class="section-lead reveal">Na hovoru společně projdeme, kde se u vás dnes ztrácí nejvíc, a řekneme, co má smysl zautomatizovat jako první.</p>
+      <p class="section-lead reveal">Na hovoru společně identifikujeme místa, kde by nahrávání a automatizace výstupů přinesly největší výsledky.</p>
       <ul class="call-list">
         <li class="reveal">
           <svg width="20" height="20" viewBox="0 0 18 18" fill="none" aria-hidden="true"><circle cx="9" cy="9" r="9" fill="#FEC710"/><path d="M5.5 9.2l2.3 2.3 4.7-4.8" stroke="#1F1741" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
@@ -1124,7 +1112,7 @@ body.pop-open { overflow: hidden; }
           Budete vědět, co to znamená pro vaše systémy, lidi a data.
         </li>
       </ul>
-      <p class="call-note reveal"><strong>Když to smysl nedává, řekneme to.</strong> Na místě nic neprodáváme a nerozhodujete se během hovoru.</p>
+      <p class="call-note reveal">Hovor je pouze informativní. <strong>Nic vám neprodáváme ani se nerozhodujete během hovoru.</strong> Když to smysl nedává, řekneme to.</p>
       <figure class="call-photo reveal">
         <img src="Fotky/plaud/plaud-schuzka.webp" alt="Nahrávací zařízení Plaud Note Pro na stole během jednání" width="1280" height="853" loading="lazy">
       </figure>
@@ -1187,14 +1175,12 @@ body.pop-open { overflow: hidden; }
       <div id="pop-step-1">
         <p class="pop-eyebrow">Krátká otázka</p>
         <h2 id="pop-title">Kde se u vás ztrácí nejvíc informací?</h2>
-        <p class="pop-lead">Vyberte, co je vám nejbližší. Podle toho vám na hovoru navrhneme, kde začít.</p>
         <ul class="pop-options">
           <li><button type="button" class="pop-option" data-answer="Na schůzkách a konzultacích s klienty">Na schůzkách a konzultacích s klienty</button></li>
           <li><button type="button" class="pop-option" data-answer="Na poradách a při předávání práce">Na poradách a při předávání práce</button></li>
           <li><button type="button" class="pop-option" data-answer="Na telefonu a v terénu">Na telefonu a v terénu</button></li>
           <li><button type="button" class="pop-option" data-answer="Nevím, potřebuji to zjistit">Nevím, potřebuji to zjistit</button></li>
         </ul>
-        <button type="button" class="pop-skip" id="pop-skip">Teď ne, děkuji</button>
       </div>
 
       <div id="pop-step-2" hidden>
@@ -1338,7 +1324,6 @@ body.pop-open { overflow: hidden; }
     if (!popSeen()) window.addEventListener('scroll', onScrollPop, { passive: true });
 
     document.getElementById('pop-close').addEventListener('click', closePop);
-    document.getElementById('pop-skip').addEventListener('click', closePop);
     pop.addEventListener('click', function (e) { if (e.target === pop) closePop(); });
     document.addEventListener('keydown', function (e) {
       if (e.key === 'Escape' && pop.classList.contains('is-open')) closePop();
