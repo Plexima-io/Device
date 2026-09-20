@@ -113,9 +113,9 @@ export default async function handler(req, res) {
     MobilePhone: body.telefon || '',
     Email: body.email,
     Commentary: buildCommentary(body, zdroj),
-    LeadTypeId: '96ed75a6-1718-4311-a690-a577d4c873b1',
+    LeadType: '96ed75a6-1718-4311-a690-a577d4c873b1',
     OwnerId: '9043f9e8-1bd1-4340-86d0-d74aa5a12e81',
-    LeadSourceId: 'f82c416e-0cb2-4080-b4a3-58a0eeb82f24',
+    LeadSourceId: '2390a995-bd4f-4028-abfc-f54a1604e389',
     UsrZdrojDevice: zdroj
   }, utmPole(body.page));
 
