@@ -880,7 +880,7 @@ body.pop-open { overflow: hidden; }
         </div>
         <div class="form-field">
           <label for="h-telefon">Telefon <span class="req" aria-hidden="true">*</span></label>
-          <input type="tel" id="h-telefon" name="telefon" required minlength="9" inputmode="tel" autocomplete="tel">
+          <input type="tel" id="h-telefon" name="telefon" required minlength="9" pattern="[0-9+ ]{9,}" inputmode="tel" autocomplete="tel">
         </div>
         <div class="form-field">
           <label for="h-email">E-mail <span class="req" aria-hidden="true">*</span></label>
@@ -1155,7 +1155,7 @@ body.pop-open { overflow: hidden; }
         </div>
         <div class="form-field">
           <label for="f-telefon">Telefon <span class="req" aria-hidden="true">*</span></label>
-          <input type="tel" id="f-telefon" name="telefon" required minlength="9" inputmode="tel" autocomplete="tel">
+          <input type="tel" id="f-telefon" name="telefon" required minlength="9" pattern="[0-9+ ]{9,}" inputmode="tel" autocomplete="tel">
         </div>
         <div class="form-field">
           <label for="f-email">E-mail <span class="req" aria-hidden="true">*</span></label>
@@ -1213,7 +1213,7 @@ body.pop-open { overflow: hidden; }
           <input type="hidden" name="problemy" id="pop-answer" value="">
           <div class="form-field">
             <label for="p-telefon">Telefon <span class="req" aria-hidden="true">*</span></label>
-            <input type="tel" id="p-telefon" name="telefon" required minlength="9" inputmode="tel" autocomplete="tel">
+            <input type="tel" id="p-telefon" name="telefon" required minlength="9" pattern="[0-9+ ]{9,}" inputmode="tel" autocomplete="tel">
           </div>
           <div class="form-field">
             <label for="p-email">E-mail <span class="req" aria-hidden="true">*</span></label>
@@ -1376,7 +1376,7 @@ body.pop-open { overflow: hidden; }
     }
     var msg = input.type === 'email'
       ? 'Zadejte e-mail ve tvaru jmeno@firma.cz.'
-      : (input.type === 'tel' ? 'Zadejte telefon, alespoň 9 znaků.' : 'Vyplňte prosím toto pole.');
+      : (input.type === 'tel' ? 'Zadejte telefonní číslo, alespoň 9 číslic.' : 'Vyplňte prosím toto pole.');
     if (!err) {
       err = document.createElement('p');
       err.className = 'field-error';
@@ -1392,6 +1392,26 @@ body.pop-open { overflow: hidden; }
   document.querySelectorAll('form[data-type] input').forEach(function (input) {
     if (input.type === 'checkbox') return;
     input.addEventListener('blur', function () { validate(input); });
+    if (input.type !== 'tel') return;
+    input.addEventListener('input', function () {
+      var cistY = input.value.replace(/[^0-9+ ]/g, '');
+      if (cistY !== input.value) {
+        var pos = input.selectionStart - (input.value.length - cistY.length);
+        input.value = cistY;
+        input.setSelectionRange(pos, pos);
+      }
+    });
+  });
+
+  window.addEventListener('pageshow', function (e) {
+    if (!e.persisted) return;
+    document.querySelectorAll('form[data-type]').forEach(function (form) {
+      var button = form.querySelector('button[type="submit"]');
+      button.disabled = false;
+      button.textContent = button.getAttribute('data-label') || button.textContent;
+      var status = form.querySelector('.form-status');
+      if (status) { status.hidden = true; status.textContent = ''; }
+    });
   });
 
   var submitForm = function (form) {
@@ -1400,6 +1420,7 @@ body.pop-open { overflow: hidden; }
     var payload = { type: form.getAttribute('data-type'), page: location.href };
     new FormData(form).forEach(function (value, key) { payload[key] = value; });
 
+    button.setAttribute('data-label', button.textContent);
     button.disabled = true;
     button.textContent = 'Odesílám…';
 
@@ -1409,7 +1430,7 @@ body.pop-open { overflow: hidden; }
       body: JSON.stringify(payload)
     }).then(function (res) {
       if (!res.ok) throw new Error(res.status);
-      location.href = '/dekujeme?typ=konzultace';
+      location.replace('/dekujeme?typ=konzultace');
     }).catch(function () {
       button.disabled = false;
       button.textContent = 'Chci návrh pro naši firmu';

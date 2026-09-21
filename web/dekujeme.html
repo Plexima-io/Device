@@ -580,6 +580,10 @@ img { max-width: 100%; }
 
   var typ = new URLSearchParams(location.search).get('typ');
 
+  /* Tlačítko zpět vede na úvod, ne do odeslaného formuláře */
+  history.pushState(null, '', location.href);
+  window.addEventListener('popstate', function () { location.replace('/'); });
+
   /* Konverzní event pro OpenAI pixel */
   var EVENTY = {
     objednavka: ['order_created', { type: 'customer_action', amount: 479000, currency: 'CZK' }],
