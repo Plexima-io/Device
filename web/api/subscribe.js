@@ -10,7 +10,7 @@ const ZDROJE = {
   'exit-intent': 'newsletter'
 };
 
-const SKIP = ['type', 'email', 'telefon', 'jmeno', 'souhlas', 'page', 'firma'];
+const SKIP = ['type', 'email', 'telefon', 'jmeno', 'prijmeni', 'souhlas', 'page', 'firma'];
 
 const UTM_POLE = {
   utm_source: 'UtmSourceStr',
@@ -54,7 +54,10 @@ const LABELS = {
   prinos: 'Očekávaný přínos'
 };
 
-function splitName(jmeno) {
+function splitName(jmeno, prijmeni) {
+  if (String(prijmeni || '').trim()) {
+    return { first: String(jmeno || '').trim(), last: String(prijmeni).trim() };
+  }
   const parts = String(jmeno || '').trim().split(/\s+/).filter(Boolean);
   if (parts.length === 0) return { first: '', last: '' };
   if (parts.length === 1) return { first: parts[0], last: '' };
@@ -105,7 +108,7 @@ export default async function handler(req, res) {
     return;
   }
 
-  const name = splitName(body.jmeno);
+  const name = splitName(body.jmeno, body.prijmeni);
   const lead = Object.assign({
     EntityName: 'Lead',
     UsrFirstName: name.first,

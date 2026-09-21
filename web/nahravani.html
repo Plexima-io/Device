@@ -205,6 +205,7 @@ section { padding: var(--section-y) 0; }
   margin-top: 8px;
   margin-bottom: 20px;
 }
+.lead-card .lead-sub strong { color: var(--ink); }
 .lead-tag {
   display: inline-flex;
   align-items: center;
@@ -218,6 +219,7 @@ section { padding: var(--section-y) 0; }
   margin-bottom: 14px;
 }
 .form-grid { display: grid; grid-template-columns: 1fr; gap: 14px; }
+.form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
 .form-field { display: flex; flex-direction: column; gap: 6px; }
 .form-field label { font: 600 14px/1.4 var(--font-body); color: var(--ink); }
 .form-field label .req { color: #D9534F; }
@@ -580,23 +582,13 @@ input[type="range"]:focus-visible { outline: 2px solid var(--blue); outline-offs
 /* ---------- Hovor ---------- */
 .call-grid {
   display: grid;
-  grid-template-columns: 46fr 54fr;
+  grid-template-columns: 54fr 46fr;
   gap: clamp(28px, 4vw, 56px);
   align-items: start;
 }
 .call-list { list-style: none; margin-top: 26px; display: flex; flex-direction: column; gap: 14px; }
 .call-list li { display: flex; align-items: flex-start; gap: 12px; font-size: 17px; line-height: 1.5; }
 .call-list svg { flex-shrink: 0; margin-top: 4px; }
-.call-note {
-  margin-top: 24px;
-  background: var(--white);
-  border: 1px solid var(--border);
-  border-radius: var(--radius-md);
-  padding: 20px;
-  font-size: 16px;
-  color: var(--muted);
-}
-.call-note strong { color: var(--ink); }
 .call-photo {
   margin-top: 24px;
   border-radius: var(--radius-lg);
@@ -814,6 +806,7 @@ body.pop-open { overflow: hidden; }
   .hero-benefits, .hero-authority { order: 3; margin-top: 0; }
 }
 @media (max-width: 560px) {
+  .form-row { grid-template-columns: 1fr; }
   .partner-tag { flex-direction: column; align-items: flex-start; gap: 10px; }
   .partner-tag img { height: 20px; }
   .partner-visual img { width: 112%; margin: 0 -6% -8% auto; }
@@ -872,9 +865,15 @@ body.pop-open { overflow: hidden; }
       <h2>Zjistěte, jak by to mohlo fungovat u vás ve firmě</h2>
       <p class="lead-sub">Nechte kontakt a domluvíme si poznávací hovor nad vaším provozem.</p>
       <form class="form-grid" data-type="reklama" novalidate>
-        <div class="form-field">
-          <label for="h-jmeno">Jméno a příjmení</label>
-          <input type="text" id="h-jmeno" name="jmeno" autocomplete="name">
+        <div class="form-row">
+          <div class="form-field">
+            <label for="h-jmeno">Jméno</label>
+            <input type="text" id="h-jmeno" name="jmeno" autocomplete="given-name">
+          </div>
+          <div class="form-field">
+            <label for="h-prijmeni">Příjmení</label>
+            <input type="text" id="h-prijmeni" name="prijmeni" autocomplete="family-name">
+          </div>
         </div>
         <div class="form-field">
           <label for="h-firma">Firma</label>
@@ -1131,7 +1130,6 @@ body.pop-open { overflow: hidden; }
           Budete vědět, co to znamená pro vaše systémy, lidi a data.
         </li>
       </ul>
-      <p class="call-note reveal">Hovor je pouze informativní. <strong>Nic vám neprodáváme ani se nerozhodujete během hovoru.</strong> Když to smysl nedává, řekneme to.</p>
       <figure class="call-photo reveal">
         <img src="Fotky/plaud/plaud-schuzka.webp" alt="Nahrávací zařízení Plaud Note Pro na stole během jednání" width="1280" height="853" loading="lazy">
       </figure>
@@ -1140,11 +1138,17 @@ body.pop-open { overflow: hidden; }
     <div class="lead-card">
       <span class="lead-tag">Nezávazně</span>
       <h2>Nechte nám kontakt</h2>
-      <p class="lead-sub">Ozveme se s návrhem termínu. Hovor trvá 30 minut a k ničemu vás nezavazuje.</p>
+      <p class="lead-sub">Hovor je pouze informativní. <strong>Nic vám neprodáváme ani se nerozhodujete během hovoru.</strong> Když to smysl nedává, řekneme to.</p>
       <form class="form-grid" data-type="reklama" novalidate>
-        <div class="form-field">
-          <label for="f-jmeno">Jméno a příjmení</label>
-          <input type="text" id="f-jmeno" name="jmeno" autocomplete="name">
+        <div class="form-row">
+          <div class="form-field">
+            <label for="f-jmeno">Jméno</label>
+            <input type="text" id="f-jmeno" name="jmeno" autocomplete="given-name">
+          </div>
+          <div class="form-field">
+            <label for="f-prijmeni">Příjmení</label>
+            <input type="text" id="f-prijmeni" name="prijmeni" autocomplete="family-name">
+          </div>
         </div>
         <div class="form-field">
           <label for="f-firma">Firma</label>
