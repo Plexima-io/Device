@@ -11,6 +11,7 @@ oaiq("init",{pixelId:"HFNN5hLCtY4DnT6svjq37Z"});
 <title>Děkujeme | Plexima</title>
 <meta name="description" content="Vaši žádost o konzultaci jsme přijali. Ozveme se do jednoho pracovního dne a domluvíme termín.">
 <meta name="robots" content="noindex, follow">
+<script src="/assets/mereni.js"></script>
 <link rel="icon" href="/Fotky/favicon.ico" sizes="32x32">
 <link rel="icon" href="/Fotky/favicon.svg" type="image/svg+xml">
 <link rel="apple-touch-icon" href="/Fotky/apple-touch-icon.png">
@@ -575,6 +576,16 @@ img { max-width: 100%; }
         ['Domluvíme doručení', 'Řekneme si termín a způsob předání, ať to sedne vašemu provozu.'],
         ['Pomůžeme s rozjezdem', 'Ukážeme, jak zařízení spárovat a nastavit, aby fungovalo od prvního dne.']
       ]
+    },
+    /* Přesměrování z Calendly po rezervaci: /dekujeme?typ=rezervace */
+    rezervace: {
+      title: 'Konzultace je domluvená',
+      lead: 'Potvrzení termínu vám přišlo e-mailem od Calendly. Na konzultaci projdeme vybraný proces a navrhneme, jak důležité informace z rozhovorů zapojit do další práce.',
+      steps: [
+        ['Projdeme situaci', 'Projdeme, jak dnes pracujete s informacemi z porad, schůzek a hovorů a kde se vám ztrácí důležitý kontext.'],
+        ['Ukážeme možnosti', 'Ukážeme, jak mohou rozhodnutí, úkoly a souvislosti pokračovat do vašich systémů.'],
+        ['Doporučíme postup', 'Doporučíme, kde začít a jaký první krok bude pro vaši firmu dávat největší smysl.']
+      ]
     }
   };
 
@@ -588,8 +599,15 @@ img { max-width: 100%; }
   var EVENTY = {
     objednavka: ['order_created', { type: 'customer_action', amount: 479000, currency: 'CZK' }],
     konzultace: ['appointment_scheduled', { type: 'customer_action' }],
+    rezervace: ['appointment_scheduled', { type: 'customer_action' }],
     dotaznik: ['lead_created', { type: 'customer_action' }]
   };
+
+  /* dataLayer: rezervace konzultace v Calendly (s variantou hero a UTM z cookie) */
+  if (typ === 'rezervace' && window.PleximaMereni && !sessionStorage.getItem('dl_consultation_booked')) {
+    sessionStorage.setItem('dl_consultation_booked', '1');
+    window.PleximaMereni.track('consultation_booked', { booking_source: 'calendly' });
+  }
 
   var ev = EVENTY[typ];
   if (ev && !sessionStorage.getItem('oaiq_fired_' + typ)) {
