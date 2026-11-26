@@ -77,6 +77,41 @@
       cmp.style.setProperty('--pos', v + '%');
       cmp.style.setProperty('--pos-px', (cmp.clientWidth * v / 100) + 'px');
     };
+    var fromPointer = function (e) {
+      var r = cmp.getBoundingClientRect();
+      range.value = Math.round(Math.min(100, Math.max(0, (e.clientX - r.left) / r.width * 100)) * 10) / 10;
+      set();
+    };
+    /* Myš i dotyk kdekoli na ploše; svislý posun prstem dál scrolluje stránku (touch-action: pan-y) */
+    var dragging = false, pending = null;
+    var startDrag = function (e) {
+      dragging = true;
+      pending = null;
+      cmp.classList.add('is-dragging');
+      if (cmp.setPointerCapture) cmp.setPointerCapture(e.pointerId);
+      fromPointer(e);
+    };
+    cmp.addEventListener('pointerdown', function (e) {
+      if (e.button !== undefined && e.button !== 0) return;
+      // Na dotyku čekáme, jestli jde o vodorovný tah, aby svislý posun jen scrolloval
+      if (e.pointerType === 'touch') { pending = { x: e.clientX, y: e.clientY }; return; }
+      startDrag(e);
+    });
+    cmp.addEventListener('pointermove', function (e) {
+      if (dragging) { fromPointer(e); return; }
+      if (!pending) return;
+      var dx = Math.abs(e.clientX - pending.x), dy = Math.abs(e.clientY - pending.y);
+      if (dx > 6 && dx > dy) startDrag(e);
+      else if (dy > 10) pending = null;
+    });
+    var stop = function (e) {
+      if (pending && e && e.type === 'pointerup') fromPointer(e); // klepnutí posune jezdec
+      pending = null;
+      dragging = false;
+      cmp.classList.remove('is-dragging');
+    };
+    cmp.addEventListener('pointerup', stop);
+    cmp.addEventListener('pointercancel', stop);
     range.addEventListener('input', set);
     window.addEventListener('resize', set);
     set();
@@ -242,7 +277,11 @@
     });
   };
   var seg = $('.seg');
-  if (seg) tabs('.seg-btn', 'data-have', $$('.have-panel'), function (i) { seg.setAttribute('data-active', i); });
+  if (seg) {
+    tabs('.seg-btn', 'data-have', $$('.have-panel'), function (i) { seg.setAttribute('data-active', i); });
+    // Předvolba podle varianty hero: A = firmy bez nahrávání, B = firmy, které už nahrávky mají
+    if (document.documentElement.getAttribute('data-hero') === 'a') $$('.seg-btn')[1].click();
+  }
   if ($('.dev-tab')) tabs('.dev-tab', 'data-dev', $$('.dev-stage'));
 
   /* ---------- Přilepené CTA na mobilu až po odscrollování hero ---------- */

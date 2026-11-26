@@ -312,20 +312,20 @@
 }
 .cmp-handle span::before { left: 11px; transform: rotate(135deg); }
 .cmp-handle span::after { right: 11px; transform: rotate(-45deg); }
-.cmp-range {
+/* Tažení obsluhuje JS (pointer events) na celé ploše; range zůstává jen pro klávesnici a čtečky */
+.cmp { cursor: ew-resize; }
+.cmp.is-dragging { cursor: grabbing; }
+.cmp .cmp-range {
   position: absolute;
-  inset: 0;
+  left: 0;
+  bottom: 0;
   z-index: 4;
   width: 100%;
-  height: 100%;
+  height: 1px;
   margin: 0;
   opacity: 0;
-  cursor: ew-resize;
-  -webkit-appearance: none;
-          appearance: none;
+  pointer-events: none;
 }
-.cmp-range::-webkit-slider-thumb { -webkit-appearance: none; width: 46px; height: 100vh; }
-.cmp-range::-moz-range-thumb { width: 46px; height: 1000px; border: 0; }
 .cmp:has(.cmp-range:focus-visible) .cmp-handle span { outline: 3px solid var(--blue); outline-offset: 3px; }
 
 /* ---------- Sticky scroll: Zachytit / Pochopit / Napojit ---------- */

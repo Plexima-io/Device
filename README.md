@@ -74,9 +74,11 @@ Podstránky `/scenare/*`, `/priklady`, `/co-je-omi`, `/co-je-plaud`, `/prospirio
 
 ### A/B test a měření
 
-- Logika je v `web/assets/mereni.js`. Varianta hero se přidělí 50:50 a uloží do cookie `pm_hero` na 30 dní. Vynutit ji jde parametrem `?hero=a` nebo `?hero=b`.
-- Události do `dataLayer`: `hero_variant`, `cta_click` (s `cta_location`), `calculator_interaction`, `consultation_booked`. Každá nese `hero_variant` a uložené UTM/gclid.
-- UTM a gclid se ukládají do cookie `pm_attr` na 90 dní a připojují se ke všem odkazům na Calendly.
+- Logika je v `web/assets/mereni.js`. Varianta A („Každá firma přemýšlí nahlas…“, pro firmy bez nahrávání) nebo B („Vaše přepisy vědí všechno…“, pro firmy s přepisy).
+- Přidělení: parametr `?v=a` / `?v=b` má přednost a přepíše cookie (alias `?hero=`), jinak cookie `pm_hero` (30 dní), jinak náhodně 50:50. Volí se synchronně v `<head>` před vykreslením, takže hero neproblikne a není potřeba Edge Middleware.
+- Přepínač zařízení se předvolí podle varianty: A „Zařízení zatím nemáme“, B „Už nahrávací zařízení máme“.
+- Události do `dataLayer`: `hero_view`, `cta_click` (`cta_area` = hero / sticky / hlavicka / sekce, podrobně `cta_location`), `calculator_interaction`, `consultation_booked`. Každá nese `hero_variant` a uložené UTM/gclid. Při načtení se do `dataLayer` posílá i `user_properties.hero_variant`; v GTM ho namapujte na uživatelskou vlastnost GA4 `hero_variant`.
+- UTM a gclid se ukládají do cookie `pm_attr` na 90 dní a připojují se ke všem odkazům na Calendly. Varianta se do Calendly předává v `utm_content` jako `hero_a` / `hero_b` (pokud kampaň má vlastní `utm_content`, připojí se za něj: `banner1__hero_a`), takže je vidět u každé rezervace.
 - `consultation_booked` se odesílá na `/dekujeme?typ=rezervace`. V Calendly musí být u události nastavené přesměrování po rezervaci na `https://memory.plexima.io/dekujeme?typ=rezervace`, bez předávání údajů o účastníkovi v URL.
 
 ## Agentní vstup

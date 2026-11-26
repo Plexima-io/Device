@@ -10,7 +10,7 @@ oaiq("init",{pixelId:"HFNN5hLCtY4DnT6svjq37Z"});
 </script>
 <title>Inteligentní paměť firmy z porad a schůzek, napojená na vaše systémy | Plexima</title>
 <meta name="description" content="Rozhodnutí, úkoly a souvislosti z porad, schůzek a hovorů napojíme na CRM, projektové nástroje a e-mail. Postupně z nich vzniká inteligentní paměť firmy pro tým i AI agenty.">
-<script src="/assets/mereni.js"></script>
+<script src="/assets/mereni.js?v=4"></script>
 <link rel="icon" href="/Fotky/favicon.ico" sizes="32x32">
 <link rel="icon" href="/Fotky/favicon.svg" type="image/svg+xml">
 <link rel="apple-touch-icon" href="/Fotky/apple-touch-icon.png">
@@ -18,7 +18,7 @@ oaiq("init",{pixelId:"HFNN5hLCtY4DnT6svjq37Z"});
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@700;800&family=Open+Sans:wght@400;600;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="/assets/nav.css">
-<link rel="stylesheet" href="/assets/homepage-interakce.css">
+<link rel="stylesheet" href="/assets/homepage-interakce.css?v=4">
 <style>
 :root {
   --yellow: #FEC710;
@@ -1987,6 +1987,8 @@ html[data-hero="b"] .hero-variant[data-variant="b"] { display: grid; }
 .hero-calc-link svg { transition: transform .2s ease; }
 .hero-calc-link:hover svg { transform: translateX(3px); }
 
+.hero-cta-note { margin-top: 14px; font-size: 15px; color: var(--caption); }
+
 /* Varianta A: výstupy ze schůzky */
 .out-panel {
   background: var(--soft);
@@ -2311,33 +2313,17 @@ html[data-hero="b"] .hero-variant[data-variant="b"] { display: grid; }
 </section>
 </template>
 
-<!-- HERO (A/B test: varianta se nastavuje v /assets/mereni.js) -->
+<!-- HERO (A/B test: varianta se volí v <head> přes /assets/mereni.js, ?v=a nebo ?v=b) -->
 <section class="hero" id="uvod">
   <div class="container hero-grid hero-variant" data-variant="a">
     <div>
-      <span class="eyebrow">Víc než přepis</span>
-      <h1>Rozhovor skončí. Práce z něj pokračuje sama.</h1>
-      <p class="hero-sub">Nejde jen o přepis. Z porad, schůzek a hovorů vybereme rozhodnutí, úkoly a souvislosti a pošleme je do CRM, projektových nástrojů a e-mailu. Přesně podle toho, jak vaše firma pracuje.</p>
+      <span class="eyebrow">Inteligentní paměť firmy</span>
+      <h1>Každá firma přemýšlí nahlas. Málokterá si to pamatuje.</h1>
+      <p class="hero-sub">Na poradách, telefonátech a schůzkách vaše firma denně rozhoduje, slibuje a vymýšlí. Plexima z toho skládá firemní mozek: pamatuje si rozhodnutí i souvislosti, zapíše je do CRM a projektových nástrojů a odpoví, kdykoli se zeptáte.</p>
       <div class="hero-cta">
-        <a href="https://calendly.com/jakub-fryda-plexima/30min" class="btn btn-primary" target="_blank" rel="noopener" data-cta-location="hero-a">Domluvit konzultaci</a>
+        <a href="https://calendly.com/jakub-fryda-plexima/30min" class="btn btn-primary" target="_blank" rel="noopener" data-cta-location="hero">Postavit firemní mozek</a>
       </div>
-      <a href="#kalkulacka" class="hero-calc-link">Spočítat, kolik času tým ztrácí
-        <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3 8h9M8.5 4.5L12 8l-3.5 3.5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
-      </a>
-      <ul class="hero-benefits">
-        <li>
-          <svg width="18" height="18" viewBox="0 0 18 18" fill="none"><circle cx="9" cy="9" r="9" fill="#FEC710"/><path d="M5.5 9.2l2.3 2.3 4.7-4.8" stroke="#1F1741" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
-          Úkoly rovnou ve Freelu, Asaně, ClickUpu nebo Notionu
-        </li>
-        <li>
-          <svg width="18" height="18" viewBox="0 0 18 18" fill="none"><circle cx="9" cy="9" r="9" fill="#FEC710"/><path d="M5.5 9.2l2.3 2.3 4.7-4.8" stroke="#1F1741" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
-          Zápis a souvislosti uložené v CRM
-        </li>
-        <li>
-          <svg width="18" height="18" viewBox="0 0 18 18" fill="none"><circle cx="9" cy="9" r="9" fill="#FEC710"/><path d="M5.5 9.2l2.3 2.3 4.7-4.8" stroke="#1F1741" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
-          Shrnutí a další kroky v e-mailu, Slacku nebo Teams
-        </li>
-      </ul>
+      <p class="hero-cta-note">30 minut, nezávazně. Ukážeme, jak by fungoval u vás.</p>
     </div>
     <div class="hero-visual">
       <div class="live-demo" id="live-demo" role="img" aria-label="Ukázka: z přepisu porady se vyberou rozhodnutí, úkol a follow-up a zapíšou se do CRM, projektového nástroje a e-mailu">
@@ -2372,29 +2358,13 @@ html[data-hero="b"] .hero-variant[data-variant="b"] { display: grid; }
   </div>
   <div class="container hero-grid hero-variant" data-variant="b">
     <div>
-      <span class="eyebrow">Inteligentní paměť firmy</span>
-      <h1>Z každého rozhovoru roste mozek vaší firmy.</h1>
-      <p class="hero-sub">Rozhodnutí, dohody a know-how z porad a schůzek se ukládají s kontextem a propojují v čase. Tým se na ně může kdykoli zeptat a vaši AI agenti z nich čerpají, jak to u vás opravdu chodí.</p>
+      <span class="eyebrow">Víc než přepis</span>
+      <h1>Vaše přepisy vědí všechno. Jen se jich nikdo neptá.</h1>
+      <p class="hero-sub">Plaud, Omi, Fireflies, Teams nebo Zoom: nahrávky už máte. Plexima je propojí do jednoho firemního mozku, napojí na CRM a projektové nástroje a z hromady textu udělá odpovědi pro lidi i AI agenty.</p>
       <div class="hero-cta">
-        <a href="https://calendly.com/jakub-fryda-plexima/30min" class="btn btn-primary" target="_blank" rel="noopener" data-cta-location="hero-b">Domluvit konzultaci</a>
+        <a href="https://calendly.com/jakub-fryda-plexima/30min" class="btn btn-primary" target="_blank" rel="noopener" data-cta-location="hero">Ukázat, co v našich přepisech je</a>
       </div>
-      <a href="#kalkulacka" class="hero-calc-link">Spočítat, kolik času tým ztrácí
-        <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3 8h9M8.5 4.5L12 8l-3.5 3.5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
-      </a>
-      <ul class="hero-benefits">
-        <li>
-          <svg width="18" height="18" viewBox="0 0 18 18" fill="none"><circle cx="9" cy="9" r="9" fill="#FEC710"/><path d="M5.5 9.2l2.3 2.3 4.7-4.8" stroke="#1F1741" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
-          Zachycený kontext, nejen přepis
-        </li>
-        <li>
-          <svg width="18" height="18" viewBox="0 0 18 18" fill="none"><circle cx="9" cy="9" r="9" fill="#FEC710"/><path d="M5.5 9.2l2.3 2.3 4.7-4.8" stroke="#1F1741" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
-          Odpověď na dotaz z celé historie rozhovorů
-        </li>
-        <li>
-          <svg width="18" height="18" viewBox="0 0 18 18" fill="none"><circle cx="9" cy="9" r="9" fill="#FEC710"/><path d="M5.5 9.2l2.3 2.3 4.7-4.8" stroke="#1F1741" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
-          Napojeno na CRM, projekty, e-mail i vaše AI nástroje
-        </li>
-      </ul>
+      <p class="hero-cta-note">Napojíme nástroje, které už používáte.</p>
     </div>
     <div class="hero-visual">
       <div class="mem-panel">
@@ -2896,7 +2866,7 @@ html[data-hero="b"] .hero-variant[data-variant="b"] { display: grid; }
           </div>
           <div class="flip-item" style="--i:3">
             <h3>Kontext pro vaše AI agenty</h3>
-            <p>Firemní paměť je zdroj, ze kterého můžou čerpat vaši AI asistenti a agenti <span class="k-overeni" title="Doplní a potvrdí Plexima před spuštěním">[přes API, potvrdí Plexima]</span>. Odpovídají podle toho, co se ve firmě skutečně řeklo a rozhodlo.</p>
+            <p>Firemní paměť je zdroj, ze kterého můžou čerpat vaši AI asistenti a agenti. Odpovídají podle toho, co se ve firmě skutečně řeklo a rozhodlo.</p>
           </div>
         </div>
       </div>
@@ -3564,7 +3534,7 @@ html[data-hero="b"] .hero-variant[data-variant="b"] { display: grid; }
     <div class="faq-list reveal">
       <details class="faq-item">
         <summary>Můžou z firemní paměti čerpat naše AI nástroje?<span class="faq-icon"><svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M6 1v10M1 6h10" stroke="#1F1741" stroke-width="1.8" stroke-linecap="round"/></svg></span></summary>
-        <p class="faq-body"><span class="k-overeni" title="Doplní Plexima před spuštěním">[Doplní Plexima: jak se paměť zpřístupní AI asistentům a agentům, např. přes API, a jaká pravidla přístupu platí.]</span></p>
+        <p class="faq-body">Ano. Firemní paměť zpřístupníme každému AI nástroji, který umí pracovat přes MCP nebo API. Vaši asistenti a agenti pak odpovídají podle toho, co se ve firmě skutečně řeklo a rozhodlo. Kdo a k jakým informacím má přístup, nastavíme společně s vámi.</p>
       </details>
       <details class="faq-item">
         <summary>Co znamená inteligentní paměť firmy?<span class="faq-icon"><svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M6 1v10M1 6h10" stroke="#1F1741" stroke-width="1.8" stroke-linecap="round"/></svg></span></summary>
@@ -3623,7 +3593,7 @@ html[data-hero="b"] .hero-variant[data-variant="b"] { display: grid; }
 
 <!-- PŘILEPENÉ CTA NA MOBILU -->
 <div class="sticky-cta">
-  <a href="https://calendly.com/jakub-fryda-plexima/30min" class="btn btn-primary" target="_blank" rel="noopener" data-cta-location="sticky-mobil">Domluvit konzultaci</a>
+  <a href="https://calendly.com/jakub-fryda-plexima/30min" class="btn btn-primary" target="_blank" rel="noopener" data-cta-location="sticky">Domluvit konzultaci</a>
 </div>
 
 <footer class="site-footer">
@@ -3809,7 +3779,7 @@ html[data-hero="b"] .hero-variant[data-variant="b"] { display: grid; }
 </div>
 </template>
 
-<script src="/assets/homepage-sekce.js"></script>
+<script src="/assets/homepage-sekce.js?v=4"></script>
 <script>
 (function () {
   var SUBSCRIBE_ENDPOINT = '/api/subscribe';
@@ -4771,7 +4741,7 @@ html[data-hero="b"] .hero-variant[data-variant="b"] { display: grid; }
 })();
 </script>
 
-<script src="/assets/homepage-interakce.js" defer></script>
+<script src="/assets/homepage-interakce.js?v=4" defer></script>
 <script src="/assets/nav.js" defer></script>
 </body>
 </html>

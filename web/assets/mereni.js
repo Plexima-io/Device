@@ -49,9 +49,15 @@
     window.dataLayer.push(payload);
   };
 
-  /* A/B test hero: jen na stránce, která ho má (<html data-hero-test>) */
+  /*
+   * A/B test hero: jen na stránce, která ho má (<html data-hero-test>).
+   * 1. ?v=a / ?v=b má přednost (alias ?hero=) a přepíše cookie,
+   * 2. jinak varianta z cookie (30 dní),
+   * 3. jinak náhodně 50:50.
+   * Běží synchronně v <head> před vykreslením těla, takže hero neproblikne.
+   */
   if (document.documentElement.hasAttribute('data-hero-test')) {
-    var forced = (params.get('hero') || '').toLowerCase();
+    var forced = (params.get('v') || params.get('hero') || '').toLowerCase();
     var variant;
     if (forced === 'a' || forced === 'b') {
       variant = forced;
@@ -61,14 +67,18 @@
     }
     setCookie(HERO_COOKIE, variant, 30);
     document.documentElement.setAttribute('data-hero', variant);
-    track('hero_variant', { hero_variant: variant });
+    // Uživatelská vlastnost pro GA4 (v GTM namapovat na user property hero_variant)
+    window.dataLayer.push({ user_properties: { hero_variant: variant }, hero_variant: variant });
+    track('hero_view', { hero_variant: variant });
   }
 
-  /* Odkazy na Calendly: doplnit UTM/gclid a měřit kliky */
+  /* Odkazy na Calendly: doplnit UTM/gclid a variantu hero (do utm_content), měřit kliky */
   var decorate = function (a) {
     try {
       var url = new URL(a.href);
       ATTR_KEYS.forEach(function (k) { if (attr[k]) url.searchParams.set(k, attr[k]); });
+      var v = heroVariant();
+      if (v) url.searchParams.set('utm_content', (attr.utm_content ? attr.utm_content + '__' : '') + 'hero_' + v);
       a.href = url.toString();
     } catch (e) { /* neplatná URL, necháme být */ }
   };
@@ -77,6 +87,10 @@
     var sec = a.closest('section[id], header, footer');
     return sec ? (sec.id || sec.tagName.toLowerCase()) : 'jine';
   };
+  // Hrubé umístění pro porovnání: hero / sticky / sekce (podrobnost v cta_location)
+  var ctaArea = function (loc) {
+    return loc === 'hero' || loc === 'sticky' ? loc : (loc === 'header' ? 'hlavicka' : 'sekce');
+  };
 
   document.addEventListener('DOMContentLoaded', function () {
     document.querySelectorAll('a[href*="calendly.com/"]').forEach(decorate);
@@ -84,7 +98,8 @@
   document.addEventListener('click', function (e) {
     var a = e.target.closest && e.target.closest('a[href*="calendly.com/"]');
     if (!a) return;
-    track('cta_click', { cta_location: ctaLocation(a), cta_text: (a.textContent || '').trim() });
+    var loc = ctaLocation(a);
+    track('cta_click', { cta_location: loc, cta_area: ctaArea(loc), cta_text: (a.textContent || '').trim() });
   });
 
   window.PleximaMereni = { track: track, heroVariant: heroVariant };
