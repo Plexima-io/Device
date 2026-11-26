@@ -18,6 +18,7 @@ oaiq("init",{pixelId:"HFNN5hLCtY4DnT6svjq37Z"});
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@700;800&family=Open+Sans:wght@400;600;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="/assets/nav.css">
+<link rel="stylesheet" href="/assets/homepage-interakce.css">
 <style>
 :root {
   --yellow: #FEC710;
@@ -2339,36 +2340,33 @@ html[data-hero="b"] .hero-variant[data-variant="b"] { display: grid; }
       </ul>
     </div>
     <div class="hero-visual">
-      <div class="out-panel" role="img" aria-label="Výstupy ze schůzky pokračují do CRM, projektových nástrojů a komunikace">
-        <div class="out-card">
-          <div class="out-head">
-            <span class="out-icon"><svg width="18" height="18" viewBox="0 0 18 18"><path d="M9 2v9 M5.5 8 L9 11.5 L12.5 8 M3.5 13.5h11" stroke="#4DABF7" stroke-width="1.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
-            <span><strong>Výstupy ze schůzky</strong><small>Připraveno k odeslání</small></span>
+      <div class="live-demo" id="live-demo" role="img" aria-label="Ukázka: z přepisu porady se vyberou rozhodnutí, úkol a follow-up a zapíšou se do CRM, projektového nástroje a e-mailu">
+        <div class="ld-transcript">
+          <div class="ld-head"><span class="ld-rec" aria-hidden="true"></span>Porada vedení<span class="ld-time">přepis</span></div>
+          <p class="ld-line"><b>Petra</b>Spuštění pilotu <mark data-tag="0">posuneme na 15. dubna</mark>.</p>
+          <p class="ld-line"><b>Tomáš</b><mark data-tag="1">Napojení CRM připraví Martin</mark> do konce března.</p>
+          <p class="ld-line"><b>Petra</b>Klientovi <mark data-tag="2">pošleme shrnutí ještě dnes</mark>.</p>
+        </div>
+        <div class="ld-cards">
+          <div class="ld-card" data-card="0">
+            <span class="ld-card-icon"><svg width="20" height="20" viewBox="0 0 22 22"><rect x="2.5" y="4" width="17" height="14" rx="2" stroke="#3A3A6B" stroke-width="1.5" fill="none"/><circle cx="7.5" cy="9.5" r="2.1" stroke="#3A3A6B" stroke-width="1.4" fill="none"/><path d="M4.6 15c0-1.8 1.3-2.7 2.9-2.7s2.9 0.9 2.9 2.7" stroke="#3A3A6B" stroke-width="1.3" fill="none" stroke-linecap="round"/><path d="M13.5 8.5h3.5 M13.5 11.5h3.5 M13.5 14.5h2" stroke="#3A3A6B" stroke-width="1.3" stroke-linecap="round"/></svg></span>
+            <span class="ld-card-body"><small>CRM záznam</small><strong>Pilot posunut na 15. 4.</strong></span>
+            <span class="ld-ok"><svg width="11" height="11" viewBox="0 0 13 13"><path d="M3 6.6 L5.5 9.1 L10 3.9" stroke="#fff" stroke-width="1.9" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
           </div>
-          <div class="out-chips">
-            <span><i></i>Zápis</span>
-            <span><i></i>Úkoly</span>
-            <span><i></i>Follow up</span>
+          <div class="ld-card" data-card="1">
+            <span class="ld-card-icon"><svg width="20" height="20" viewBox="0 0 22 22"><rect x="3" y="4" width="4.6" height="14" rx="1.4" stroke="#3A3A6B" stroke-width="1.5" fill="none"/><rect x="9.2" y="4" width="4.6" height="9.5" rx="1.4" stroke="#3A3A6B" stroke-width="1.5" fill="none"/><rect x="15.4" y="4" width="4.6" height="11" rx="1.4" stroke="#3A3A6B" stroke-width="1.5" fill="none"/></svg></span>
+            <span class="ld-card-body"><small>Úkol v projektovém nástroji</small><strong>Martin: napojení CRM do 31. 3.</strong></span>
+            <span class="ld-ok"><svg width="11" height="11" viewBox="0 0 13 13"><path d="M3 6.6 L5.5 9.1 L10 3.9" stroke="#fff" stroke-width="1.9" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+          </div>
+          <div class="ld-card" data-card="2">
+            <span class="ld-card-icon"><svg width="20" height="20" viewBox="0 0 22 22"><rect x="2.5" y="4.5" width="17" height="13" rx="2" stroke="#3A3A6B" stroke-width="1.5" fill="none"/><path d="M3.5 6l7.5 6 7.5-6" stroke="#3A3A6B" stroke-width="1.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+            <span class="ld-card-body"><small>Follow-up e-mail</small><strong>Shrnutí pro klienta odesláno</strong></span>
+            <span class="ld-ok"><svg width="11" height="11" viewBox="0 0 13 13"><path d="M3 6.6 L5.5 9.1 L10 3.9" stroke="#fff" stroke-width="1.9" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
           </div>
         </div>
-        <div class="out-flow" aria-hidden="true"></div>
-        <div class="out-tiles">
-          <div class="out-tile">
-            <span class="out-tile-icon"><svg width="22" height="22" viewBox="0 0 22 22"><rect x="2.5" y="4" width="17" height="14" rx="2" stroke="#3A3A6B" stroke-width="1.5" fill="none"/><circle cx="7.5" cy="9.5" r="2.1" stroke="#3A3A6B" stroke-width="1.4" fill="none"/><path d="M4.6 15c0-1.8 1.3-2.7 2.9-2.7s2.9 0.9 2.9 2.7" stroke="#3A3A6B" stroke-width="1.3" fill="none" stroke-linecap="round"/><path d="M13.5 8.5h3.5 M13.5 11.5h3.5 M13.5 14.5h2" stroke="#3A3A6B" stroke-width="1.3" stroke-linecap="round"/></svg></span>
-            <span class="out-tile-body"><strong>CRM a obchodní systém</strong><small><i></i>Připojeno</small></span>
-            <span class="out-badge"><svg width="13" height="13" viewBox="0 0 13 13"><path d="M3 6.6 L5.5 9.1 L10 3.9" stroke="#fff" stroke-width="1.8" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
-          </div>
-          <div class="out-tile">
-            <span class="out-tile-icon"><svg width="22" height="22" viewBox="0 0 22 22"><rect x="3" y="4" width="4.6" height="14" rx="1.4" stroke="#3A3A6B" stroke-width="1.5" fill="none"/><rect x="9.2" y="4" width="4.6" height="9.5" rx="1.4" stroke="#3A3A6B" stroke-width="1.5" fill="none"/><rect x="15.4" y="4" width="4.6" height="11" rx="1.4" stroke="#3A3A6B" stroke-width="1.5" fill="none"/></svg></span>
-            <span class="out-tile-body"><strong>Projektové a úkolové nástroje</strong><small><i></i>Připojeno</small></span>
-            <span class="out-badge"><svg width="13" height="13" viewBox="0 0 13 13"><path d="M3 6.6 L5.5 9.1 L10 3.9" stroke="#fff" stroke-width="1.8" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
-          </div>
-          <div class="out-tile">
-            <span class="out-tile-icon"><svg width="22" height="22" viewBox="0 0 22 22"><path d="M3.5 5.5a2 2 0 0 1 2-2h11a2 2 0 0 1 2 2v7a2 2 0 0 1-2 2H9l-4 3.2V14.5H5.5a2 2 0 0 1-2-2Z" stroke="#3A3A6B" stroke-width="1.5" fill="none" stroke-linejoin="round"/><path d="M7 8.5h8 M7 11h5" stroke="#3A3A6B" stroke-width="1.3" stroke-linecap="round"/></svg></span>
-            <span class="out-tile-body"><strong>E-mail, Teams, Slack nebo API</strong><small><i></i>Připojeno</small></span>
-            <span class="out-badge"><svg width="13" height="13" viewBox="0 0 13 13"><path d="M3 6.6 L5.5 9.1 L10 3.9" stroke="#fff" stroke-width="1.8" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
-          </div>
-        </div>
+        <span class="ld-chip" data-chip="0" aria-hidden="true">Rozhodnutí</span>
+        <span class="ld-chip" data-chip="1" aria-hidden="true">Úkol</span>
+        <span class="ld-chip" data-chip="2" aria-hidden="true">Follow-up</span>
       </div>
     </div>
   </div>
@@ -2417,6 +2415,15 @@ html[data-hero="b"] .hero-variant[data-variant="b"] { display: grid; }
         </div>
       </div>
     </div>
+  </div>
+</section>
+
+<!-- BĚŽÍCÍ PÁS LOG -->
+<section class="logo-marquee" aria-label="Nástroje, na které výstupy napojujeme">
+  <div class="container"><p class="lm-title">Výstupy napojíme na nástroje, které už používáte</p></div>
+  <div class="lm-viewport">
+    <ul class="lm-track"><li><img src="Fotky/loga/creatio.png" alt="" width="22" height="22" loading="lazy">Creatio</li><li><img src="Fotky/loga/make.png" alt="" width="22" height="22" loading="lazy">Make</li><li><img src="Fotky/loga/microsoft365.png" alt="" width="22" height="22" loading="lazy">Microsoft 365 / Outlook</li><li><img src="Fotky/loga/teams.png" alt="" width="22" height="22" loading="lazy">Teams</li><li><img src="Fotky/loga/google.png" alt="" width="22" height="22" loading="lazy">Google Workspace</li><li><img src="Fotky/loga/slack.png" alt="" width="22" height="22" loading="lazy">Slack</li><li><img src="Fotky/loga/pipedrive.png" alt="" width="22" height="22" loading="lazy">Pipedrive</li><li><img src="Fotky/loga/salesforce.png" alt="" width="22" height="22" loading="lazy">Salesforce</li><li><img src="Fotky/loga/freelo.png" alt="" width="22" height="22" loading="lazy">Freelo</li><li><img src="Fotky/loga/asana.png" alt="" width="22" height="22" loading="lazy">Asana</li><li><img src="Fotky/loga/clickup.png" alt="" width="22" height="22" loading="lazy">ClickUp</li><li><img src="Fotky/loga/notion.png" alt="" width="22" height="22" loading="lazy">Notion</li><li><img src="Fotky/loga/zapier.png" alt="" width="22" height="22" loading="lazy">Zapier</li></ul>
+    <ul class="lm-track" aria-hidden="true"><li><img src="Fotky/loga/creatio.png" alt="" width="22" height="22" loading="lazy">Creatio</li><li><img src="Fotky/loga/make.png" alt="" width="22" height="22" loading="lazy">Make</li><li><img src="Fotky/loga/microsoft365.png" alt="" width="22" height="22" loading="lazy">Microsoft 365 / Outlook</li><li><img src="Fotky/loga/teams.png" alt="" width="22" height="22" loading="lazy">Teams</li><li><img src="Fotky/loga/google.png" alt="" width="22" height="22" loading="lazy">Google Workspace</li><li><img src="Fotky/loga/slack.png" alt="" width="22" height="22" loading="lazy">Slack</li><li><img src="Fotky/loga/pipedrive.png" alt="" width="22" height="22" loading="lazy">Pipedrive</li><li><img src="Fotky/loga/salesforce.png" alt="" width="22" height="22" loading="lazy">Salesforce</li><li><img src="Fotky/loga/freelo.png" alt="" width="22" height="22" loading="lazy">Freelo</li><li><img src="Fotky/loga/asana.png" alt="" width="22" height="22" loading="lazy">Asana</li><li><img src="Fotky/loga/clickup.png" alt="" width="22" height="22" loading="lazy">ClickUp</li><li><img src="Fotky/loga/notion.png" alt="" width="22" height="22" loading="lazy">Notion</li><li><img src="Fotky/loga/zapier.png" alt="" width="22" height="22" loading="lazy">Zapier</li></ul>
   </div>
 </section>
 
@@ -2478,8 +2485,113 @@ html[data-hero="b"] .hero-variant[data-variant="b"] { display: grid; }
   </div>
 </section>
 
+<!-- SROVNÁNÍ: BEZ PAMĚTI / S PLEXIMA -->
+<section id="srovnani">
+  <div class="container">
+    <div class="reveal">
+      <span class="eyebrow">Rozdíl</span>
+      <h2 class="section-title">Stejné porady. Jiný výsledek.</h2>
+      <p class="section-lead">Posuňte jezdcem a podívejte se, co se změní, když informace z rozhovorů nezůstanou ležet v poznámkách.</p>
+    </div>
+    <div class="cmp reveal" id="cmp" style="--pos:50%">
+      <div class="cmp-pane cmp-before" aria-hidden="true">
+        <span class="cmp-label">Bez paměti</span>
+        <div class="cmp-note n1"><strong>Zápis z porady 12. 3.</strong><span>(nedokončený)</span></div>
+        <div class="cmp-note n2"><strong>Úkoly??</strong><span>CRM někdo, termín ?</span></div>
+        <div class="cmp-note n3"><strong>RE: RE: Fwd: zápis</strong><span>Posílám znovu, kde je verze 3?</span></div>
+        <div class="cmp-toast t1"><span class="cmp-dot"></span><strong>Kdo to měl udělat?</strong><span>Tým · před 2 dny</span></div>
+        <div class="cmp-toast t2"><span class="cmp-dot"></span><strong>Na co jsme se domluvili s klientem?</strong><span>Vedení · včera</span></div>
+        <div class="cmp-note n4"><strong>poznámky_final_v2.docx</strong><span>Upraveno: neznámo kdy</span></div>
+      </div>
+      <div class="cmp-pane cmp-after" aria-hidden="true">
+        <span class="cmp-label">S Plexima</span>
+        <div class="cmp-sys s1"><span class="cmp-sys-icon"><svg width="20" height="20" viewBox="0 0 22 22"><rect x="2.5" y="4" width="17" height="14" rx="2" stroke="#3A3A6B" stroke-width="1.5" fill="none"/><circle cx="7.5" cy="9.5" r="2.1" stroke="#3A3A6B" stroke-width="1.4" fill="none"/><path d="M4.6 15c0-1.8 1.3-2.7 2.9-2.7s2.9 0.9 2.9 2.7" stroke="#3A3A6B" stroke-width="1.3" fill="none" stroke-linecap="round"/><path d="M13.5 8.5h3.5 M13.5 11.5h3.5 M13.5 14.5h2" stroke="#3A3A6B" stroke-width="1.3" stroke-linecap="round"/></svg></span><span><small>CRM záznam</small><strong>Pilot posunut na 15. 4.</strong><em>Porada 12. 3. · rozhodnutí s důvodem</em></span></div>
+        <div class="cmp-sys s2"><span class="cmp-sys-icon"><svg width="20" height="20" viewBox="0 0 22 22"><rect x="3" y="4" width="4.6" height="14" rx="1.4" stroke="#3A3A6B" stroke-width="1.5" fill="none"/><rect x="9.2" y="4" width="4.6" height="9.5" rx="1.4" stroke="#3A3A6B" stroke-width="1.5" fill="none"/><rect x="15.4" y="4" width="4.6" height="11" rx="1.4" stroke="#3A3A6B" stroke-width="1.5" fill="none"/></svg></span><span><small>Úkol · Martin</small><strong>Napojení CRM do 31. 3.</strong><em>Projektový nástroj · přiřazeno</em></span></div>
+        <div class="cmp-sys s3"><span class="cmp-sys-icon"><svg width="20" height="20" viewBox="0 0 22 22"><rect x="2.5" y="4.5" width="17" height="13" rx="2" stroke="#3A3A6B" stroke-width="1.5" fill="none"/><path d="M3.5 6l7.5 6 7.5-6" stroke="#3A3A6B" stroke-width="1.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span><small>Follow-up e-mail</small><strong>Shrnutí odesláno klientovi</strong><em>Dnes 14:05 · další kroky v příloze</em></span></div>
+        <div class="cmp-sys s4"><span class="cmp-sys-icon cmp-ask">?</span><span><small>Dotaz týmu</small><strong>Proč jsme posunuli pilot?</strong><em>Odpověď z porady 12. 3.</em></span></div>
+      </div>
+      <div class="cmp-handle" aria-hidden="true"><span></span></div>
+      <input type="range" class="cmp-range" min="0" max="100" value="50" aria-label="Porovnání: vlevo bez paměti, vpravo s Plexima">
+    </div>
+  </div>
+</section>
+
+<!-- JAK TO FUNGUJE: sticky scroll -->
+<section id="jak-to-funguje" class="pin-section">
+  <div class="pin-track" id="pin-track">
+    <div class="pin-sticky">
+      <div class="container pin-grid">
+        <div class="pin-left">
+          <span class="eyebrow">Řešení</span>
+          <h2 class="section-title">Zachytit. Pochopit. Napojit.</h2>
+          <p class="section-lead">Omi zachytí rozhovor. Inteligentní vrstva z něj vybere to podstatné a výstupy napojíme na vaše systémy.</p>
+          <ol class="pin-nav" aria-label="Kroky">
+            <li class="pin-progress" aria-hidden="true"><span id="pin-progress-fill"></span></li>
+            <li><button type="button" class="pin-nav-btn is-active" data-step="0"><span class="step-no">1</span><span><strong>Zachytit</strong><small>Rozhovor můžete vést naplno.</small></span></button></li>
+            <li><button type="button" class="pin-nav-btn" data-step="1"><span class="step-no">2</span><span><strong>Pochopit</strong><small>Inteligentní vrstva rozpozná, co je podstatné.</small></span></button></li>
+            <li><button type="button" class="pin-nav-btn" data-step="2"><span class="step-no">3</span><span><strong>Napojit</strong><small>Informace pokračují do vašich systémů.</small></span></button></li>
+          </ol>
+        </div>
+        <div class="pin-right">
+          <article class="pin-step is-active" data-step="0">
+            <div class="pin-step-head"><span class="step-no">1</span>Zachytit</div>
+            <div class="pin-visual"><div class="pv-stage pv-capture">
+              <div class="pv-devices">
+                <figure class="pv-device pv-omi"><img src="Fotky/WebP Image.webp" alt="Nahrávací zařízení Omi" loading="lazy" width="1920" height="1920"><figcaption>Omi</figcaption></figure>
+                <figure class="pv-device pv-plaud"><img src="Fotky/plaud/plaud-note-front-transparent.webp" alt="Nahrávací zařízení Plaud Note Pro" loading="lazy" width="1000" height="1000"><figcaption>Plaud</figcaption></figure>
+              </div>
+              <div class="pv-wave" aria-hidden="true"><span style="--i:0"></span><span style="--i:1"></span><span style="--i:2"></span><span style="--i:3"></span><span style="--i:4"></span><span style="--i:5"></span><span style="--i:6"></span><span style="--i:7"></span><span style="--i:8"></span><span style="--i:9"></span><span style="--i:10"></span><span style="--i:11"></span><span style="--i:12"></span><span style="--i:13"></span><span style="--i:14"></span><span style="--i:15"></span><span style="--i:16"></span><span style="--i:17"></span><span style="--i:18"></span><span style="--i:19"></span><span style="--i:20"></span><span style="--i:21"></span><span style="--i:22"></span><span style="--i:23"></span><span style="--i:24"></span><span style="--i:25"></span><span style="--i:26"></span><span style="--i:27"></span></div>
+              <div class="pv-rec"><span class="pv-rec-dot"></span>Nahrávám<span class="pv-rec-time">porada, online hovor i terén</span></div>
+            </div></div>
+            <div class="pin-step-copy">
+              <h3>Rozhovor můžete vést naplno.</h3>
+              <p>Omi zachytí schůzku, telefonát nebo návštěvu v kanceláři, online i v terénu.</p>
+              <ul class="how-list"><li><svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3.5 8.2l3 3 6-6.2" stroke="#6EC1E4" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>Zaznamená průběh rozhovoru</li><li><svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3.5 8.2l3 3 6-6.2" stroke="#6EC1E4" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>Zachová důležité detaily</li><li><svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3.5 8.2l3 3 6-6.2" stroke="#6EC1E4" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>Připraví obsah pro další zpracování</li></ul>
+            </div>
+          </article>
+          <article class="pin-step" data-step="1">
+            <div class="pin-step-head"><span class="step-no">2</span>Pochopit</div>
+            <div class="pin-visual"><div class="pv-stage pv-understand">
+              <div class="pv-card pv-transcript">
+                <div class="pv-card-head">Přepis porady</div>
+                <p style="--d:0"><b>Pavel</b><mark>Začneme s jedním týmem.</mark><span class="pv-tag t-dec">Rozhodnutí</span></p>
+                <p style="--d:1"><b>Aneta</b><mark>Napojení CRM připravím do konce března.</mark><span class="pv-tag t-task">Úkol</span></p>
+                <p style="--d:2"><b>David</b><mark>Pilot spustíme 15. září.</mark><span class="pv-tag t-date">Termín</span></p>
+                <p style="--d:3"><b>Aneta</b><mark>Klienti se nejčastěji ptají na export dat.</mark><span class="pv-tag t-new">Nový poznatek</span></p>
+              </div>
+            </div></div>
+            <div class="pin-step-copy">
+              <h3>Inteligentní vrstva rozpozná, co je podstatné.</h3>
+              <p>Z rozhovoru vybere důležitá témata, rozhodnutí a souvislosti pro další práci.</p>
+              <ul class="how-list"><li><svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3.5 8.2l3 3 6-6.2" stroke="#6EC1E4" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>Důležité detaily a souvislosti</li><li><svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3.5 8.2l3 3 6-6.2" stroke="#6EC1E4" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>Rozhodnutí včetně jejich důvodů</li><li><svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3.5 8.2l3 3 6-6.2" stroke="#6EC1E4" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>Úkoly a další kroky</li></ul>
+            </div>
+          </article>
+          <article class="pin-step" data-step="2">
+            <div class="pin-step-head"><span class="step-no">3</span>Napojit</div>
+            <div class="pin-visual"><div class="pv-stage pv-connect">
+              <span class="pv-fly t-dec" style="--y:40px;--tx:268px;--ty:7px;--d:0">Rozhodnutí</span>
+              <span class="pv-fly t-new" style="--y:120px;--tx:268px;--ty:-73px;--d:1">Nový poznatek</span>
+              <span class="pv-fly t-task" style="--y:200px;--tx:268px;--ty:-15px;--d:2">Úkol</span>
+              <span class="pv-fly t-date" style="--y:280px;--tx:268px;--ty:43px;--d:3">Termín</span>
+              <div class="pv-sys" style="--y:14px;--d:0"><span class="pv-sys-icon"><svg width="20" height="20" viewBox="0 0 22 22"><rect x="2.5" y="4" width="17" height="14" rx="2" stroke="#3A3A6B" stroke-width="1.5" fill="none"/><circle cx="7.5" cy="9.5" r="2.1" stroke="#3A3A6B" stroke-width="1.4" fill="none"/><path d="M4.6 15c0-1.8 1.3-2.7 2.9-2.7s2.9 0.9 2.9 2.7" stroke="#3A3A6B" stroke-width="1.3" fill="none" stroke-linecap="round"/><path d="M13.5 8.5h3.5 M13.5 11.5h3.5 M13.5 14.5h2" stroke="#3A3A6B" stroke-width="1.3" stroke-linecap="round"/></svg></span><span><small>CRM záznam</small><strong>Rozhodnutí a poznatek uloženy</strong></span><span class="pv-ok"><svg width="11" height="11" viewBox="0 0 13 13"><path d="M3 6.6 L5.5 9.1 L10 3.9" stroke="#fff" stroke-width="1.9" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg></span></div>
+              <div class="pv-sys" style="--y:152px;--d:2"><span class="pv-sys-icon"><svg width="20" height="20" viewBox="0 0 22 22"><rect x="3" y="4" width="4.6" height="14" rx="1.4" stroke="#3A3A6B" stroke-width="1.5" fill="none"/><rect x="9.2" y="4" width="4.6" height="9.5" rx="1.4" stroke="#3A3A6B" stroke-width="1.5" fill="none"/><rect x="15.4" y="4" width="4.6" height="11" rx="1.4" stroke="#3A3A6B" stroke-width="1.5" fill="none"/></svg></span><span><small>Úkol v projektovém nástroji</small><strong>Aneta: napojení CRM do 31. 3.</strong></span><span class="pv-ok"><svg width="11" height="11" viewBox="0 0 13 13"><path d="M3 6.6 L5.5 9.1 L10 3.9" stroke="#fff" stroke-width="1.9" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg></span></div>
+              <div class="pv-sys" style="--y:290px;--d:3"><span class="pv-sys-icon"><svg width="20" height="20" viewBox="0 0 22 22"><rect x="2.5" y="4.5" width="17" height="13" rx="2" stroke="#3A3A6B" stroke-width="1.5" fill="none"/><path d="M3.5 6l7.5 6 7.5-6" stroke="#3A3A6B" stroke-width="1.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span><small>Follow-up e-mail</small><strong>Další kroky a termín pilotu</strong></span><span class="pv-ok"><svg width="11" height="11" viewBox="0 0 13 13"><path d="M3 6.6 L5.5 9.1 L10 3.9" stroke="#fff" stroke-width="1.9" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg></span></div>
+            </div></div>
+            <div class="pin-step-copy">
+              <h3>Informace pokračují do vašich systémů.</h3>
+              <p>Napojíme je na nástroje, ve kterých už pracujete, a celý tok nastavíme podle vašich procesů.</p>
+              <ul class="how-list"><li><svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3.5 8.2l3 3 6-6.2" stroke="#6EC1E4" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>CRM a klientská historie</li><li><svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3.5 8.2l3 3 6-6.2" stroke="#6EC1E4" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>Projektové a úkolové nástroje</li><li><svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3.5 8.2l3 3 6-6.2" stroke="#6EC1E4" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>Dokumenty, komunikace a znalostní báze</li></ul>
+            </div>
+          </article>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<template data-sekce="jak-puvodni">
 <!-- JAK TO FUNGUJE -->
-<section id="jak-to-funguje">
+<section>
   <div class="container">
     <div class="reveal">
       <span class="eyebrow">Řešení</span>
@@ -2760,6 +2872,7 @@ html[data-hero="b"] .hero-variant[data-variant="b"] { display: grid; }
     </div>
   </div>
 </section>
+</template>
 
 <section class="section-soft" id="zmena">
   <div class="container">
@@ -2794,7 +2907,36 @@ html[data-hero="b"] .hero-variant[data-variant="b"] { display: grid; }
   </div>
 </section>
 
+<!-- DEMO: ZEPTEJTE SE FIREMNÍ PAMĚTI -->
+<section id="zeptejte-se" class="ask-section">
+  <div class="container ask-grid">
+    <div class="reveal">
+      <span class="eyebrow">Vyzkoušejte</span>
+      <h2 class="section-title">Zeptejte se firemní paměti</h2>
+      <p class="section-lead">Takhle dostane tým odpověď z historie porad a schůzek. I se zdrojem, ze kterého vychází. Vyberte otázku.</p>
+      <p class="ask-note">Ukázka s modelovými daty.</p>
+    </div>
+    <div class="ask-demo reveal" id="ask-demo">
+      <div class="ask-log" id="ask-log" aria-live="polite">
+        <p class="ask-empty">Vyberte jednu z otázek níže.</p>
+      </div>
+      <div class="ask-chips" role="group" aria-label="Ukázkové otázky">
+        <button type="button" class="ask-chip" data-q="0">Proč jsme v březnu změnili dodavatele?</button>
+        <button type="button" class="ask-chip" data-q="1">Co jsme slíbili klientovi na poslední schůzce?</button>
+        <button type="button" class="ask-chip" data-q="2">Které téma se na poradách opakuje?</button>
+        <button type="button" class="ask-chip" data-q="3">Kdo má na starosti napojení CRM?</button>
+      </div>
+      <div class="ask-input" aria-hidden="true">
+        <span>Zeptejte se na cokoli z porad a schůzek</span>
+        <span class="ask-send"><svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 8h9M8.5 4.5L12 8l-3.5 3.5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+      </div>
+    </div>
+  </div>
+</section>
+
 <template data-sekce="profese">
+
+
 <!-- FLIP -->
 <!-- VYTVOŘENO PRO SKUTEČNOU PRÁCI -->
 <section class="section-soft" id="scenare">
@@ -2936,7 +3078,6 @@ html[data-hero="b"] .hero-variant[data-variant="b"] { display: grid; }
 </section>
 </template>
 
-<template data-sekce="prospirio-partner">
 <!-- PARTNER: PROSPIRIO HUB -->
 <section class="partner-band" aria-labelledby="partner-title">
   <div class="container">
@@ -2968,10 +3109,9 @@ html[data-hero="b"] .hero-variant[data-variant="b"] { display: grid; }
     </div>
   </div>
 </section>
-</template>
 
 <!-- INTEGRACE -->
-<section id="integrace">
+<section class="section-soft" id="integrace">
   <div class="container">
     <div class="reveal">
       <span class="eyebrow">Integrace</span>
@@ -3019,6 +3159,74 @@ html[data-hero="b"] .hero-variant[data-variant="b"] { display: grid; }
       </div>
     </div>
     <p class="int-more reveal">Tohle je jen nejčastější výběr, napojit umíme téměř jakýkoli nástroj.</p>
+  </div>
+</section>
+
+<!-- ZAŘÍZENÍ: MÁTE, NEBO NE? -->
+<section id="zarizeni">
+  <div class="container">
+    <div class="reveal dev-intro">
+      <span class="eyebrow">Zařízení</span>
+      <h2 class="section-title">Zařízení nemusíte kupovat znovu.</h2>
+      <p class="section-lead">Začneme s tím, co už máte. A když zatím nic nemáte, vhodné zařízení zajistíme a nastavíme.</p>
+    </div>
+    <div class="have reveal">
+      <div class="seg" role="tablist" aria-label="Máte nahrávací zařízení?">
+        <span class="seg-indicator" aria-hidden="true"></span>
+        <button type="button" class="seg-btn is-active" role="tab" aria-selected="true" aria-controls="have-yes" id="have-yes-tab" data-have="0">Už nahrávací zařízení máme</button>
+        <button type="button" class="seg-btn" role="tab" aria-selected="false" aria-controls="have-no" id="have-no-tab" data-have="1">Zařízení zatím nemáme</button>
+      </div>
+      <div class="have-panels">
+        <div class="have-panel is-active" id="have-yes" role="tabpanel" aria-labelledby="have-yes-tab">
+          <div>
+            <h3>Napojíme to, co už používáte.</h3>
+            <p>Plaud, Omi nebo nahrávky z Teams, Zoomu a Google Meet. My se postaráme o zpracování a integrace do vašich systémů.</p>
+            <a href="https://calendly.com/jakub-fryda-plexima/30min" class="btn btn-primary" target="_blank" rel="noopener" data-cta-location="zarizeni-mame">Domluvit konzultaci</a>
+          </div>
+          <ul class="have-sources">
+            <li><img src="Fotky/plaud/plaud-note-front-transparent.webp" alt="" width="28" height="28" loading="lazy">Plaud</li>
+            <li><img src="Fotky/WebP Image.webp" alt="" width="28" height="28" loading="lazy">Omi</li>
+            <li><img src="Fotky/loga/teams.png" alt="" width="22" height="22" loading="lazy">Nahrávky z Teams</li>
+            <li><span class="have-mono">Z</span>Nahrávky ze Zoomu</li>
+            <li><img src="Fotky/loga/google.png" alt="" width="22" height="22" loading="lazy">Nahrávky z Google Meet</li>
+          </ul>
+        </div>
+        <div class="have-panel" id="have-no" role="tabpanel" aria-labelledby="have-no-tab" hidden>
+          <div>
+            <h3>Zajistíme Omi nebo Plaud.</h3>
+            <p>Doporučíme zařízení podle toho, kde a jak vaše týmy vedou rozhovory, nastavíme ho a zapojíme do vašich procesů.</p>
+            <a href="https://calendly.com/jakub-fryda-plexima/30min" class="btn btn-primary" target="_blank" rel="noopener" data-cta-location="zarizeni-nemame">Domluvit konzultaci</a>
+          </div>
+          <ul class="have-steps">
+            <li><span>1</span>Výběr zařízení podle typu rozhovorů</li>
+            <li><span>2</span>Nastavení, spárování a pravidla nahrávání</li>
+            <li><span>3</span>Zapojení do procesů a systémů</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <div class="dev-show reveal">
+      <div class="dev-tabs" role="tablist" aria-label="Zařízení">
+        <button type="button" class="dev-tab is-active" role="tab" aria-selected="true" data-dev="0">Omi</button>
+        <button type="button" class="dev-tab" role="tab" aria-selected="false" data-dev="1">Plaud Note Pro</button>
+      </div>
+      <div class="dev-stages">
+        <figure class="dev-stage is-active" data-dev="0">
+          <div class="dev-img"><img src="Fotky/WebP Image.webp" alt="Nahrávací zařízení Omi na šňůrce" width="1920" height="1920" loading="lazy">
+            <ol class="hs-list"><li class="hs hs-l" style="--x:38;--y:12"><span class="hs-dot">1</span><span class="hs-label"><strong>Na krk nebo na ruku</strong>Šňůrka nebo náramek, ruce zůstanou volné.</span></li><li class="hs hs-r" style="--x:50;--y:52"><span class="hs-dot">2</span><span class="hs-label"><strong>Mikrofony s redukcí hluku</strong>Rozpozná mluvčí, ve výstupu je vidět, kdo co řekl.</span></li><li class="hs hs-l" style="--x:35;--y:60"><span class="hs-dot">3</span><span class="hs-label"><strong>10 až 14 hodin</strong>nahrávání na jedno nabití</span></li><li class="hs hs-r" style="--x:62;--y:66"><span class="hs-dot">4</span><span class="hs-label"><strong>25 jazyků včetně češtiny</strong>Průměr jen 2,5 cm.</span></li></ol>
+          </div>
+          <figcaption>Nositelné zařízení pro schůzky v kanceláři i v terénu.</figcaption>
+        </figure>
+        <figure class="dev-stage" data-dev="1" hidden>
+          <div class="dev-img"><img src="Fotky/plaud/plaud-note-front-transparent.webp" alt="Nahrávací zařízení Plaud Note Pro, pohled zepředu" width="1000" height="1000" loading="lazy">
+            <ol class="hs-list"><li class="hs hs-r" style="--x:52;--y:18"><span class="hs-dot">1</span><span class="hs-label"><strong>Přepínač režimů</strong>Osobní rozhovor nebo telefonní hovor.</span></li><li class="hs hs-l" style="--x:32;--y:40"><span class="hs-dot">2</span><span class="hs-label"><strong>Dva mikrofony</strong>Záběr do 3 metrů, zachytí celý stůl.</span></li><li class="hs hs-r" style="--x:72;--y:64"><span class="hs-dot">3</span><span class="hs-label"><strong>Tenký 3 mm</strong>Velikost kreditní karty, až 30 hodin nahrávání.</span></li><li class="hs hs-l" style="--x:40;--y:80"><span class="hs-dot">4</span><span class="hs-label"><strong>Na zadní stranu telefonu</strong>Magneticky se přichytí a zaznamená obě strany hovoru.</span></li></ol>
+          </div>
+          <figcaption>Karta do kapsy pro jednání, porady i telefonní hovory.</figcaption>
+        </figure>
+      </div>
+      <p class="dev-source">Parametry podle dokumentace výrobců.</p>
+    </div>
   </div>
 </section>
 
@@ -3706,7 +3914,7 @@ html[data-hero="b"] .hero-variant[data-variant="b"] { display: grid; }
     }
   }
 
-  /* Calculator: hodiny měsíčně = lidé × schůzky × minuty × 4,33 / 60 */
+  /* Calculator: hodiny měsíčně = lidé × schůzky × minuty × 4,33 / 60, výsledky se dopočítávají animovaně */
   var people = document.getElementById('calc-people');
   var meetings = document.getElementById('calc-meetings');
   var minutes = document.getElementById('calc-minutes');
@@ -3726,32 +3934,62 @@ html[data-hero="b"] .hero-variant[data-variant="b"] { display: grid; }
     return czNumber(d) + ' pracovních dní';
   };
 
-  var updateCalc = function () {
+  /* Count-up: plynule z aktuální hodnoty na novou, nikdy z nuly */
+  var shown = { hours: 231, days: 29, month: 115500 };
+  var target = { hours: 231, hoursDec: 0, days: 29, month: 115500 };
+  var countFrame = null;
+  var render = function (v) {
+    hoursEl.textContent = czNumber(v.hours, target.hoursDec);
+    daysEl.textContent = czechDays(v.days);
+    czkMonthEl.textContent = czNumber(v.month) + ' Kč';
+    czkYearEl.textContent = czNumber(v.month * 12) + ' Kč';
+  };
+  var animateTo = function () {
+    cancelAnimationFrame(countFrame);
+    if (reducedMotion) { shown = { hours: target.hours, days: target.days, month: target.month }; render(shown); return; }
+    var from = { hours: shown.hours, days: shown.days, month: shown.month };
+    var start = null;
+    var step = function (ts) {
+      if (!start) start = ts;
+      var p = Math.min((ts - start) / 450, 1);
+      var e = 1 - Math.pow(1 - p, 3);
+      var f = Math.pow(10, target.hoursDec);
+      shown.hours = Math.round((from.hours + (target.hours - from.hours) * e) * f) / f;
+      shown.days = target.days < 1 ? target.days : Math.round(from.days + (target.days - from.days) * e);
+      shown.month = Math.round((from.month + (target.month - from.month) * e) / 10) * 10;
+      if (p === 1) shown = { hours: target.hours, days: target.days, month: target.month };
+      render(shown);
+      if (p < 1) countFrame = requestAnimationFrame(step);
+    };
+    countFrame = requestAnimationFrame(step);
+  };
+
+  var updateCalc = function (animate) {
     document.getElementById('calc-people-out').textContent = people.value;
     document.getElementById('calc-meetings-out').textContent = meetings.value;
     document.getElementById('calc-minutes-out').textContent = minutes.value;
     document.getElementById('calc-rate-out').textContent = czNumber(+rate.value) + ' Kč';
     var hours = people.value * meetings.value * minutes.value * 4.33 / 60;
     // Malé hodnoty s jedním desetinným místem, aby se nikdy nezobrazila nula
-    var shownHours = hours < 10 ? Math.max(0.1, Math.round(hours * 10) / 10) : Math.round(hours);
-    hoursEl.textContent = czNumber(shownHours, hours < 10 ? 1 : 0);
-    daysEl.textContent = czechDays(hours < 8 ? hours / 8 : Math.round(hours / 8));
-    var month = Math.max(10, Math.round(shownHours * rate.value / 10) * 10);
-    czkMonthEl.textContent = czNumber(month) + ' Kč';
-    czkYearEl.textContent = czNumber(month * 12) + ' Kč';
+    target.hoursDec = hours < 10 ? 1 : 0;
+    target.hours = hours < 10 ? Math.max(0.1, Math.round(hours * 10) / 10) : Math.round(hours);
+    target.days = hours < 8 ? hours / 8 : Math.round(hours / 8);
+    target.month = Math.max(10, Math.round(target.hours * rate.value / 10) * 10);
+    if (animate) animateTo();
+    else { shown = { hours: target.hours, days: target.days, month: target.month }; render(shown); }
   };
 
   var calcTouched = false;
   [people, meetings, minutes, rate].forEach(function (input) {
     input.addEventListener('input', function () {
-      updateCalc();
+      updateCalc(true);
       if (!calcTouched) {
         calcTouched = true;
         if (window.PleximaMereni) window.PleximaMereni.track('calculator_interaction', { calc_field: input.id });
       }
     });
   });
-  updateCalc();
+  updateCalc(false);
 
   /* How-it-works tabs with auto-rotation */
   var tabs = document.querySelectorAll('.how-tab');
@@ -3806,7 +4044,7 @@ html[data-hero="b"] .hero-variant[data-variant="b"] { display: grid; }
     });
   });
 
-  if ('IntersectionObserver' in window && !reducedMotion) {
+  if (tabs.length && 'IntersectionObserver' in window && !reducedMotion) {
     var howSection = document.getElementById('jak-to-funguje');
     var rotationStarted = false;
     var howObserver = new IntersectionObserver(function (entries) {
@@ -4533,6 +4771,7 @@ html[data-hero="b"] .hero-variant[data-variant="b"] { display: grid; }
 })();
 </script>
 
+<script src="/assets/homepage-interakce.js" defer></script>
 <script src="/assets/nav.js" defer></script>
 </body>
 </html>

@@ -59,7 +59,7 @@ Nic se nesmazalo. Skryté části zůstaly v `web/index.html` beze změny, jen j
 | Klíč | Co zapne |
 |---|---|
 | `profese` | sekce „Každá profese potřebuje pamatovat něco jiného“ |
-| `prospirio-partner` | blok „Partnerské řešení“ s Prospirio Hub |
+| `jak-puvodni` | původní sekce „Zachytit. Pochopit. Napojit.“ se záložkami (nahrazená sticky scrollem; při zapnutí nový blok odeberte) |
 | `prospirio-integrace` | logo Prospirio Hub v sekci Integrace |
 | `koupit-omi` | sekce s tlačítkem „Koupit Omi“ a modální okno objednávky |
 | `exit-popup` | exit-intent pop-up |

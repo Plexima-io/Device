@@ -11,7 +11,7 @@
 window.HOMEPAGE_SEKCE = {
   'hero-puvodni': false,          // původní hero „To nejdůležitější z rozhovorů často zapadne“
   'profese': false,               // sekce „Každá profese potřebuje pamatovat něco jiného“ (karusel scénářů)
-  'prospirio-partner': false,     // blok „Partnerské řešení“ s Prospirio Hub
+  'jak-puvodni': false,           // původní sekce „Zachytit. Pochopit. Napojit.“ se záložkami (nahrazena sticky scrollem)
   'prospirio-integrace': false,   // logo Prospirio Hub v sekci Integrace
   'koupit-omi': false,            // sekce s tlačítkem „Koupit Omi“ a modální okno objednávky
   'exit-popup': false,            // exit-intent pop-up „Počkejte, tohle se vám bude hodit“
