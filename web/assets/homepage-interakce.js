@@ -284,6 +284,14 @@
   }
   if ($('.dev-tab')) tabs('.dev-tab', 'data-dev', $$('.dev-stage'));
 
+  /* ---------- Odkaz na otázku ve FAQ ji rovnou rozbalí ---------- */
+  document.addEventListener('click', function (e) {
+    var a = e.target.closest && e.target.closest('a[href^="#faq-"]');
+    if (!a) return;
+    var d = document.getElementById(a.getAttribute('href').slice(1));
+    if (d && d.tagName === 'DETAILS') d.open = true;
+  });
+
   /* ---------- Přilepené CTA na mobilu až po odscrollování hero ---------- */
   (function () {
     var bar = $('.sticky-cta');

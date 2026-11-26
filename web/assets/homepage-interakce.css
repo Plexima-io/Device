@@ -911,3 +911,6 @@
 html.no-motion .lm-track { animation: none; }
 html.no-motion .lm-track[aria-hidden="true"] { display: none; }
 html.no-motion .lm-viewport { overflow-x: auto; }
+
+/* Kotvy na otázky ve FAQ nezajedou pod přilepenou hlavičku */
+.faq-item[id] { scroll-margin-top: 96px; }
