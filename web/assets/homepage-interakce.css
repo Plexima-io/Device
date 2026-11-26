@@ -660,7 +660,7 @@
 
 /* ---------- Zařízení: přepínač a anotovaný vizuál ---------- */
 .dev-intro { text-align: center; }
-.dev-intro .section-lead { margin-left: auto; margin-right: auto; }
+.dev-intro .section-title, .dev-intro .section-lead { margin-left: auto; margin-right: auto; }
 .have { max-width: 980px; margin: 40px auto 0; }
 .seg {
   position: relative;
